@@ -1,0 +1,12 @@
+Create new model with a migration
+----------------------------------
+php artisan make:model Teacher --migration
+
+Create new model migration without a model
+-------------------------------------------
+php artisan make:migration create_users_table
+
+Create new migration for upgrading the table columns and settings
+------------------------------------------------------------------
+php artisan make:migration update_users_table --table=users
+
