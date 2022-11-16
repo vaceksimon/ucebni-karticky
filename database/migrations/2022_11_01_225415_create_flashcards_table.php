@@ -15,7 +15,7 @@ class CreateFlashcardsTable extends Migration
     {
         Schema::create('flashcards', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('exercise_id');
+            $table->unsignedBigInteger('exercise_id');
             $table->string('question');
             $table->string('answer');
             $table->timestamps();

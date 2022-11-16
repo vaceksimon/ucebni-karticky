@@ -15,7 +15,7 @@ class CreateExercisesTable extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('author');
+            $table->unsignedBigInteger('author');
             $table->string('name');
             $table->string('description');
             $table->string('topic');

@@ -1,0 +1,15 @@
+1. Run mysql
+-----------------
+mysql -u root -p
+
+	If ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES), try
+	--------------------------------------------------------------------------------------------
+	sudo service mysql stop
+	sudo service mysql start
+
+	And than run mysql.
+
+2. Open MySQL WorkBenbench
+---------------------------
+3. Login as root into the database
+-----------------------------------
