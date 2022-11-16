@@ -17,8 +17,8 @@ class CreateExercisesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('author');
             $table->string('name');
-            $table->string('description');
-            $table->string('topic');
+            $table->string('description')->nullable();
+            $table->string('topic')->nullable();
             $table->timestamps();
 
             $table->foreign('author')
