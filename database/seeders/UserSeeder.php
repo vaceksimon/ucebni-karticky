@@ -26,6 +26,29 @@ class UserSeeder extends Seeder
             'remember_token'    => Str::random(10),
             'type'              => 'admin'
         ]);
-        User::factory()->times(99)->create();
+        // Student
+        DB::table('users')->insert([
+            'first_name'        => 'Marek',
+            'last_name'         => 'Dočekal',
+            'email'             => 'speedy@example.com',
+            'password'          => 'BigShock',
+            'email_verified_at' => now(),
+            'remember_token'    => Str::random(10),
+            'type'              => 'student'
+        ]);
+        // Teacher
+        DB::table('users')->insert([
+            'degree_front'      => 'Dr.',
+            'first_name'        => 'Bohumil',
+            'last_name'         => 'Brtník',
+            'degree_after'      => 'Ing.',
+            'email'             => 'BBELM@example.com',
+            'password'          => 'Osciloskop123',
+            'email_verified_at' => now(),
+            'remember_token'    => Str::random(10),
+            'type'              => 'teacher'
+        ]);
+        // Fake data
+        User::factory()->times(97)->create();
     }
 }
