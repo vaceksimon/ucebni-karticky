@@ -14,13 +14,13 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('degree_front');
-            $table->string('degree_after');
+            $table->string('degree_front')->nullable();
+            $table->string('degree_after')->nullable();
             $table->dropColumn('name');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('school');
-            $table->string('photo');
+            $table->string('school')->nullable();
+            $table->string('photo')->nullable();
             $table->enum('type', ['admin', 'teacher', 'student']);
         });
     }

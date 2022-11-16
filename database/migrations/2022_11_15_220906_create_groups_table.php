@@ -17,8 +17,8 @@ class CreateGroupsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('owner');
             $table->string('name');
-            $table->string('description');
-            $table->string('photo');
+            $table->string('description')->nullable();
+            $table->string('photo')->nullable();
             $table->enum('type', ['teachers', 'students']);
             $table->timestamps();
 
