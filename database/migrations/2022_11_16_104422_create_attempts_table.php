@@ -17,7 +17,6 @@ class CreateAttemptsTable extends Migration
             $table->id();
             $table->unsignedInteger('exercise_id');
             $table->unsignedInteger('user_id');
-            $table->dateTime('created_at');
             $table->time('spend_time');
             $table->unsignedInteger('correct_answers_number');
             $table->unsignedInteger('wrong_answers_number');
