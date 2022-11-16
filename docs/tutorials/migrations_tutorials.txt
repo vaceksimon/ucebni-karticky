@@ -10,3 +10,21 @@ Create new migration for upgrading the table columns and settings
 ------------------------------------------------------------------
 php artisan make:migration update_users_table --table=users
 
+
+
+
+Create empty tables structure
+---------------------------------------------
+php artisan migrate
+
+Delete all tables
+---------------------------------------------
+php artisan migrate:reset
+
+Both in one command (delete all tables and create empty tables structure)
+---------------------------------------------
+php artisan migrate:fresh
+
+With seed variant:
+php artisan migrate:fresh --seed
+

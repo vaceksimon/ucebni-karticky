@@ -15,8 +15,8 @@ class CreateAttemptsTable extends Migration
     {
         Schema::create('attempts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('exercise_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('exercise_id');
+            $table->unsignedBigInteger('user_id');
             $table->time('spend_time');
             $table->unsignedInteger('correct_answers_number');
             $table->unsignedInteger('wrong_answers_number');
