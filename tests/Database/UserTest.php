@@ -40,7 +40,7 @@ class UserTest extends TestCase
             'email'      => 'maryjane@gmail.com'
         ]);
 
-        $this->assertTrue($user1->first_name != $user2->first_name);
+        $this->assertNotEquals($user1->getAttributes(), $user2->getAttributes());
     }
 
     public function test_database_contains_implicit_data()
@@ -69,7 +69,7 @@ class UserTest extends TestCase
 
         $updatedUser = User::find(1);
 
-        $this->assertTrue($user != $updatedUser);
+        $this->assertNotEquals($user->getAttributes(), $updatedUser->getAttributes());
     }
 
     public function test_database_delete_user()
