@@ -11,6 +11,20 @@ class Attempt extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'exercise_id',
+        'user_id',
+        'spend_time',
+        'correct_answers_number',
+        'wrong_answers_number'
+    ];
+
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo

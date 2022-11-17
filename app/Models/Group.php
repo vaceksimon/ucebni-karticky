@@ -11,6 +11,29 @@ class Group extends Model
 {
     use HasFactory;
 
+    const TEACHERS_GROUP = 'teachers';
+    const STUDENTS_GROUP = 'students';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'photo',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'type'
+    ];
+
     /**
      * @return BelongsTo
      */

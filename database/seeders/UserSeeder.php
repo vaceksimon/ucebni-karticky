@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -16,38 +15,30 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Admin
-        User::factory()->create([
-            'first_name'        => 'admin',
-            'last_name'         => 'admin',
-            'email'             => 'admin@example.com',
-            'password'          => 'admin',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
-            'type'              => 'admin'
+        User::factory()->admin()->create([
+            'first_name' => 'admin',
+            'last_name'  => 'admin',
+            'email'      => 'admin@example.com',
+            'password'   => 'admin'
         ]);
         // Student
-        User::factory()->create([
-            'first_name'        => 'Marek',
-            'last_name'         => 'Dočekal',
-            'email'             => 'speedy@example.com',
-            'password'          => 'BigShock',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
-            'type'              => 'student'
+        User::factory()->student()->create([
+            'first_name' => 'Marek',
+            'last_name'  => 'Dočekal',
+            'email'      => 'speedy@example.com',
+            'password'   => 'BigShock'
         ]);
         // Teacher
-        User::factory()->create([
-            'degree_front'      => 'Dr.',
-            'first_name'        => 'Bohumil',
-            'last_name'         => 'Brtník',
-            'degree_after'      => 'Ing.',
-            'email'             => 'BBELM@example.com',
-            'password'          => 'Osciloskop123',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
-            'type'              => 'teacher'
+        User::factory()->teacher()->create([
+            'degree_front' => 'Dr.',
+            'first_name'   => 'Bohumil',
+            'last_name'    => 'Brtník',
+            'degree_after' => 'Ing.',
+            'email'        => 'BBELM@example.com',
+            'password'     => 'Osciloskop123'
         ]);
         // Fake data
-        User::factory()->times(97)->create();
+        User::factory(27)->teacher()->create();
+        User::factory(70)->student()->create();
     }
 }
