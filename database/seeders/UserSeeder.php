@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -21,8 +20,6 @@ class UserSeeder extends Seeder
             'last_name'         => 'admin',
             'email'             => 'admin@example.com',
             'password'          => 'admin',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
             'type'              => 'admin'
         ]);
         // Student
@@ -31,8 +28,6 @@ class UserSeeder extends Seeder
             'last_name'         => 'Dočekal',
             'email'             => 'speedy@example.com',
             'password'          => 'BigShock',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
             'type'              => 'student'
         ]);
         // Teacher
@@ -43,8 +38,6 @@ class UserSeeder extends Seeder
             'degree_after'      => 'Ing.',
             'email'             => 'BBELM@example.com',
             'password'          => 'Osciloskop123',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
             'type'              => 'teacher'
         ]);
         // Fake data
