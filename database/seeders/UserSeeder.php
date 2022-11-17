@@ -41,6 +41,7 @@ class UserSeeder extends Seeder
             'type'              => 'teacher'
         ]);
         // Fake data
-        User::factory()->times(97)->create();
+        User::factory(27)->teacher()->create();
+        User::factory(70)->student()->create();
     }
 }
