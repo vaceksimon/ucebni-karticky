@@ -19,14 +19,14 @@
 
                                 <div class="col-md-6">
                                     <div>
-                                        <input type="radio" onclick="javascript:showExtendedRegistration()" id="student" name="account-type" value="student"
-                                               checked>
-                                        <label for="student">Žák</label>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" onclick="javascript:showExtendedRegistration()" id="teacher" name="account-type" value="teacher">
-                                        <label for="teacher">Učitel</label>
+                                        <div>
+                                            <input type="radio" onclick="javascript:showExtendedRegistration()" id="student" name="account-type" value="student" checked>
+                                            <label for="student">Žák</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" onclick="javascript:showExtendedRegistration()" id="teacher" name="account-type" value="teacher">
+                                            <label for="teacher">Učitel</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
 
-                            <div id="degree-front-field" class="mb-3 row row-center">
+                            <div id="degree-front-field" class="mb-3 row row-center hide-by-default">
                                 <label for="degree-front" class="col-form-label text-start offset-md-6">
                                     {{ __('Tituly před') }} :
                                 </label>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <div id="degree-after-field" class="mb-3 row row-center">
+                            <div id="degree-after-field" class="mb-3 row row-center hide-by-default">
                                 <label for="degree-after" class="col-form-label text-start offset-md-6">
                                     {{ __('Tituly za') }} :
                                 </label>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <div id="school-field" class="mb-3 row row-center">
+                            <div id="school-field" class="mb-3 row row-center hide-by-default">
                                 <label for="school" class="col-form-label text-start offset-md-6">
                                     {{ __('Škola') }} :
                                 </label>

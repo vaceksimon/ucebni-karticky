@@ -9,3 +9,7 @@
 .row-center {
     justify-content: center;
 }
+
+.hide-by-default {
+    display: none;
+}
