@@ -14,6 +14,12 @@ class ExerciseSeeder extends Seeder
      */
     public function run()
     {
-        Exercise::factory()->times(20)->create();
+        Exercise::factory()->create([
+            'author'      => 3,
+            'name'        => 'Elektrotechnické měření',
+            'description' => 'Kartičky pro procvičení základních pojmů z předmětu ELM',
+            'topic'       => 'Elektrotechnika'
+        ]);
+        Exercise::factory()->times(19)->create();
     }
 }
