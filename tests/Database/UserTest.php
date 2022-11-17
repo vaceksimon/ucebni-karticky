@@ -10,13 +10,15 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_model_user_exists() {
+    public function test_model_user_exists()
+    {
         $user = User::factory()->create();
 
         $this->assertModelExists($user);
     }
 
-    public function test_model_user_delete() {
+    public function test_model_user_delete()
+    {
         $user = User::factory()->create();
 
         $user->delete();
@@ -38,13 +40,11 @@ class UserTest extends TestCase
             'email'      => 'maryjane@gmail.com'
         ]);
 
-        echo 'Jmeno: ' . $user1->first_name;
-        echo 'Jmeno: ' . $user2->first_name;
-
         $this->assertTrue($user1->first_name != $user2->first_name);
     }
 
-    public function test_database_contains_implicit_data() {
+    public function test_database_contains_implicit_data()
+    {
         $this->assertDatabaseHas('users', [
             'email' => 'admin@example.com',
         ]);
