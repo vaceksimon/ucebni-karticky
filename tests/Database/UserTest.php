@@ -46,15 +46,26 @@ class UserTest extends TestCase
     public function test_database_contains_implicit_data()
     {
         $this->assertDatabaseHas('users', [
-            'email' => 'admin@example.com',
+            'first_name' => 'admin',
+            'last_name'  => 'admin',
+            'email'      => 'admin@example.com',
+            'password'   => 'admin'
         ]);
 
         $this->assertDatabaseHas('users', [
-            'email' => 'speedy@example.com',
+            'first_name' => 'Marek',
+            'last_name'  => 'Dočekal',
+            'email'      => 'speedy@example.com',
+            'password'   => 'BigShock'
         ]);
 
         $this->assertDatabaseHas('users', [
-            'email' => 'BBELM@example.com',
+            'degree_front' => 'Dr.',
+            'first_name'   => 'Bohumil',
+            'last_name'    => 'Brtník',
+            'degree_after' => 'Ing.',
+            'email'        => 'BBELM@example.com',
+            'password'     => 'Osciloskop123'
         ]);
     }
 

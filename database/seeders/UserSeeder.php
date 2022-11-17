@@ -16,27 +16,26 @@ class UserSeeder extends Seeder
     {
         // Admin
         User::factory()->admin()->create([
-            'first_name'        => 'admin',
-            'last_name'         => 'admin',
-            'email'             => 'admin@example.com',
-            'password'          => 'admin',
+            'first_name' => 'admin',
+            'last_name'  => 'admin',
+            'email'      => 'admin@example.com',
+            'password'   => 'admin'
         ]);
         // Student
         User::factory()->student()->create([
-            'first_name'        => 'Marek',
-            'last_name'         => 'Dočekal',
-            'email'             => 'speedy@example.com',
-            'password'          => 'BigShock',
+            'first_name' => 'Marek',
+            'last_name'  => 'Dočekal',
+            'email'      => 'speedy@example.com',
+            'password'   => 'BigShock'
         ]);
         // Teacher
         User::factory()->teacher()->create([
-            'degree_front'      => 'Dr.',
-            'first_name'        => 'Bohumil',
-            'last_name'         => 'Brtník',
-            'degree_after'      => 'Ing.',
-            'email'             => 'BBELM@example.com',
-            'password'          => 'Osciloskop123',
-            'type'              => 'teacher'
+            'degree_front' => 'Dr.',
+            'first_name'   => 'Bohumil',
+            'last_name'    => 'Brtník',
+            'degree_after' => 'Ing.',
+            'email'        => 'BBELM@example.com',
+            'password'     => 'Osciloskop123'
         ]);
         // Fake data
         User::factory(27)->teacher()->create();
