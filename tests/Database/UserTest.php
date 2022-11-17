@@ -67,9 +67,9 @@ class UserTest extends TestCase
 
         $user->save();
 
-        $updatedUser = User::find(1);
+        $updatedUser = User::find(2);
 
-        $this->assertNotEquals($user->getAttributes(), $updatedUser->getAttributes());
+        $this->assertEquals($user->getAttributes(), $updatedUser->getAttributes());
     }
 
     public function test_database_delete_user()
