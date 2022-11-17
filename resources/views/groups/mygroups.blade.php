@@ -1,5 +1,5 @@
 @extends('layouts.main')
 
 @section('content')
-    asdwad
+    Content pro moje skupiny
 @endsection

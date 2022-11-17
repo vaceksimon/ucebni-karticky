@@ -1,5 +1,5 @@
 @extends('layouts.main')
 
 @section('content')
-    awdhwaljkddawhdlawgdhawlidugawljkfhiesfhunyapí
+    Content pro moje cvičení
 @endsection
