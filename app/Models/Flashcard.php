@@ -11,6 +11,16 @@ class Flashcard extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'question',
+        'answer',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function exercise(): BelongsTo

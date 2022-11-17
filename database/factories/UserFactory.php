@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,12 +16,73 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'first_name'        => $this->faker->firstName(),
+            'last_name'         => $this->faker->lastName(),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token'    => Str::random(10),
+            'degree_front'      => null,
+            'degree_after'      => null,
+            'type'              => 'student',
+            'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
         ];
+    }
+
+    public function student()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'first_name'        => $this->faker->firstName(),
+                'last_name'         => $this->faker->lastName(),
+                'email'             => $this->faker->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token'    => Str::random(10),
+                'degree_front'      => null,
+                'degree_after'      => null,
+                'type'              => User::ROLE_STUDENT,
+                'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
+            ];
+        });
+    }
+
+    public function teacher()
+    {
+        return $this->state(function (array $attributes) {
+
+            return [
+                'first_name'        => $this->faker->firstName(),
+                'last_name'         => $this->faker->lastName(),
+                'email'             => $this->faker->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token'    => Str::random(10),
+                'degree_front'      => $this->faker->randomElement(['Mgr.', 'Ing.', 'PhDr.', 'Bc.', null]),
+                'degree_after'      => $this->faker->randomElement(['Mgr.', 'Ing.', 'PhDr.', null]),
+                'type'              => User::ROLE_TEACHER,
+                'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
+            ];
+        });
+    }
+
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+
+            return [
+                'first_name'        => $this->faker->firstName(),
+                'last_name'         => $this->faker->lastName(),
+                'email'             => $this->faker->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token'    => Str::random(10),
+                'degree_front'      => null,
+                'degree_after'      => null,
+                'type'              => User::ROLE_ADMIN,
+                'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
+            ];
+        });
     }
 
     /**

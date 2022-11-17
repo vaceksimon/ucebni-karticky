@@ -12,6 +12,17 @@ class Exercise extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'topic',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function creator(): BelongsTo

@@ -14,15 +14,23 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN   = 'admin';
+    const ROLE_STUDENT = 'student';
+    const ROLE_TEACHER = 'teacher';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'degree_front',
+        'first_name',
+        'last_name',
+        'degree_after',
         'email',
         'password',
+        'photo'
     ];
 
     /**
@@ -33,6 +41,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'type'
     ];
 
     /**
@@ -76,7 +85,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function attemps(): HasMany
+    public function attempts(): HasMany
     {
         return $this->hasMany(Attempt::class);
     }
