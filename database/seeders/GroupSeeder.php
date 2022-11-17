@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Group;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class GroupSeeder extends Seeder
 {
@@ -16,22 +15,21 @@ class GroupSeeder extends Seeder
     public function run()
     {
 
-        Group::factory()->create([
-            'owner' => 3,
-            'name' => 'SSPTAJI',
+        Group::factory()->teachers()->create([
+            'owner'       => 3,
+            'name'        => 'SSPTAJI',
             'description' => 'Střední škola technická, průmyslová a automobilní Jihlava',
-            'photo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Digitaloszilloskop_IMGP1971_WP.jpg',
-            'type' => 'teachers'
+            'photo'       => 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Digitaloszilloskop_IMGP1971_WP.jpg'
         ]);
 
-        Group::factory()->create([
-            'owner' => 3,
-            'name' => 'ELM',
+        Group::factory()->students()->create([
+            'owner'       => 3,
+            'name'        => 'ELM',
             'description' => 'Elektrotechnícké měření - IT4A',
-            'photo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Digitaloszilloskop_IMGP1971_WP.jpg',
-            'type' => 'students'
+            'photo'       => 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Digitaloszilloskop_IMGP1971_WP.jpg'
         ]);
 
-        Group::factory()->times(25)->create();
+        Group::factory(5)->teachers()->create();
+        Group::factory(20)->students()->create();
     }
 }
