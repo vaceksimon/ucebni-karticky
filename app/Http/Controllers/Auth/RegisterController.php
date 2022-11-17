@@ -49,9 +49,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // TODO add type of the account and ignore filed fields for student type
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'degree_front' => ['string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'degree_after' => ['string', 'max:255'],
+            'school' => ['string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,8 +70,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
+            'degree_front' => $data['degree_front'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['first_name'],
+            'degree_after' => $data['degree_after'],
+            'school' => $data['school'],
             'password' => Hash::make($data['password']),
         ]);
     }

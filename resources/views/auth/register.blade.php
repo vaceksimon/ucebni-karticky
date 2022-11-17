@@ -49,15 +49,15 @@
                             </div>
 
                             <div id="degree-front-field" class="mb-3 row row-center hide-by-default">
-                                <label for="degree-front" class="col-form-label text-start offset-md-6">
+                                <label for="degree_front" class="col-form-label text-start offset-md-6">
                                     {{ __('Tituly před') }} :
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="degree-front" type="text" class="form-control @error('degree-front') is-invalid @enderror"
-                                           name="degree-front" value="{{ old('degree-front') }}" required autocomplete="degree-front" autofocus>
+                                    <input id="degree_front" type="text" class="form-control @error('degree_front') is-invalid @enderror"
+                                           name="degree_front" value="{{ old('degree_front') }}" autocomplete="degree_front" autofocus>
 
-                                    @error('degree-front')
+                                    @error('degree_front')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -66,15 +66,15 @@
                             </div>
 
                             <div class="mb-3 row row-center">
-                                <label for="first-name" class="col-form-label text-start offset-md-6">
+                                <label for="first_name" class="col-form-label text-start offset-md-6">
                                     {{ __('Jméno *') }} :
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="first-name" type="text" class="form-control @error('first-name') is-invalid @enderror"
-                                           name="first-name" value="{{ old('first-name') }}" required autocomplete="first-name" autofocus>
+                                    <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                           name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
 
-                                    @error('first-name')
+                                    @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -83,15 +83,15 @@
                             </div>
 
                             <div class="mb-3 row row-center">
-                                <label for="last-name" class="col-form-label text-start offset-md-6">
+                                <label for="last_name" class="col-form-label text-start offset-md-6">
                                     {{ __('Příjmení *') }} :
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="last-name" type="text" class="form-control @error('last-name') is-invalid @enderror"
-                                           name="last-name" value="{{ old('last-name') }}" required autocomplete="last-name" autofocus>
+                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                           name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
-                                    @error('last-name')
+                                    @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -100,15 +100,15 @@
                             </div>
 
                             <div id="degree-after-field" class="mb-3 row row-center hide-by-default">
-                                <label for="degree-after" class="col-form-label text-start offset-md-6">
+                                <label for="degree_after" class="col-form-label text-start offset-md-6">
                                     {{ __('Tituly za') }} :
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="degree-after" type="text" class="form-control @error('degree-after') is-invalid @enderror"
-                                           name="degree-after" value="{{ old('degree-after') }}" required autocomplete="degree-after" autofocus>
+                                    <input id="degree_after" type="text" class="form-control @error('degree_after') is-invalid @enderror"
+                                           name="degree_after" value="{{ old('degree_after') }}" autocomplete="degree_after" autofocus>
 
-                                    @error('degree-after')
+                                    @error('degree_after')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -123,7 +123,7 @@
 
                                 <div class="col-md-6">
                                     <input id="school" type="text" class="form-control @error('school') is-invalid @enderror"
-                                           name="school" value="{{ old('school') }}" required autocomplete="school" autofocus>
+                                           name="school" value="{{ old('school') }}" autocomplete="school" autofocus>
 
                                     @error('school')
                                     <span class="invalid-feedback" role="alert">
