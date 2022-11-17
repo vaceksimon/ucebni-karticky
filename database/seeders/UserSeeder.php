@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
@@ -17,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Admin
-        DB::table('users')->insert([
+        User::factory()->create([
             'first_name'        => 'admin',
             'last_name'         => 'admin',
             'email'             => 'admin@example.com',
@@ -27,7 +26,7 @@ class UserSeeder extends Seeder
             'type'              => 'admin'
         ]);
         // Student
-        DB::table('users')->insert([
+        User::factory()->create([
             'first_name'        => 'Marek',
             'last_name'         => 'Dočekal',
             'email'             => 'speedy@example.com',
@@ -37,7 +36,7 @@ class UserSeeder extends Seeder
             'type'              => 'student'
         ]);
         // Teacher
-        DB::table('users')->insert([
+        User::factory()->create([
             'degree_front'      => 'Dr.',
             'first_name'        => 'Bohumil',
             'last_name'         => 'Brtník',

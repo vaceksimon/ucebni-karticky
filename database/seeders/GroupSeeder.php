@@ -15,7 +15,8 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('groups')->insert([
+
+        Group::factory()->create([
             'owner' => 3,
             'name' => 'SSPTAJI',
             'description' => 'Střední škola technická, průmyslová a automobilní Jihlava',
@@ -23,7 +24,7 @@ class GroupSeeder extends Seeder
             'type' => 'teachers'
         ]);
 
-        DB::table('groups')->insert([
+        Group::factory()->create([
             'owner' => 3,
             'name' => 'ELM',
             'description' => 'Elektrotechnícké měření - IT4A',
