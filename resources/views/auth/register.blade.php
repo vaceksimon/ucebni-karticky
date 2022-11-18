@@ -21,7 +21,7 @@
                                     <div>
                                         <div>
                                             <input type="radio" onclick="javascript:showExtendedRegistration()"
-                                                   class="form-check-input @error('account_type') is-invalid @enderror"
+                                                   class="form-check-input"
                                                    name="account_type" id="student" value="student"
                                                 {{ old('account_type') == 'student' ? 'checked' : '' }}>
                                             <label for="student" class="form-check-label">
@@ -30,7 +30,7 @@
                                         </div>
                                         <div>
                                             <input type="radio" onclick="javascript:showExtendedRegistration()"
-                                                   class="form-check-input @error('account_type') is-invalid @enderror"
+                                                   class="form-check-input"
                                                    name="account_type" id="teacher" value="teacher"
                                                 {{ old('account_type') == 'teacher' ? 'checked' : '' }}>
                                             <label for="teacher" class="form-check-label">
@@ -51,6 +51,18 @@
                                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                     @error('email')
+                                    <script>
+                                        if (document.getElementById("teacher").checked) {
+                                            document.getElementById('degree-front-field').style.display = "flex";
+                                            document.getElementById('degree-after-field').style.display = "flex";
+                                            document.getElementById('school-field').style.display = "flex";
+                                        } else {
+                                            document.getElementById('degree-front-field').style.display = "none";
+                                            document.getElementById('degree-after-field').style.display = "none";
+                                            document.getElementById('school-field').style.display = "none";
+                                        }
+                                    </script>
+
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -64,14 +76,8 @@
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="degree_front" type="text" class="form-control @error('degree_front') is-invalid @enderror"
+                                    <input id="degree_front" type="text" class="form-control"
                                            name="degree_front" value="{{ old('degree_front') }}" autocomplete="degree_front" autofocus>
-
-                                    @error('degree_front')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -81,14 +87,8 @@
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                    <input id="first_name" type="text" class="form-control"
                                            name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-
-                                    @error('first_name')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -98,14 +98,8 @@
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                    <input id="last_name" type="text" class="form-control"
                                            name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
-
-                                    @error('last_name')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -115,14 +109,8 @@
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="degree_after" type="text" class="form-control @error('degree_after') is-invalid @enderror"
+                                    <input id="degree_after" type="text" class="form-control"
                                            name="degree_after" value="{{ old('degree_after') }}" autocomplete="degree_after" autofocus>
-
-                                    @error('degree_after')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -132,14 +120,8 @@
                                 </label>
 
                                 <div class="col-md-6">
-                                    <input id="school" type="text" class="form-control @error('school') is-invalid @enderror"
+                                    <input id="school" type="text" class="form-control"
                                            name="school" value="{{ old('school') }}" autocomplete="school" autofocus>
-
-                                    @error('school')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -155,6 +137,18 @@
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
+                                            <script>
+                                                if (document.getElementById("teacher").checked) {
+                                                    document.getElementById('degree-front-field').style.display = "flex";
+                                                    document.getElementById('degree-after-field').style.display = "flex";
+                                                    document.getElementById('school-field').style.display = "flex";
+                                                } else {
+                                                    document.getElementById('degree-front-field').style.display = "none";
+                                                    document.getElementById('degree-after-field').style.display = "none";
+                                                    document.getElementById('school-field').style.display = "none";
+                                                }
+                                            </script>
+
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
