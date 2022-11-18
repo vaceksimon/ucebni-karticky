@@ -52,11 +52,11 @@ class RegisterController extends Controller
         // TODO add type of the account and ignore filed fields for student type
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'degree_front' => ['string', 'max:255'],
+            'degree_front' => ['string', 'nullable', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'degree_after' => ['string', 'max:255'],
-            'school' => ['string', 'max:255'],
+            'degree_after' => ['string', 'nullable', 'max:255'],
+            'school' => ['string', 'nullable', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
