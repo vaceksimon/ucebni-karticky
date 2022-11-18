@@ -19,14 +19,14 @@ class UserSeeder extends Seeder
             'first_name' => 'admin',
             'last_name'  => 'admin',
             'email'      => 'admin@example.com',
-            'password'   => 'admin'
+            'password'   => bcrypt('admin')
         ]);
         // Student
         User::factory()->student()->create([
             'first_name' => 'Marek',
             'last_name'  => 'Dočekal',
             'email'      => 'speedy@example.com',
-            'password'   => 'BigShock'
+            'password'   => bcrypt('BigShock')
         ]);
         // Teacher
         User::factory()->teacher()->create([
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'last_name'    => 'Brtník',
             'degree_after' => 'Ing.',
             'email'        => 'BBELM@example.com',
-            'password'     => 'Osciloskop123'
+            'password'     => bcrypt('Osciloskop123')
         ]);
         // Fake data
         User::factory(27)->teacher()->create();
