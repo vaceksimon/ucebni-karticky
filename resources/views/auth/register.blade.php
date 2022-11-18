@@ -23,7 +23,7 @@
                                             <input type="radio" onclick="javascript:showExtendedRegistration()"
                                                    class="form-check-input"
                                                    name="account_type" id="student" value="student"
-                                                {{ old('account_type') == 'student' ? 'checked' : '' }}>
+                                                {{ old('account_type') == 'teacher' ? '' : 'checked' }}>
                                             <label for="student" class="form-check-label">
                                                 Žák
                                             </label>
