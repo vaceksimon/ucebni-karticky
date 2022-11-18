@@ -20,12 +20,22 @@
                                 <div class="col-md-6">
                                     <div>
                                         <div>
-                                            <input type="radio" onclick="javascript:showExtendedRegistration()" id="student" name="account-type" value="student" checked>
-                                            <label for="student">Žák</label>
+                                            <input type="radio" onclick="javascript:showExtendedRegistration()"
+                                                   class="form-check-input @error('account_type') is-invalid @enderror"
+                                                   name="account_type" id="student" value="student"
+                                                {{ old('account_type') == 'student' ? 'checked' : '' }}>
+                                            <label for="student" class="form-check-label">
+                                                Žák
+                                            </label>
                                         </div>
                                         <div>
-                                            <input type="radio" onclick="javascript:showExtendedRegistration()" id="teacher" name="account-type" value="teacher">
-                                            <label for="teacher">Učitel</label>
+                                            <input type="radio" onclick="javascript:showExtendedRegistration()"
+                                                   class="form-check-input @error('account_type') is-invalid @enderror"
+                                                   name="account_type" id="teacher" value="teacher"
+                                                {{ old('account_type') == 'teacher' ? 'checked' : '' }}>
+                                            <label for="teacher" class="form-check-label">
+                                                Učitel
+                                            </label>
                                         </div>
                                     </div>
                                 </div>

@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'degree_after' => ['string', 'nullable', 'max:255'],
             'school' => ['string', 'nullable', 'max:255'],
+            'account_type' => ['required', 'string', 'max:15'], // TODO student or teacher maybe check
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -76,6 +77,7 @@ class RegisterController extends Controller
             'last_name' => $data['first_name'],
             'degree_after' => $data['degree_after'],
             'school' => $data['school'],
+            'account_type' =>  $data['account_type'],
             'password' => Hash::make($data['password']),
         ]);
     }
