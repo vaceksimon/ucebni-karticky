@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -57,7 +58,7 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'degree_after' => ['string', 'nullable', 'max:255'],
             'school' => ['string', 'nullable', 'max:255'],
-            'account_type' => ['required', 'string', 'max:15'], // TODO student or teacher maybe check
+            'account_type' => ['required', Rule::in(['student', 'teacher'])],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
