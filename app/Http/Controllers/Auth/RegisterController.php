@@ -71,11 +71,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        /*
+         * If the new account is student account type, ignore following text fields:
+         * - degree_front
+         * - degree_after
+         * - school
+         */
+        if (strcmp($data['account_type'], 'student') == 0)
+        {
+            $data['degree_front'] = null;
+            $data['degree_after'] = null;
+            $data['school'] = null;
+        }
+
         return User::create([
             'email' => $data['email'],
             'degree_front' => $data['degree_front'],
             'first_name' => $data['first_name'],
-            'last_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'degree_after' => $data['degree_after'],
             'school' => $data['school'],
             'account_type' =>  $data['account_type'],
