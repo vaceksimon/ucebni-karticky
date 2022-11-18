@@ -20,7 +20,7 @@ class UserFactory extends Factory
             'last_name'         => $this->faker->lastName(),
             'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password'          => bcrypt($this->faker->word()), // password
             'remember_token'    => Str::random(10),
             'degree_front'      => null,
             'degree_after'      => null,
@@ -37,7 +37,7 @@ class UserFactory extends Factory
                 'last_name'         => $this->faker->lastName(),
                 'email'             => $this->faker->unique()->safeEmail(),
                 'email_verified_at' => now(),
-                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password'          => bcrypt($this->faker->word()), // password
                 'remember_token'    => Str::random(10),
                 'degree_front'      => null,
                 'degree_after'      => null,
@@ -56,7 +56,7 @@ class UserFactory extends Factory
                 'last_name'         => $this->faker->lastName(),
                 'email'             => $this->faker->unique()->safeEmail(),
                 'email_verified_at' => now(),
-                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password'          => bcrypt($this->faker->word()), // password
                 'remember_token'    => Str::random(10),
                 'degree_front'      => $this->faker->randomElement(['Mgr.', 'Ing.', 'PhDr.', 'Bc.', null]),
                 'degree_after'      => $this->faker->randomElement(['Mgr.', 'Ing.', 'PhDr.', null]),
@@ -75,7 +75,7 @@ class UserFactory extends Factory
                 'last_name'         => $this->faker->lastName(),
                 'email'             => $this->faker->unique()->safeEmail(),
                 'email_verified_at' => now(),
-                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password'          => bcrypt($this->faker->word()), // password
                 'remember_token'    => Str::random(10),
                 'degree_front'      => null,
                 'degree_after'      => null,
