@@ -29,6 +29,10 @@ Route::get('/myexercises', function () {
     return view('exercises.myexercises');
 })->name('myexercises');
 
+Route::get('/create-group', function () {
+    return view('create-group.create-group');
+})->name('create-group');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
