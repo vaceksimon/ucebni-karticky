@@ -3,7 +3,7 @@
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">{{ __('Vytvoření skupiny') }}
                     </div>
@@ -75,13 +75,17 @@
 
                                 <div>
                                     <!-- Second column -->
-                                    <div class="row row-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex mx-auto"
-                                             style="width: 120px;"
-                                             alt="Avatar"/>
-                                    </div>
-                                    <div class="row row-center">
-                                        <button class="btn btn-outline-primary btn-sm px-3 col-3 mt-3 mx-auto" style="width: 120px">Upravit</button>
+                                    <div class="row row-center row-cols-2">
+                                        <div class="row row-center" style="width: 40%">
+                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex px-0"
+                                                 alt="Avatar"/>
+                                        </div>
+                                        <div class="row row-center" style="width: 60%">
+                                            <div class="container my-auto">
+                                                <label class="input-group-text my-auto" style="width: 75px" for="inputGroupFile">Upravit</label>
+                                                <input type="file" class="form-control" id="inputGroupFile" hidden>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +131,7 @@
                                             Vaše skupina zatím neobsahuje žádné členy.
                                         </div>
                                         <div class="row row-center mx-auto my-3" style="width: 120px">
-                                            <button class="btn btn-outline-primary btn-sm px-3">Přidat člena</button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
                                         </div>
                                     </div>
                                 </div>
@@ -138,6 +142,25 @@
                                 <button class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit skupinu</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Text v modal
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
