@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -22,14 +22,19 @@
 
 </head>
 
-<body>
-@include('layouts.header')
-<div class="row flex-nowrap">
-    @include('layouts.sidenav')
-    <div class="col py-3">
-        @yield('content')
+<body class="h-100" >
+<div class="d-flex h-100" style="flex-flow: column;">
+    <div class="d-flex flex-grow-0 flex-shrink-1">
+        <div class="flex-grow-1 flex-shrink-1" style="flex-basis: auto">
+            @include('layouts.header')
+        </div>
+    </div>
+    <div class="d-flex flex-grow-1 flex-shrink-1 m-0">
+        @include('layouts.sidenav')
+        <div class="d-flex col-md-9 col-xl-10">
+            @yield('content')
+        </div>
     </div>
 </div>
-
 </body>
 </html>
