@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -49,9 +50,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // TODO add type of the account and ignore filed fields for student type
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'degree_front' => ['string', 'nullable', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'degree_after' => ['string', 'nullable', 'max:255'],
+            'school' => ['string', 'nullable', 'max:255'],
+            'account_type' => ['required', Rule::in(['student', 'teacher'])],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,9 +71,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        /*
+         * If the new account is student account type, ignore following text fields:
+         * - degree_front
+         * - degree_after
+         * - school
+         */
+        if (strcmp($data['account_type'], 'student') == 0)
+        {
+            $data['degree_front'] = null;
+            $data['degree_after'] = null;
+            $data['school'] = null;
+        }
+
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
+            'degree_front' => $data['degree_front'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'degree_after' => $data['degree_after'],
+            'school' => $data['school'],
+            'account_type' =>  $data['account_type'],
             'password' => Hash::make($data['password']),
         ]);
     }

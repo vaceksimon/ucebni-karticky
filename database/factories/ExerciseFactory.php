@@ -14,7 +14,7 @@ class ExerciseFactory extends Factory
      */
     public function definition()
     {
-        $teacher = DB::table('users')->select('id')->where('type', 'teacher')->pluck('id');
+        $teacher = DB::table('users')->select('id')->where('account_type', 'teacher')->pluck('id');
         return [
             'author'      => $this->faker->randomElement($teacher),
             'name'        => $this->faker->words(2, true),

@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'remember_token'    => Str::random(10),
             'degree_front'      => null,
             'degree_after'      => null,
-            'type'              => 'student',
+            'account_type'      => User::ROLE_STUDENT,
             'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
         ];
     }
@@ -41,7 +41,7 @@ class UserFactory extends Factory
                 'remember_token'    => Str::random(10),
                 'degree_front'      => null,
                 'degree_after'      => null,
-                'type'              => User::ROLE_STUDENT,
+                'account_type'      => User::ROLE_STUDENT,
                 'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
             ];
         });
@@ -60,7 +60,7 @@ class UserFactory extends Factory
                 'remember_token'    => Str::random(10),
                 'degree_front'      => $this->faker->randomElement(['Mgr.', 'Ing.', 'PhDr.', 'Bc.', null]),
                 'degree_after'      => $this->faker->randomElement(['Mgr.', 'Ing.', 'PhDr.', null]),
-                'type'              => User::ROLE_TEACHER,
+                'account_type'      => User::ROLE_TEACHER,
                 'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
             ];
         });
@@ -79,7 +79,7 @@ class UserFactory extends Factory
                 'remember_token'    => Str::random(10),
                 'degree_front'      => null,
                 'degree_after'      => null,
-                'type'              => User::ROLE_ADMIN,
+                'account_type'      => User::ROLE_ADMIN,
                 'photo'             => $this->faker->imageUrl(640, 480, 'people', true)
             ];
         });
