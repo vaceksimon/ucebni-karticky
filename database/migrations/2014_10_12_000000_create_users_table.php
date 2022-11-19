@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('school')->nullable();
             $table->string('photo')->nullable();
             $table->enum('account_type', ['admin', 'teacher', 'student']);
-            //$table->string('account_type');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

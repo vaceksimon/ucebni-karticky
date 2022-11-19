@@ -20,6 +20,7 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('degree_after')->nullable();
+            $table->enum('account_type', ['admin', 'teacher', 'student']);
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();
