@@ -15,7 +15,7 @@ class GroupFactory extends Factory
      */
     public function definition()
     {
-        $teacher = DB::table('users')->select('id')->where('type', 'teacher')->pluck('id');
+        $teacher = DB::table('users')->select('id')->where('account_type', 'teacher')->pluck('id');
 
         return [
             'owner'       => $this->faker->randomElement($teacher),
@@ -29,7 +29,7 @@ class GroupFactory extends Factory
     public function teachers()
     {
         return $this->state(function (array $attributes) {
-            $teacher = DB::table('users')->select('id')->where('type', 'teacher')->pluck('id');
+            $teacher = DB::table('users')->select('id')->where('account_type', 'teacher')->pluck('id');
 
             return [
                 'owner'       => $this->faker->randomElement($teacher),
@@ -44,7 +44,7 @@ class GroupFactory extends Factory
     public function students()
     {
         return $this->state(function (array $attributes) {
-            $teacher = DB::table('users')->select('id')->where('type', 'teacher')->pluck('id');
+            $teacher = DB::table('users')->select('id')->where('account_type', 'teacher')->pluck('id');
 
             return [
                 'owner'       => $this->faker->randomElement($teacher),

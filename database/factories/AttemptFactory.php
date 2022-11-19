@@ -14,7 +14,7 @@ class AttemptFactory extends Factory
      */
     public function definition()
     {
-        $student         = DB::table('users')->select('id')->where('type', 'student')->pluck('id');
+        $student         = DB::table('users')->select('id')->where('account_type', 'student')->pluck('id');
         $exercise        = DB::table('exercises')->pluck('id');
         $exercise_id     = $this->faker->randomElement($exercise);
 
