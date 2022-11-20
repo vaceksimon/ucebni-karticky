@@ -18,7 +18,7 @@ class CreateUsersMembershipsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('group_id');
             $table->timestamps();
-
+/*
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -27,7 +27,7 @@ class CreateUsersMembershipsTable extends Migration
             $table->foreign('group_id')
                 ->references('id')
                 ->on('groups')
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
         });
     }
 

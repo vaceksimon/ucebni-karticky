@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -28,55 +29,20 @@ class CreateGroupController extends Controller
         }
 
         return response()->json(['result' => $result]);
+    }
 
+    public function store(Request $request)
+    {
+        $user = auth()->user();
 
-        /*
-        $name = $request->name;
-        $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$name."%")->get();
+        $group = $user->groupsOwnerships()->create([
+            'name' => $request->name,
+            'type' => $request->type,
+            'description' => $request->description,
+        ]);
 
-        //return dd($result);
-        return view('create-group.create-group', compact('result'));
-        */
+        $group->save();
 
-
-
-
-        /*
-        $output = "";
-
-        if ($request->ajax())
-        {
-            $name = $request->name;
-            $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$name."%")->get();
-
-            if ($result)
-            {
-                foreach ($result as $key => $user)
-                {
-                    $output.='<tr>'.
-                        '<td>'.$user->degree_front.'</td>'.
-                        '<td>'.$user->first_name.'</td>'.
-                        '<td>'.$user->last_name.'</td>'.
-                        '<td>'.$user->degree_after.'</td>'.
-                        '<td>'.$user->account_type.'</td>'.
-                        '</tr>';
-                }
-            }
-        }
-
-        dd($output);
-
-        return Response($output);
-        */
-
-        if (request('search'))
-        {
-            $name = request('search');
-            $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$name."%")->get();
-        } else {
-            $result = User::all();
-        }
-
-        return view('create-group.create-group')->with('result', $result);
+        return redirect('create-group')->with('status', 'Blog Post Form Data Has Been inserted');
     }
 }

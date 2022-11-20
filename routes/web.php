@@ -42,6 +42,11 @@ Route::get('/create-group', function () {
 
 Route::get('/create-group', [App\Http\Controllers\CreateGroupController::class, 'index'])->name('create-group');
 Route::post('/create-group/search', [App\Http\Controllers\CreateGroupController::class, 'search'])->name('create-group.search');
+
+
+Route::post('create-group', [App\Http\Controllers\CreateGroupController::class, 'store'])->name('create-group.store');
+
+
 //Route::get('/create-group/search', 'App\Http\Controllers\CreateGroupController@search');
 
 //Route::get('/create-group', 'SearchController@index');

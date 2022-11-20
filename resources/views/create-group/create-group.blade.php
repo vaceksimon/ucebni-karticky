@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('create-group') }}">
+                        <form method="POST" action="{{ route('create-group.store') }}">
                             @csrf
 
                             <div class="row row-center row-cols-2">
@@ -139,7 +139,7 @@
 
                             <div class="my-3 d-flex">
                                 <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
-                                <button class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit skupinu</button>
+                                <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit skupinu</button>
                             </div>
                         </form>
                     </div>

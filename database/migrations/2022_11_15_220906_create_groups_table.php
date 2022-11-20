@@ -19,7 +19,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('photo')->nullable();
-            $table->enum('type', ['teachers', 'students']);
+            $table->enum('group_type', ['teachers', 'students']);
             $table->timestamps();
 
             $table->foreign('owner')

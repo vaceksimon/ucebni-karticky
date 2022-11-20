@@ -60,12 +60,13 @@ class User extends Authenticatable
      */
     public function groupsOwnerships(): HasMany
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Group::class, 'owner', 'id');
     }
 
     /**
      * @return BelongsToMany
      */
+    /*
     public function groupsMemberships(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -74,7 +75,7 @@ class User extends Authenticatable
             'user_id',
             'group_id'
         );
-    }
+    }*/
 
     /**
      * @return HasMany
