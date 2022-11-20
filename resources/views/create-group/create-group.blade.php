@@ -174,6 +174,7 @@
                                                     <th>Pořadí</th>
                                                     <th>Jméno</th>
                                                     <th>Příjmení</th>
+                                                    <th>Typ uživatele</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -226,32 +227,46 @@
         </div>
     </div>
 
+    <!-- https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
-    <script>$('#search').on('keyup', function(){    search();});search();
-        function search(){
-            var keyword = $('#search').val();
-            $.post('{{ route("create-group.search") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    keyword:keyword
-                },
-                function(data){
-                table_post_row(data);
-                console.log(data);
-            });}
-        // table row with ajax
-        function table_post_row(res){
-            let htmlView = '';
-            if(res.result.length <= 0){
-                htmlView += `
-                    <tr>
-                        <td colspan="4">No data.</td>
-                    </tr>`;
-            }
-            for(let i = 0; i < res.result.length; i++){
-                htmlView +=
-                    `        <tr>           <td>`+ (i+1) +`</td>              <td>`+res.result[i].first_name+`</td>               <td>`+res.result[i].last_name+`</td>        </tr>`;}     $('tbody').html(htmlView);}</script>
+<script>$('#search').on('keyup', function(){
+    search();
+});
+search();
+function search(){
+    var keyword = $('#search').val();
+    $.post('{{ route("create-group.search") }}',
+        {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            keyword:keyword
+        },
+        function(data){
+        table_post_row(data);
+        console.log(data);
+    });
+}
+// table row with ajax
+function table_post_row(res){
+    let htmlView = '';
+    if(res.result.length <= 0){
+        htmlView += `
+            <tr>
+                <td colspan="4">No data.</td>
+            </tr>`;
+    }
+    for(let i = 0; i < res.result.length; i++){
+        htmlView += `
+            <tr>
+                <td>`+ (i+1) +`</td>
+                <td>`+res.result[i].first_name+`</td>
+                <td>`+res.result[i].last_name+`</td>
+                <td>`+res.result[i].account_type+`</td>
+            </tr>`;
+    }
+    $('tbody').html(htmlView);
+}
+</script>
 @endsection

@@ -18,11 +18,13 @@ class CreateGroupController extends Controller
     {
         if ($request->keyword != '')
         {
-            $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")->get();
+            $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
+                ->where( 'account_type', '<>', 'admin')
+                ->get();
         }
         else
         {
-            $result = User::all();
+            $result = User::where('account_type', '<>', 'admin')->get();
         }
 
         return response()->json(['result' => $result]);
