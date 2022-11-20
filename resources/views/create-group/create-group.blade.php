@@ -138,6 +138,11 @@
                             </div>
 
                             <div class="my-3 d-flex">
+                                <!--
+                                 TODO
+                                  - zrušit will navigate to home-page or previous page
+                                  - vytvořit skupinu will navigate to moje skupiny page
+                                 -->
                                 <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit skupinu</button>
                             </div>
@@ -187,38 +192,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <!--
-
-                            <div class="row row-center">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Fotografie</th>
-                                                    <th>Tituly před</th>
-                                                    <th>Jméno</th>
-                                                    <th>Příjmení</th>
-                                                    <th>Tituly za</th>
-                                                    <th>Typ uživatele</th>
-                                                    <th>Akce</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-                        -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
@@ -278,6 +251,7 @@ function table_post_row(res){
                 <td>`+res.result[i].account_type+`</td>
                 <td>
                     <form method="post" action="">
+                        <input type="hidden" name="member_id" value="`+ res.result[i].id +`">
                         <button type="submit" class="btn btn-outline-primary">Přidat</button>
                     </form>
                 </td>
