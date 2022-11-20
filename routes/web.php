@@ -21,17 +21,15 @@ Route::get('/test', function () {
     return view('test');
 })->name('test');
 
-Route::get('/mygroups', function () {
-    return view('groups.mygroups');
-})->name('mygroups');
+Route::get('mygroups', [\App\Http\Controllers\Groups\GroupController::class, 'show' ])->name('mygroups');
+
+Route::get('create-group', function () {
+    return view('create-group');
+})->name('create-group');
 
 Route::get('/myexercises', function () {
     return view('exercises.myexercises');
 })->name('myexercises');
-
-Route::get('/create-group', function () {
-    return view('create-group');
-})->name('create-group');
 
 Auth::routes();
 
