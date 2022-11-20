@@ -172,8 +172,10 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Pořadí</th>
+                                                    <th>Tituly před</th>
                                                     <th>Jméno</th>
                                                     <th>Příjmení</th>
+                                                    <th>Tituly za</th>
                                                     <th>Typ uživatele</th>
                                                 </tr>
                                                 </thead>
@@ -258,11 +260,21 @@ function table_post_row(res){
             </tr>`;
     }
     for(let i = 0; i < res.result.length; i++){
+        if (res.result[i].degree_front === null) {
+            res.result[i].degree_front = '';
+        }
+
+        if (res.result[i].degree_after === null) {
+            res.result[i].degree_after = '';
+        }
+
         htmlView += `
             <tr>
                 <td>`+ (i+1) +`</td>
+                <td>`+res.result[i].degree_front+`</td>
                 <td>`+res.result[i].first_name+`</td>
                 <td>`+res.result[i].last_name+`</td>
+                <td>`+ res.result[i].degree_after  +`</td>
                 <td>`+res.result[i].account_type+`</td>
             </tr>`;
     }
