@@ -147,15 +147,89 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Přidání uživatele</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Text v modal
+                            <form method="post" action="{{ route('search/user/list') }}">
+                                @csrf
+
+                                <div class="row">
+                                    <div class="col-sm- col-md-11 col-lg-12 col-xl- col-12">
+                                        <div>
+                                            <!--
+                                            <input type="text" id="name" name="name">
+                                            <label> User Name </label>
+                                            -->
+                                            <input type="search" class="form-control" placeholder="Find user here" id="name" name="name" value="{{ request('search') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary col-md-3">
+                                        {{ __('Hledat') }}
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="row row-center">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fotografie</th>
+                                                    <th>Tituly před</th>
+                                                    <th>Jméno</th>
+                                                    <th>Příjmení</th>
+                                                    <th>Tituly za</th>
+                                                    <th>Typ uživatele</th>
+                                                    <th>Akce</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($result as $user)
+                                                    <tr>
+                                                        <td>
+                                                            Fotografie
+                                                        </td>
+                                                        <td>
+                                                            {{ $user->degree_front }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $user->first_name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $user->last_name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $user->degree_after }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $user->account_type }}
+                                                        </td>
+                                                        <td>
+                                                            akce
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

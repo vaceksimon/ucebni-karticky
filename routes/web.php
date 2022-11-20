@@ -30,10 +30,19 @@ Route::get('/mygroups', function () {
 Route::get('/myexercises', function () {
     return view('exercises.myexercises');
 })->name('myexercises');
-
+/*
 Route::get('/create-group', function () {
     return view('create-group.create-group');
 })->name('create-group');
+*/
+Route::get('/create-group', [App\Http\Controllers\CreateGroupController::class, 'index'])->name('create-group');
+
+/* Search user in create group */
+Route::post('search/user/list', [App\Http\Controllers\CreateGroupController::class, 'searchUser'])->name('search/user/list');
+
+//Route::get('/create-group', 'SearchController@index');
+//Route::get('/users/simple', 'SearchController@simple')->name('simple_search');
+//Route::get('/users/advance', 'SearchController@advance')->name('advance_search');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 
