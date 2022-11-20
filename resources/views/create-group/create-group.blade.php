@@ -177,6 +177,7 @@
                                                     <th>Příjmení</th>
                                                     <th>Tituly za</th>
                                                     <th>Typ uživatele</th>
+                                                    <th>Akce</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -220,8 +221,7 @@
                         -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
                         </div>
                     </div>
                 </div>
@@ -276,7 +276,12 @@ function table_post_row(res){
                 <td>`+res.result[i].last_name+`</td>
                 <td>`+ res.result[i].degree_after  +`</td>
                 <td>`+res.result[i].account_type+`</td>
-            </tr>`;
+                <td>
+                    <form method="post" action="">
+                        <button type="submit" class="btn btn-outline-primary">Přidat</button>
+                    </form>
+                </td>
+</tr>`;
     }
     $('tbody').html(htmlView);
 }
