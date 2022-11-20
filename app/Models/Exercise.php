@@ -20,6 +20,7 @@ class Exercise extends Model
         'name',
         'description',
         'topic',
+        'visibility',
     ];
 
     /**

@@ -29,9 +29,9 @@ Route::get('/myexercises', function () {
     return view('exercises.myexercises');
 })->name('myexercises');
 
-Route::get('/create-group', function () {
-    return view('create-group');
-})->name('create-group');
+Route::get('/create-exercise', [App\Http\Controllers\CreateExerciseController::class, 'index'])->name('create-exercise');
+
+Route::post('create-exercise', [App\Http\Controllers\CreateExerciseController::class, 'store'])->name('create-exercise.store');
 
 Auth::routes();
 

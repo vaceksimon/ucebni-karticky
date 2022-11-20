@@ -81,14 +81,15 @@ class User extends Authenticatable
      */
     public function createdExercises(): HasMany
     {
-        return $this->hasMany(Exercise::class);
+        return $this->hasMany(Exercise::class, 'author', 'id');
     }
 
     /**
      * @return HasMany
      */
+    /*
     public function attempts(): HasMany
     {
         return $this->hasMany(Attempt::class);
-    }
+    }*/
 }
