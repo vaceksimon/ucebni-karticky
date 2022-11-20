@@ -8,7 +8,8 @@
                     <div class="col-lg-7 col-md-8">
                         <h1 class="text-white text-center mb-0 display-2">{{ __('Učební Kartičky') }}</h1>
                         <div class="col-lg-12 mx-auto">
-                            <p class="lead mb-4 text-white-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p class="lead text-white-50 text-center"><i>„Učení vaši mysl nikdy nevyčerpá.“</i></p>
+                            <h5 class="text-white-50 text-center pb-4">Leonardo Da Vinci</h5>
                             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                                 <form>
                                     <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('register') }}">Registrovat</button>
