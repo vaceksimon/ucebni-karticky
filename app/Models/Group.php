@@ -21,8 +21,9 @@ class Group extends Model
      */
     protected $fillable = [
         'name',
-        'type',
         'description',
+        'type',
+        'visibility',
         'photo',
     ];
 

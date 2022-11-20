@@ -19,7 +19,8 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('photo')->nullable();
-            $table->enum('group_type', ['teachers', 'students']);
+            $table->enum('type', ['teachers', 'students']);
+            $table->enum('visibility', ['private', 'public']);
             $table->timestamps();
 
             $table->foreign('owner')

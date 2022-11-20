@@ -37,12 +37,13 @@ class CreateGroupController extends Controller
 
         $group = $user->groupsOwnerships()->create([
             'name' => $request->name,
-            'type' => $request->type,
             'description' => $request->description,
+            'type' => $request->type,
+            'visibility' => $request->visibility,
         ]);
 
         $group->save();
 
-        return redirect('create-group')->with('status', 'Blog Post Form Data Has Been inserted');
+        return redirect('create-group')->with('status', 'Post Form Data Has Been inserted');
     }
 }
