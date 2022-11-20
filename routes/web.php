@@ -35,10 +35,14 @@ Route::get('/create-group', function () {
     return view('create-group.create-group');
 })->name('create-group');
 */
-Route::get('/create-group', [App\Http\Controllers\CreateGroupController::class, 'index'])->name('create-group');
+//Route::get('/create-group', [App\Http\Controllers\CreateGroupController::class, 'index'])->name('create-group');
 
 /* Search user in create group */
-Route::post('search/user/list', [App\Http\Controllers\CreateGroupController::class, 'searchUser'])->name('search/user/list');
+//Route::post('search/user/list', [App\Http\Controllers\CreateGroupController::class, 'searchUser'])->name('search/user/list');
+
+Route::get('/create-group', [App\Http\Controllers\CreateGroupController::class, 'index'])->name('create-group');
+Route::post('/create-group/search', [App\Http\Controllers\CreateGroupController::class, 'search'])->name('create-group.search');
+//Route::get('/create-group/search', 'App\Http\Controllers\CreateGroupController@search');
 
 //Route::get('/create-group', 'SearchController@index');
 //Route::get('/users/simple', 'SearchController@simple')->name('simple_search');

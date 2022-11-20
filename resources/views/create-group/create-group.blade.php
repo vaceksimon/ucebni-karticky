@@ -121,7 +121,7 @@
                                                 {{ __('Členové') }}
                                             </div>
                                             <div class="row row-center">
-                                                <button class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px">Přidat člena</button>
+                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
                                             </div>
                                         </div>
                                     </div>
@@ -155,27 +155,37 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="{{ route('search/user/list') }}">
-                                @csrf
-
-                                <div class="row">
-                                    <div class="col-sm- col-md-11 col-lg-12 col-xl- col-12">
-                                        <div>
-                                            <!--
-                                            <input type="text" id="name" name="name">
-                                            <label> User Name </label>
-                                            -->
-                                            <input type="search" class="form-control" placeholder="Find user here" id="name" name="name" value="{{ request('search') }}">
+                            <div class="row mt-5">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control"   placeholder="Vyhledat uživatele" id="search">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <table class="table table-striped table-inverse table-responsive d-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Pořadí</th>
+                                                    <th>Jméno</th>
+                                                    <th>Příjmení</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <button type="submit" class="btn btn-primary col-md-3">
-                                        {{ __('Hledat') }}
-                                    </button>
-                                </div>
-                            </form>
+
+                            <!--
 
                             <div class="row row-center">
                                 <div class="col-md-12">
@@ -193,31 +203,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($result as $user)
-                                                    <tr>
-                                                        <td>
-                                                            Fotografie
-                                                        </td>
-                                                        <td>
-                                                            {{ $user->degree_front }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $user->first_name }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $user->last_name }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $user->degree_after }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $user->account_type }}
-                                                        </td>
-                                                        <td>
-                                                            akce
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -229,7 +214,7 @@
 
 
 
-
+                        -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -240,4 +225,33 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <script>$('#search').on('keyup', function(){    search();});search();
+        function search(){
+            var keyword = $('#search').val();
+            $.post('{{ route("create-group.search") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    keyword:keyword
+                },
+                function(data){
+                table_post_row(data);
+                console.log(data);
+            });}
+        // table row with ajax
+        function table_post_row(res){
+            let htmlView = '';
+            if(res.result.length <= 0){
+                htmlView += `
+                    <tr>
+                        <td colspan="4">No data.</td>
+                    </tr>`;
+            }
+            for(let i = 0; i < res.result.length; i++){
+                htmlView +=
+                    `        <tr>           <td>`+ (i+1) +`</td>              <td>`+res.result[i].first_name+`</td>               <td>`+res.result[i].last_name+`</td>        </tr>`;}     $('tbody').html(htmlView);}</script>
 @endsection
