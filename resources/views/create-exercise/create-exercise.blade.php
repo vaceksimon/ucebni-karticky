@@ -112,7 +112,7 @@
                                 <!--
                                  TODO
                                   - zrušit will navigate to home-page or previous page
-                                  - vytvořit skupinu will navigate to moje skupiny page
+                                  - vytvořit skupinu will navigate to moje cviceni page
                                  -->
                                 <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit cvičení</button>
