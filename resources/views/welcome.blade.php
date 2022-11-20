@@ -1,27 +1,27 @@
 @extends('layouts/app', ['activePage' => 'welcome', 'title' => 'Učební Kartičky'])
 
 @section('content')
-    <div class="full-page section-image" data-color="black">
-        <div class="content">
-            <div class="container">
-                <div class="row justify-content-center">
+    <div class="full-page section-image d-flex justify-content-center align-items-center" data-color="black" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); height: 100vh;">
+        <div class="content mask-custom" style="background-color: rgba(0, 0, 0, 0.6); height: 100vh; width: 100vw;">
+            <div class="container justify-content-center align-items-center h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-lg-7 col-md-8">
-                        <h1 class="text-black text-center">{{ __('Učební Kartičky') }}</h1>
+                        <h1 class="text-white text-center mb-0 display-2">{{ __('Učební Kartičky') }}</h1>
+                        <div class="col-lg-12 mx-auto">
+                            <p class="lead text-white-50 text-center"><i>„Učení vaši mysl nikdy nevyčerpá.“</i></p>
+                            <h5 class="text-white-50 text-center pb-4">Leonardo Da Vinci</h5>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                <form>
+                                    <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('register') }}">Registrovat</button>
+                                </form>
+                                <form>
+                                    <button class="btn btn-outline-secondary btn-lg px-4">Procvičovat</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-@push('js')
-    <script>
-        $(document).ready(function() {
-            //demo.checkFullPageBackgroundImage();
-            setTimeout(function() {
-                // after 1000 ms the class animated is added to the login/register card
-                $('.card').removeClass('card-hidden');
-            }, 700)
-        });
-    </script>
-@endpush

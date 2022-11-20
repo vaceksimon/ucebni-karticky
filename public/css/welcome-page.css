@@ -1,0 +1,8 @@
+/*
+ * Author: David Chocholaty (xchoch09)
+ */
+
+.mask-custom {
+    backdrop-filter: blur(4px);
+    background-color: rgba(33, 5, 51, 0.5);
+}
