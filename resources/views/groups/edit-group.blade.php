@@ -102,9 +102,7 @@
 
                                 <div class="col-md-6">
                                     <textarea rows="5" cols="60" id="description" name="description" class="form-control" style="height:20vh;"
-                                              required autocomplete="description" autofocus>
-                                        <?php echo $group[0]->description ?>
-                                    </textarea>
+                                              required autocomplete="description" autofocus><?php echo $group[0]->description ?></textarea>
                                 </div>
                             </div>
 
