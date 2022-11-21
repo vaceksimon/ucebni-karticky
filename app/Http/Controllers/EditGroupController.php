@@ -59,8 +59,3 @@ class EditGroupController extends Controller
         return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
     }
 }
-
-public function removeMember(Request $request)
-{
-    
-}
