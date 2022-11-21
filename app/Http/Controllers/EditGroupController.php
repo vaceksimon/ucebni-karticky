@@ -58,4 +58,27 @@ class EditGroupController extends Controller
 
         return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
     }
+
+    public function removeMember(Request $request)
+    {
+        $member_id = $request->member_id;
+        $group_id = $request->group_id;
+
+        DB::table('users_memberships')
+            ->where('user_id', $member_id)
+            ->where('group_id', $group_id)
+            ->delete();
+
+        // Prepare data for refreshing the view.
+/*
+        $group = Group::where('id', '=', $group_id)->get();
+
+        //SELECT * FROM ucebni_karticky.users LEFT JOIN users_memberships ON users.id = users_memberships.user_id WHERE users_memberships.group_id = 1;
+        $members = DB::table('users')
+            ->leftJoin('users_memberships', 'users.id', '=', 'users_memberships.user_id')
+            ->where('users_memberships.group_id', '=', $group_id)
+            ->get();
+*/
+        return view('layouts.main');
+    }
 }

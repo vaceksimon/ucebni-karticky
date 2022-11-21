@@ -60,7 +60,7 @@ class User extends Authenticatable
      */
     public function groupsOwnerships(): HasMany
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Group::class, 'owner', 'id');
     }
 
     /**
@@ -72,7 +72,7 @@ class User extends Authenticatable
             Group::class,
             'user_memberships',
             'user_id',
-            'group_id'
+            'id'
         );
     }
 

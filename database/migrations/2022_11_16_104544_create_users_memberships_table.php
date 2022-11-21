@@ -21,13 +21,11 @@ class CreateUsersMembershipsTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+                ->on('users');
 
             $table->foreign('group_id')
                 ->references('id')
-                ->on('groups')
-                ->onDelete('cascade');
+                ->on('groups');
         });
     }
 

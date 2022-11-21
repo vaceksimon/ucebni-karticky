@@ -13,6 +13,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('edit-group.store') }}">
                             @csrf
+
                             <input type="hidden" name="group_id" value="<?php echo $group[0]->id; ?>">
 
 
@@ -132,8 +133,11 @@
                                                         <td>{{ $member->last_name }}</td>
                                                         <td>{{ $member->degree_after }}</td>
                                                         <td>
-                                                            <form method="post" action="">
-                                                                <input type="hidden" name="member_id" value="{{ $member->id }}">
+                                                            <form method="post" action="{{ route('edit-group.remove-member') }}">
+                                                                @csrf
+
+                                                                <input type="hidden" id="member_id" name="member_id" value="{{ $member->user_id }}">
+                                                                <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
                                                                 <button type="submit" class="btn btn-outline-danger">Odebrat</button>
                                                             </form>
                                                         </td>
@@ -149,15 +153,6 @@
                                             </div>
                                         @endforelse
                                         </table>
-
-                                        <!--
-                                        <div class="text-center">
-                                            Vaše skupina zatím neobsahuje žádné členy.
-                                        </div>
-                                        <div class="row row-center mx-auto my-3" style="width: 120px">
-                                            <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
-                                        </div>
-                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -190,10 +185,12 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="" method="POST">
+                                                @csrf
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
-                                                            <input type="text" class="form-control"   placeholder="Vyhledat uživatele" id="search">
+                                                            <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,6 +271,8 @@
                 <td>`+res.result[i].account_type+`</td>
                 <td>
                     <form method="post" action="">
+                        @csrf
+
                         <input type="hidden" name="member_id" value="`+ res.result[i].id +`">
                         <button type="submit" class="btn btn-outline-primary">Přidat</button>
                     </form>
