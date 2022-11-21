@@ -43,7 +43,7 @@ class GroupSeeder extends Seeder
             );
         });
 
-        Group::all()->where('type', '=', Group::STUDENTS_GROUP)->random(rand(3,6))->each(function ($group)
+        Group::all()->where('type', '=', Group::STUDENTS_GROUP)->each(function ($group)
         {
             $students = User::all()->random(rand(0,70))
                 ->where('account_type', '=', User::ROLE_STUDENT)
