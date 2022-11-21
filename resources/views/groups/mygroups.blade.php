@@ -102,6 +102,40 @@
                                 </div>
                             </div>
                             @endforeach
+                            <div class="pb-3">
+                                <h4>Skupiny, ve kterých jste</h4>
+                            </div>
+                                @foreach($t_teacherGroupsGroup as $record)
+                                    <div class="card mb-3">
+                                        <div class="card-header d-flex align-items-center">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <div class="col-2">
+                                                        <img class="rounded-circle d-block m-auto" src="{{ $record->photo }}" style=" width: 3rem; height: 3rem;" alt="Avatar"/>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <div>{{ $record->name }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 d-flex justify-content-end gap-3">
+                                                <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                                    <div style="width: 120px">
+                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body d-flex">
+                                            <div class="row">
+                                                <div>Počet žáků: {{ $record->pocet }}</div>
+                                                <div>Popis: {{$record->description}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             @elseif($role === 'student')
                                 @foreach($s_studentGroups as $record)
                                     <div class="card mb-3">
