@@ -29,9 +29,14 @@ Route::get('/myexercises', function () {
     return view('exercises.myexercises');
 })->name('myexercises');
 
-Route::get('/create-group', function () {
-    return view('create-group');
-})->name('create-group');
+Route::get('/edit-group', [App\Http\Controllers\EditGroupController::class, 'index'])->name('edit-group');
+Route::post('/edit-group/search', [App\Http\Controllers\EditGroupController::class, 'search'])->name('edit-group.search');
+
+
+Route::post('edit-group', [App\Http\Controllers\EditGroupController::class, 'store'])->name('edit-group.store');
+
+
+
 
 Auth::routes();
 
