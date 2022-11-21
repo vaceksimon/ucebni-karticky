@@ -33,7 +33,8 @@ class GroupSeeder extends Seeder
         Group::factory(5)->teachers()->create();
         Group::factory(20)->students()->create();
 
-        Group::all()->each(function ($group) {
+        Group::all()->where('type', '=', Group::TEACHERS_GROUP)->each(function ($group)
+        {
             $teachers = User::all()->random(rand(0,27))
                 ->where('account_type', '=', User::ROLE_TEACHER)
                 ->where('id', '>', 1);
@@ -42,7 +43,8 @@ class GroupSeeder extends Seeder
             );
         });
 
-        Group::all()->random(rand(3,6))->each(function ($group) {
+        Group::all()->where('type', '=', Group::STUDENTS_GROUP)->each(function ($group)
+        {
             $students = User::all()->random(rand(0,70))
                 ->where('account_type', '=', User::ROLE_STUDENT)
                 ->where('id', '>', 1);
