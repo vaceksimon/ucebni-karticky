@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-<!-- TODO zmenit id zkupiny z 1 na spravnou -->
-
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">

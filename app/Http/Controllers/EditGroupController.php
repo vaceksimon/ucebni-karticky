@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class EditGroupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $group_id = Session::get('group_id');
         $group = Group::where('id', '=', $group_id)->get();
