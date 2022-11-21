@@ -7,19 +7,19 @@ use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class EditGroupController extends Controller
 {
     public function index()
     {
-        // TODO zmenit na spravny
-        $group = Group::where('id', '=', '1')->get();// Table::select('name','surname')->where('id', 1)->get();
+        $group_id = Session::get('group_id');
+        $group = Group::where('id', '=', $group_id)->get();
 
         //SELECT * FROM ucebni_karticky.users LEFT JOIN users_memberships ON users.id = users_memberships.user_id WHERE users_memberships.group_id = 1;
-        // TODO zmenit na spravny
         $members = DB::table('users')
             ->leftJoin('users_memberships', 'users.id', '=', 'users_memberships.user_id')
-            ->where('users_memberships.group_id', '=', '1')
+            ->where('users_memberships.group_id', '=', $group_id)
             ->get();
 
         return view('groups.edit-group')
