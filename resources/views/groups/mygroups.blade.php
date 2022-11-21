@@ -33,12 +33,19 @@
                                         </div>
                                     </div>
                                     <div class="col-6 d-flex justify-content-end gap-3">
-                                        <div class="" style="width: 120px">
-                                            <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">Upravit skupinu</button>
-                                        </div>
-                                        <div class="" style="width: 120px">
-                                            <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail skupiny</button>
-                                        </div>
+                                        <form method="POST" action="{{ route('mygroups.clickEdit') }}">
+                                            <div style="width: 120px">
+                                                <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit skupinu</button>
+                                            </div>
+                                        </form>
+
+                                        <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                            <div style="width: 120px">
+                                                <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -71,12 +78,19 @@
                                         </div>
                                     </div>
                                     <div class="col-6 d-flex justify-content-end gap-3">
-                                        <div class="" style="width: 120px">
-                                            <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">Upravit skupinu</button>
-                                        </div>
-                                        <div class="" style="width: 120px">
-                                            <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail skupiny</button>
-                                        </div>
+                                        <form method="POST" action="{{ route('mygroups.clickEdit') }}">
+                                            <div style="width: 120px">
+                                                <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit skupinu</button>
+                                            </div>
+                                        </form>
+
+                                        <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                        <div style="width: 120px">
+                                            <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                            <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -103,12 +117,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-6 d-flex justify-content-end gap-3">
-                                                <div class="" style="width: 120px">
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">Upravit skupinu</button>
-                                                </div>
-                                                <div class="" style="width: 120px">
-                                                    <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail skupiny</button>
-                                                </div>
+                                                <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                                    <div style="width: 120px">
+                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
 

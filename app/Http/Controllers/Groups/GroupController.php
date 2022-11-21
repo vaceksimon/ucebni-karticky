@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Groups;
 
 use App\Http\Controllers\Controller;
-use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
@@ -53,5 +53,17 @@ class GroupController extends Controller
             ->where('type', '=', 'students')
             ->where('user_id', '=', Auth::user()->id)
             ->get();
+    }
+
+    public function clickEdit(Request $request)
+    {
+        return redirect('edit-group')
+            ->with('group_id', $request->group_id);
+    }
+
+    public function clickShow(Request $request)
+    {
+        return redirect('edit-group')
+            ->with('group_id', $request->group_id);
     }
 }
