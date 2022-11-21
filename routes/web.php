@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
 Route::get('/test', function () {
     return view('test');
 })->name('test');
@@ -41,6 +45,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dbconn', function(){
-   return view('dbconn');
+Route::get('/dbconn', function () {
+    return view('dbconn');
 });

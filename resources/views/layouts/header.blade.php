@@ -10,11 +10,32 @@
                 </li>
             </ul>
 
-            <a href="{{ route('login') }}">
-                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex"
-                     style="width: 60px;"
+            <div class="btn-group">
+                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex dropdown-toggle"
+                     data-bs-toggle="dropdown"
+                     style="width: 60px; cursor:pointer" ;
                      alt="Avatar"/>
-            </a>
+                <ul class="dropdown-menu dropdown-menu-xxl-end">
+                    <li>
+                        <a href="{{route('profile')}}" style="text-decoration: none">
+                            <button class="dropdown-item fs-4" type="button">
+                                Můj profil
+                            </button>
+                        </a>
+                    </li>
+                    <li>
+                        <button class="dropdown-item text-danger fs-4" type="button"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Odhlásit se
+                        </button>
+                    </li>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

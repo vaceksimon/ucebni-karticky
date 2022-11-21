@@ -3,7 +3,8 @@
         <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start fs-4" id="menu"
             style="--bs-nav-link-color: none">
             <li class="nav-item">
-                <a href="{{route('home')}}" class="nav-link align-middle px-0 @if(request()->routeIs('home')) active @endif">
+                <a href="{{route('home')}}"
+                   class="nav-link align-middle px-0 @if(request()->routeIs('home')) active @endif">
                     <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Domů</span>
                 </a>
             </li>
@@ -15,7 +16,8 @@
                     <ul class="collapse show nav flex-column ms-1 fs-5" data-bs-parent="#menu"
                         style="--bs-nav-link-color: none">
                         <li class="w-100 nav-item">
-                            <a href="#" class="nav-link px-0 @if(request()->routeIs('mygroups')) active @endif"> <span class="d-none d-sm-inline">Moje skupiny</span></a>
+                            <a href="#" class="nav-link px-0 @if(request()->routeIs('mygroups')) active @endif"> <span
+                                    class="d-none d-sm-inline">Moje skupiny</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link px-0 @if(request()->routeIs('')) active @endif"> <span
@@ -32,7 +34,8 @@
                     <ul class="collapse show nav flex-column ms-1 fs-5" data-bs-parent="#menu"
                         style="--bs-nav-link-color: none">
                         <li class="w-100 nav-item">
-                            <a href="#" class="nav-link px-0 @if(request()->routeIs('myexercises')) active @endif"> <span class="d-none d-sm-inline">Moje cvičení</span></a>
+                            <a href="#" class="nav-link px-0 @if(request()->routeIs('myexercises')) active @endif">
+                                <span class="d-none d-sm-inline">Moje cvičení</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link px-0 @if(request()->routeIs('')) active @endif"> <span
@@ -42,12 +45,13 @@
                 @endif
             </li>
             <li class="nav-item">
-                <a href="" data-bs-toggle="collapse" class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
+                <a href="{{route('create-group')}}"
+                   class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
                     <i class="fs-4 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit skupinu</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" data-bs-toggle="collapse" class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
+                <a href="" class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
                     <i class="fs-4 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit cvičení</span>
                 </a>
             </li>
