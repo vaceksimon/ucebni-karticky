@@ -42,12 +42,12 @@
                 @endif
             </li>
             <li>
-                <a href="{{route('create-group')}}" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <a href="{{route('create-group')}}" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit skupinu</span>
                 </a>
             </li>
             <li>
-                <a href="" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <a href="" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit cvičení</span>
                 </a>
             </li>
