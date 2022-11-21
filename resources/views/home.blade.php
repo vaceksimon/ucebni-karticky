@@ -16,7 +16,7 @@
                                 <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('register') }}">Vytvořit sadu kartiček</button>
                             </form>
                             <form>
-                                <button class="btn btn-outline-secondary btn-lg px-4">Vytvořit skupinu</button>
+                                <button class="btn btn-outline-secondary btn-lg px-4" formaction="{{ route('create-group') }}">Vytvořit skupinu</button>
                             </form>
                         </div>
                     </div>
