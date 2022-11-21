@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link fs-1" href="{{ route('test') }}">
+                    <a class="nav-link fs-1" href="{{ route('home') }}">
                         <i class="bi-journals"></i>
                         Učební kartičky
                     </a>
