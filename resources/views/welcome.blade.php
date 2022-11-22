@@ -10,6 +10,7 @@
                         <div class="col-lg-12 mx-auto">
                             <p class="lead text-white-50 text-center"><i>„Učení vaši mysl nikdy nevyčerpá.“</i></p>
                             <h5 class="text-white-50 text-center pb-4">Leonardo Da Vinci</h5>
+                            @guest
                             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                                 <form>
                                     <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('register') }}">Registrovat</button>
@@ -18,7 +19,15 @@
                                     <button class="btn btn-outline-secondary btn-lg px-4">Procvičovat</button>
                                 </form>
                             </div>
-                        </div>
+                            @endguest
+                            @auth
+                            <div class="d-grid gap-2 d-sm-flex flex-column align-items-center">
+                                <h2 class="text-white pt-5">Jste již přihlášen</h2>
+                                <form>
+                                    <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('home') }}">Vstoupit do systému</button>
+                                </form>
+                            </div>
+                            @endauth
                     </div>
                 </div>
             </div>
