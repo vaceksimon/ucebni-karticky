@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="row row-center" style="width: 60%">
                                             <div class="container my-auto">
-                                                <label class="input-group-text my-auto" style="width: 75px" for="inputGroupFile">Upravit</label>
+                                                <label class="input-group-text my-auto" style="width: 75px; cursor:pointer;" for="inputGroupFile">Upravit</label>
                                                 <input type="file" class="form-control" id="inputGroupFile" hidden>
                                             </div>
                                         </div>
