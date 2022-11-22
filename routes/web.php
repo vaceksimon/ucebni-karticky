@@ -17,9 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+Route::get('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 
 Route::get('/test', function () {
     return view('test');

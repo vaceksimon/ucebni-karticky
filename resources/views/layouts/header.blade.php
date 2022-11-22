@@ -11,9 +11,9 @@
             </ul>
 
             <div class="btn-group">
-                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex dropdown-toggle"
+                <img src="{{Auth::user()->photo}}" class="rounded-circle d-flex dropdown-toggle"
                      data-bs-toggle="dropdown"
-                     style="width: 60px; cursor:pointer" ;
+                     style="width: 60px; height: 60px; cursor:pointer" ;
                      alt="Avatar"/>
                 <ul class="dropdown-menu dropdown-menu-xxl-end">
                     <li>
