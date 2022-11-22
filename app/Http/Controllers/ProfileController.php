@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email]);
+        User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
 
         if(isset($request->photo))
             User::where('id', Auth::id())->update(['photo' => $request->photo]);
