@@ -65,5 +65,7 @@ class GroupSeeder extends Seeder
                 $exercises->pluck('id')->toArray()
             );
         });
+
+        $student->assigned()->attach(1);
     }
 }
