@@ -40,6 +40,7 @@ class ExerciseController extends Controller
     public function s_getStudents()
     {
         return DB::table('users AS us')
+            ->select(DB::raw('ex.id, ex.name AS e_name, ex.topic, gr.name, ex.description'))
             ->addSelect(DB::raw('(
                 SELECT COUNT(*) FROM ucebny_karticky.exercises exin
 	            JOIN ucebny_karticky.flashcards fl on fl.exercise_id = exin.id
