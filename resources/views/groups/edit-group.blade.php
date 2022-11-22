@@ -164,7 +164,7 @@
                                   - vytvořit skupinu will navigate to moje skupiny page
                                  -->
                                 <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
-                                <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit skupinu</button>
+                                <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>
                             </div>
                         </form>
                     </div>
