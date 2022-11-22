@@ -11,7 +11,9 @@
                         </div>
                         @if($user['id'] == Auth::id())
                             <div class="col-10">
-                                <button class="btn btn-outline-primary">Upravit</button>
+                                <a href="{{route('profile.edit')}}">
+                                    <button class="btn btn-outline-primary">Upravit</button>
+                                </a>
                             </div>
                         @endif
                     </div>
