@@ -195,9 +195,9 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div style="height: 300px;overflow-y: scroll;">
-                                                <table id="users_table" class="table table-striped d-table">
-                                                    <thead>
+                                                <div style="height: 300px;overflow-y: scroll;">
+                                                <table class="table table-striped d-table">
+                                                    <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
                                                     <tr>
                                                         <th>Pořadí</th>
                                                         <th>Tituly před</th>
@@ -208,10 +208,10 @@
                                                         <th>Akce</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
-                                                    </tbody>
+                                                        <tbody id="users_table">
+                                                        </tbody>
                                                 </table>
-                                            </div>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
