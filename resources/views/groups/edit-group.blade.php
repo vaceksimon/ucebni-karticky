@@ -119,38 +119,40 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <table class="table table-striped table-inverse table-responsive d-table">
-                                            <thead>
-                                            </thead>
-                                        @forelse($members as $member)
-                                            <div class="text-center">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{ $member->degree_front }}</td>
-                                                        <td>{{ $member->first_name }}</td>
-                                                        <td>{{ $member->last_name }}</td>
-                                                        <td>{{ $member->degree_after }}</td>
-                                                        <td>
-                                                            <form method="post" action="{{ route('edit-group.remove-member') }}">
-                                                                @csrf
+                                        <div style="height: 300px;overflow-y: scroll;">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                </thead>
+                                                @empty($members)
+                                                    <div class="text-center">
+                                                        Vaše skupina zatím neobsahuje žádné členy.
+                                                    </div>
+                                                    <div class="row row-center mx-auto my-3" style="width: 120px">
+                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
+                                                    </div>
+                                                @else
+                                                    <tbody>
+                                                    @foreach($members as $member)
+                                                        <tr>
+                                                            <td>{{ $member->degree_front }}</td>
+                                                            <td>{{ $member->first_name }}</td>
+                                                            <td>{{ $member->last_name }}</td>
+                                                            <td>{{ $member->degree_after }}</td>
+                                                            <td>
+                                                                <form method="post" action="{{ route('edit-group.remove-member') }}">
+                                                                    @csrf
 
-                                                                <input type="hidden" id="member_id" name="member_id" value="{{ $member->user_id }}">
-                                                                <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
-                                                                <button type="submit" class="btn btn-outline-danger">Odebrat</button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </div>
-                                        @empty
-                                            <div class="text-center">
-                                                Vaše skupina zatím neobsahuje žádné členy.
-                                            </div>
-                                            <div class="row row-center mx-auto my-3" style="width: 120px">
-                                                <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
-                                            </div>
-                                        @endforelse
-                                        </table>
+                                                                    <input type="hidden" id="member_id" name="member_id" value="{{ $member->user_id }}">
+                                                                    <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
+                                                                    <button type="submit" class="btn btn-outline-danger">Odebrat</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                @endempty
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
