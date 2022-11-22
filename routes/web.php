@@ -29,9 +29,7 @@ Route::get('create-group', function () {
     return view('create-group');
 })->name('create-group');
 
-Route::get('/myexercises', function () {
-    return view('exercises.myexercises');
-})->name('myexercises');
+Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
 
 Auth::routes();
 
