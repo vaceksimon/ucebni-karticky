@@ -54,4 +54,18 @@ class Group extends Model
             'user_id'
         );
     }
+
+
+    /**
+     * @return BelongsToMany
+     */
+    public function assigned(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'assigned_exercises',
+            'group_id',
+            'exercise_id'
+        );
+    }
 }
