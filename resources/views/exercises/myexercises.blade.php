@@ -57,15 +57,20 @@
                                         <div class="card-header d-flex align-items-center">
                                             <div class="col-6">
                                                 <div class="d-flex align-items-center gap-1">
-                                                    <div> {{ $record->e_name }} </div>
+                                                    <div class="col-6"> {{ $record->e_name }} </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="d-flex justify-content-end">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <div class="d-flex">
-                                                <div class="col-6">
+                                                <div class="col">
                                                     <div>Počet kartiček: {{ $record->count }} </div>
                                                     <div>Téma: {{ $record->topic }}</div>
+                                                    <div>Skupina: {{ $record->g_name }}</div>
                                                 </div>
                                             </div>
                                             <hr class="my-2" />
