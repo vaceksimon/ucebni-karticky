@@ -195,21 +195,23 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <table id="users_table" class="table table-striped table-inverse table-responsive d-table">
-                                                <thead>
-                                                <tr>
-                                                    <th>Pořadí</th>
-                                                    <th>Tituly před</th>
-                                                    <th>Jméno</th>
-                                                    <th>Příjmení</th>
-                                                    <th>Tituly za</th>
-                                                    <th>Typ uživatele</th>
-                                                    <th>Akce</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                            <div style="height: 300px;overflow-y: scroll;">
+                                                <table id="users_table" class="table table-striped d-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Pořadí</th>
+                                                        <th>Tituly před</th>
+                                                        <th>Jméno</th>
+                                                        <th>Příjmení</th>
+                                                        <th>Tituly za</th>
+                                                        <th>Typ uživatele</th>
+                                                        <th>Akce</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
