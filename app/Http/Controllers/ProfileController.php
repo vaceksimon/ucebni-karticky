@@ -41,10 +41,10 @@ class ProfileController extends Controller
     {
         User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
 
-        if(isset($request->photo))
+        if (isset($request->photo))
             User::where('id', Auth::id())->update(['photo' => $request->photo]);
 
-        if(Auth::user()['account_type'] == 'teacher')
+        if (Auth::user()['account_type'] == 'teacher')
             User::where('id', Auth::id())->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
 
         return redirect(route('profile'));

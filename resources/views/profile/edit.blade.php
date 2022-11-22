@@ -11,7 +11,9 @@
                         </div>
                         @if($user['id'] == Auth::id())
                             <div class="col-10">
-                                <button class="btn btn-outline-success" onclick="document.getElementById('submitBtn').click()">Uložit</button>
+                                <button class="btn btn-outline-success"
+                                        onclick="document.getElementById('submitBtn').click()">Uložit
+                                </button>
                             </div>
                         @endif
                     </div>
@@ -31,7 +33,7 @@
                                                            value="{{$user['first_name']}}" placeholder="Jméno">
                                                 </div>
                                                 <div>
-                                                    <span id="errorFirstName" name="error"  class="text-danger"></span>
+                                                    <span id="errorFirstName" name="error" class="text-danger"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,17 +79,15 @@
                                                 document.getElementById('email').addEventListener('keyup', checkValue('email', 'errorEmail', 1, 'Email'));
 
                                                 function checkValue(idInput, idSpan, length, prompt) {
-                                                    return function() {
+                                                    return function () {
                                                         if (!checkLength(idInput, length)) {
                                                             document.getElementById(idSpan).textContent = prompt + " musí mít alespoň " + length + " znaků.";
                                                             document.getElementById(idInput).classList.add('bg-danger');
-                                                        }
-                                                        else {
-                                                            if(idInput === 'email' && !checkEmail(idInput)) {
+                                                        } else {
+                                                            if (idInput === 'email' && !checkEmail(idInput)) {
                                                                 document.getElementById(idSpan).textContent = "Emailová adresa je ve špatném tvaru";
                                                                 document.getElementById(idInput).classList.add('bg-danger');
-                                                            }
-                                                            else {
+                                                            } else {
                                                                 document.getElementById(idSpan).textContent = "";
                                                                 document.getElementById(idInput).classList.remove('bg-danger');
                                                             }
@@ -109,13 +109,13 @@
                                                 function validateFormAndSubmit() {
                                                     var errorElements = document.getElementsByName('error');
                                                     var isOk = true;
-                                                    for(const element of errorElements) {
-                                                        if(element.textContent !== "") {
+                                                    for (const element of errorElements) {
+                                                        if (element.textContent !== "") {
                                                             isOk = false
                                                             break;
                                                         }
                                                     }
-                                                    if(isOk)
+                                                    if (isOk)
                                                         document.getElementById('edit-form').submit();
                                                     else
                                                         alert('Vyplňte prosím povinné údaje.');
@@ -182,7 +182,9 @@
 
                             </div>
                         </form>
-                        <button id="submitBtn" name="submitBtn" class="btn btn-outline-success" onclick="validateFormAndSubmit()">Uložit</button>
+                        <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
+                                onclick="validateFormAndSubmit()">Uložit
+                        </button>
                     </div>
                 </div>
             </div>
