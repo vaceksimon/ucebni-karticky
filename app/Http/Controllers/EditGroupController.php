@@ -41,13 +41,17 @@ class EditGroupController extends Controller
     {
         if ($request->keyword != '')
         {
-            $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
+            $result = User::whereNotIn('users.id', function ($query) use ($request) {
+                    $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+                })->where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
                 ->where( 'account_type', '<>', 'admin')
                 ->get();
         }
         else
         {
-            $result = User::where('account_type', '<>', 'admin')->get();
+            $result = User::whereNotIn('users.id', function ($query) use ($request) {
+                    $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+                })->where( 'account_type', '<>', 'admin')->get();
         }
 
         return response()->json(['result' => $result]);
