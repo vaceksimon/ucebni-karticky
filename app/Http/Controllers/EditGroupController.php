@@ -89,7 +89,7 @@ class EditGroupController extends Controller
             ->where('group_id', $group_id)
             ->delete();
 
-        return redirect('mygroups');
+        return redirect('edit-group');
     }
 
     public function addMember(Request $request)
