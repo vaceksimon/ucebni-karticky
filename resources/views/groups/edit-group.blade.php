@@ -140,7 +140,11 @@
                                                             <td>{{ $member->last_name }}</td>
                                                             <td>{{ $member->degree_after }}</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-danger open-remove-member-dialog" data-id="{{ $member->user_id }}" data-bs-toggle="modal" data-bs-target="#removingQuestion">Odebrat</button>
+                                                                <button type="button"
+                                                                        class="btn btn-outline-danger open-remove-member-dialog"
+                                                                        data-id="{{ $member->user_id }}"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#removingQuestion">Odebrat</button>
                                                                 <!--
                                                                 <form method="post" action="{{ route('edit-group.remove-member') }}">
                                                                     @csrf
@@ -236,10 +240,6 @@
                         <div class="modal-header">
                             <h5 class="modal-title">Upozornění</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            <!--
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>-->
                         </div>
                         <div class="modal-body">
                             <p>Opravdu si přejete odebrat uživatele ze skupiny?</p>
@@ -311,10 +311,11 @@
                 <td>`+ res.result[i].degree_after  +`</td>
                 <td>`+res.result[i].account_type+`</td>
                 <td>
-                    <form method="post" action="">
+                    <form method="post" action="{{ route('edit-group.add-member') }}">
                         @csrf
 
-                        <input type="hidden" name="member_id" value="`+ res.result[i].id +`">
+                        <input type="hidden" name="new_user_id" value="`+ res.result[i].id +`">
+                        <input type="hidden" id="new_user_group_id" name="new_user_group_id" value="{{ session('group_id') }}">
                         <button type="submit" class="btn btn-outline-primary">Přidat</button>
                     </form>
                 </td>

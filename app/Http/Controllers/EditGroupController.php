@@ -96,4 +96,14 @@ class EditGroupController extends Controller
 */
         return view('layouts.main');
     }
+
+    public function addMember(Request $request)
+    {
+        $user_id = $request->new_user_id;
+        $group_id = $request->new_user_group_id;
+
+        DB::insert('insert into users_memberships (user_id, group_id) values (?, ?)', [$user_id, $group_id]);
+
+        return view('layouts.main');
+    }
 }
