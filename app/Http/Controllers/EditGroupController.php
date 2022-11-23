@@ -61,17 +61,10 @@ class EditGroupController extends Controller
 
     public function store(Request $request)
     {
-        $user = auth()->user();
+        // TODO image
+        Group::where('id', '=', $request->group_id)->update(['name' => $request->name, 'description' => $request->description]);
 
-        $group = $user->groupsOwnerships()->create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'type' => $request->type,
-        ]);
-
-        $group->save();
-
-        return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
+        return redirect('mygroups');
     }
 
     public function removeMember(Request $request)
@@ -84,7 +77,7 @@ class EditGroupController extends Controller
             ->where('group_id', $group_id)
             ->delete();
 
-        return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
+        return redirect('edit-group');
     }
 
     public function addMember(Request $request)
@@ -94,6 +87,6 @@ class EditGroupController extends Controller
 
         DB::insert('insert into users_memberships (user_id, group_id) values (?, ?)', [$user_id, $group_id]);
 
-        return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
+        return redirect('edit-group');
     }
 }
