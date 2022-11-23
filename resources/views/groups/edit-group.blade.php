@@ -104,14 +104,22 @@
                                                     <tbody>
                                                     @foreach($members as $member)
                                                         <tr>
-                                                            <td>
+                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
                                                                 <img src="{{ $member->photo }}" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
                                                                      alt="Avatar"/>
                                                             </td>
-                                                            <td>{{ $member->degree_front }}</td>
-                                                            <td>{{ $member->first_name }}</td>
-                                                            <td>{{ $member->last_name }}</td>
-                                                            <td>{{ $member->degree_after }}</td>
+                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
+                                                                {{ $member->degree_front }}
+                                                            </td>
+                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
+                                                                {{ $member->first_name }}
+                                                            </td>
+                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
+                                                                {{ $member->last_name }}
+                                                            </td>
+                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
+                                                                {{ $member->degree_after }}
+                                                            </td>
                                                             <td>
                                                                 <button type="button"
                                                                         class="btn btn-outline-danger open-remove-member-dialog"
@@ -227,6 +235,20 @@
     {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+    <script>
+        $('#search').ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
     <script>$('#search').on('keyup', function(){
             search();
         });
@@ -264,19 +286,23 @@
                 if (res.result[i].degree_after === null) {
                     res.result[i].degree_after = '';
                 }
+
+                var url = '{{ route("profile", ":id") }}';
+                url = url.replace(':id', res.result[i].id);
+
                 htmlView += `
             <tr>
-                <td>`+ (i+1) +`</td>
-                <td>
+                <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
+                <td class="clickable-row" data-href="` + url + `">
                     <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
                         alt="Avatar"/>
                 </td>
-                <td>`+res.result[i].degree_front+`</td>
-                <td>`+res.result[i].first_name+`</td>
-                <td>`+res.result[i].last_name+`</td>
-                <td>`+ res.result[i].degree_after  +`</td>
-                <td>`+res.result[i].account_type+`</td>
-                <td>
+                <td class="clickable-row" data-href="` + url + `">`+res.result[i].degree_front+`</td>
+                <td class="clickable-row" data-href="` + url + `">`+res.result[i].first_name+`</td>
+                <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
+                <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
+                <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
+                <td class="clickable-row" data-href="` + url + `">
                     <form method="post" action="{{ route('edit-group.add-member') }}">
                         @csrf
 
@@ -285,7 +311,8 @@
                         <button type="submit" class="btn btn-outline-primary">Přidat</button>
                     </form>
                 </td>
-</tr>`;
+            </tr>`;
+
             }
             $('#users_table').html(htmlView);
         }
@@ -300,4 +327,5 @@
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });
     </script>
+
 @endsection
