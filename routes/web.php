@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile/store', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
+Route::get('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+
 Route::get('/test', function () {
     return view('test');
 })->name('test');
@@ -31,9 +35,7 @@ Route::get('create-group', function () {
     return view('create-group');
 })->name('create-group');
 
-Route::get('/myexercises', function () {
-    return view('exercises.myexercises');
-})->name('myexercises');
+Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
 
 Route::get('/edit-group', [App\Http\Controllers\EditGroupController::class, 'index'])->name('edit-group');
 Route::post('/edit-group/search', [App\Http\Controllers\EditGroupController::class, 'search'])->name('edit-group.search');
@@ -55,6 +57,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dbconn', function(){
-   return view('dbconn');
+Route::get('/dbconn', function () {
+    return view('dbconn');
 });

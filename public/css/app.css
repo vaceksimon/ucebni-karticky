@@ -3805,6 +3805,10 @@ textarea.form-control-lg {
   color: var(--bs-navbar-active-color);
 }
 
+.nav-item .active {
+    color: var(--bs-nav-link-hover-color);
+}
+
 .navbar-collapse {
   flex-basis: 100%;
   flex-grow: 1;

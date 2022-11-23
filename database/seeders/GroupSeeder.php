@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Exercise;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -55,5 +56,16 @@ class GroupSeeder extends Seeder
 
         $teacher->members()->attach(3);
         $student->members()->attach(2);
+
+        Group::all()->where('type', '=', Group::STUDENTS_GROUP)->each(function ($group)
+        {
+            $exercises = Exercise::all()->random(rand(1,4));
+
+            $group->assigned()->attach(
+                $exercises->pluck('id')->toArray()
+            );
+        });
+
+        $student->assigned()->attach(1);
     }
 }
