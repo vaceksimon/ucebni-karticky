@@ -26,7 +26,6 @@ class EditGroupController extends Controller
         $group_id = Session::get('group_id');
         $group = Group::where('id', '=', $group_id)->get();
 
-        //SELECT * FROM ucebni_karticky.users LEFT JOIN users_memberships ON users.id = users_memberships.user_id WHERE users_memberships.group_id = 1;
         $members = User::leftJoin('users_memberships', function($join) {
                 $join->on('users.id', '=', 'users_memberships.user_id');
             })->whereNotIn('user_id', function ($query) use ($group_id) {

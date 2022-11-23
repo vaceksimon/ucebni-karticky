@@ -139,6 +139,8 @@
                                                             <td>{{ $member->last_name }}</td>
                                                             <td>{{ $member->degree_after }}</td>
                                                             <td>
+                                                                <button type="button" class="btn btn-outline-danger open-remove-member-dialog" data-id="{{ $member->user_id }}" data-bs-toggle="modal" data-bs-target="#removingQuestion">Odebrat</button>
+                                                                <!--
                                                                 <form method="post" action="{{ route('edit-group.remove-member') }}">
                                                                     @csrf
 
@@ -146,6 +148,7 @@
                                                                     <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
                                                                     <button type="submit" class="btn btn-outline-danger">Odebrat</button>
                                                                 </form>
+                                                                -->
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -224,6 +227,34 @@
                     </div>
                 </div>
             </div>
+
+            <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upozornění</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <!--
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>-->
+                        </div>
+                        <div class="modal-body">
+                            <p>Opravdu si přejete odebrat uživatele ze skupiny?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" action="{{ route('edit-group.remove-member') }}">
+                                @csrf
+
+                                <input type="hidden" id="member_id" name="member_id" value="">
+                                <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
+                                <button type="submit" class="btn btn-primary">Ano</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -287,5 +318,12 @@
             }
             $('#users_table').html(htmlView);
         }
+    </script>
+    <script>
+        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
+        $(document).on("click", ".open-remove-member-dialog", function () {
+            var member = $(this).data('id');
+            $(".modal-footer #member_id").val( member );
+        });
     </script>
 @endsection
