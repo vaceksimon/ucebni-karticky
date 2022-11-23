@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Flashcards;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FlashcardController extends Controller
@@ -17,25 +18,16 @@ class FlashcardController extends Controller
         $this->middleware('auth');
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        return view('flashcards.flashcard')
-            ->with('flashcard_set', $this->getFlashcardSet());
+        return view('flashcards.flashcard', ['id' => $request->id]);
     }
 
-    public function getFlashcardSet()
-    {
-        return DB::table('flashcards')
-            ->select('*')
-            ->where('exercise_id', '=', 1)
-            ->get();
-    }
-
-    public function getCards()
+    public function getCards(Request $request)
     {
         $cards = DB::table('flashcards')
             ->select('*')
-            ->where('exercise_id', '=', 1)
+            ->where('exercise_id', '=', $request->id)
             ->get();
         return $cards;
     }
