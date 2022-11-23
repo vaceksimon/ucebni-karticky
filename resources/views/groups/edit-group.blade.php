@@ -62,7 +62,7 @@
                                     <!-- Second column -->
                                     <div class="row row-center row-cols-2">
                                         <div class="row row-center" style="width: 40%">
-                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0"
+                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="width: 160px; height: 160px;"
                                                  alt="Avatar"/>
                                         </div>
                                         <div class="row row-center" style="width: 60%">
@@ -104,6 +104,10 @@
                                                     <tbody>
                                                     @foreach($members as $member)
                                                         <tr>
+                                                            <td>
+                                                                <img src="{{ $member->photo }}" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
+                                                                     alt="Avatar"/>
+                                                            </td>
                                                             <td>{{ $member->degree_front }}</td>
                                                             <td>{{ $member->first_name }}</td>
                                                             <td>{{ $member->last_name }}</td>
@@ -167,6 +171,7 @@
                                                     <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
                                                     <tr>
                                                         <th>Pořadí</th>
+                                                        <th>Foto</th>
                                                         <th>Tituly před</th>
                                                         <th>Jméno</th>
                                                         <th>Příjmení</th>
@@ -249,7 +254,7 @@
             if(res.result.length <= 0){
                 htmlView += `
             <tr>
-                <td colspan="7">Nebyli nalezeni žádní uživatelé.</td>
+                <td colspan="8">Nebyli nalezeni žádní uživatelé.</td>
             </tr>`;
             }
             for(let i = 0; i < res.result.length; i++){
@@ -262,6 +267,10 @@
                 htmlView += `
             <tr>
                 <td>`+ (i+1) +`</td>
+                <td>
+                    <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
+                        alt="Avatar"/>
+                </td>
                 <td>`+res.result[i].degree_front+`</td>
                 <td>`+res.result[i].first_name+`</td>
                 <td>`+res.result[i].last_name+`</td>
