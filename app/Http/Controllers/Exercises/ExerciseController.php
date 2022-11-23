@@ -42,8 +42,8 @@ class ExerciseController extends Controller
         return DB::table('users AS us')
             ->select(DB::raw('ex.id, ex.name AS e_name, ex.topic, gr.name AS g_name, ex.description'))
             ->addSelect(DB::raw('(
-                SELECT COUNT(*) FROM ucebny_karticky.exercises exin
-	            JOIN ucebny_karticky.flashcards fl on fl.exercise_id = exin.id
+                SELECT COUNT(*) FROM exercises exin
+	            JOIN flashcards fl on fl.exercise_id = exin.id
 	            WHERE exin.id = ex.id) AS count'))
             ->join('users_memberships AS um', 'us.id', '=', 'um.user_id')
             ->join('groups AS gr', 'gr.id', '=', 'um.group_id')
