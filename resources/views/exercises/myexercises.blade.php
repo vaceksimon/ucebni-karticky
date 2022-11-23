@@ -111,23 +111,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
-                                                            <input type="text" class="form-control"   placeholder="Vyhledat uživatele" id="search">
+                                                            <input type="text" class="form-control"   placeholder="Vyhledat skupiny" id="search">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <table class="table table-striped table-inverse table-responsive d-table">
-                                                <thead>
-                                                <tr>
-                                                    <th>Pořadí</th>
-                                                    <th>Název</th>
-                                                    <th>Popis</th>
-                                                    <th>Foto</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                            <div class="container" id="searchedGroupsBody" name="searchedGroupsBody">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,43 +149,39 @@
                     keyword:keyword
                 },
                 function(data){
-                    table_post_row(data);
+                    postGroups(data);
                     console.log(data);
                 });
         }
         // table row with ajax
-        function table_post_row(res){
-            let htmlView = '';
-            if(res.result.length <= 0){
-                htmlView += `
-            <tr>
-                <td colspan="3">No data.</td>
-            </tr>`;
-            }
+        function postGroups(res){
+            htmlView = '';
             for(let i = 0; i < res.result.length; i++){
-                if (res.result[i].degree_front === null) {
-                    res.result[i].degree_front = '';
-                }
-
-                if (res.result[i].degree_after === null) {
-                    res.result[i].degree_after = '';
+                if(i % 3 === 0) {
+                    htmlView += `
+                        <div class="row mb-3">`
                 }
 
                 htmlView += `
-            <tr>
-                <td>`+ (i+1) +`</td>
-                <td>`+res.result[i].name +`</td>
-                <td>`+res.result[i].description +`</td>
-                <td>`+res.result[i].photo +`</td>
-                <td>
-                    <form method="post" action="">
-                        <input type="hidden" name="member_id" value="`+ res.result[i].id +`">
-                        <button type="submit" class="btn btn-outline-primary">Zadat</button>
-                    </form>
-                </td>
-</tr>`;
+                    <div class="col">
+                        <div class="card" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                            <div class="card-body">
+                                <h5 class="card-title">` + res.result[i].name + `</h5>
+                                <p class="card-text">` + res.result[i].description + `</p>
+                                <a href="#" class="btn btn-primary">Zadat</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+                if((i+1) % 3 === 0 || i === (res.result.length + 1))
+                    htmlView += `</div>`
             }
-            $('tbody').html(htmlView);
+            // var _this = this;
+            // $(_this).parent().html(htmlView);
+            $('#searchedGroupsBody').html(htmlView);
+            console.log(htmlView);
+            // document.getElementById('searchedGroupsBody').html(htmlView);
         }
     </script>
 
