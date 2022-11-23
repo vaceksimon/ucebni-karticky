@@ -130,7 +130,7 @@
 
                                         <div class="card-body d-flex">
                                             <div class="row">
-                                                <div>Počet žáků: {{ $record->pocet }}</div>
+                                                <div>Počet učitelů: {{ $record->pocet }}</div>
                                                 <div>Popis: {{$record->description}}</div>
                                             </div>
                                         </div>
