@@ -9,11 +9,10 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('edit-group.store') }}">
+                        <form method="POST" action="{{ route('edit-group.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" name="group_id" value="<?php echo $group[0]->id; ?>">
-
 
                             <div class="row row-center">
                                 <div class="col-7">
@@ -63,13 +62,13 @@
                                     <!-- Second column -->
                                     <div class="row row-center row-cols-2">
                                         <div class="row row-center" style="width: 40%">
-                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex px-0"
+                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0"
                                                  alt="Avatar"/>
                                         </div>
                                         <div class="row row-center" style="width: 60%">
                                             <div class="container my-auto">
-                                                <label class="input-group-text my-auto" style="width: 75px; cursor:pointer;" for="inputGroupFile">Upravit</label>
-                                                <input type="file" class="form-control" id="inputGroupFile" hidden>
+                                                <label class="input-group-text my-auto" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
+                                                <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image">
                                             </div>
                                         </div>
                                     </div>
@@ -288,5 +287,8 @@
             var member = $(this).data('id');
             $(".modal-footer #member_id").val( member );
         });
+    </script>
+    <script>
+        $("input[name='image']").change(function() { this.form.submit(); });
     </script>
 @endsection

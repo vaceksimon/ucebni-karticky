@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\ImageUploadController;
+
 class EditGroupController extends Controller
 {
     /**
@@ -21,7 +23,7 @@ class EditGroupController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $group_id = Session::get('group_id');
         $group = Group::where('id', '=', $group_id)->get();
@@ -61,10 +63,20 @@ class EditGroupController extends Controller
 
     public function store(Request $request)
     {
-        // TODO image
-        Group::where('id', '=', $request->group_id)->update(['name' => $request->name, 'description' => $request->description]);
+        if ($request->image != null)
+        {
+            $image_uploader = new ImageUploadController();
+            $image_name = $image_uploader->imageUploadPost($request);
 
-        return redirect('mygroups');
+            $image_name = "images/" . $image_name;
+
+            Group::where('id', '=', $request->group_id)->update(['name' => $request->name, 'description' => $request->description, 'photo' => $image_name]);
+        }
+        else{
+            Group::where('id', '=', $request->group_id)->update(['name' => $request->name, 'description' => $request->description]);
+        }
+
+        return $this->index();
     }
 
     public function removeMember(Request $request)
@@ -77,7 +89,7 @@ class EditGroupController extends Controller
             ->where('group_id', $group_id)
             ->delete();
 
-        return redirect('edit-group');
+        return redirect('mygroups');
     }
 
     public function addMember(Request $request)
