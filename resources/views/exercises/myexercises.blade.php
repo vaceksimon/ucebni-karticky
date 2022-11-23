@@ -79,10 +79,14 @@
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
                                                     <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                    <a href="{{route('flashcard.show', ['id' => $record->id])}}">
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                    </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                    <a href="{{route('flashcard.show', ['id' => $record->id])}}">
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
