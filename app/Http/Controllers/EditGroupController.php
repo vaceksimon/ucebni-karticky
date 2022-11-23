@@ -27,10 +27,11 @@ class EditGroupController extends Controller
         $group = Group::where('id', '=', $group_id)->get();
 
         //SELECT * FROM ucebni_karticky.users LEFT JOIN users_memberships ON users.id = users_memberships.user_id WHERE users_memberships.group_id = 1;
-        $members = DB::table('users')
-            ->leftJoin('users_memberships', 'users.id', '=', 'users_memberships.user_id')
-            ->where('users_memberships.group_id', '=', $group_id)
-            ->get();
+        $members = User::leftJoin('users_memberships', function($join) {
+                $join->on('users.id', '=', 'users_memberships.user_id');
+            })->whereNotIn('user_id', function ($query) use ($group_id) {
+                $query->select('owner')->from('groups')->where('groups.id', '=', $group_id);
+            })->where('users_memberships.group_id', '=', $group_id)->get();
 
         return view('groups.edit-group')
             ->with('group', $group)
