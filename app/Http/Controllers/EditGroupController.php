@@ -67,7 +67,6 @@ class EditGroupController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'type' => $request->type,
-            'visibility' => $request->visibility,
         ]);
 
         $group->save();

@@ -15,8 +15,8 @@
                             <input type="hidden" name="group_id" value="<?php echo $group[0]->id; ?>">
 
 
-                            <div class="row row-center row-cols-2">
-                                <div>
+                            <div class="row row-center">
+                                <div class="col-7">
                                     <div class="mb-3 row row-center">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Typ skupiny') }} :
@@ -35,7 +35,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <!--
                                     <div class="mb-3 row row-center">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Viditelnost') }} :
@@ -64,9 +64,32 @@
                                             </div>
                                         </div>
                                     </div>
+                                    -->
+
+                                    <div class="mb-3 row row-center">
+                                        <label for="name" class="col-form-label text-start">
+                                            {{ __('Název *') }} :
+                                        </label>
+
+                                        <div class="col-md-11">
+                                            <input id="name" type="text" class="form-control"
+                                                   name="name" value="<?php echo $group[0]->name ?>" required autocomplete="name" autofocus>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row row-center">
+                                        <label for="description" class="col-form-label text-start">
+                                            {{ __('Popis') }} :
+                                        </label>
+
+                                        <div class="col-md-11">
+                                    <textarea rows="5" cols="60" id="description" name="description" class="form-control" style="height:20vh;"
+                                              required autocomplete="description" autofocus><?php echo $group[0]->description ?></textarea>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div>
+                                <div class="col-5">
                                     <!-- Second column -->
                                     <div class="row row-center row-cols-2">
                                         <div class="row row-center" style="width: 40%">
@@ -80,28 +103,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 row row-center">
-                                <label for="name" class="col-form-label text-start">
-                                    {{ __('Název *') }} :
-                                </label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control"
-                                           name="name" value="<?php echo $group[0]->name ?>" required autocomplete="name" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 row row-center">
-                                <label for="description" class="col-form-label text-start">
-                                    {{ __('Popis') }} :
-                                </label>
-
-                                <div class="col-md-6">
-                                    <textarea rows="5" cols="60" id="description" name="description" class="form-control" style="height:20vh;"
-                                              required autocomplete="description" autofocus><?php echo $group[0]->description ?></textarea>
                                 </div>
                             </div>
 
