@@ -39,19 +39,21 @@ class EditGroupController extends Controller
 
     public function search(Request $request)
     {
+        $account_type = rtrim($request->group_type, "s");
+
         if ($request->keyword != '')
         {
             $result = User::whereNotIn('users.id', function ($query) use ($request) {
                     $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
                 })->where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
-                ->where( 'account_type', '<>', 'admin')
+                ->where( 'account_type', '=', $account_type)
                 ->get();
         }
         else
         {
             $result = User::whereNotIn('users.id', function ($query) use ($request) {
                     $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
-                })->where( 'account_type', '<>', 'admin')->get();
+                })->where( 'account_type', '=', $account_type)->get();
         }
 
         return response()->json(['result' => $result]);

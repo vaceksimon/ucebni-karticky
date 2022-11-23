@@ -194,6 +194,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
                                                             <input type="hidden" id="group_id" value="{{ $group[0]->id }}">
+                                                            <input type="hidden" id="group_type" name="group_type" value="{{ $group[0]->type }}">
                                                             <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search">
                                                         </div>
                                                     </div>
@@ -270,12 +271,14 @@
         function search(){
             var keyword = $('#search').val();
             var group_id = $('#group_id').val();
+            var group_type = $('#group_type').val();
 
             $.post('{{ route("edit-group.search") }}',
                 {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     keyword:keyword,
-                    group_id:group_id
+                    group_id:group_id,
+                    group_type:group_type
                 },
                 function(data){
                     table_post_row(data);
