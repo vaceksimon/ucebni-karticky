@@ -84,17 +84,7 @@ class EditGroupController extends Controller
             ->where('group_id', $group_id)
             ->delete();
 
-        // Prepare data for refreshing the view.
-/*
-        $group = Group::where('id', '=', $group_id)->get();
-
-        //SELECT * FROM ucebni_karticky.users LEFT JOIN users_memberships ON users.id = users_memberships.user_id WHERE users_memberships.group_id = 1;
-        $members = DB::table('users')
-            ->leftJoin('users_memberships', 'users.id', '=', 'users_memberships.user_id')
-            ->where('users_memberships.group_id', '=', $group_id)
-            ->get();
-*/
-        return view('layouts.main');
+        return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
     }
 
     public function addMember(Request $request)
@@ -104,6 +94,6 @@ class EditGroupController extends Controller
 
         DB::insert('insert into users_memberships (user_id, group_id) values (?, ?)', [$user_id, $group_id]);
 
-        return view('layouts.main');
+        return redirect('edit-group')->with('status', 'Post Form Data Has Been inserted');
     }
 }

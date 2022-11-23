@@ -114,7 +114,7 @@
                                                 {{ __('Členové') }}
                                             </div>
                                             <div class="row row-center">
-                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
+                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                                         Vaše skupina zatím neobsahuje žádné členy.
                                                     </div>
                                                     <div class="row row-center mx-auto my-3" style="width: 120px">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat člena</button>
+                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
                                                     </div>
                                                 @else
                                                     <tbody>
@@ -180,11 +180,11 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="--bs-modal-width: 75vw;">
+            <div class="modal fade" id="addMemberModal" name="addMemberModal" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Přidání uživatele</h5>
+                            <h5 class="modal-title" id="addMemberModalLabel">Přidání uživatele</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -234,7 +234,7 @@
                 </div>
             </div>
 
-            <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+            <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
