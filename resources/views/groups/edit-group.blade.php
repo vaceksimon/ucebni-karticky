@@ -35,36 +35,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--
-                                    <div class="mb-3 row row-center">
-                                        <label for="" class="col-form-label text-start">
-                                            {{ __('Viditelnost') }} :
-                                        </label>
-
-                                        <div class="col-md-6">
-                                            <div>
-                                                <div>
-                                                    <input type="radio"
-                                                           class="form-check-input"
-                                                           name="visibility" id="private" value="private"
-                                                        {{ $group[0]->visibility == 'public' ? '' : 'checked' }}>
-                                                    <label for="private" class="form-check-label">
-                                                        Soukromá skupina
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <input type="radio"
-                                                           class="form-check-input"
-                                                           name="visibility" id="public" value="public"
-                                                        {{ $group[0]->visibility == 'public' ? 'checked' : '' }}>
-                                                    <label for="private" class="form-check-label">
-                                                        Veřejná skupina
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    -->
 
                                     <div class="mb-3 row row-center">
                                         <label for="name" class="col-form-label text-start">
@@ -145,15 +115,6 @@
                                                                         data-id="{{ $member->user_id }}"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#removingQuestion">Odebrat</button>
-                                                                <!--
-                                                                <form method="post" action="{{ route('edit-group.remove-member') }}">
-                                                                    @csrf
-
-                                                                    <input type="hidden" id="member_id" name="member_id" value="{{ $member->user_id }}">
-                                                                    <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
-                                                                    <button type="submit" class="btn btn-outline-danger">Odebrat</button>
-                                                                </form>
-                                                                -->
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -166,12 +127,9 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <!--
-                                 TODO
-                                  - zrušit will navigate to home-page or previous page
-                                  - vytvořit skupinu will navigate to moje skupiny page
-                                 -->
-                                <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
+                                <a href="{{ route('mygroups') }}">
+                                    <input type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" value="Zrušit">
+                                </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>
                             </div>
                         </form>
