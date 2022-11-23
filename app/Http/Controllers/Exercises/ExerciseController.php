@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Exercises;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -53,6 +56,22 @@ class ExerciseController extends Controller
             ->orderBy('g_name')
             ->orderBy('e_name')
             ->get();
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->keyword != '')
+        {
+            $result = Group::where('name', 'LIKE', "%".$request->keyword."%")
+                ->where( 'type', 'students')
+                ->get();
+        }
+        else
+        {
+            $result = Group::where('type', 'students')->get();
+        }
+
+        return response()->json(['result' => $result]);
     }
 
 }

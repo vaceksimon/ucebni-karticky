@@ -33,7 +33,10 @@ Route::get('create-group', function () {
     return view('create-group');
 })->name('create-group');
 
+
+Route::post('/myexercises/search', [App\Http\Controllers\Exercises\ExerciseController::class, 'search'])->name('myexercises.search');
 Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
+
 
 Auth::routes();
 
