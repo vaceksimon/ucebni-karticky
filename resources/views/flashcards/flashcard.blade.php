@@ -1,23 +1,31 @@
 @extends('layouts.main')
 
 @section('content')
-    <div>
-        <h1>Flash Card Web App</h1>
-        <div class="container" id="cards" data-id="{{$id}}">
-
-            <div id="card-area" class="card-area">
-                <h2>Cards</h2>
-
-                <div class="card" id="card" onclick={flipCard()}>
-                    <div class="card-body"></div>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-evenly">
+                            <div>
+                                <button type="button" class="btn btn-secondary" onclick={getPrevCard()}>Předchozí kartička</button>
+                            </div>
+                            <div>
+                                <button type="button" id="btnFlip" class="btn btn-primary" onclick={flipCard()} style="width: 160px">Zobraz odpověď</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary" onclick={getNextCard()}>Následující kartička</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container flashcard" id="cards" data-id="{{$id}}">
+                            <div id="card-area" class="mb-4">
+                                <div id="frontCard" class="fs-2 text-center" onclick={flipCard()}></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div>Click on the card to flip sides</div>
-
-                <p class="add-new-card" onclick={addNewCard()}>add new card</p>
-
-                <button type="button" class="btn btn-secondary" onclick={getNextCard()}>Next Card</button>
-
             </div>
         </div>
     </div>
@@ -53,22 +61,47 @@
             });
         }
 
-        function flipCard(){
+        function flipCard() {
+            if (!showFront) {
+                document.getElementById('btnFlip').innerText = "Zobraz odpověď";
+            } else {
+                document.getElementById('btnFlip').innerText = "Zobraz otázku";
+            }
             showFront = !showFront;
             showCard();
         }
 
-        function showCard(){
+        function showCard() {
             let text = showFront ? cardSet[currentCard].question : cardSet[currentCard].answer;
-            card.innerText = text;
+            frontCard.innerText = text;
         }
 
-        function getNextCard(){
+        function getNextCard() {
             currentCard < cardSet.length - 1 ? currentCard++ : currentCard = 0;
             showFront = true;
             showCard();
         }
 
+        function getPrevCard() {
+            currentCard !== 0 ? currentCard-- : currentCard = cardSet.length - 1;
+            showFront = true;
+            showCard();
+        }
+
         getCards();
+
+        // $('.back').hide();
+        //
+        // //.delay(3000)
+        //
+        // $('.front', '.flashcard').hover(function() {
+        //     $(this).hide();
+        //     $(this).siblings('.back').addClass( "animated flipInY fast" ).show();
+        // });
+        //
+        // $('.back', '.flashcard').mouseleave(function() {
+        //     $(this).hide();
+        //     $(this).siblings('.front').addClass( "animated flipInY fast" ).show();
+        // });
     </script>
 @endsection
