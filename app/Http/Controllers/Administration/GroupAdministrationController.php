@@ -44,12 +44,10 @@ class GroupAdministrationController extends Controller
 
     public function removeGroup(Request $request)
     {
-        // TODO
-        /*
-        DB::table('users')
-            ->where('id', $request->user_id)
+        DB::table('groups')
+            ->where('id', $request->group_id)
             ->delete();
-        */
+
         return view('administration.group-administration');
     }
 

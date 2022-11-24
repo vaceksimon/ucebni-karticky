@@ -128,9 +128,11 @@
                                             </div>
                                             <div class="col-6 d-flex justify-content-end gap-3">
                                                 <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                                    @csrf
+
                                                     <div style="width: 120px">
-                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->group_id }}" />
+                                                        <button type="submit" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -163,7 +165,7 @@
                                                     @csrf
 
                                                     <div style="width: 120px">
-                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->group_id }}" />
                                                         <button type="submit" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
                                                     </div>
                                                 </form>

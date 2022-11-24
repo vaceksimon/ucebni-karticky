@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" role="dialog">
+            <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -120,9 +120,9 @@
                 </td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].name+`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].type+`</td>
-                <td class="clickable-row" data-href="` + url + `">
+                <td>
                     <button type="button"
-                        class="btn btn-outline-danger open-remove-member-dialog"
+                        class="btn btn-outline-danger open-remove-group-dialog"
                         data-id="` + group + `"
                         data-bs-toggle="modal"
                         data-bs-target="#removingQuestion">Odebrat</button>
@@ -139,7 +139,7 @@
     </script>
     <script>
         // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
-        $(document).on("click", ".open-remove-member-dialog", function () {
+        $(document).on("click", ".open-remove-group-dialog", function () {
             var group = $(this).data('id');
             $(".modal-footer #group_id").val( group );
         });
