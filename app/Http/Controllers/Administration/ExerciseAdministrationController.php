@@ -26,4 +26,28 @@ class ExerciseAdministrationController extends Controller
     {
         return view('administration.exercise-administration');
     }
+
+    public function search(Request $request)
+    {
+        if ($request->keyword != '')
+        {
+            $result = Exercise::where('name', 'LIKE', "%".$request->keyword."%")
+                ->get();
+        }
+        else
+        {
+            $result = Exercise::all();
+        }
+
+        return response()->json(['result' => $result]);
+    }
+
+    public function removeExercise(Request $request)
+    {
+        DB::table('exercises')
+            ->where('id', $request->exercise_id)
+            ->delete();
+
+        return view('administration.exercise-administration');
+    }
 }
