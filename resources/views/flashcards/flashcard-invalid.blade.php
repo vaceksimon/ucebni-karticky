@@ -14,7 +14,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="m-auto text-center">
-                            <a>
+                            <a href="{{ route('myexercises') }}">
                                 <button type="button" class="btn btn-primary" onclick={flipCard()} >Zpět na seznam cvičení</button>
                             </a>
                         </div>
