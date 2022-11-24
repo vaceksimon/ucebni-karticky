@@ -115,7 +115,7 @@
                 url = url.replace(':id', res.result[i].id);
 
                 var user = '{{ ":id" }}';
-                user = user.replace('":id"', res.result[i].id);
+                user = user.replace(':id', res.result[i].id);
 
                 htmlView += `
             <tr>
@@ -147,6 +147,13 @@
             $(".clickable-row").click(function() {
                 window.location = $(this).data("href");
             });
+        });
+    </script>
+    <script>
+        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
+        $(document).on("click", ".open-remove-member-dialog", function () {
+            var user = $(this).data('id');
+            $(".modal-footer #user_id").val( user );
         });
     </script>
 @endsection

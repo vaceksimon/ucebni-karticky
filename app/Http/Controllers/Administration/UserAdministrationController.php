@@ -45,7 +45,10 @@ class UserAdministrationController extends Controller
 
     public function removeUser(Request $request)
     {
-        // TODO
+        DB::table('users')
+            ->where('id', $request->user_id)
+            ->delete();
+
         return view('administration.user-administration');
     }
 }
