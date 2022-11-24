@@ -80,6 +80,6 @@ class GroupController extends Controller
     {
         session(['group_id' => $request->group_id]);
 
-        return redirect('edit-group');
+        return redirect('show-group');
     }
 }
