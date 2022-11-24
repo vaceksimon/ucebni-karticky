@@ -38,7 +38,8 @@ Route::get('flashcard/{id}', [\App\Http\Controllers\Flashcards\FlashcardControll
 Route::post('flashcard', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'getCards'])->name('flashcard.get-cards');
 
 Route::get('flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\FlashcardPractiseController::class, 'show'])->name('flashcardPractise.show');
-Route::post('flashcardPractise', [\App\Http\Controllers\Flashcards\FlashcardPractiseController::class, 'getCards'])->name('flashcardPractise.get-cards');
+
+Route::post('attempt', [\App\Http\Controllers\Attempts\AttemptController::class, 'saveAttempt'])->name('attempt.save-attempt');
 
 Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
 

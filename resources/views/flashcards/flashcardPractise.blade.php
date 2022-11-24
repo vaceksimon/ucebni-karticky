@@ -25,6 +25,7 @@
                     </div>
                     <div class="card-body">
                         <div class="container flashcard" id="cards" data-id="{{$id}}">
+                            <h2 id="QA" class="text-decoration-underline m-auto text-center">Otázka</h2>
                             <div id="card-area" class="mb-4">
                                 <div id="frontCard" class="fs-2 text-center" onclick={flipCard()}></div>
                             </div>
@@ -32,16 +33,19 @@
                                 <h2>Výsledky cvičení</h2>
                                 <p class="fs-4 text-success">Správných odpovědí: <span id="resultCorrect"></span></p>
                                 <p class="fs-4 text-danger" >Špatných odpovědí:  <span id="resultWrong"  ></span></p>
-                                <p class="fs-4 text-warning"   >Uběhnutý čas: <span id="resultTimer"  ></span></p>
+                                <p class="fs-4 text-warning">Uběhnutý čas: <span id="resultTimer"  ></span></p>
+                                @if($role === 'teacher')
+                                    <p class="fs-4">Tyto výsledky nebudou započítány do systému</p>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="text-center fs-5">
-                            <div id="timer"><label id="minutes"></label>:<label id="seconds"></label></div>
+                            <div id="timer"><label id="hours"></label>:<label id="minutes"></label>:<label id="seconds"></label></div>
                             <div class="text-center">
                                 <a href="{{ route('myexercises') }}">
-                                <button id="btnBack" type="button" class="btn btn-info btn-lg m-auto" style="display: none">Zpět na seznam cvičení</button>
+                                    <button id="btnBack" type="button" class="btn btn-info btn-lg m-auto" style="display: none">Zpět na seznam cvičení</button>
                                 </a>
                             </div>
                         </div>
@@ -87,8 +91,10 @@
         function flipCard() {
             if (!showFront) {
                 document.getElementById('btnFlip').innerText = "Zobraz odpověď";
+                document.getElementById('QA').innerText      = "Otázka";
             } else {
                 document.getElementById('btnFlip').innerText = "Zobraz otázku";
+                document.getElementById('QA').innerText = "Odpověď";
             }
             showFront = !showFront;
             showCard();
@@ -128,16 +134,45 @@
 
         function showResults() {
             document.getElementById('card-area').style.display = 'none';
-            document.getElementById('result').style.display = 'block';
-            document.getElementById('timer').style.display = 'none';
-            document.getElementById('btnBack').style.display = 'block   ';
-            document.getElementById('btnCorrect').disabled = true;
-            document.getElementById('btnWrong').disabled = true;
-            document.getElementById('btnFlip').disabled = true;
+            document.getElementById('result').style.display    = 'block';
+            document.getElementById('timer').style.display     = 'none';
+            document.getElementById('btnBack').style.display   = 'block';
+            document.getElementById('btnCorrect').disabled     = true;
+            document.getElementById('btnWrong').disabled       = true;
+            document.getElementById('btnFlip').disabled        = true;
             document.getElementById('resultCorrect').innerHTML = (correctCounter - 1).toString();
             document.getElementById('resultWrong').innerText   = (wrongCounter - 1).toString();
-            document.getElementById('resultTimer').innerText   = pad(parseInt(sec / 60, 10)) + ':' + pad( sec % 60 );
+            document.getElementById('resultTimer').innerText   = getTimer();
+            sendResult();
             clearInterval(interval);
+        }
+
+        function sendResult() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {"correctCount" : correctCounter - 1,
+                       "wrongCount"   : wrongCounter   - 1,
+                       "timer"        : getTimer(),
+                       "exercise_id"  : document.getElementById('cards').getAttribute('data-id')
+                },
+                url: "{{ route('attempt.save-attempt') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data !== "1")
+                    {
+                        alert("Výsledky se neporařilo uložit.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
 
         correct.innerText = correctCounter++;
@@ -145,10 +180,19 @@
         getCards();
 
         let sec = 0;
-        function pad ( val ) { return val > 9 ? val : "0" + val; }
-        interval = setInterval( function(){
-            document.getElementById("seconds").innerHTML=pad(++sec % 60);
-            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+
+        function pad ( val ) {
+            return val > 9 ? val : "0" + val;
+        }
+
+        function getTimer() {
+            return pad(parseInt(sec / 3600, 10)) + ':' + pad(parseInt(sec / 60, 10)) + ':' + pad( sec % 60 );
+        }
+
+        interval = setInterval( function() {
+            document.getElementById("seconds").innerHTML = pad(++sec % 60);
+            document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60,10));
+            document.getElementById("hours").innerHTML   = pad(parseInt(sec / 3600, 10))
         }, 1000);
 
     </script>
