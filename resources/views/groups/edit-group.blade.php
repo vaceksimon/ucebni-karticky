@@ -220,6 +220,8 @@
 
                                 <input type="hidden" id="member_id" name="member_id" value="">
                                 <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
+                                <input type="hidden" id="group_name" name="group_name" value="">
+                                <input type="hidden" id="group_description" name="group_description" value="">
                                 <button type="submit" class="btn btn-primary">Ano</button>
                             </form>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
@@ -321,7 +323,12 @@
         // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-member-dialog", function () {
             var member = $(this).data('id');
+            var groupName = document.getElementById("name").value;
+            var groupDescription = document.getElementById("description").value;
+
             $(".modal-footer #member_id").val( member );
+            $(".modal-footer #group_name").val( groupName );
+            $(".modal-footer #group_description").val( groupDescription );
         });
     </script>
     <script>
