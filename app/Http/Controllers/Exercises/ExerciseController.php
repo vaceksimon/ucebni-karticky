@@ -78,12 +78,6 @@ class ExerciseController extends Controller
                 ->where('groups.owner', $request->owner_id)
                 ->where('groups.type', 'students')
                 ->get();
-
-//            $result = DB::table('groups AS gr')
-//                ->where('gr.owner', $request->owner_id)
-//                ->where('gr.type', 'students')
-////                ->whereNotIn('gr.id', DB::raw('(SELECT ae.group_id FROM assigned_exercises AS ae WHERE ae.exercise_id = ' . $request->exercise_id . ' AND ae.group_id = gr.id)'))
-//                ->get();
         }
 
         return response()->json(['result' => $result]);

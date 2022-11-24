@@ -34,7 +34,7 @@
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                onclick="exerciseId = {{$record->id}}">
+                                                                onclick="exerciseId = {{$record->id}}; search();">
                                                             Zadat
                                                         </button>
                                                     </div>
@@ -168,9 +168,11 @@
     {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
-    <script>$('#search').on('keyup', function () {
+    <script>
+        $('#search').on('keyup', function () {
             search();
         });
+
         search();
 
         function search() {
@@ -211,11 +213,7 @@
                 if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
                     htmlView += `</div>`
             }
-            // var _this = this;
-            // $(_this).parent().html(htmlView);
             $('#searchedGroupsBody').html(htmlView);
-            console.log(htmlView);
-            // document.getElementById('searchedGroupsBody').html(htmlView);
         }
     </script>
 
