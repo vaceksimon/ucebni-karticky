@@ -46,10 +46,13 @@ class ProfileController extends Controller
     {
         if (Auth::user()->account_type != 'admin')
         {
-            if (!isset($request->first_name) || !isset($request->last_name) || !isset($request->email) || !isset($request->password) || strlen($request->password) < 8)
+            if (!isset($request->first_name) || !isset($request->last_name) || !isset($request->email))
                 return redirect(route('profile.edit', ['errorValidation' => true]));
 
-            User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+            User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email]);
+
+            if(isset($request->password))
+                User::where('id', Auth::id())->update(['password' => bcrypt($request->password)]);
 
             if (isset($request->image)) {
                 $image_uploader = new ImageUploadController();
@@ -67,10 +70,13 @@ class ProfileController extends Controller
         }
         else
         {
-            if (!isset($request->first_name) || !isset($request->last_name) || !isset($request->email) || !isset($request->password) || strlen($request->password) < 8)
+            if (!isset($request->first_name) || !isset($request->last_name) || !isset($request->email))
             return redirect(route('profile', ['id' => $request->user_id, 'errorValidation' => true]));
 
-            User::where('id', $request->user_id)->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+            User::where('id', $request->user_id)->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email]);
+
+            if(isset($request->password))
+                User::where('id', $request->user_id)->update(['password' => bcrypt($request->password)]);
 
             if (isset($request->image)) {
                 $image_uploader = new ImageUploadController();
