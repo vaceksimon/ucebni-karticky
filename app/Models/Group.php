@@ -67,4 +67,17 @@ class Group extends Model
             'exercise_id'
         );
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function groupsSharing() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'shared_exercise',
+            'group_id',
+            'exercise_id'
+        );
+    }
 }
