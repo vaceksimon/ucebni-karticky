@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Exercises;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -55,4 +56,10 @@ class ExerciseController extends Controller
             ->get();
     }
 
+    public function edit(Request $request)
+    {
+        session(['exercise_id' => $request->id]);
+
+        return redirect('edit-exercise');
+    }
 }
