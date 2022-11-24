@@ -44,26 +44,11 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->account_type == 'admin')
+        if (Auth::user()->account_type != 'admin')
         {
-            User::where('id', $request->user_id)->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+            if (!isset($request->first_name) || !isset($request->last_name) || !isset($request->email) || !isset($request->password) || strlen($request->password) < 8)
+                return redirect(route('profile.edit', ['errorValidation' => true]));
 
-            if (isset($request->image)) {
-                $image_uploader = new ImageUploadController();
-                $image_name = $image_uploader->imageUploadPost($request);
-
-                $image_name = "images/" . $image_name;
-
-                User::where('id', $request->user_id)->update(['photo' => $image_name]);
-            }
-
-            if (Auth::user()['account_type'] == 'teacher')
-                User::where('id', $request->user_id)->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
-
-            return redirect(route('profile', ['id' => $request->user_id]));
-        }
-        else
-        {
             User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
 
             if (isset($request->image)) {
@@ -79,6 +64,27 @@ class ProfileController extends Controller
                 User::where('id', Auth::id())->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
 
             return redirect(route('profile'));
+        }
+        else
+        {
+            if (!isset($request->first_name) || !isset($request->last_name) || !isset($request->email) || !isset($request->password) || strlen($request->password) < 8)
+            return redirect(route('profile', ['id' => $request->user_id, 'errorValidation' => true]));
+
+            User::where('id', $request->user_id)->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+
+            if (isset($request->image)) {
+                $image_uploader = new ImageUploadController();
+                $image_name = $image_uploader->imageUploadPost($request);
+
+                $image_name = "images/" . $image_name;
+
+                User::where('id', $request->user_id)->update(['photo' => $image_name]);
+            }
+
+            if(isset($request->degree_front) || isset($request->degree_after) || isset($request->school))
+                User::where('id', $request->user_id)->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
+
+            return redirect(route('profile', ['id' => $request->user_id]));
         }
 
     }

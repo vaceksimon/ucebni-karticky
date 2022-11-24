@@ -9,7 +9,7 @@
                         <div class="col-11">
                             {{ __('Úprava profilu') }}
                         </div>
-                        @if($user['id'] == Auth::id())
+                        @if($user['id'] == Auth::id() || Auth::user()->account_type == "admin")
                             <div class="col-10">
                                 <button class="btn btn-outline-success"
                                         onclick="document.getElementById('submitBtn').click()">Uložit
@@ -18,8 +18,14 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form id="edit-form" method="POST" action="{{ route('profile.store') }}" enctype="multipart/form-data">
-                            <input id="user_id" name="user_id" value="{{$user['id']}}" hidden />
+                        @if(Request::get('errorValidation') !== null)
+                            <div>
+                                <p class="text-danger">Zadané údaje jsou špatné</p>
+                            </div>
+                        @endif
+                        <form id="edit-form" method="POST" action="{{ route('profile.store') }}"
+                              enctype="multipart/form-data">
+                            <input id="user_id" name="user_id" value="{{$user['id']}}" hidden/>
                             @csrf
                             <div class="d-flex flex-nowrap flex-column">
                                 <div class="row col-12 d-flex">
@@ -136,7 +142,8 @@
                                                     <label class="input-group-text my-auto"
                                                            style="width: 75px; cursor: pointer"
                                                            for="image">Nahrát</label>
-                                                    <input type="file" onchange="this.form.submit()" class="form-control" id="image" name="image"
+                                                    <input type="file" onchange="this.form.submit()"
+                                                           class="form-control" id="image" name="image"
                                                            style="cursor: pointer" hidden>
                                                 </div>
                                             </div>
