@@ -45,7 +45,7 @@ Route::post('/edit-group/add-member', [App\Http\Controllers\EditGroupController:
 
 Route::post('edit-group', [App\Http\Controllers\EditGroupController::class, 'store'])->name('edit-group.store');
 
-Route::get('/users-administration', [App\Http\Controllers\Administration\UsersAdministrationController::class, 'index'])->name('users-administration');
+Route::get('/user-administration', [App\Http\Controllers\Administration\UserAdministrationController::class, 'index'])->name('user-administration');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');

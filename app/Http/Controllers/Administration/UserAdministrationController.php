@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
 
-class UsersAdministrationController extends Controller
+class UserAdministrationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,6 +20,6 @@ class UsersAdministrationController extends Controller
 
     public function index()
     {
-        return view('administration.users-administration');
+        return view('administration.user-administration');
     }
 }
