@@ -62,13 +62,16 @@ class ExerciseController extends Controller
     {
         if ($request->keyword != '')
         {
-            $result = Group::where('name', 'LIKE', "%".$request->keyword."%")
-                ->where( 'type', 'students')
+            $result = DB::table('groups AS g')
+                ->select('*')
+                ->where('owner', $request->owner_id)
+                ->where('type', 'students')
+                ->where('name', 'LIKE', "%".$request->keyword."%")
                 ->get();
         }
         else
         {
-            $result = Group::where('type', 'students')->get();
+            $result = Group::where('owner', $request->owner_id)->where('type', 'students')->get();
         }
 
         return response()->json(['result' => $result]);
