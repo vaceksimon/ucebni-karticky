@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Groups;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageUploadController;
 use App\Models\Group;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
-use App\Http\Controllers\ImageUploadController;
 
 class EditGroupController extends Controller
 {
