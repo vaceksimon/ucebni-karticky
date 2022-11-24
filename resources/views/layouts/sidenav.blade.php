@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('mygroups')}}" class="nav-link align-middle px-0">
+                    <a href="{{route('users-administration')}}" class="nav-link align-middle px-0">
                         <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">Správa uživatelů</span>
                     </a>
                 <li class="nav-item">
