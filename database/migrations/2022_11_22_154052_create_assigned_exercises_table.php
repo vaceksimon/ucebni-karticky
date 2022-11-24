@@ -21,11 +21,13 @@ class CreateAssignedExercisesTable extends Migration
 
             $table->foreign('exercise_id')
                 ->references('id')
-                ->on('exercises');
+                ->on('exercises')
+                ->onDelete('cascade');
 
             $table->foreign('group_id')
                 ->references('id')
-                ->on('groups');
+                ->on('groups')
+                ->onDelete('cascade');
         });
     }
 
