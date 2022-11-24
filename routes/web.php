@@ -43,6 +43,8 @@ Route::post('/edit-group/remove-member', [App\Http\Controllers\EditGroupControll
 Route::post('/edit-group/add-member', [App\Http\Controllers\EditGroupController::class, 'addMember'])->name('edit-group.add-member');
 
 
+Route::get('/show-group', [App\Http\Controllers\Groups\ShowGroupController::class, 'index'])->name('show-group');
+
 Route::post('edit-group', [App\Http\Controllers\EditGroupController::class, 'store'])->name('edit-group.store');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
