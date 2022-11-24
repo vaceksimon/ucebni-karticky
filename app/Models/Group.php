@@ -75,7 +75,7 @@ class Group extends Model
     {
         return $this->belongsToMany(
             Group::class,
-            'shared_exercise',
+            'shared_exercises',
             'group_id',
             'exercise_id'
         );
