@@ -84,7 +84,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
-                                                    <a href="{{route('flashcard.show', ['id' => $record->id])}}">
+                                                    <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
                                                     </a>
                                                 </div>
