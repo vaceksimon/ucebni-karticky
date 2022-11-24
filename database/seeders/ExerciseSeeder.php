@@ -18,7 +18,8 @@ class ExerciseSeeder extends Seeder
             'author'      => 3,
             'name'        => 'Elektrotechnické měření',
             'description' => 'Kartičky pro procvičení základních pojmů z předmětu ELM',
-            'topic'       => 'Elektrotechnika'
+            'topic'       => 'Elektrotechnika',
+            'visibility'  => 'private'
         ]);
         Exercise::factory()->times(19)->create();
     }
