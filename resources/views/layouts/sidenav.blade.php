@@ -75,11 +75,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('user-administration')}}" class="nav-link align-middle px-0">
+                    <a href="{{route('user-administration')}}"
+                       class="nav-link align-middle px-0 @if(request()->routeIs('user-administration') || request()->routeIs('profile')) active @endif">
                         <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">Správa uživatelů</span>
                     </a>
                 <li class="nav-item">
-                    <a href="{{route('group-administration')}}" class="nav-link align-middle px-0">
+                    <a href="{{route('group-administration')}}" class="nav-link align-middle px-0 @if(request()->routeIs('group-administration') || request()->routeIs('edit-group')) active @endif">
                         <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Správa skupin</span>
                     </a>
                 </li>
