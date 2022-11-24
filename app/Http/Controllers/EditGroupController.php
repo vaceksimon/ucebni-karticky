@@ -84,6 +84,10 @@ class EditGroupController extends Controller
         $member_id = $request->member_id;
         $group_id = $request->group_id;
 
+        // First store the other data.
+        Group::where('id', '=', $group_id)->update(['name' => $request->group_name, 'description' => $request->group_description]);
+
+        // Then remove user from the group.
         DB::table('users_memberships')
             ->where('user_id', $member_id)
             ->where('group_id', $group_id)
