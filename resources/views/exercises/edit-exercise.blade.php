@@ -9,8 +9,10 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('edit-exercise.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('edit-exercise.store') }}">
                             @csrf
+
+                            <input type="hidden" name="exercise_id" value="<?php echo $exercise[0]->id; ?>">
 
                             <div class="row row-center row-cols-2">
                                 <div>
@@ -130,7 +132,7 @@
                                   - vytvořit skupinu will navigate to moje cviceni page
                                  -->
                                 <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
-                                <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Vytvořit cvičení</button>
+                                <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit cvičení</button>
                             </div>
                         </form>
                     </div>

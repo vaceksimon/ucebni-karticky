@@ -36,8 +36,10 @@ class EditExerciseController extends Controller
             ->with('flashcards', $flashcards);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        // TODO
+        Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'description' => $request->description]);
+
+        return $this->index();
     }
 }
