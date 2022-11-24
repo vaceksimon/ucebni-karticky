@@ -302,7 +302,7 @@
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
                 <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
-                <td class="clickable-row" data-href="` + url + `">
+                <td>
                     <form method="post" action="{{ route('edit-group.add-member') }}">
                         @csrf
 
