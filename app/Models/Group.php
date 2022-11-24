@@ -31,7 +31,6 @@ class Group extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'type'
     ];
 
     /**

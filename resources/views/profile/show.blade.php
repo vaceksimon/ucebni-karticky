@@ -37,7 +37,7 @@
                                 @endif
                             </div>
                             <div class="row row-center">
-                                <img src="{{$user['photo']}}" class="rounded-circle d-flex px-0" style="width:150px; height: 150px"
+                                <img src="{{asset($user['photo'])}}" class="rounded-circle d-flex px-0" style="width:150px; height: 150px"
                                      alt="Avatar"/>
                             </div>
                         </div>

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Groups;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageUploadController;
 use App\Models\Group;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
-use App\Http\Controllers\ImageUploadController;
 
 class EditGroupController extends Controller
 {
@@ -84,6 +83,10 @@ class EditGroupController extends Controller
         $member_id = $request->member_id;
         $group_id = $request->group_id;
 
+        // First store the other data.
+        Group::where('id', '=', $group_id)->update(['name' => $request->group_name, 'description' => $request->group_description]);
+
+        // Then remove user from the group.
         DB::table('users_memberships')
             ->where('user_id', $member_id)
             ->where('group_id', $group_id)

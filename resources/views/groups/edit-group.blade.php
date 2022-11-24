@@ -175,22 +175,22 @@
                                                 </div>
                                             </form>
                                                 <div style="height: 300px;overflow-y: scroll;">
-                                                <table class="table table-striped d-table">
-                                                    <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
-                                                    <tr>
-                                                        <th>Pořadí</th>
-                                                        <th>Foto</th>
-                                                        <th>Tituly před</th>
-                                                        <th>Jméno</th>
-                                                        <th>Příjmení</th>
-                                                        <th>Tituly za</th>
-                                                        <th>Typ uživatele</th>
-                                                        <th>Akce</th>
-                                                    </tr>
-                                                    </thead>
-                                                        <tbody id="users_table">
-                                                        </tbody>
-                                                </table>
+                                                    <table class="table table-striped d-table">
+                                                        <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
+                                                        <tr>
+                                                            <th>Pořadí</th>
+                                                            <th>Foto</th>
+                                                            <th>Tituly před</th>
+                                                            <th>Jméno</th>
+                                                            <th>Příjmení</th>
+                                                            <th>Tituly za</th>
+                                                            <th>Typ uživatele</th>
+                                                            <th>Akce</th>
+                                                        </tr>
+                                                        </thead>
+                                                            <tbody id="users_table">
+                                                            </tbody>
+                                                    </table>
                                                 </div>
                                         </div>
                                     </div>
@@ -220,6 +220,8 @@
 
                                 <input type="hidden" id="member_id" name="member_id" value="">
                                 <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
+                                <input type="hidden" id="group_name" name="group_name" value="">
+                                <input type="hidden" id="group_description" name="group_description" value="">
                                 <button type="submit" class="btn btn-primary">Ano</button>
                             </form>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
@@ -302,7 +304,7 @@
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
                 <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
-                <td class="clickable-row" data-href="` + url + `">
+                <td>
                     <form method="post" action="{{ route('edit-group.add-member') }}">
                         @csrf
 
@@ -321,7 +323,12 @@
         // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-member-dialog", function () {
             var member = $(this).data('id');
+            var groupName = document.getElementById("name").value;
+            var groupDescription = document.getElementById("description").value;
+
             $(".modal-footer #member_id").val( member );
+            $(".modal-footer #group_name").val( groupName );
+            $(".modal-footer #group_description").val( groupDescription );
         });
     </script>
     <script>
