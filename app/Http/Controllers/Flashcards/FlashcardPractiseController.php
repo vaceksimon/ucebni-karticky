@@ -21,7 +21,7 @@ class FlashcardPractiseController extends Controller
 
     public function show(Request $request)
     {
-        if (FlashcardController::hasAccess(Auth::user()->id, $request->id))
+        if (FlashcardController::hasAccess($request->id))
             return view('flashcards.flashcardPractise', ['id' => $request->id])
                 ->with('role', Auth::user()->account_type);
         else

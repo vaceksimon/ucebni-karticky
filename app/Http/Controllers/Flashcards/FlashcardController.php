@@ -37,7 +37,7 @@ class FlashcardController extends Controller
         return $cards;
     }
 
-    private static function hasAccess($exercise_id) {
+    public static function hasAccess($exercise_id) {
         if (Auth::user()->account_type === User::ROLE_STUDENT)
             return !(self::studentAccess($exercise_id) === 0);
         elseif (Auth::user()->account_type === User::ROLE_TEACHER)
