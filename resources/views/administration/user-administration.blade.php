@@ -143,10 +143,8 @@
         }
     </script>
     <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
+        $(document).on("click", ".clickable-row", function() {
+            window.location = $(this).data("href");
         });
     </script>
     <script>
