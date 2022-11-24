@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\lessThanOrEqual;
 
 class ProfileController extends Controller
 {
@@ -29,7 +30,11 @@ class ProfileController extends Controller
             $id = $request['id'];
 
         $user = User::where('id', $id)->get();
-        return view('profile.show', ['user' => $user->first()]);
+
+        if (Auth::user()->account_type == 'admin')
+            return view('profile.edit', ['user' => $user->first()]);
+        else
+            return view('profile.show', ['user' => $user->first()]);
     }
 
     public function edit()
@@ -39,14 +44,42 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+        if (Auth::user()->account_type == 'admin')
+        {
+            User::where('id', $request->user_id)->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
 
-        if (isset($request->photo))
-            User::where('id', Auth::id())->update(['photo' => $request->photo]);
+            if (isset($request->image)) {
+                $image_uploader = new ImageUploadController();
+                $image_name = $image_uploader->imageUploadPost($request);
 
-        if (Auth::user()['account_type'] == 'teacher')
-            User::where('id', Auth::id())->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
+                $image_name = "images/" . $image_name;
 
-        return redirect(route('profile'));
+                User::where('id', $request->user_id)->update(['photo' => $image_name]);
+            }
+
+            if (Auth::user()['account_type'] == 'teacher')
+                User::where('id', $request->user_id)->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
+
+            return redirect(route('profile', ['id' => $request->user_id]));
+        }
+        else
+        {
+            User::where('id', Auth::id())->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+
+            if (isset($request->image)) {
+                $image_uploader = new ImageUploadController();
+                $image_name = $image_uploader->imageUploadPost($request);
+
+                $image_name = "images/" . $image_name;
+
+                User::where('id', Auth::id())->update(['photo' => $image_name]);
+            }
+
+            if (Auth::user()['account_type'] == 'teacher')
+                User::where('id', Auth::id())->update(['degree_front' => $request->degree_front, 'degree_after' => $request->degree_after, 'school' => $request->school]);
+
+            return redirect(route('profile'));
+        }
+
     }
 }

@@ -175,22 +175,22 @@
                                                 </div>
                                             </form>
                                                 <div style="height: 300px;overflow-y: scroll;">
-                                                <table class="table table-striped d-table">
-                                                    <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
-                                                    <tr>
-                                                        <th>Pořadí</th>
-                                                        <th>Foto</th>
-                                                        <th>Tituly před</th>
-                                                        <th>Jméno</th>
-                                                        <th>Příjmení</th>
-                                                        <th>Tituly za</th>
-                                                        <th>Typ uživatele</th>
-                                                        <th>Akce</th>
-                                                    </tr>
-                                                    </thead>
-                                                        <tbody id="users_table">
-                                                        </tbody>
-                                                </table>
+                                                    <table class="table table-striped d-table">
+                                                        <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
+                                                        <tr>
+                                                            <th>Pořadí</th>
+                                                            <th>Foto</th>
+                                                            <th>Tituly před</th>
+                                                            <th>Jméno</th>
+                                                            <th>Příjmení</th>
+                                                            <th>Tituly za</th>
+                                                            <th>Typ uživatele</th>
+                                                            <th>Akce</th>
+                                                        </tr>
+                                                        </thead>
+                                                            <tbody id="users_table">
+                                                            </tbody>
+                                                    </table>
                                                 </div>
                                         </div>
                                     </div>
@@ -304,7 +304,7 @@
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
                 <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
-                <td class="clickable-row" data-href="` + url + `">
+                <td>
                     <form method="post" action="{{ route('edit-group.add-member') }}">
                         @csrf
 

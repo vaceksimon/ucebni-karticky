@@ -11,7 +11,7 @@
             </ul>
 
             <div class="btn-group">
-                <img src="{{Auth::user()->photo}}" class="rounded-circle d-flex dropdown-toggle"
+                <img src="{{asset(Auth::user()->photo)}}" class="rounded-circle d-flex dropdown-toggle"
                      data-bs-toggle="dropdown"
                      style="width: 60px; height: 60px; cursor:pointer" ;
                      alt="Avatar"/>
