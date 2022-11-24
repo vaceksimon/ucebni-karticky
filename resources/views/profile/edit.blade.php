@@ -18,7 +18,8 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form id="edit-form" method="POST" action="{{ route('profile.store') }}">
+                        <form id="edit-form" method="POST" action="{{ route('profile.store') }}" enctype="multipart/form-data">
+                            <input id="user_id" name="user_id" value="{{$user['id']}}" hidden />
                             @csrf
                             <div class="d-flex flex-nowrap flex-column">
                                 <div class="row col-12 d-flex">
@@ -126,7 +127,7 @@
                                     <div class="col-6">
                                         <div class="d-flex gap-2 align-items-center">
                                             <div>
-                                                <img src="{{$user['photo']}}" class="rounded-circle d-flex px-0"
+                                                <img src="{{asset($user->photo)}}" class="rounded-circle d-flex px-0"
                                                      style="width:150px; height: 150px"
                                                      alt="Avatar"/>
                                             </div>
@@ -134,9 +135,8 @@
                                                 <div class="container my-auto">
                                                     <label class="input-group-text my-auto"
                                                            style="width: 75px; cursor: pointer"
-                                                           for="photo">Nahrát</label>
-                                                    <input type="file" class="form-control" id="photo"
-                                                           value="{{$user['photo']}}"
+                                                           for="image">Nahrát</label>
+                                                    <input type="file" onchange="this.form.submit()" class="form-control" id="image" name="image"
                                                            style="cursor: pointer" hidden>
                                                 </div>
                                             </div>
