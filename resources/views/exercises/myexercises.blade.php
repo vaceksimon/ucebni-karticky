@@ -205,7 +205,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
                                 <p class="card-text">` + res.result[i].description + `</p>
-                                <a href="#" class="btn btn-primary">Zadat</a>
+                                <button class="btn btn-primary" onclick="assignExercise(` + res.result[i].id + `);">Zadat</button>
                             </div>
                         </div>
                     </div>
@@ -214,6 +214,16 @@
                     htmlView += `</div>`
             }
             $('#searchedGroupsBody').html(htmlView);
+        }
+
+        function assignExercise(groupId) {
+            $.post('{{ route("myexercises.store-assignment") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    exercise_id: exerciseId,
+                    group_id: groupId
+                });
+            search();
         }
     </script>
 

@@ -58,7 +58,7 @@ class ExerciseController extends Controller
             ->get();
     }
 
-    public function search(Request $request)
+public function search(Request $request)
     {
         if ($request->keyword != '')
         {
@@ -83,4 +83,8 @@ class ExerciseController extends Controller
         return response()->json(['result' => $result]);
     }
 
+    public function store_assignment(Request $request) {
+//        DB::table('assigned_exercises')->insert(['exercise_id' => $request->exerciseId, 'group_id' => $request->group_id]);
+        return redirect(route('profile'));
+    }
 }
