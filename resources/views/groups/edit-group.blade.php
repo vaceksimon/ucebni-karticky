@@ -68,7 +68,7 @@
                                         <div class="row row-center" style="width: 60%">
                                             <div class="container my-auto">
                                                 <label class="input-group-text my-auto" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
-                                                <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image">
+                                                <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image" hidden>
                                             </div>
                                         </div>
                                     </div>
