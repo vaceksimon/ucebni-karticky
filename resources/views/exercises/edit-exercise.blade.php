@@ -24,7 +24,7 @@
                                         <div class="col-md-6">
                                             <div>
                                                 <label class="form-check-label text-black-50">
-                                                    @if($exercise[0]->type == 'private')
+                                                    @if($exercise[0]->visibility == 'private')
                                                         Soukromé cvičení
                                                     @else
                                                         Veřejné cvičení
