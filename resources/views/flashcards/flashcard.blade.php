@@ -63,7 +63,18 @@
             });
         }
 
+        function changeQA() {
+            if (showFront) {
+                document.getElementById('btnFlip').innerText = "Zobraz odpověď";
+                document.getElementById('QA').innerText      = "Otázka";
+            } else {
+                document.getElementById('btnFlip').innerText = "Zobraz otázku";
+                document.getElementById('QA').innerText = "Odpověď";
+            }
+        }
+
         function flipCard() {
+            changeQA();
             showFront = !showFront;
             showCard();
         }
@@ -71,15 +82,7 @@
         function showCard() {
             let text = showFront ? cardSet[currentCard].question : cardSet[currentCard].answer;
             counter.innerText = (currentCard + 1).toString() + "/" + cardSet.length.toString();
-
-            if (!showFront) {
-                document.getElementById('btnFlip').innerText = "Zobraz odpověď";
-                document.getElementById('QA').innerText      = "Otázka";
-            } else {
-                document.getElementById('btnFlip').innerText = "Zobraz otázku";
-                document.getElementById('QA').innerText = "Odpověď";
-            }
-
+            changeQA();
             frontCard.innerText = text;
         }
 
