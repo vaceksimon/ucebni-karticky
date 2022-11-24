@@ -71,13 +71,15 @@ class GroupController extends Controller
 
     public function clickEdit(Request $request)
     {
-        return redirect('edit-group')
-            ->with('group_id', $request->group_id);
+        session(['group_id' => $request->group_id]);
+
+        return redirect('edit-group');
     }
 
     public function clickShow(Request $request)
     {
-        return redirect('edit-group')
-            ->with('group_id', $request->group_id);
+        session(['group_id' => $request->group_id]);
+
+        return redirect('edit-group');
     }
 }
