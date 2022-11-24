@@ -55,8 +55,7 @@ class GroupAdministrationController extends Controller
 
     public function redirectToGroup(Request $request)
     {
-        dd($request);
-        //session(['group_id' => $request->group_id]);
+        session(['group_id' => $request->group_id]);
 
         return redirect('edit-group');
     }

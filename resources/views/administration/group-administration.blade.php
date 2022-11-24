@@ -106,8 +106,8 @@
                     res.result[i].type = "Skupina studentů";
                 }
 
-                var url = '{{ route("group-administration.redirect-to-group", ":id") }}';
-                url = url.replace(':id', res.result[i].id);
+                var url = '{{ route("group-administration.redirect-to-group", ["group_id" => "rpl"]) }}';
+                url = url.replace('rpl', res.result[i].id);
                 var group = '{{ ":id" }}';
                 group = group.replace(':id', res.result[i].id);
 
@@ -133,10 +133,8 @@
         }
     </script>
     <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
+        $(document).on("click", ".clickable-row", function() {
+            window.location = $(this).data("href");
         });
     </script>
     <script>
