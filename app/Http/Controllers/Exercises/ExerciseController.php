@@ -62,16 +62,28 @@ class ExerciseController extends Controller
     {
         if ($request->keyword != '')
         {
-            $result = DB::table('groups AS g')
-                ->select('*')
-                ->where('owner', $request->owner_id)
-                ->where('type', 'students')
-                ->where('name', 'LIKE', "%".$request->keyword."%")
+            $result = Group::whereNotIn('groups.id', function ($query) use ($request) {
+                $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=' , $request->exercise_id);
+            })
+                ->where('groups.owner', $request->owner_id)
+                ->where('groups.type', 'students')
+                ->where('groups.name', 'LIKE', "%".$request->keyword."%")
                 ->get();
         }
         else
         {
-            $result = Group::where('owner', $request->owner_id)->where('type', 'students')->get();
+            $result = Group::whereNotIn('groups.id', function ($query) use ($request) {
+                $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=' , $request->exercise_id);
+            })
+                ->where('groups.owner', $request->owner_id)
+                ->where('groups.type', 'students')
+                ->get();
+
+//            $result = DB::table('groups AS gr')
+//                ->where('gr.owner', $request->owner_id)
+//                ->where('gr.type', 'students')
+////                ->whereNotIn('gr.id', DB::raw('(SELECT ae.group_id FROM assigned_exercises AS ae WHERE ae.exercise_id = ' . $request->exercise_id . ' AND ae.group_id = gr.id)'))
+//                ->get();
         }
 
         return response()->json(['result' => $result]);

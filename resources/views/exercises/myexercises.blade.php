@@ -33,7 +33,8 @@
                                                         </button>
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
-                                                                data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="exerciseId = {{$record->id}}">
+                                                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                                onclick="exerciseId = {{$record->id}}">
                                                             Zadat
                                                         </button>
                                                     </div>
@@ -178,12 +179,11 @@
                 {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     keyword: keyword,
-                    owner_id: {{Auth::id()}}
-                    // exercise_id: exerciseId
+                    owner_id: {{Auth::id()}},
+                    exercise_id: exerciseId
                 },
                 function (data) {
                     postGroups(data);
-                    console.log(data);
                 });
         }
 
