@@ -105,13 +105,16 @@
                     res.result[i].visibility = "Veřejné cvičení";
                 }
 
+                var url = '{{ route("exercise-administration.redirect-to-exercise", ["exercise_id" => "rpl"]) }}';
+                url = url.replace('rpl', res.result[i].id);
                 var exercise = '{{ ":id" }}';
                 exercise = exercise.replace(':id', res.result[i].id);
+
                 htmlView += `
             <tr>
-                <td>`+ (i+1) +`</td>
-                <td>`+res.result[i].name+`</td>
-                <td>`+res.result[i].visibility+`</td>
+                <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
+                <td class="clickable-row" data-href="` + url + `">`+res.result[i].name+`</td>
+                <td class="clickable-row" data-href="` + url + `">`+res.result[i].visibility+`</td>
                 <td>
                     <button type="button"
                         class="btn btn-outline-danger open-remove-exercise-dialog"

@@ -50,4 +50,11 @@ class ExerciseAdministrationController extends Controller
 
         return view('administration.exercise-administration');
     }
+
+    public function redirectToExercise(Request $request)
+    {
+        session(['exercise_id' => $request->exercise_id]);
+
+        return redirect('edit-exercise');
+    }
 }
