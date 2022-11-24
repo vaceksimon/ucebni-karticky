@@ -42,4 +42,21 @@ class EditExerciseController extends Controller
 
         return $this->index();
     }
+
+    public function removeFlashcard(Request $request)
+    {
+        $flashcard_id = $request->flashcard_id;
+        $exercise_id = $request->exercise_id;
+
+        // First store the other data.
+        Exercise::where('id', '=', $exercise_id)->update(['name' => $request->exercise_name, 'description' => $request->exercise_description]);
+
+        // Then remove the flashcard from the exercise.
+
+        DB::table('flashcards')
+            ->where('id', $flashcard_id)
+            ->delete();
+
+        return redirect('edit-exercise');
+    }
 }

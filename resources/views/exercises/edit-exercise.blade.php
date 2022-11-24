@@ -81,7 +81,7 @@
                                                         Vaše cvičení zatím neobsahuje žádné kartičky.
                                                     </div>
                                                     <div class="row row-center mx-auto my-3" style="width: 120px">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat kartičky</button>
+                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
                                                     </div>
                                                 @else
                                                     <tbody>
@@ -110,7 +110,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <button type="button"
-                                                                            class="btn btn-outline-danger open-remove-member-dialog"
+                                                                            class="btn btn-outline-danger open-remove-flashcard-dialog"
                                                                             data-id="{{ $flashcard->id }}"
                                                                             data-bs-toggle="modal"
                                                                             data-bs-target="#removingQuestion">Odebrat</button>
@@ -140,22 +140,49 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="--bs-modal-width: 75vw;">
-                <div class="modal-dialog">
+
+
+
+            <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addFlashcardModalLabel" aria-hidden="true" role="dialog">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Přidání kartiček</h5>
+                            <h5 class="modal-title">Upozornění</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
+                            <p>Opravdu si přejete odebrat uživatele ze skupiny?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+                            <form method="post" action="{{ route('edit-exercise.remove-flashcard') }}">
+                                @csrf
+
+                                <input type="hidden" id="flashcard_id" name="flashcard_id" value="">
+                                <input type="hidden" id="exercise_id" name="exercise_id" value="{{ session('exercise_id') }}">
+                                <input type="hidden" id="exercise_name" name="exercise_name" value="">
+                                <input type="hidden" id="exercise_description" name="exercise_description" value="">
+                                <button type="submit" class="btn btn-primary">Ano</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script>
+        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
+        $(document).on("click", ".open-remove-flashcard-dialog", function () {
+            var flashcard = $(this).data('id');
+            var exerciseName = document.getElementById("name").value;
+            var exerciseDescription = document.getElementById("description").value;
+
+            $(".modal-footer #flashcard_id").val( flashcard );
+            $(".modal-footer #exercise_name").val( exerciseName );
+            $(".modal-footer #exercise_description").val( exerciseDescription );
+        });
+    </script>
 @endsection
