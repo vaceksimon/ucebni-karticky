@@ -82,14 +82,16 @@
                                                 <thead>
                                                 </thead>
                                                 @empty($members[0])
-                                                    <tr>
-                                                        <div class="my-5">
-                                                            <div class="text-center">
-                                                                Skupina zatím neobsahuje žádné členy.
-                                                                <i class="bi bi-emoji-frown"></i>
+                                                    <tbody>
+                                                        <tr>
+                                                            <div class="my-5">
+                                                                <div class="text-center">
+                                                                    Skupina zatím neobsahuje žádné členy.
+                                                                    <i class="bi bi-emoji-frown"></i>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </tr>
+                                                        </tr>
+                                                    </tbody>
                                                 @else
                                                     <tbody>
                                                     @foreach($members as $member)
