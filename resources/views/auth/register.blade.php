@@ -48,7 +48,9 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                           name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                           name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                                           oninvalid="this.setCustomValidity('Prosím zadejte emailovou adresu')"
+                                           oninput="setCustomValidity('')">
 
                                     @error('email')
                                     <script>
@@ -88,7 +90,9 @@
 
                                 <div class="col-md-6">
                                     <input id="first_name" type="text" class="form-control"
-                                           name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                           name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus
+                                           oninvalid="this.setCustomValidity('Prosím zadejte Vaše křestní jméno')"
+                                           oninput="setCustomValidity('')">
                                 </div>
                             </div>
 
@@ -99,7 +103,9 @@
 
                                 <div class="col-md-6">
                                     <input id="last_name" type="text" class="form-control"
-                                           name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                           name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus
+                                           oninvalid="this.setCustomValidity('Prosím zadejte Vaše křestní příjmení')"
+                                           oninput="setCustomValidity('')">
                                 </div>
                             </div>
 
@@ -133,7 +139,9 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                            class="form-control @error('password') is-invalid @enderror" name="password"
-                                           required autocomplete="new-password">
+                                           required autocomplete="new-password"
+                                           oninvalid="this.setCustomValidity('Prosím zadejte heslo')"
+                                           oninput="setCustomValidity('')">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -163,7 +171,9 @@
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password"
                                            class="form-control @error('password') is-invalid @enderror"
-                                           name="password_confirmation" required autocomplete="new-password">
+                                           name="password_confirmation" required autocomplete="new-password"
+                                           oninvalid="this.setCustomValidity('Prosím zadejte heslo znovu pro potvrzení')"
+                                           oninput="setCustomValidity('')">
                                 </div>
                             </div>
 
