@@ -66,6 +66,7 @@ class User extends Authenticatable
     /**
      * @return BelongsToMany
      */
+
     public function groupsMemberships(): BelongsToMany
     {
         return $this->belongsToMany(

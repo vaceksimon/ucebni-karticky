@@ -47,6 +47,10 @@ Route::post('/myexercises/share', [App\Http\Controllers\Exercises\ExerciseContro
 Route::post('/myexercises/store-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'storeShare'])->name('myexercises.store-share');
 Route::post('/myexercises/delete-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'deleteShare'])->name('myexercises.delete-share');
 
+Route::get('/create-group', [\App\Http\Controllers\Groups\CreateGroupController::class, 'index'])->name('create-group');
+Route::post('/create-group/search', [\App\Http\Controllers\Groups\CreateGroupController::class, 'search'])->name('create-group.search');
+Route::post('create-group', [\App\Http\Controllers\Groups\CreateGroupController::class, 'store'])->name('create-group.store');
+
 Route::get('/edit-group', [\App\Http\Controllers\Groups\EditGroupController::class, 'index'])->name('edit-group');
 Route::post('/edit-group/search', [\App\Http\Controllers\Groups\EditGroupController::class, 'search'])->name('edit-group.search');
 Route::post('/edit-group/remove-member', [\App\Http\Controllers\Groups\EditGroupController::class, 'removeMember'])->name('edit-group.remove-member');
