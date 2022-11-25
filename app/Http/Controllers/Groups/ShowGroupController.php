@@ -39,7 +39,6 @@ class ShowGroupController extends Controller
                 ->where('aex.group_id', $group_id)
                 ->Select(DB::raw('ex.*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS pocet'))
                 ->get();
-
             return view('groups.show-group')
                 ->with('group', $group)
                 ->with('members', $members)
@@ -50,6 +49,14 @@ class ShowGroupController extends Controller
         return view('groups.show-group')
             ->with('group', $group)
             ->with('members', $members);
+    }
+
+    public function getAssignments(Request $request) {
+        return DB::table('exercises AS ex')
+                ->join('assigned_exercises AS aex', 'ex.id', 'aex.exercise_id')
+                ->where('aex.group_id', $request->group_id)
+                ->Select(DB::raw('ex.*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS pocet'))
+                ->get();
     }
 
     public function unassign(Request $request) {
