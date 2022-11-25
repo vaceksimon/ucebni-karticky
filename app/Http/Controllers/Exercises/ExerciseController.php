@@ -77,6 +77,13 @@ class ExerciseController extends Controller
             ->get();
     }
 
+    public function edit(Request $request)
+    {
+        session(['exercise_id' => $request->id]);
+
+        return redirect('edit-exercise');
+    }
+
     public function share(Request $request) {
         if ($request->keyword != '')
         {
@@ -140,5 +147,4 @@ class ExerciseController extends Controller
             return '0';
         }
     }
-
 }

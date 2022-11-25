@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('myexercises')}}" class="nav-link align-middle px-0">
+                    <a href="{{route('exercise-administration')}}" class="nav-link align-middle px-0">
                         <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Správa cvičení</span>
                     </a>
                 </li>
