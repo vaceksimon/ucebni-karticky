@@ -85,5 +85,6 @@ public function search(Request $request)
 
     public function store_assignment(Request $request) {
         DB::table('assigned_exercises')->insert(['exercise_id' => $request->exercise_id, 'group_id' => $request->group_id]);
+        return redirect(route('myexercises'));
     }
 }
