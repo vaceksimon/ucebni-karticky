@@ -26,7 +26,7 @@ class CreateExerciseController extends Controller
 
         $exercise->save();
 
-        return redirect('create-exercise')->with('status', 'Post Form Data Has Been inserted');
+        return redirect('myexercises')->with('status', 'Post Form Data Has Been inserted');
     }
 
 }
