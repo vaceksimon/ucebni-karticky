@@ -1,18 +1,18 @@
 # Soupis pohledy
 
 ### Hotové
-- [ ] *Přihlášení*
-- [ ] *Registrace*
-- [ ] *Horní menu*
-- [ ] *Levé menu*
+- [X] *Přihlášení*
+- [X] *Registrace*
+- [X] *Horní menu*
+- [X] *Levé menu*
 
 ### Nepřihlášený uživatel
-- [ ] Úvodní stránka (stačí možná přidat foto, případně logo)
+- [X] Úvodní stránka (stačí možná přidat foto, případně logo)
 - [ ] (Procvičování veřejných cvičení)
 
 ### Hlavní stránka uživatele (domů)
 - [ ] Hlavní stránka po registraci
-- [ ] Hlavní stránka
+- [X] Hlavní stránka
 
 ### Vytváření (zápis do databáze)
 - [ ] Vytvoření skupiny

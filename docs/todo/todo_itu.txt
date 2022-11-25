@@ -1,0 +1,3 @@
+- add AJAX into the registration (login) form
+- edit-group: jquery list to be dynamic - remove member
+- edit-group: jquery list to be dynamic - add new member

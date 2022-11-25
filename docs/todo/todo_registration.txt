@@ -1,2 +1,0 @@
-- add AJAX into the registration (login) form
-

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Exercise extends Model
@@ -45,5 +46,18 @@ class Exercise extends Model
     public function attempts(): HasMany
     {
         return $this->hasMany(Attempt::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function groupsSharing() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Exercise::class,
+            'shared_exercises',
+            'exercise_id',
+            'group_id'
+        );
     }
 }
