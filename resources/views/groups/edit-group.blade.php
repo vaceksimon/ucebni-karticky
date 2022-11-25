@@ -42,7 +42,9 @@
 
                                         <div class="col-md-11">
                                             <input id="name" type="text" class="form-control"
-                                                   name="name" value="<?php echo $group[0]->name ?>" required autocomplete="name" autofocus>
+                                                   name="name" value="<?php echo $group[0]->name ?>" required autocomplete="name" autofocus
+                                                   oninvalid="this.setCustomValidity('Prosím zadejte název skupiny')"
+                                                   oninput="setCustomValidity('')">
                                         </div>
                                     </div>
 
