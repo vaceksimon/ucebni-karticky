@@ -43,7 +43,9 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control"
-                                           name="name" value="<?php echo $exercise[0]->name ?>" required autocomplete="name" autofocus>
+                                           name="name" value="<?php echo $exercise[0]->name ?>" required autocomplete="name" autofocus
+                                           oninvalid="this.setCustomValidity('Prosím zadejte název cvičení')"
+                                           oninput="setCustomValidity('')">
                                 </div>
                             </div>
 
