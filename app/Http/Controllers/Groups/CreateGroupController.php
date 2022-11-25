@@ -18,7 +18,7 @@ class CreateGroupController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         return view('groups.create-group');
