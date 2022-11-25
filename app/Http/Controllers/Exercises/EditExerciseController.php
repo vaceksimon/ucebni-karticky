@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
 use App\Models\Flashcard;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -56,6 +55,29 @@ class EditExerciseController extends Controller
         DB::table('flashcards')
             ->where('id', $flashcard_id)
             ->delete();
+
+        return redirect('edit-exercise');
+    }
+
+    public function addFlashcard(Request $request)
+    {
+        $validated = $request->validate([
+            'flashcard_question' => 'required|max:1023',
+            'flashcard_answer' => 'required|max:1023',
+        ]);
+
+        $question = $validated['flashcard_question'];
+        $answer = $validated['flashcard_answer'];
+        $exercise_id = $request->add_flashcard_exercise_id;
+
+        $exercise = Exercise::find($exercise_id);
+
+        $exercise->flashcards()->create([
+            'question' => $question,
+            'answer' => $answer,
+        ]);
+
+        $exercise->save();
 
         return redirect('edit-exercise');
     }

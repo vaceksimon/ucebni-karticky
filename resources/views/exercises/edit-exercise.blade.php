@@ -66,7 +66,7 @@
                                                 {{ __('Kartičky') }}
                                             </div>
                                             <div class="row row-center">
-                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#exampleModal">Přidat kartičky</button>
+                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,6 @@
                                                                     <div style="text-overflow: ellipsis;
                                                                     overflow: hidden;
                                                                     max-width: 15vw;
-                                                                    height: 1.2em;
                                                                     white-space: nowrap;">
                                                                         {{ $flashcard->question }}
                                                                     </div>
@@ -103,7 +102,6 @@
                                                                     <div style="text-overflow: ellipsis;
                                                                     overflow: hidden;
                                                                     max-width: 12vw;
-                                                                    height: 1.2em;
                                                                     white-space: nowrap;">
                                                                         {{ $flashcard->answer }}
                                                                     </div>
@@ -140,8 +138,73 @@
             </div>
 
             <!-- Modal -->
+            <div class="modal fade" id="addFlashcardModal" name="addFlashcardModal" tabindex="-1" aria-labelledby="addFlashcardModalLabel" aria-hidden="true" style="--bs-modal-width: 55vw;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addFlashcardModalLabel">Přidání kartičky</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" action="{{ route('edit-exercise.add-flashcard') }}">
+                            @csrf
 
+                            <div class="modal-body">
+                                <div class="row mt-5">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <!-- TODO both of fields have to be filled -->
+                                                <div class="mb-3 row row-center offset-lg-4">
+                                                    <label for="flashcard_question" class="col-form-label text-start">
+                                                        {{ __('Otázka *') }} :
+                                                    </label>
 
+                                                    <div class="col-lg-6">
+                                                        <input id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
+                                                               value="{{ old('question') }}" required autocomplete="question" autofocus
+                                                               oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
+                                                               oninput="setCustomValidity('')">
+
+                                                        @error('flashcard_question')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>Otázka musí být vyplněna.</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 row row-center offset-lg-4">
+                                                    <label for="flashcard_answer" class="col-form-label text-start">
+                                                        {{ __('Odpověď *') }} :
+                                                    </label>
+
+                                                    <div class="col-lg-6">
+                                                        <input id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
+                                                               value="{{ old('answer') }}" required autocomplete="question" autofocus
+                                                               oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
+                                                               oninput="setCustomValidity('')">
+
+                                                        @error('flashcard_answer')
+                                                        <span class="invalid-feedback" role="alert">
+                                                                <strong>Odpověď musí být vyplněna.</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="justify-content: flex-start;">
+                                <input type="hidden" id="add_flashcard_exercise_id" name="add_flashcard_exercise_id" value="<?php echo $exercise[0]->id;?>">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
+                                <button type="submit" class="btn btn-primary ms-auto me-0 add-flashcard">Přidat</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addFlashcardModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
