@@ -173,8 +173,6 @@
             search();
         });
 
-        search();
-
         function search() {
             var keyword = $('#search').val();
             $.post('{{ route("myexercises.search") }}',
@@ -205,13 +203,23 @@
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
                                 <p class="card-text">` + res.result[i].description + `</p>
-                                <button class="btn btn-primary" onclick="assignExercise(` + res.result[i].id + `);">Zadat</button>
+                                <form method="POST" action="`
+                htmlView += `{{route('myexercises.store-assignment')}}`;
+                htmlView += `">`;
+                htmlView += `@csrf`;
+                htmlView += `
+                                    <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
+                                    <input type="hidden" id="exercise_id" name="exercise_id" value="` + exerciseId + `" />
+                                    <input type="submit" class="btn btn-primary" value="Zadat" />
+                                </form>
                             </div>
                         </div>
                     </div>
-                `
+                `;
+
                 if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
                     htmlView += `</div>`
+                console.log(htmlView);
             }
             $('#searchedGroupsBody').html(htmlView);
         }
@@ -222,8 +230,8 @@
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     exercise_id: exerciseId,
                     group_id: groupId
-                });
-            search();
+                }
+            );
         }
     </script>
 
