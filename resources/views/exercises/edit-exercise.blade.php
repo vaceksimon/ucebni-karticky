@@ -126,12 +126,15 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <!--
-                                 TODO
-                                  - zrušit will navigate to home-page or previous page
-                                  - vytvořit skupinu will navigate to moje cviceni page
-                                 -->
-                                <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
+                                <a
+                                    @if((Auth::user()->account_type != "admin"))
+                                        href="{{ route('myexercises') }}"
+                                    @else
+                                        href="{{ route('exercise-administration') }}"
+                                    @endif
+                                >
+                                    <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
+                                </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit cvičení</button>
                             </div>
                         </form>
@@ -155,7 +158,6 @@
                                     <div class="col-md-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <!-- TODO both of fields have to be filled -->
                                                 <div class="mb-3 row row-center offset-lg-4">
                                                     <label for="flashcard_question" class="col-form-label text-start">
                                                         {{ __('Otázka *') }} :
