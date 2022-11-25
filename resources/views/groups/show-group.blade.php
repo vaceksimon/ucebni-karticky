@@ -121,7 +121,7 @@
                                     </div>
                                 </div>
                                 @if($group[0]->type == 'students')
-                                    <div class="card">
+                                    <div class="card mt-5" style="max-height: 10000px; overflow-y: scroll; overflow-x: hidden">
                                         <div class="card-header">
                                             {{__('Zadaná cvičení')}}
                                         </div>
@@ -132,9 +132,12 @@
                                                     {{$exercise->name}}
                                                 </div>
                                                 <div class="col-7">
-                                                    <a href="">
-                                                        <button class="btn btn-outline-danger">Zrušit zadání</button>
-                                                    </a>
+                                                    <form class="mb-0" method="POST" action="{{route('mygroups.unassign-exercise')}}">
+                                                        @csrf
+                                                        <input id="group_id" name="group_id" hidden value="{{$group[0]->id}}">
+                                                        <input id="exercise_id" name="exercise_id" hidden value="{{$exercise->id}}">
+                                                        <input type="submit" class="btn btn-outline-danger" value="Zrušit zadání" />
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -144,14 +147,6 @@
                                                 <div class="mb-2">Popis:</div>
                                                 <p class="card-text">{{$exercise->description}}</p>
                                             </div>
-{{--                                                if (isShared[i].shared === "1") {--}}
-{{--                                                htmlView += `<button class="btn btn-danger"--}}
-{{--                                                                     onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`--}}
-{{--                                                } else {--}}
-{{--                                                htmlView += `<button class="btn btn-primary"--}}
-{{--                                                                     onclick="shareExercise(` + res.result[i].id + `);">Sdílet</button>`--}}
-{{--                                                }--}}
-{{--                                                htmlView += `</div>--}}
                                         </div>
                                         @endforeach
                                     </div>

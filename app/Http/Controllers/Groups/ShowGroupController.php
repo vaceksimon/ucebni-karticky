@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exercise;
 use App\Models\Group;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -50,4 +51,13 @@ class ShowGroupController extends Controller
             ->with('group', $group)
             ->with('members', $members);
     }
+
+    public function unassign(Request $request) {
+        DB::table('assigned_exercises')
+            ->select('*')
+            ->where('group_id', $request->group_id)
+            ->where('exercise_id', $request->exercise_id)
+            ->delete();
+    }
+
 }
