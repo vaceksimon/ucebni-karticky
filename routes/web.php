@@ -43,6 +43,9 @@ Route::get('flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\Flashcard
 Route::post('attempt', [\App\Http\Controllers\Attempts\AttemptController::class, 'saveAttempt'])->name('attempt.save-attempt');
 
 Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
+Route::post('/myexercises/share', [App\Http\Controllers\Exercises\ExerciseController::class, 'share'])->name('myexercises.share');
+Route::post('/myexercises/store-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'storeShare'])->name('myexercises.store-share');
+Route::post('/myexercises/delete-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'deleteShare'])->name('myexercises.delete-share');
 
 Route::get('/edit-group', [\App\Http\Controllers\Groups\EditGroupController::class, 'index'])->name('edit-group');
 Route::post('/edit-group/search', [\App\Http\Controllers\Groups\EditGroupController::class, 'search'])->name('edit-group.search');

@@ -67,5 +67,16 @@ class GroupSeeder extends Seeder
         });
 
         $student->assigned()->attach(1);
+
+        Group::all()->where('type', '=', Group::TEACHERS_GROUP)->each(function ($group)
+        {
+           $exercise = Exercise::all()->where('author', '!=', $group->owner)->random(rand(0,2));
+
+           $group->groupsSharing()->attach(
+               $exercise->pluck('id')->toArray()
+           );
+        });
+
+        $teacher->groupsSharing()->attach(2);
     }
 }
