@@ -132,12 +132,7 @@
                                                     {{$exercise->name}}
                                                 </div>
                                                 <div class="col-7">
-                                                    <form class="mb-0" method="POST" action="{{route('mygroups.unassign-exercise')}}">
-                                                        @csrf
-                                                        <input id="group_id" name="group_id" hidden value="{{$group[0]->id}}">
-                                                        <input id="exercise_id" name="exercise_id" hidden value="{{$exercise->id}}">
-                                                        <input type="submit" class="btn btn-outline-danger" value="Zrušit zadání" />
-                                                    </form>
+                                                    <button type="submit" class="btn btn-outline-danger" onclick="unassignExercise({{$exercise->id}}, {{$group[0]->id}})">Zrušit zadání</button>
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -174,4 +169,13 @@
             window.location = $(this).data("href");
         });
     });
+
+    function unassignExercise(exerciseID, groupId) {
+        $.post('{{route('mygroups.unassign-exercise')}}', {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            group_id: groupId,
+            exercise_id: exerciseID
+        });
+        window.location.reload();
+    }
 </script>
