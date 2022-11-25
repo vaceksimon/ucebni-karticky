@@ -139,6 +139,21 @@
                                 </div>
                             </div>
 
+                            <div class="mb-3 row row-center">
+                                <label for="delete-group" class="col-form-label text-start" style="color: red">
+                                    <b>{{ __('Nebezpečná zóna') }}</b> :
+                                </label>
+
+                                <div class="pb-5">
+                                    <button id="delete-group"
+                                            type="button"
+                                            class="btn btn-outline-danger px-4 gap-3"
+                                            data-id="{{ session('group_id') }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deletingQuestion">Zrušit skupinu</button>
+                                </div>
+                            </div>
+
                             <div class="my-3 d-flex">
                                 <a
                                 @if((Auth::user()->account_type != "admin"))
@@ -231,6 +246,29 @@
                                 <input type="hidden" id="group_name" name="group_name" value="">
                                 <input type="hidden" id="group_description" name="group_description" value="">
                                 <button type="submit" class="btn btn-primary">Ano</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deletingQuestion" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upozornění</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Opravdu si přejete zrušit skupinu?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" action="{{ route('edit-group.delete-group') }}">
+                                @csrf
+
+                                <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
+                                <button type="submit" class="btn btn-danger">Ano</button>
                             </form>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>

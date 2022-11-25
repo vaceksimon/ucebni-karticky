@@ -7,6 +7,7 @@ use App\Http\Controllers\ImageUploadController;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -103,5 +104,20 @@ class EditGroupController extends Controller
         DB::insert('insert into users_memberships (user_id, group_id) values (?, ?)', [$user_id, $group_id]);
 
         return redirect('edit-group');
+    }
+
+    public function deleteGroup(Request $request)
+    {
+        DB::table('groups')
+            ->where('id', $request->group_id)
+            ->delete();
+
+        if (Auth::user()->account_type != 'admin')
+        {
+            $groupController = new GroupController();
+            return $groupController->show();
+        }
+
+        return view('administration.group-administration');
     }
 }
