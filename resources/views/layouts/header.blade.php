@@ -15,7 +15,10 @@
                      data-bs-toggle="dropdown"
                      style="width: 60px; height: 60px; cursor:pointer" ;
                      alt="Avatar"/>
-                <ul class="dropdown-menu dropdown-menu-xxl-end">
+                <ul class="dropdown-menu dropdown-menu-xxl-end" style="width: max-content !important; max-width: 200px;">
+                    <li class="align-items-center">
+                        <p class="m-2">{{Auth::user()->degree_front}} {{Auth::user()->first_name}} {{Auth::user()->last_name}} {{Auth::user()->degree_after}}</p>
+                    </li>
                     <li>
                         <a href="{{route('profile')}}" style="text-decoration: none">
                             <button class="dropdown-item fs-4" type="button">
