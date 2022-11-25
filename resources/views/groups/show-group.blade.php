@@ -138,8 +138,8 @@
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                Počet kartiček
-                                                <p>Téma: {{$exercise->topic}}</p>
+                                                <p class="mb-0">Počet kartiček: {{$exercise->pocet}}</p>
+                                                <p class="mb-0">Téma: {{$exercise->topic}}</p>
                                                 <hr class="my-2">
                                                 <div class="mb-2">Popis:</div>
                                                 <p class="card-text">{{$exercise->description}}</p>

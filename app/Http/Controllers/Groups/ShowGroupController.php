@@ -36,7 +36,7 @@ class ShowGroupController extends Controller
             $assigned_exc = DB::table('exercises AS ex')
                 ->join('assigned_exercises AS aex', 'ex.id', 'aex.exercise_id')
                 ->where('aex.group_id', $group_id)
-                ->select('ex.*')
+                ->Select(DB::raw('ex.*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS pocet'))
                 ->get();
 
             return view('groups.show-group')
