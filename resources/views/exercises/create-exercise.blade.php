@@ -70,11 +70,6 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <!--
-                                 TODO
-                                  - zrušit will navigate to home-page or previous page
-                                  - vytvořit skupinu will navigate to moje cviceni page
-                                 -->
                                 <a href="{{ route('home') }}">
                                     <button class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 </a>
