@@ -18,8 +18,9 @@ class CreateGroupsTable extends Migration
             $table->unsignedBigInteger('owner');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('photo')->default('images/default-group.svg');
             $table->enum('type', ['teachers', 'students']);
+            $table->enum('visibility', ['private', 'public']);
             $table->timestamps();
 
             $table->foreign('owner')

@@ -28,6 +28,7 @@ class GroupController extends Controller
                         WHERE usm.group_id = gr.id ) AS pocet'))
             ->where('type', '=', 'teachers')
             ->where('owner', '=', Auth::user()->id)
+            ->orderBy('name')
             ->get();
     }
 
@@ -40,6 +41,7 @@ class GroupController extends Controller
                         WHERE usm.group_id = gr.id ) AS pocet'))
             ->where('type', '=', 'students')
             ->where('owner', '=', Auth::user()->id)
+            ->orderBy('name')
             ->get();
     }
 
@@ -50,9 +52,10 @@ class GroupController extends Controller
             ->addSelect(DB::raw('(SELECT COUNT(usm.user_id)
                         FROM users_memberships usm
                         WHERE usm.group_id = mb.group_id ) AS pocet'))
-            ->rightJoin('users_memberships as mb', 'gr.id', '=', 'mb.group_id')
+            ->join('users_memberships as mb', 'gr.id', '=', 'mb.group_id')
             ->where('type', '=', 'teachers')
             ->where('user_id', '=', Auth::user()->id)
+            ->orderBy('name')
             ->get();
     }
 
@@ -63,21 +66,24 @@ class GroupController extends Controller
             ->addSelect(DB::raw('(SELECT COUNT(usm.user_id)
                         FROM users_memberships usm
                         WHERE usm.group_id = mb.group_id ) AS pocet'))
-            ->rightJoin('users_memberships as mb', 'gr.id', '=', 'mb.group_id')
+            ->join('users_memberships as mb', 'gr.id', '=', 'mb.group_id')
             ->where('type', '=', 'students')
             ->where('user_id', '=', Auth::user()->id)
+            ->orderBy('name')
             ->get();
     }
 
     public function clickEdit(Request $request)
     {
-        return redirect('edit-group')
-            ->with('group_id', $request->group_id);
+        session(['group_id' => $request->group_id]);
+
+        return redirect('edit-group');
     }
 
     public function clickShow(Request $request)
     {
-        return redirect('edit-group')
-            ->with('group_id', $request->group_id);
+        session(['group_id' => $request->group_id]);
+
+        return redirect('show-group');
     }
 }

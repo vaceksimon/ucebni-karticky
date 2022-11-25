@@ -19,7 +19,8 @@ class ExerciseFactory extends Factory
             'author'      => $this->faker->randomElement($teacher),
             'name'        => $this->faker->words(2, true),
             'description' => $this->faker->sentence(4),
-            'topic'       => $this->faker->word()
+            'topic'       => $this->faker->word(),
+            'visibility'  => $this->faker->randomElement(['public', 'private'])
         ];
     }
 }

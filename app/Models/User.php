@@ -60,19 +60,20 @@ class User extends Authenticatable
      */
     public function groupsOwnerships(): HasMany
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Group::class, 'owner', 'id');
     }
 
     /**
      * @return BelongsToMany
      */
+
     public function groupsMemberships(): BelongsToMany
     {
         return $this->belongsToMany(
             Group::class,
             'user_memberships',
             'user_id',
-            'group_id'
+            'id'
         );
     }
 

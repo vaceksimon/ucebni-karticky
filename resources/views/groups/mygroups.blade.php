@@ -34,16 +34,20 @@
                                     </div>
                                     <div class="col-6 d-flex justify-content-end gap-3">
                                         <form method="POST" action="{{ route('mygroups.clickEdit') }}">
+                                            @csrf
+
                                             <div style="width: 120px">
                                                 <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                                <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit skupinu</button>
+                                                <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit skupinu</button>
                                             </div>
                                         </form>
 
                                         <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                            @csrf
+
                                             <div style="width: 120px">
                                                 <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                                <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                                <button type="submit" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
                                             </div>
                                         </form>
                                     </div>
@@ -79,16 +83,20 @@
                                     </div>
                                     <div class="col-6 d-flex justify-content-end gap-3">
                                         <form method="POST" action="{{ route('mygroups.clickEdit') }}">
+                                            @csrf
+
                                             <div style="width: 120px">
                                                 <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                                <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit skupinu</button>
+                                                <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit skupinu</button>
                                             </div>
                                         </form>
 
                                         <form method="POST" action="{{ route('mygroups.clickShow') }}">
-                                        <div style="width: 120px">
-                                            <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                            <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                            @csrf
+
+                                            <div style="width: 120px">
+                                                <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
+                                                <button type="submit" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
                                             </div>
                                         </form>
                                     </div>
@@ -120,9 +128,11 @@
                                             </div>
                                             <div class="col-6 d-flex justify-content-end gap-3">
                                                 <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                                    @csrf
+
                                                     <div style="width: 120px">
-                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->group_id }}" />
+                                                        <button type="submit" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -152,9 +162,11 @@
                                             </div>
                                             <div class="col-6 d-flex justify-content-end gap-3">
                                                 <form method="POST" action="{{ route('mygroups.clickShow') }}">
+                                                    @csrf
+
                                                     <div style="width: 120px">
-                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->id }}" />
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
+                                                        <input type="hidden" name="group_id" id="group_id" value="{{ $record->group_id }}" />
+                                                        <button type="submit" class="btn btn-primary btn-sm px-3 text-nowrap">Detail skupiny</button>
                                                     </div>
                                                 </form>
                                             </div>

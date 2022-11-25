@@ -22,6 +22,7 @@ class Group extends Model
     protected $fillable = [
         'name',
         'description',
+        'type',
         'photo',
     ];
 
@@ -31,7 +32,6 @@ class Group extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'type'
     ];
 
     /**
@@ -39,7 +39,7 @@ class Group extends Model
      */
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id', 'owner');
     }
 
     /**
@@ -64,6 +64,19 @@ class Group extends Model
         return $this->belongsToMany(
             Group::class,
             'assigned_exercises',
+            'group_id',
+            'exercise_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function groupsSharing() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'shared_exercises',
             'group_id',
             'exercise_id'
         );
