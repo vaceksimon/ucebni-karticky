@@ -38,6 +38,7 @@ Route::get('create-group', function () {
 Route::get('/create-exercise', [\App\Http\Controllers\Exercises\CreateExerciseController::class, 'index'])->name('create-exercise');
 Route::post('create-exercise', [\App\Http\Controllers\Exercises\CreateExerciseController::class, 'store'])->name('create-exercise.store');
 
+
 Route::get('flashcard/{id}', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'show'])->name('flashcard.show');
 Route::post('flashcard', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'getCards'])->name('flashcard.get-cards');
 
@@ -46,6 +47,9 @@ Route::get('flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\Flashcard
 Route::post('attempt', [\App\Http\Controllers\Attempts\AttemptController::class, 'saveAttempt'])->name('attempt.save-attempt');
 
 Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
+
+Route::post('/myexercises/search', [App\Http\Controllers\Exercises\ExerciseController::class, 'search'])->name('myexercises.search');
+Route::post('/myexercises/store-assignment', [App\Http\Controllers\Exercises\ExerciseController::class, 'store_assignment'])->name('myexercises.store-assignment');
 
 Route::get('myexercises/edit', [\App\Http\Controllers\Exercises\ExerciseController::class, 'edit'])->name('myexercises.edit');
 Route::post('/myexercises/share', [App\Http\Controllers\Exercises\ExerciseController::class, 'share'])->name('myexercises.share');
@@ -87,6 +91,7 @@ Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controller
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
+
 
 
 Auth::routes();
