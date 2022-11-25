@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Exercises;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\User;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -72,6 +75,70 @@ class ExerciseController extends Controller
             ->orderBy('g_name')
             ->orderBy('e_name')
             ->get();
+    }
+
+    public function share(Request $request) {
+        if ($request->keyword != '')
+        {
+            $groups = DB::table('groups')
+                ->where('groups.type', Group::TEACHERS_GROUP)
+                ->where('groups.name', 'LIKE', "%".$request->keyword."%")
+                ->get()
+                ->toArray();
+        }
+        else
+        {
+            $groups = DB::table('groups')
+                ->where('groups.type', Group::TEACHERS_GROUP)
+                ->get()
+                ->toArray();
+        }
+
+        $isShared = array();
+        $counter = 0;
+        $tmp = $groups;
+        foreach ($groups as $group)
+        {
+            $count = DB::table('shared_exercises')
+                ->where('group_id', '=', $group->id)
+                ->where('exercise_id', '=', $request->exercise_id)
+                ->count();
+
+            if ($count !== 0)
+                $isShared[$counter++]['shared'] = '1';
+            else
+                $isShared[$counter++]['shared'] = '0';
+        }
+
+        return response()->json(['result' => $tmp, 'isShared' => json_encode($isShared)]);
+    }
+
+    public function storeShare(Request $request) {
+        try
+        {
+            $group = Group::find($request->group_id);
+            $group->groupsSharing()->attach($request->exercise_id);
+            return '1';
+        }
+        catch (Exception $e)
+        {
+            return '0';
+        }
+    }
+
+    public function deleteShare(Request $request) {
+        try
+        {
+            DB::table('shared_exercises')
+                ->where('group_id', '=', $request->group_id)
+                ->where('exercise_id', '=', $request->exercise_id)
+                ->delete();
+            return '1';
+        }
+        catch (Exception $e)
+        {
+            return '0';
+        }
     }
 
 }
