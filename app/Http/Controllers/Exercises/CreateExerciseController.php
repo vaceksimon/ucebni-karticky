@@ -2,21 +2,17 @@
 
 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Exercises;
 
-use App\Models\Group;
-use App\Models\User;
-use http\Env\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CreateExerciseController extends Controller
 {
     public function index()
     {
-        return view('create-exercise.create-exercise');
+        return view('exercises.create-exercise');
     }
-
 
     public function store(Request $request)
     {
