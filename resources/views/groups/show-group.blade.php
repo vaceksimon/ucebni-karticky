@@ -81,13 +81,15 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                 </thead>
-                                                @empty($members)
-                                                    <div class="text-center">
-                                                        Vaše skupina zatím neobsahuje žádné členy.
-                                                    </div>
-                                                    <div class="row row-center mx-auto my-3" style="width: 120px">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
-                                                    </div>
+                                                @empty($members[0])
+                                                    <tr>
+                                                        <div class="my-5">
+                                                            <div class="text-center">
+                                                                Skupina zatím neobsahuje žádné členy.
+                                                                <i class="bi bi-emoji-frown"></i>
+                                                            </div>
+                                                        </div>
+                                                    </tr>
                                                 @else
                                                     <tbody>
                                                     @foreach($members as $member)
