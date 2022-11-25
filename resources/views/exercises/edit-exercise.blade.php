@@ -132,6 +132,21 @@
                                 </div>
                             </div>
 
+                            <div class="mb-3 row row-center">
+                                <label for="delete-exercise" class="col-form-label text-start" style="color: red">
+                                    <b>{{ __('Nebezpečná zóna') }}</b> :
+                                </label>
+
+                                <div class="pb-5">
+                                    <button id="delete-exercise"
+                                            type="button"
+                                            class="btn btn-outline-danger px-4 gap-3"
+                                            data-id="{{ session('group_id') }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deletingQuestion">Smazat cvičení</button>
+                                </div>
+                            </div>
+
                             <div class="my-3 d-flex">
                                 <a
                                     @if((Auth::user()->account_type != "admin"))
@@ -236,6 +251,29 @@
                                 <input type="hidden" id="exercise_name" name="exercise_name" value="">
                                 <input type="hidden" id="exercise_description" name="exercise_description" value="">
                                 <button type="submit" class="btn btn-primary">Ano</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deletingQuestion" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upozornění</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Opravdu si přejete smazat cvičení?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" action="{{ route('edit-exercise.delete-exercise') }}">
+                                @csrf
+
+                                <input type="hidden" id="exercise_id" name="exercise_id" value="{{ session('exercise_id') }}">
+                                <button type="submit" class="btn btn-danger">Ano</button>
                             </form>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
