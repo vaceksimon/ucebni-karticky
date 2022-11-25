@@ -68,6 +68,11 @@ Route::get('/user-administration', [App\Http\Controllers\Administration\UserAdmi
 Route::post('/user-administration/search', [App\Http\Controllers\Administration\UserAdministrationController::class, 'search'])->name('user-administration.search');
 Route::post('/user-administration/remove-user', [App\Http\Controllers\Administration\UserAdministrationController::class, 'removeUser'])->name('user-administration.remove-user');
 
+Route::get('/exercise-administration', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'index'])->name('exercise-administration');
+Route::post('/exercise-administration/search', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'search'])->name('exercise-administration.search');
+Route::post('/exercise-administration/remove-exercise', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'removeExercise'])->name('exercise-administration.remove-exercise');
+Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'redirectToExercise'])->name('exercise-administration.redirect-to-exercise');
+
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 
