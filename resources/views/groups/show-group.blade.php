@@ -120,6 +120,42 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if($group[0]->type == 'students')
+                                    <div class="card">
+                                        <div class="card-header">
+                                            {{__('Zadaná cvičení')}}
+                                        </div>
+                                        @foreach($exercises as $exercise)
+                                        <div class="card mt-2">
+                                            <div class="card-header d-flex align-items-center">
+                                                <div class="col-10">
+                                                    {{$exercise->name}}
+                                                </div>
+                                                <div class="col-7">
+                                                    <a href="">
+                                                        <button class="btn btn-outline-danger">Zrušit zadání</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                Počet kartiček
+                                                <p>Téma: {{$exercise->topic}}</p>
+                                                <hr class="my-2">
+                                                <div class="mb-2">Popis:</div>
+                                                <p class="card-text">{{$exercise->description}}</p>
+                                            </div>
+{{--                                                if (isShared[i].shared === "1") {--}}
+{{--                                                htmlView += `<button class="btn btn-danger"--}}
+{{--                                                                     onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`--}}
+{{--                                                } else {--}}
+{{--                                                htmlView += `<button class="btn btn-primary"--}}
+{{--                                                                     onclick="shareExercise(` + res.result[i].id + `);">Sdílet</button>`--}}
+{{--                                                }--}}
+{{--                                                htmlView += `</div>--}}
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="my-3 row d-flex">
