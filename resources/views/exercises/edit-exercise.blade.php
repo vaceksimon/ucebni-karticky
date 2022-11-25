@@ -78,13 +78,20 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                 </thead>
-                                                @empty($flashcards)
-                                                    <div class="text-center">
-                                                        Vaše cvičení zatím neobsahuje žádné kartičky.
-                                                    </div>
-                                                    <div class="row row-center mx-auto my-3" style="width: 120px">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
-                                                    </div>
+                                                @empty($flashcards[0])
+                                                    <tbody>
+                                                        <tr>
+                                                            <div class="my-5">
+                                                                <div class="text-center">
+                                                                    Cvičení zatím neobsahuje žádné kartičky.
+                                                                    <i class="bi bi-emoji-frown"></i>
+                                                                </div>
+                                                                <div class="row row-center mx-auto my-3" style="width: 120px">
+                                                                    <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
+                                                                </div>
+                                                            </div>
+                                                        </tr>
+                                                    </tbody>
                                                 @else
                                                     <tbody>
                                                         @foreach($flashcards as $flashcard)
