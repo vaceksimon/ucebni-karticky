@@ -56,7 +56,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
+                        <a href="{{route('create-exercise')}}"
+                           class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
                             <i class="fs-4 bi-plus"></i> <span
                                 class="ms-1 d-none d-sm-inline fs-5">Vytvořit cvičení</span>
                         </a>
@@ -96,7 +97,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
+                    <a href="{{route('create-exercise')}}"
+                       class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
                         <i class="fs-4 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit cvičení</span>
                     </a>
                 </li>

@@ -20,6 +20,7 @@ class Exercise extends Model
     protected $fillable = [
         'name',
         'description',
+        'topic',
         'visibility',
     ];
 
