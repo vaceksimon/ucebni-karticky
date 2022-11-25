@@ -32,11 +32,6 @@ class ImageUploadController extends Controller
 
         $request->image->move(public_path('images'), $imageName);
 
-        /* Store $imageName name in DATABASE from HERE */
-        // TODO
-
-        return back()
-            ->with('success','You have successfully upload image.')
-            ->with('image',$imageName);
+        return $imageName;
     }
 }

@@ -23,7 +23,6 @@ class Group extends Model
         'name',
         'description',
         'type',
-        'visibility',
         'photo',
     ];
 
@@ -46,14 +45,40 @@ class Group extends Model
     /**
      * @return BelongsToMany
      */
-    /*
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(
             User::class,
             'users_memberships',
             'group_id',
-            ''
+            'user_id'
         );
-    }*/
+    }
+
+
+    /**
+     * @return BelongsToMany
+     */
+    public function assigned(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'assigned_exercises',
+            'group_id',
+            'exercise_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function groupsSharing() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'shared_exercises',
+            'group_id',
+            'exercise_id'
+        );
+    }
 }

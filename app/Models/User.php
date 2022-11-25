@@ -73,7 +73,7 @@ class User extends Authenticatable
             Group::class,
             'user_memberships',
             'user_id',
-            'group_id'
+            'id'
         );
     }*/
 

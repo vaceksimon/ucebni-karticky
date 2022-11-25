@@ -49,14 +49,12 @@ class UserTest extends TestCase
             'first_name' => 'admin',
             'last_name'  => 'admin',
             'email'      => 'admin@example.com',
-            'password'   => 'admin'
         ]);
 
         $this->assertDatabaseHas('users', [
             'first_name' => 'Marek',
             'last_name'  => 'Dočekal',
             'email'      => 'speedy@example.com',
-            'password'   => 'BigShock'
         ]);
 
         $this->assertDatabaseHas('users', [
@@ -65,7 +63,6 @@ class UserTest extends TestCase
             'last_name'    => 'Brtník',
             'degree_after' => 'Ing.',
             'email'        => 'BBELM@example.com',
-            'password'     => 'Osciloskop123'
         ]);
     }
 
