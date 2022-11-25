@@ -42,7 +42,9 @@
 
                                         <div class="col-md-11">
                                             <input id="name" type="text" class="form-control"
-                                                   name="name" value="<?php echo $group[0]->name ?>" required autocomplete="name" autofocus>
+                                                   name="name" value="<?php echo $group[0]->name ?>" required autocomplete="name" autofocus
+                                                   oninvalid="this.setCustomValidity('Prosím zadejte název skupiny')"
+                                                   oninput="setCustomValidity('')">
                                         </div>
                                     </div>
 
@@ -93,13 +95,20 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                 </thead>
-                                                @empty($members)
-                                                    <div class="text-center">
-                                                        Vaše skupina zatím neobsahuje žádné členy.
-                                                    </div>
-                                                    <div class="row row-center mx-auto my-3" style="width: 120px">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
-                                                    </div>
+
+                                                @empty($members[0])
+                                                    <tbody>
+                                                        <tr>
+                                                            <div class="my-5">
+                                                                <div class="text-center">
+                                                                    Vaše skupina zatím neobsahuje žádné členy.
+                                                                </div>
+                                                                <div class="row row-center mx-auto my-3" style="width: 120px">
+                                                                    <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
+                                                                </div>
+                                                            </div>
+                                                        </tr>
+                                                    </tbody>
                                                 @else
                                                     <tbody>
                                                     @foreach($members as $member)
@@ -138,7 +147,13 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a href="{{ route('mygroups') }}">
+                                <a
+                                @if((Auth::user()->account_type != "admin"))
+                                    href="{{ route('mygroups') }}"
+                                @else
+                                    href="{{ route('group-administration') }}"
+                                @endif
+                                >
                                     <input type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" value="Zrušit">
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>

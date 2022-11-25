@@ -22,6 +22,7 @@ class Group extends Model
     protected $fillable = [
         'name',
         'description',
+        'type',
         'photo',
     ];
 
@@ -63,6 +64,19 @@ class Group extends Model
         return $this->belongsToMany(
             Group::class,
             'assigned_exercises',
+            'group_id',
+            'exercise_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function groupsSharing() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'shared_exercises',
             'group_id',
             'exercise_id'
         );

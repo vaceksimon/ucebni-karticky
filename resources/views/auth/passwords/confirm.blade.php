@@ -8,14 +8,14 @@
                     <div class="card-header">{{ __('Confirm Password') }}</div>
 
                     <div class="card-body">
-                        {{ __('Please confirm your password before continuing.') }}
+                        {{ __('Před pokračováním prosím potvrďte své heslo.') }}
 
                         <form method="POST" action="{{ route('password.confirm') }}">
                             @csrf
 
                             <div class="mb-3 row">
                                 <label for="password" class="col-md-4 col-form-label text-end">
-                                    {{ __('Password') }} :
+                                    {{ __('Heslo *') }} :
                                 </label>
 
                                 <div class="col-md-6">
@@ -34,12 +34,12 @@
                             <div class="mb-3 row">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Confirm Password') }}
+                                        {{ __('Heslo znovu *') }}
                                     </button>
 
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('Zapomněli jste heslo?') }}
                                         </a>
                                     @endif
                                 </div>
