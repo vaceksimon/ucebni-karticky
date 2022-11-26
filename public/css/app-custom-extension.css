@@ -1,10 +1,5 @@
 /*
- * Author: David Chocholaty (xchoch09)
- */
-
-/*
- * (davidchocholaty): Added own rule for centering the row content
- * set by row rule from the app.css file.
+ * Custom rules which extends the rules in the app.css file.
  */
 .row-center {
     justify-content: center;
