@@ -7,11 +7,14 @@ use App\Models\Attempt;
 use App\Models\Exercise;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupStatisticsController extends Controller
 {
     public function index(Request $request) {
-        $exercise = Exercise::where('id', $request->exercise_id)
+        $exercise = DB::table('exercises AS ex')
+            ->where('ex.id', $request->exercise_id)
+            ->Select(DB::raw('*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS count'))
             ->get()
             ->first();
 
