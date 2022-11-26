@@ -35,7 +35,7 @@
                             <div class="d-flex flex-nowrap flex-column">
                                 <div class="row col-12 d-flex">
                                     <div class="col-6">
-                                        <div class="mb-3 row row-center">
+                                        <div class="mb-3 row">
                                             <div>
                                                 <div>
                                                     <label for="first_name">Jméno * :</label>
@@ -49,7 +49,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mb-3 row row-center">
+                                        <div class="mb-3 row">
                                             <div>
                                                 <label for="last_name">Příjmení * :</label>
                                             </div>
@@ -61,7 +61,7 @@
                                                 <span id="errorLastName" name="error" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        <div class="mb-3 row row-center">
+                                        <div class="mb-3 row">
                                             <div>
                                                 <label for="last_name">Email * :</label>
                                             </div>
@@ -73,7 +73,7 @@
                                                 <span id="errorEmail" name="error" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        <div class="mb-3 row row-center">
+                                        <div class="mb-3 row">
                                             <div>
                                                 <label for="password">Heslo * :</label>
                                             </div>
