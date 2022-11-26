@@ -108,6 +108,12 @@
                         </div>
 
                         @endempty
+
+                        <div class="my-3 row d-flex">
+                            <a href="{{ route('myexercises') }}">
+                                <input type="button" class="btn btn-outline-secondary btn-lg px-4" value="Zpět">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,7 +123,7 @@
     <!--
         The following part of code is inspired from the source on 2022-11-25:
         - Source: https://www.devwares.com/blog/create-bootstrap-charts-using-bootstrap5/
-        - Author: By Chimdia Anyiam
+        - Author: Chimdia Anyiam
     -->
     <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
