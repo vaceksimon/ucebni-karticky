@@ -51,7 +51,8 @@ Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::c
 
 Route::post('/myexercises/search', [App\Http\Controllers\Exercises\ExerciseController::class, 'search'])->name('myexercises.search');
 Route::post('/myexercises/store-assignment', [App\Http\Controllers\Exercises\ExerciseController::class, 'store_assignment'])->name('myexercises.store-assignment');
-
+Route::post('/myexercises/search-stat', [App\Http\Controllers\Exercises\ExerciseController::class, 'searchGroupsForStat'])->name('myexercises.search-stat');
+Route::get('/myexercises/show-stat', [App\Http\Controllers\Exercises\ExerciseController::class, 'searchGroupsForStat'])->name('myexercises.show-stat');
 Route::get('myexercises/edit', [\App\Http\Controllers\Exercises\ExerciseController::class, 'edit'])->name('myexercises.edit');
 Route::post('/myexercises/share', [App\Http\Controllers\Exercises\ExerciseController::class, 'share'])->name('myexercises.share');
 Route::post('/myexercises/store-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'storeShare'])->name('myexercises.store-share');
