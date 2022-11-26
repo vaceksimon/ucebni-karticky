@@ -1,6 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9d1d9a82d2.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+
     <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -87,10 +94,43 @@
                             </ul>
                         </div>
 
+                        <div class="my-5">
+                            <div class="card chart-container">
+                                <canvas id="chart"></canvas>
+                            </div>
+                        </div>
+
                         @endempty
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const ctx = document.getElementById("chart").getContext('2d');
+        var chartData =  {{ json_encode($chart_data) }};
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["0%", "10%", "20%", "30%", "40%",
+                    "50%", "60%", "70%", "80%", "90%", "100%"],
+                datasets: [{
+                    label: 'Úspěšnost',
+                    backgroundColor: 'rgba(161, 198, 247, 1)',
+                    borderColor: 'rgb(47, 128, 237)',
+                    data: chartData,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            },
+        });
+    </script>
 @endsection
