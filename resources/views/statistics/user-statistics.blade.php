@@ -23,26 +23,36 @@
                             </ul>
                         </div>
 
+                        @empty($most_successful_attempt[0])
+                            <div class="text-center my-5">
+                                <h4>
+                                    Dané cvičení zatím nebylo dokončeno.
+                                    <i class="bi bi-emoji-frown"></i>
+                                </h4>
+                            </div>
+                        @else
                         <div class="my-5">
                             <b>Nejrúspěšnější pokus</b>
                             <ul>
                                 <li>
-                                    Datum:
+                                    <b>Datum:</b> {{ $most_successful_attempt[0]->created_at }}
                                 </li>
                                 <li>
-                                    Čas:
+                                    <b>Čas:</b> {{ $most_successful_attempt[0]->spend_time }}
                                 </li>
                                 <li>
-                                    Úspěšnost:
+                                    <b>Úspěšnost:</b> {{ floor($most_successful_attempt[0]->success_rate) }} %
                                     <ul>
                                         <li>
-                                            Počet otázek:
+                                            Počet otázek: {{
+                                                $most_successful_attempt[0]->correct_answers_number +
+                                                $most_successful_attempt[0]->wrong_answers_number }}
                                         </li>
                                         <li style="color: green">
-                                            Správně:
+                                            Správně: {{ $most_successful_attempt[0]->correct_answers_number }}
                                         </li>
                                         <li style="color: red">
-                                            Špatně:
+                                            Špatně: {{ $most_successful_attempt[0]->wrong_answers_number }}
                                         </li>
                                     </ul>
                                 </li>
@@ -53,27 +63,31 @@
                             <b>Nejrychlejší pokus</b>
                             <ul>
                                 <li>
-                                    Datum:
+                                    <b>Datum:</b> {{ $fastest_attempt[0]->created_at }}
                                 </li>
                                 <li>
-                                    Čas:
+                                    <b>Čas:</b> {{ $fastest_attempt[0]->spend_time }}
                                 </li>
                                 <li>
-                                    Úspěšnost:
+                                    <b>Úspěšnost:</b> {{ floor($fastest_attempt[0]->success_rate) }} %
                                     <ul>
                                         <li>
-                                            Počet otázek:
+                                            Počet otázek: {{
+                                                $fastest_attempt[0]->correct_answers_number +
+                                                $fastest_attempt[0]->wrong_answers_number }}
                                         </li>
                                         <li style="color: green">
-                                            Správně:
+                                            Správně: {{ $fastest_attempt[0]->correct_answers_number }}
                                         </li>
                                         <li style="color: red">
-                                            Špatně:
+                                            Špatně: {{ $fastest_attempt[0]->wrong_answers_number }}
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
+
+                        @endempty
                     </div>
                 </div>
             </div>
