@@ -120,6 +120,34 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if($group[0]->type == 'students')
+                                    <div class="card mt-5">
+                                        <div class="card-header">
+                                            {{__('Zadaná cvičení')}}
+                                        </div>
+                                        <div id="assignedExercisesBody" name="assignedExercisesBody" class="card-body" style="max-height: 10000px; overflow-y: scroll;">
+                                            @foreach($exercises as $exercise)
+                                            <div class="card mt-2">
+                                                <div class="card-header d-flex align-items-center">
+                                                    <div>
+                                                        {{$exercise->name}}
+                                                    </div>
+                                                    <div class="ms-auto">
+                                                        <button type="submit" class="btn btn-outline-danger" onclick="unassignExercise({{$exercise->id}}, {{$group[0]->id}})">Zrušit zadání</button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-0">Počet kartiček: {{$exercise->pocet}}</p>
+                                                    <p class="mb-0">Téma: {{$exercise->topic}}</p>
+                                                    <hr class="my-2">
+                                                    <div class="mb-2">Popis:</div>
+                                                    <p class="card-text">{{$exercise->description}}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="my-3 row d-flex">
@@ -143,4 +171,51 @@
             window.location = $(this).data("href");
         });
     });
+
+    function unassignExercise(exerciseID, groupId) {
+        $.post('{{route('mygroups.unassign-exercise')}}', {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            group_id: groupId,
+            exercise_id: exerciseID
+        });
+        loadAssignedExercises(groupId);
+    }
+
+    function loadAssignedExercises(groupId) {
+        if('{{$group[0]->type}}' === 'students') {
+            $.post('{{route('mygroups.get-assignments')}}', {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                group_id: groupId
+            }, function (data) {
+                postAssignments(data);
+            });
+        }
+    }
+
+    function postAssignments(data) {
+        let htmlView = ``;
+        for(let i = 0; i < data.length; i++) {
+            htmlView += `
+                <div class="card mt-2">
+                    <div class="card-header d-flex align-items-center">
+                        <div>` + data[i].name + `</div>
+                        <div class="ms-auto">
+                            <button type="submit" class="btn btn-outline-danger" onclick="unassignExercise(` + data[i].id + `, ` + data[i].id + `)">
+                                Zrušit zadání
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0">Počet kartiček: ` + data[i].pocet + `</p>
+                        <p class="mb-0">Téma: ` + data[i].topic + `</p>
+                        <hr class="my-2">
+                        <div class="mb-2">Popis:</div>
+                        <p class="card-text">` + data[i].description + `</p>
+                    </div>
+                </div>
+            `
+        }
+        $('#assignedExercisesBody').html(htmlView);
+    }
+
 </script>

@@ -30,6 +30,9 @@ Route::get('/test', function () {
 Route::get('mygroups', [\App\Http\Controllers\Groups\GroupController::class, 'show' ])->name('mygroups');
 Route::post('mygroups/clickEdit', [\App\Http\Controllers\Groups\GroupController::class, 'clickEdit' ])->name('mygroups.clickEdit');
 Route::post('mygroups/clickShow', [\App\Http\Controllers\Groups\GroupController::class, 'clickShow' ])->name('mygroups.clickShow');
+Route::post('mygroups/get-assignments', [\App\Http\Controllers\Groups\ShowGroupController::class, 'getAssignments' ])->name('mygroups.get-assignments');
+Route::post('mygroups/unassign-exercise', [\App\Http\Controllers\Groups\ShowGroupController::class, 'unassign' ])->name('mygroups.unassign-exercise');
+
 
 Route::get('create-group', function () {
     return view('create-group');
