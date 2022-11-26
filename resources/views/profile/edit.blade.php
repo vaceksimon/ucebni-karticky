@@ -144,7 +144,7 @@
                                             </div>
                                             <div style="width: 60%">
                                                 <div class="container my-auto">
-                                                    <label class="input-group-text my-auto"
+                                                    <label class="input-group-text my-auto change-image"
                                                            style="width: 75px; cursor: pointer"
                                                            for="image">Nahrát</label>
                                                     <input type="file" onchange="this.form.submit()"
