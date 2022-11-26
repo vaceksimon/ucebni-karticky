@@ -51,7 +51,9 @@
                                                     <a href="{{route('myexercises.edit', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit</button>
                                                     </a>
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                    <a href="{{route('myexercises.user-statistics')}}">
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                    </a>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
                                                     </a>
@@ -138,8 +140,13 @@
                                             <div> {{ $record->description }} </div>
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
+                                                    <form method="POST" action="{{ route('myexercises.user-statistics') }}">
+                                                        @csrf
 
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                        <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
+                                                        <input type="hidden" name="exercise_id_stat" id="exercise_id_stat" value="{{ $record->id }}">
+                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                    </form>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
                                                     </a>
