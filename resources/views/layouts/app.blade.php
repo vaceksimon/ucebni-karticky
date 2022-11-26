@@ -28,7 +28,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand fs-1" href="{{ url('/') }}">
+                <a class="navbar-brand fs-3" href="{{ url('/') }}">
                     <i class="bi-journals"></i>
                     {{ config('app.name', 'Učební Kartičky') }}
                 </a>
@@ -49,18 +49,18 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link fs-4" href="{{ route('login') }}">{{ __('Přihlášení') }}</a>
+                                    <a class="nav-link fs-6" href="{{ route('login') }}">{{ __('Přihlášení') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link fs-4" href="{{ route('register') }}">{{ __('Registrace') }}</a>
+                                    <a class="nav-link fs-6" href="{{ route('register') }}">{{ __('Registrace') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdown" role="button"
+                                <a class="nav-link dropdown-toggle fs-6" href="#" id="navbarDropdown" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->degree_front }}
                                     {{ Auth::user()->first_name }}
@@ -71,13 +71,13 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li>
                                         <a href="{{route('profile')}}" style="text-decoration: none">
-                                            <button class="dropdown-item fs-4" type="button">
+                                            <button class="dropdown-item fs-6" type="button">
                                                 Můj profil
                                             </button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-danger fs-4" href="{{ route('logout') }}"
+                                        <a class="dropdown-item text-danger fs-6" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             {{ __('Odhlásit se') }}
                                         </a>
