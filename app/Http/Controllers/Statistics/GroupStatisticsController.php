@@ -25,6 +25,8 @@ class GroupStatisticsController extends Controller
         $fastestAttempt = Attempt::whereIn('attempts.user_id', function ($query) use ($request) {
             $query->select('user_id')->from('users_memberships AS um')->where('um.group_id', $request->group_id);
         })
+            ->select('*')
+            ->addSelect(DB::raw('(SELECT (a.correct_answers_number / (a.correct_answers_number + a.wrong_answers_number) * 100) FROM attempts AS a WHERE a.id = attempts.id) AS percentage'))
             ->where('exercise_id', $request->exercise_id)
             ->orderBy('spend_time')->limit(3)
             ->get();
@@ -32,6 +34,8 @@ class GroupStatisticsController extends Controller
         $bestAttempt = Attempt::whereIn('attempts.user_id', function ($query) use ($request) {
             $query->select('user_id')->from('users_memberships AS um')->where('um.group_id', $request->group_id);
         })
+            ->select('*')
+            ->addSelect(DB::raw('(SELECT (a.correct_answers_number / (a.correct_answers_number + a.wrong_answers_number) * 100) FROM attempts AS a WHERE a.id = attempts.id) AS percentage'))
             ->where('exercise_id', $request->exercise_id)
             ->orderByDesc('correct_answers_number')->limit(3)
             ->get();
