@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exercise;
 use App\Models\Flashcard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -51,7 +52,6 @@ class EditExerciseController extends Controller
         Exercise::where('id', '=', $exercise_id)->update(['name' => $request->exercise_name, 'description' => $request->exercise_description]);
 
         // Then remove the flashcard from the exercise.
-
         DB::table('flashcards')
             ->where('id', $flashcard_id)
             ->delete();
@@ -62,8 +62,8 @@ class EditExerciseController extends Controller
     public function addFlashcard(Request $request)
     {
         $validated = $request->validate([
-            'flashcard_question' => 'required|max:1023',
-            'flashcard_answer' => 'required|max:1023',
+            'flashcard_question' => 'required|max:255',
+            'flashcard_answer' => 'required|max:255',
         ]);
 
         $question = $validated['flashcard_question'];
@@ -80,5 +80,20 @@ class EditExerciseController extends Controller
         $exercise->save();
 
         return redirect('edit-exercise');
+    }
+
+    public function deleteExercise(Request $request)
+    {
+        DB::table('exercises')
+            ->where('id', $request->exercise_id)
+            ->delete();
+
+        if (Auth::user()->account_type != 'admin')
+        {
+            $exerciseController = new ExerciseController();
+            return $exerciseController->show();
+        }
+
+        return view('administration.exercise-administration');
     }
 }

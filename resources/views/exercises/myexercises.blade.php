@@ -143,8 +143,13 @@
                                             <div> {{ $record->description }} </div>
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
+                                                    <form method="POST" action="{{ route('myexercises.user-statistics') }}">
+                                                        @csrf
 
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                        <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
+                                                        <input type="hidden" name="exercise_id_stat" id="exercise_id_stat" value="{{ $record->id }}">
+                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                    </form>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
                                                     </a>
@@ -437,6 +442,7 @@
 
                 if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
                     htmlView += `</div>`
+                console.log(htmlView);
             }
             $('#searchedGroupsBody').html(htmlView);
         }
@@ -451,72 +457,4 @@
             );
         }
     </script>
-
-    <script>
-        $('#statSearch').on('keyup', function () {
-            searchForStat();
-        });
-
-        function searchForStat() {
-            var keyword = $('#statSearch').val();
-            $.post('{{ route("myexercises.search-stat") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    keyword: keyword,
-                    owner_id: {{Auth::id()}},
-                    exercise_id: exerciseId
-                },
-                function (data) {
-                    postGroupsStat(data);
-                });
-        }
-
-        // table row with ajax
-        function postGroupsStat(res) {
-            htmlView = '';
-            for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3">`
-                }
-
-                htmlView += `
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
-                            <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>
-                                <form method="POST" id="formAssign` + i +`" action="`
-                {{--htmlView += `{{route('myexercises.store-assignment')}}`;--}}
-                htmlView += `">`;
-                htmlView += `@csrf`;
-                htmlView += `
-                                    <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
-                                    <input type="hidden" id="exercise_id" name="exercise_id" value="` + exerciseId + `" />
-                                    <button type="submit" class="btn btn-primary" onclick="document.getElementById('formAssign` + i + `').submit()">Zobrazit</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
-                console.log(htmlView);
-            }
-            $('#statisticsBody').html(htmlView);
-        }
-
-        function assignExercise(groupId) {
-            $.post('{{ route("myexercises.store-assignment") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    exercise_id: exerciseId,
-                    group_id: groupId
-                }
-            );
-        }
-    </script>
-
 @endsection

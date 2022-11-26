@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/autologout.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +20,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chart.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/button-image-hover.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/table-head-sticky.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/text-shortening.css') }}" rel="stylesheet">
 
 </head>
 

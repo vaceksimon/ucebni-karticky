@@ -169,6 +169,14 @@ class ExerciseController extends Controller
         }
     }
 
+    public function showUserStatistics(Request $request)
+    {
+        session(['user_id' => $request->user_id]);
+        session(['exercise_id' => $request->exercise_id_stat]);
+
+        return redirect('user-statistics');
+    }
+
     public function searchGroupsForStat(Request $request) {
         if ($request->keyword != '') {
             $result = Group::whereIn('groups.id', function ($query) use ($request) {

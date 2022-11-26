@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImageUploadController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,13 @@ Route::get('create-group', function () {
     return view('create-group');
 })->name('create-group');
 
+Route::get('/create-exercise', [\App\Http\Controllers\Exercises\CreateExerciseController::class, 'index'])->name('create-exercise');
+Route::post('create-exercise', [\App\Http\Controllers\Exercises\CreateExerciseController::class, 'store'])->name('create-exercise.store');
+
+Route::get('public-exercises', [\App\Http\Controllers\Exercises\PublicExerciseController::class, 'index'])->name('public-exercises');
+Route::get('public-flashcard/{id}', [\App\Http\Controllers\Flashcards\PublicFlashcardController::class, 'show'])->name('public-flashcard.show');
+Route::post('public-flashcard', [\App\Http\Controllers\Flashcards\PublicFlashcardController::class, 'getCards'])->name('public-flashcard.get-cards');
+Route::get('public-flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\PublicFlashcardPractiseController::class, 'show'])->name('public-flashcardPractise.show');
 
 
 Route::get('flashcard/{id}', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'show'])->name('flashcard.show');
@@ -57,23 +65,24 @@ Route::get('myexercises/edit', [\App\Http\Controllers\Exercises\ExerciseControll
 Route::post('/myexercises/share', [App\Http\Controllers\Exercises\ExerciseController::class, 'share'])->name('myexercises.share');
 Route::post('/myexercises/store-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'storeShare'])->name('myexercises.store-share');
 Route::post('/myexercises/delete-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'deleteShare'])->name('myexercises.delete-share');
+Route::post('/myexercises/user-statistics', [App\Http\Controllers\Exercises\ExerciseController::class, 'showUserStatistics'])->name('myexercises.user-statistics');
 
 Route::get('/create-group', [\App\Http\Controllers\Groups\CreateGroupController::class, 'index'])->name('create-group');
 Route::post('/create-group/search', [\App\Http\Controllers\Groups\CreateGroupController::class, 'search'])->name('create-group.search');
 Route::post('create-group', [\App\Http\Controllers\Groups\CreateGroupController::class, 'store'])->name('create-group.store');
 
-
-
 Route::get('/edit-group', [App\Http\Controllers\Groups\EditGroupController::class, 'index'])->name('edit-group');
 Route::post('/edit-group/search', [App\Http\Controllers\Groups\EditGroupController::class, 'search'])->name('edit-group.search');
 Route::post('/edit-group/remove-member', [App\Http\Controllers\Groups\EditGroupController::class, 'removeMember'])->name('edit-group.remove-member');
 Route::post('/edit-group/add-member', [App\Http\Controllers\Groups\EditGroupController::class, 'addMember'])->name('edit-group.add-member');
+Route::post('/edit-group/delete-group', [\App\Http\Controllers\Groups\EditGroupController::class, 'deleteGroup'])->name('edit-group.delete-group');
 Route::post('edit-group', [App\Http\Controllers\Groups\EditGroupController::class, 'store'])->name('edit-group.store');
 
 Route::get('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'index'])->name('edit-exercise');
 Route::post('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'store'])->name('edit-exercise.store');
 Route::post('/edit-exercise/remove-flashcard', [App\Http\Controllers\Exercises\EditExerciseController::class, 'removeFlashcard'])->name('edit-exercise.remove-flashcard');
 Route::post('/edit-exercise/add-flashcard', [App\Http\Controllers\Exercises\EditExerciseController::class, 'addFlashcard'])->name('edit-exercise.add-flashcard');
+Route::post('/edit-exercise/delete-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'deleteExercise'])->name('edit-exercise.delete-exercise');
 
 Route::get('/show-group', [App\Http\Controllers\Groups\ShowGroupController::class, 'index'])->name('show-group');
 
@@ -90,6 +99,8 @@ Route::get('/exercise-administration', [App\Http\Controllers\Administration\Exer
 Route::post('/exercise-administration/search', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'search'])->name('exercise-administration.search');
 Route::post('/exercise-administration/remove-exercise', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'removeExercise'])->name('exercise-administration.remove-exercise');
 Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'redirectToExercise'])->name('exercise-administration.redirect-to-exercise');
+
+Route::get('/user-statistics', [App\Http\Controllers\Statistics\UserStatisticsController::class, 'index'])->name('user-statistics');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
