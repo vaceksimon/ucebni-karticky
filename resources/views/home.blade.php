@@ -13,7 +13,7 @@
                         <p class="lead mb-4 text-black-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         <div class="d-flex justify-content-evenly flex-wrap gap-3">
                             <form>
-                                <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('register') }}">Vytvořit sadu kartiček</button>
+                                <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('create-exercise') }}">Vytvořit sadu kartiček</button>
                             </form>
                             <form>
                                 <button class="btn btn-outline-secondary btn-lg px-4" formaction="{{ route('create-group') }}">Vytvořit skupinu</button>

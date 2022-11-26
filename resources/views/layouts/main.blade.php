@@ -38,13 +38,6 @@
         <div class="d-flex col-md-9 col-xl-10">
             @yield('content')
         </div>
-{{--        <div class="d-flex col-md-9 col-xl-10 position-relative">--}}
-{{--                <div class="h-100 start-0 end-0 top-0 bottom-0 position-absolute flex-column d-flex">--}}
-{{--                    <div style="overflow-y: auto;">--}}
-{{--                        @yield  ('content')--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--        </div>--}}
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

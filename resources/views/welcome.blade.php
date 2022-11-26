@@ -23,9 +23,9 @@
                             @auth
                             <div class="d-grid gap-2 d-sm-flex flex-column align-items-center">
                                 <h2 class="text-white pt-5">Jste již přihlášen</h2>
-                                <form>
+                                <a href="{{route('home')}}" style="text-decoration: none">
                                     <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('home') }}">Vstoupit do systému</button>
-                                </form>
+                                </a>
                             </div>
                             @endauth
                     </div>
