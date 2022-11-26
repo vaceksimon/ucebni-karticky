@@ -1,13 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/9d1d9a82d2.js" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-
-
     <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -17,17 +10,20 @@
 
                     <div class="card-body">
                         <div class="mt-1 mb-3">
-                            <b>Základní informace:</b>
-
-                            <ul>
-                                <li>
-                                    <b>Cvičení</b>: <?php echo $exercise_name ?>
-                                </li>
-                                <!-- TODO user -->
-                                @if($user_id != Auth::user()->id)
-                                    <b>Uživatel:</b>
-                                @endif
-                            </ul>
+                            <div class="mb-1">
+                                <b>Základní informace:</b>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <b>Cvičení</b>: <?php echo $exercise_name ?>
+                                    </li>
+                                    <!-- TODO user -->
+                                    @if($user_id != Auth::user()->id)
+                                        <b>Uživatel:</b>
+                                    @endif
+                                </ul>
+                            </div>
                         </div>
 
                         @empty($most_successful_attempt[0])
@@ -39,62 +35,73 @@
                             </div>
                         @else
                         <div class="my-5">
-                            <b>Nejrúspěšnější pokus</b>
-                            <ul>
-                                <li>
-                                    <b>Datum:</b> {{ $most_successful_attempt[0]->created_at }}
-                                </li>
-                                <li>
-                                    <b>Čas:</b> {{ $most_successful_attempt[0]->spend_time }}
-                                </li>
-                                <li>
-                                    <b>Úspěšnost:</b> {{ floor($most_successful_attempt[0]->success_rate) }} %
-                                    <ul>
-                                        <li>
-                                            Počet otázek: {{
+                            <div class="mb-1">
+                                <b>Nejrúspěšnější pokus</b>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <b>Datum:</b> {{ $most_successful_attempt[0]->created_at }}
+                                    </li>
+                                    <li>
+                                        <b>Čas:</b> {{ $most_successful_attempt[0]->spend_time }}
+                                    </li>
+                                    <li>
+                                        <b>Úspěšnost:</b> {{ floor($most_successful_attempt[0]->success_rate) }} %
+                                        <ul>
+                                            <li>
+                                                Počet otázek: {{
                                                 $most_successful_attempt[0]->correct_answers_number +
                                                 $most_successful_attempt[0]->wrong_answers_number }}
-                                        </li>
-                                        <li style="color: green">
-                                            Správně: {{ $most_successful_attempt[0]->correct_answers_number }}
-                                        </li>
-                                        <li style="color: red">
-                                            Špatně: {{ $most_successful_attempt[0]->wrong_answers_number }}
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                            </li>
+                                            <li style="color: green">
+                                                Správně: {{ $most_successful_attempt[0]->correct_answers_number }}
+                                            </li>
+                                            <li style="color: red">
+                                                Špatně: {{ $most_successful_attempt[0]->wrong_answers_number }}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="my-5">
-                            <b>Nejrychlejší pokus</b>
-                            <ul>
-                                <li>
-                                    <b>Datum:</b> {{ $fastest_attempt[0]->created_at }}
-                                </li>
-                                <li>
-                                    <b>Čas:</b> {{ $fastest_attempt[0]->spend_time }}
-                                </li>
-                                <li>
-                                    <b>Úspěšnost:</b> {{ floor($fastest_attempt[0]->success_rate) }} %
-                                    <ul>
-                                        <li>
-                                            Počet otázek: {{
+                            <div class="mb-1">
+                                <b>Nejrychlejší pokus</b>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <b>Datum:</b> {{ $fastest_attempt[0]->created_at }}
+                                    </li>
+                                    <li>
+                                        <b>Čas:</b> {{ $fastest_attempt[0]->spend_time }}
+                                    </li>
+                                    <li>
+                                        <b>Úspěšnost:</b> {{ floor($fastest_attempt[0]->success_rate) }} %
+                                        <ul>
+                                            <li>
+                                                Počet otázek: {{
                                                 $fastest_attempt[0]->correct_answers_number +
                                                 $fastest_attempt[0]->wrong_answers_number }}
-                                        </li>
-                                        <li style="color: green">
-                                            Správně: {{ $fastest_attempt[0]->correct_answers_number }}
-                                        </li>
-                                        <li style="color: red">
-                                            Špatně: {{ $fastest_attempt[0]->wrong_answers_number }}
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                            </li>
+                                            <li style="color: green">
+                                                Správně: {{ $fastest_attempt[0]->correct_answers_number }}
+                                            </li>
+                                            <li style="color: red">
+                                                Špatně: {{ $fastest_attempt[0]->wrong_answers_number }}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="my-5">
+                            <div class="mb-3 text-center">
+                                <b>Souhrnný graf</b>
+                            </div>
                             <div class="card chart-container">
                                 <canvas id="chart"></canvas>
                             </div>
@@ -106,6 +113,16 @@
             </div>
         </div>
     </div>
+
+    <!--
+        The following part of code is inspired from the source on 2022-11-25:
+        - Source: https://www.devwares.com/blog/create-bootstrap-charts-using-bootstrap5/
+        - Author: By Chimdia Anyiam
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9d1d9a82d2.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <script>
         const ctx = document.getElementById("chart").getContext('2d');
