@@ -10,7 +10,9 @@
                 <div class="col-lg-10 col-md-10 col-sm-10">
                     <h1 class="text-black text-center mb-0 display-4">{{ __('Učební Kartičky') }}</h1>
                     <div class="col-lg-12 mx-auto">
-                        <p class="lead mb-4 text-black-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p class="lead mb-4 text-black-50">
+                            Hledáte univerzální způsob, který Vám pomůže naučit se téměř cokoliv? Myslíte si, že se neumíte učit a máte pocit, že Vám nic neleze do hlavy? Metody učení, které momentálně používáte, nefungují? Tak právě pro Vás jsou tu Učební Kartičky. Stačí jen začít. Tak s chutí do toho!
+                        </p>
                         <div class="d-flex justify-content-evenly flex-wrap gap-3">
                             @if(Auth::user()->account_type != 'student')
                                 <form>
