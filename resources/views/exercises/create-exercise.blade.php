@@ -12,9 +12,9 @@
                         <form method="POST" action="{{ route('create-exercise.store') }}">
                             @csrf
 
-                            <div class="row row-center">
+                            <div class="row">
                                 <div>
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Viditelnost') }} :
                                         </label>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="name" class="col-form-label text-start">
                                     {{ __('Název *') }} :
                                 </label>
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="description" class="col-form-label text-start">
                                     {{ __('Popis') }} :
                                 </label>
