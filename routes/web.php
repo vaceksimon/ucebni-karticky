@@ -101,6 +101,7 @@ Route::post('/exercise-administration/remove-exercise', [App\Http\Controllers\Ad
 Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'redirectToExercise'])->name('exercise-administration.redirect-to-exercise');
 
 Route::get('/user-statistics', [App\Http\Controllers\Statistics\UserStatisticsController::class, 'index'])->name('user-statistics');
+Route::get('/group-statistics', [App\Http\Controllers\Statistics\GroupStatisticsController::class, 'index'])->name('group-statistics');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');

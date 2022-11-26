@@ -493,14 +493,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
                                 <p class="card-text">` + res.result[i].description + `</p>
-                                <form method="POST" id="formAssign` + i +`" action="`
-                {{--htmlView += `{{route('myexercises.store-assignment')}}`;--}}
-                    htmlView += `">`;
-                htmlView += `@csrf`;
-                htmlView += `
+                                <form method="GET" action="`
+                htmlView += `{{route('group-statistics')}}`;
+                htmlView += `">
                                     <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
                                     <input type="hidden" id="exercise_id" name="exercise_id" value="` + exerciseId + `" />
-                                    <button type="submit" class="btn btn-primary" onclick="document.getElementById('formAssign` + i + `').submit()">Zobrazit</button>
+                                    <input type="submit" class="btn btn-primary" value="Zobrazit" />
                                 </form>
                             </div>
                         </div>
