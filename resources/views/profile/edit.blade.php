@@ -10,7 +10,8 @@
                             {{ __('Úprava profilu') }}
                         </div>
                         <div class="ms-auto">
-                            <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif" style="text-decoration: none">
+                            <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif"
+                               style="text-decoration: none">
                                 <button class="btn btn-outline-secondary me-2">
                                     Zrušit
                                 </button>
@@ -192,15 +193,56 @@
 
                             </div>
                         </form>
-                        <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
-                                onclick="validateFormAndSubmit()">Uložit
-                        </button>
-                        <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif" style="text-decoration: none">
-                            <button class="btn btn-outline-secondary ms-2">
-                                Zrušit
+                        <div>
+                            <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
+                                    onclick="validateFormAndSubmit()">Uložit
                             </button>
-                        </a>
+                            <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif"
+                               style="text-decoration: none">
+                                <button class="btn btn-outline-secondary ms-2">
+                                    Zrušit
+                                </button>
+                            </a>
+                        </div>
+                        @if($user['account_type'] != 'admin')
+                            <div class="mt-5">
+                                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#removeUserPrompt">Smazat profil</button>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
 
+            <div id="removeUserPrompt" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upozornění</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Opravdu si přejete smazat
+                                @if(Auth::user()->account_type != 'admin')
+                                    svůj profil?
+                                @else
+                                    uživatele?
+                                @endif
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" action="
+                            @if(Auth::user()->account_type != 'admin')
+                                {{ route('profile.delete') }}
+                            @else
+                                {{ route('user-administration.remove-user') }}
+                            @endif
+                            ">
+                                @csrf
+                                <input type="hidden" id="user_id" name="user_id" value="{{$user['id']}}">
+                                <button type="submit" class="btn btn-primary">Ano</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
+                        </div>
                     </div>
                 </div>
             </div>
