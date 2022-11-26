@@ -41,6 +41,11 @@ Route::get('create-group', function () {
 Route::get('/create-exercise', [\App\Http\Controllers\Exercises\CreateExerciseController::class, 'index'])->name('create-exercise');
 Route::post('create-exercise', [\App\Http\Controllers\Exercises\CreateExerciseController::class, 'store'])->name('create-exercise.store');
 
+Route::get('public-exercises', [\App\Http\Controllers\Exercises\PublicExerciseController::class, 'index'])->name('public-exercises');
+Route::get('public-flashcard/{id}', [\App\Http\Controllers\Flashcards\PublicFlashcardController::class, 'show'])->name('public-flashcard.show');
+Route::post('public-flashcard', [\App\Http\Controllers\Flashcards\PublicFlashcardController::class, 'getCards'])->name('public-flashcard.get-cards');
+Route::get('public-flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\PublicFlashcardPractiseController::class, 'show'])->name('public-flashcardPractise.show');
+
 
 Route::get('flashcard/{id}', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'show'])->name('flashcard.show');
 Route::post('flashcard', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'getCards'])->name('flashcard.get-cards');
