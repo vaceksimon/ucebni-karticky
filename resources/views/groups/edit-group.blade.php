@@ -291,17 +291,8 @@
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
     <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
-    </script>
-    <script>
-        $('#search').ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
+        $(document).on("click", ".clickable-row", function() {
+            window.location = $(this).data("href");
         });
     </script>
     <script>$('#search').on('keyup', function(){
