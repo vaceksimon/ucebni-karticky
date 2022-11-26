@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Controller for the show-group view.
+ */
 class ShowGroupController extends Controller
 {
     /**
@@ -22,6 +25,11 @@ class ShowGroupController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * The index of the show-group view.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $group_id = Session::get('group_id');
@@ -51,6 +59,12 @@ class ShowGroupController extends Controller
             ->with('members', $members);
     }
 
+    /**
+     * Function for getting the assignments.
+     *
+     * @param Request $request
+     * @return \Illuminate\Support\Collection
+     */
     public function getAssignments(Request $request) {
         return DB::table('exercises AS ex')
                 ->join('assigned_exercises AS aex', 'ex.id', 'aex.exercise_id')
@@ -59,6 +73,12 @@ class ShowGroupController extends Controller
                 ->get();
     }
 
+    /**
+     * Function for unassigning.
+     *
+     * @param Request $request
+     * @return void
+     */
     public function unassign(Request $request) {
         DB::table('assigned_exercises')
             ->select('*')

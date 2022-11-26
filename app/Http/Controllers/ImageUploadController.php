@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// https://www.itsolutionstuff.com/post/laravel-8-image-upload-tutorial-exampleexample.html
+/*
+ * The following code is inspired of the source:
+ * Source: https://www.itsolutionstuff.com/post/laravel-8-image-upload-tutorial-exampleexample.html
+ * Author: Hardik Savani
+ */
+
+/**
+ * Controller for the image uploading.
+ */
 class ImageUploadController extends Controller
 {
     /**
