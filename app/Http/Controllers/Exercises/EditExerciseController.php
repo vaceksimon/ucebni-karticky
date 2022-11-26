@@ -52,7 +52,6 @@ class EditExerciseController extends Controller
         Exercise::where('id', '=', $exercise_id)->update(['name' => $request->exercise_name, 'description' => $request->exercise_description]);
 
         // Then remove the flashcard from the exercise.
-
         DB::table('flashcards')
             ->where('id', $flashcard_id)
             ->delete();
@@ -63,8 +62,8 @@ class EditExerciseController extends Controller
     public function addFlashcard(Request $request)
     {
         $validated = $request->validate([
-            'flashcard_question' => 'required|max:1023',
-            'flashcard_answer' => 'required|max:1023',
+            'flashcard_question' => 'required|max:255',
+            'flashcard_answer' => 'required|max:255',
         ]);
 
         $question = $validated['flashcard_question'];

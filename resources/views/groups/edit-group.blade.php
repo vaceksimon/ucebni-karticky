@@ -206,7 +206,7 @@
                                             </form>
                                                 <div style="height: 300px;overflow-y: scroll;">
                                                     <table class="table table-striped d-table">
-                                                        <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
+                                                        <thead class="table-head-sticky">
                                                         <tr>
                                                             <th>Pořadí</th>
                                                             <th>Foto</th>

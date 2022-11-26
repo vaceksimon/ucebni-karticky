@@ -100,18 +100,12 @@
                                                                     {{ $loop->index + 1 }}
                                                                 </td>
                                                                 <td>
-                                                                    <div style="text-overflow: ellipsis;
-                                                                    overflow: hidden;
-                                                                    max-width: 15vw;
-                                                                    white-space: nowrap;">
+                                                                    <div class="text-shortening">
                                                                         {{ $flashcard->question }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <div style="text-overflow: ellipsis;
-                                                                    overflow: hidden;
-                                                                    max-width: 12vw;
-                                                                    white-space: nowrap;">
+                                                                    <div class="text-shortening">
                                                                         {{ $flashcard->answer }}
                                                                     </div>
                                                                 </td>
@@ -187,6 +181,7 @@
 
                                                     <div class="col-lg-6">
                                                         <input id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
+                                                               maxlength="255"
                                                                value="{{ old('question') }}" required autocomplete="question" autofocus
                                                                oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
                                                                oninput="setCustomValidity('')">
@@ -206,6 +201,7 @@
 
                                                     <div class="col-lg-6">
                                                         <input id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
+                                                               maxlength="255"
                                                                value="{{ old('answer') }}" required autocomplete="question" autofocus
                                                                oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
                                                                oninput="setCustomValidity('')">

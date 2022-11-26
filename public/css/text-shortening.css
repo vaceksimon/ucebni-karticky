@@ -1,0 +1,6 @@
+.text-shortening {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 15vw;
+    white-space: nowrap;
+}
