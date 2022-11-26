@@ -148,7 +148,6 @@
         });
     </script>
     <script>
-        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-member-dialog", function () {
             var user = $(this).data('id');
             $(".modal-footer #user_id").val( user );
