@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Model representing the user.
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -56,6 +59,8 @@ class User extends Authenticatable
     ];
 
     /**
+     * The user groups ownerships.
+     *
      * @return HasMany
      */
     public function groupsOwnerships(): HasMany
@@ -64,6 +69,8 @@ class User extends Authenticatable
     }
 
     /**
+     * The user groups memberships.
+     *
      * @return BelongsToMany
      */
 
@@ -78,6 +85,8 @@ class User extends Authenticatable
     }
 
     /**
+     * The exercises created by the current user.
+     *
      * @return HasMany
      */
     public function createdExercises(): HasMany
@@ -85,9 +94,6 @@ class User extends Authenticatable
         return $this->hasMany(Exercise::class, 'author', 'id');
     }
 
-    /**
-     * @return HasMany
-     */
     /*
     public function attempts(): HasMany
     {

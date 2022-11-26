@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Model representing the flashcard.
+ */
 class Flashcard extends Model
 {
     use HasFactory;
@@ -21,6 +24,8 @@ class Flashcard extends Model
     ];
 
     /**
+     * Exercise to which the flashcard belongs.
+     *
      * @return BelongsTo
      */
     public function exercise(): BelongsTo
