@@ -22,10 +22,6 @@
                                    class="nav-link px-0 @if(request()->routeIs('mygroups')) active @endif"> <span
                                         class="d-none d-sm-inline">Moje skupiny</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link px-0 @if(request()->routeIs('')) active @endif"> <span
-                                        class="d-none d-sm-inline">Veřejné skupiny</span></a>
-                            </li>
                         </ul>
                     @endif
                 </li>
