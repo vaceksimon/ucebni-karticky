@@ -12,10 +12,10 @@
                         <form method="POST" action="{{ route('create-group.store') }}">
                             @csrf
 
-                            <!--<div class="row row-center row-cols-2">-->
-                                <div class="row row-center">
+                            <!--<div class="row row-cols-2">-->
+                                <div class="row">
                                 <div>
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Typ skupiny') }} :
                                         </label>
@@ -45,7 +45,7 @@
                                     </div>
 
                                     <!--
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Viditelnost') }} :
                                         </label>
@@ -79,12 +79,12 @@
                                 <div>
                                     <!-- Second column -->
                                     <!--
-                                    <div class="row row-center row-cols-2">
-                                        <div class="row row-center" style="width: 40%">
+                                    <div class="row row-cols-2">
+                                        <div class="row" style="width: 40%">
                                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex px-0"
                                                  alt="Avatar"/>
                                         </div>
-                                        <div class="row row-center" style="width: 60%">
+                                        <div class="row" style="width: 60%">
                                             <div class="container my-auto">
                                                 <label class="input-group-text my-auto" style="width: 75px" for="inputGroupFile">Upravit</label>
                                                 <input type="file" class="form-control" id="inputGroupFile" hidden>
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="name" class="col-form-label text-start">
                                     {{ __('Název *') }} :
                                 </label>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="description" class="col-form-label text-start">
                                     {{ __('Popis') }} :
                                 </label>

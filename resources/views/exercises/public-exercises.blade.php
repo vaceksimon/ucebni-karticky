@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'public-exercises', 'title' => 'Učební Kartičky'])
+@extends(Auth::user() ? 'layouts.main' : 'layouts/app', ['activePage' => 'public-exercises', 'title' => 'Učební Kartičky'])
 
 @section('content')
     <div class="container my-4">

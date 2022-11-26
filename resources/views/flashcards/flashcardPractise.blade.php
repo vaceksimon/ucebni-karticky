@@ -148,7 +148,11 @@
             document.getElementById('resultCorrect').innerHTML = (correctCounter - 1).toString();
             document.getElementById('resultWrong').innerText   = (wrongCounter - 1).toString();
             document.getElementById('resultTimer').innerText   = getTimer();
-            sendResult();
+
+            @if($role == 'student')
+                sendResult();
+            @endif
+
             clearInterval(interval);
         }
 
