@@ -9,13 +9,17 @@
                         <div>
                             {{ __('Úprava profilu') }}
                         </div>
-                        @if($user['id'] == Auth::id() || Auth::user()->account_type == "admin")
-                            <div class="ms-auto">
-                                <button class="btn btn-outline-success"
-                                        onclick="document.getElementById('submitBtn').click()">Uložit
+                        <div class="ms-auto">
+                            <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif" style="text-decoration: none">
+                                <button class="btn btn-outline-secondary me-2">
+                                    Zrušit
                                 </button>
-                            </div>
-                        @endif
+                            </a>
+                            <button class="btn btn-outline-success"
+                                    onclick="document.getElementById('submitBtn').click()">
+                                Uložit
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
                         @if(Request::get('errorValidation') !== null)
@@ -182,7 +186,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                            {{--}}<input type="submit" id="submitBtn" name="submitBtn" class="btn btn-outline-success" value="Uložit" />{{--}}
                                         </div>
                                     </div>
                                 @endif
@@ -192,6 +195,12 @@
                         <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
                                 onclick="validateFormAndSubmit()">Uložit
                         </button>
+                        <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif" style="text-decoration: none">
+                            <button class="btn btn-outline-secondary ms-2">
+                                Zrušit
+                            </button>
+                        </a>
+
                     </div>
                 </div>
             </div>
