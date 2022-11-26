@@ -17,7 +17,7 @@
                      alt="Avatar"/>
                 <ul class="dropdown-menu dropdown-menu-xxl-end" style="width: max-content !important; max-width: 200px;">
                     <li class="align-items-center">
-                        <p class="m-2">{{Auth::user()->degree_front}} {{Auth::user()->first_name}} {{Auth::user()->last_name}} {{Auth::user()->degree_after}}</p>
+                        <p class="m-2 ps-2 pe-2">{{Auth::user()->degree_front}} {{Auth::user()->first_name}} {{Auth::user()->last_name}} {{Auth::user()->degree_after}}</p>
                     </li>
                     <li>
                         <a href="{{route('profile')}}" style="text-decoration: none">

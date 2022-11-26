@@ -6,11 +6,11 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <div class="col-11">
+                        <div>
                             {{ __('Zobrazení profilu') }}
                         </div>
                         @if($user['id'] == Auth::id())
-                            <div class="col-10">
+                            <div class="ms-auto">
                                 <a href="{{route('profile.edit')}}">
                                     <button class="btn btn-outline-primary">Upravit</button>
                                 </a>

@@ -6,11 +6,11 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <div class="col-11">
+                        <div>
                             {{ __('Úprava profilu') }}
                         </div>
                         @if($user['id'] == Auth::id() || Auth::user()->account_type == "admin")
-                            <div class="col-10">
+                            <div class="ms-auto">
                                 <button class="btn btn-outline-success"
                                         onclick="document.getElementById('submitBtn').click()">Uložit
                                 </button>
