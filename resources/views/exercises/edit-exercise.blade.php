@@ -14,9 +14,9 @@
 
                             <input type="hidden" name="exercise_id" value="<?php echo $exercise[0]->id; ?>">
 
-                            <div class="row row-center row-cols-2">
+                            <div class="row row-cols-2">
                                 <div>
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Viditelnost') }} :
                                         </label>
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="name" class="col-form-label text-start">
                                     {{ __('Název *') }} :
                                 </label>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="description" class="col-form-label text-start">
                                     {{ __('Popis') }} :
                                 </label>
@@ -63,11 +63,11 @@
                             <div class="col-md-12 my-5">
                                 <div class="card">
                                     <div class="card-header">
-                                        <div class="row row-center row-cols-2">
+                                        <div class="row row-cols-2">
                                             <div>
                                                 {{ __('Kartičky') }}
                                             </div>
-                                            <div class="row row-center">
+                                            <div class="row">
                                                 <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
                                             </div>
                                         </div>
@@ -86,7 +86,7 @@
                                                                     Cvičení zatím neobsahuje žádné kartičky.
                                                                     <i class="bi bi-emoji-frown"></i>
                                                                 </div>
-                                                                <div class="row row-center mx-auto my-3" style="width: 120px">
+                                                                <div class="row mx-auto my-3" style="width: 120px">
                                                                     <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
                                                                 </div>
                                                             </div>
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="delete-exercise" class="col-form-label text-start" style="color: red">
                                     <b>{{ __('Nebezpečná zóna') }}</b> :
                                 </label>
@@ -180,7 +180,7 @@
                                     <div class="col-md-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="mb-3 row row-center offset-lg-4">
+                                                <div class="mb-3 row offset-lg-4">
                                                     <label for="flashcard_question" class="col-form-label text-start">
                                                         {{ __('Otázka *') }} :
                                                     </label>
@@ -199,7 +199,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="mb-3 row row-center offset-lg-4">
+                                                <div class="mb-3 row offset-lg-4">
                                                     <label for="flashcard_answer" class="col-form-label text-start">
                                                         {{ __('Odpověď *') }} :
                                                     </label>

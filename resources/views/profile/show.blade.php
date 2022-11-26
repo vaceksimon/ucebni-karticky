@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                         <div class="mb-3 row row-cols-2">
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <div>
                                     Jméno:
                                     {{$user['first_name']}}
@@ -36,13 +36,13 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="row row-center">
+                            <div class="row">
                                 <img src="{{asset($user['photo'])}}" class="rounded-circle d-flex px-0" style="width:150px; height: 150px"
                                      alt="Avatar"/>
                             </div>
                         </div>
                         @if($user['account_type'] == 'teacher')
-                        <div class="mb-3 row row-center">
+                        <div class="mb-3 row">
                             <div>
                                 Titul před:
                                 {{$user['degree_front']}}
