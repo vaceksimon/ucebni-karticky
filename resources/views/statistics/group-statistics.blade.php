@@ -55,8 +55,8 @@
                                     </div>
                                     <form method="POST" action="{{route('mygroups.clickShow')}}">
                                         @csrf
-                                        <input id="group_id" name="group_id" value="{{$group->id}}" hidden />
-                                        <input type="submit" class="btn btn-outline-primary" value="Zobrazit skupinu" />
+                                        <input id="group_id" name="group_id" value="{{$group->id}}" hidden/>
+                                        <input type="submit" class="btn btn-outline-primary" value="Zobrazit skupinu"/>
                                     </form>
                                 </div>
                             </div>
@@ -104,11 +104,52 @@
 
                         <div class="my-5">
                             <div class="mb-3 text-center">
-                                <b>Souhrnný graf</b>
+                                <b>Souhrný graf</b>
                             </div>
                             <div class="card chart-container">
                                 <canvas id="chart"></canvas>
                             </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                Zobrazit statistiku žáka
+                            </div>
+                            <div class="card-body p-0" style="max-height: 350px; overflow-y: scroll;">
+                                <table class="table table-striped d-table">
+                                    <thead class="table-head-sticky">
+                                    <tr style="text-align: center;">
+                                        <th>Foto</th>
+                                        <th>Jméno</th>
+                                        <th>Příjmení</th>
+                                        <th>Akce</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="users_table">
+                                    @foreach($members as $member)
+                                        <form method="POST" action="{{route('myexercises.user-statistics')}}">
+                                            @csrf
+                                            <input id="user_id" name="user_id" value="{{$member->id}}" hidden>
+                                            <input id="exercise_id_stat" name="exercise_id_stat" value="{{$exercise->id}}" hidden>
+                                            <tr style="text-align: center;">
+                                                <td>
+                                                    <img src="{{asset($member->photo)}}"
+                                                         class="rounded-circle px-0"
+                                                         style="width: 40px; height: 40px;"
+                                                         alt="Avatar"/>
+                                                </td>
+                                                <td>{{$member->first_name}}</td>
+                                                <td>{{$member->last_name}}</td>
+                                                <td>
+                                                    <input type="submit" class="btn btn-outline-primary" value="Zobrazit">
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
 
                     </div>

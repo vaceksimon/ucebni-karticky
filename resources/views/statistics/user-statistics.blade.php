@@ -100,7 +100,7 @@
 
                         <div class="my-5">
                             <div class="mb-3 text-center">
-                                <b>Souhrnný graf</b>
+                                <b>Souhrný graf</b>
                             </div>
                             <div class="card chart-container">
                                 <canvas id="chart"></canvas>

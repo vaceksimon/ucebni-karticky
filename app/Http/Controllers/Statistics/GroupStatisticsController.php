@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Exercise;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GroupStatisticsController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $exercise = DB::table('exercises AS ex')
             ->where('ex.id', $request->exercise_id)
             ->Select(DB::raw('*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS count'))
@@ -45,7 +47,17 @@ class GroupStatisticsController extends Controller
                 'group' => $group,
                 'fastest_attempt' => $fastestAttempt,
                 'best_attempt' => $bestAttempt,
+                'members' => $this->getMembers($request->group_id),
                 'chart_data' => $this->chartData($request->group_id, $request->exercise_id)]);
+    }
+
+
+    private function getMembers($group_id)
+    {
+        return User::whereIn('users.id', function ($query) use ($group_id) {
+            $query->select('um.user_id')->from('users_memberships AS um')->where('um.group_id', $group_id);
+        })
+            ->get();
     }
 
     public function chartData($group_id, $exercise_id)
@@ -73,9 +85,7 @@ class GroupStatisticsController extends Controller
 //            ->get();
 
 
-
-        foreach ($chart_data as $data)
-        {
+        foreach ($chart_data as $data) {
             /*
              * Explanation: the field is pre-populated with 0 at indices 0-10.
              * Each position represents a percentage of success:
