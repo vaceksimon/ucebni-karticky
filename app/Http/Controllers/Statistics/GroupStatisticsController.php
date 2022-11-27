@@ -8,12 +8,24 @@ use App\Models\Exercise;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GroupStatisticsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
+
         $exercise = DB::table('exercises AS ex')
             ->where('ex.id', $request->exercise_id)
             ->Select(DB::raw('*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS count'))
@@ -23,6 +35,14 @@ class GroupStatisticsController extends Controller
         $group = Group::where('id', $request->group_id)
             ->get()
             ->first();
+
+        if($exercise == null || $group == null) {
+            return redirect(route('myexercises'));
+        }
+
+        if(Auth::id() != $group->owner || Auth::id() != $exercise->author) {
+            return redirect(route('myexercises'));
+        }
 
         $fastestAttempt = Attempt::whereIn('attempts.user_id', function ($query) use ($request) {
             $query->select('user_id')->from('users_memberships AS um')->where('um.group_id', $request->group_id);
