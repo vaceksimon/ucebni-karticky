@@ -16,7 +16,9 @@
                                         Cvičení: {{$exercise->name}}
                                     </div>
                                     <div class="ms-auto">
-                                        <button class="btn btn-outline-secondary">Zpět na cvičení</button>
+                                        <a href="{{route('myexercises')}}" style="text-decoration: none">
+                                            <button class="btn btn-outline-secondary">Zpět na cvičení</button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -38,7 +40,9 @@
                                         Skupina: {{$group->name}}
                                     </div>
                                     <div class="ms-auto">
-                                        <button class="btn btn-outline-secondary">Zpět na skupinu</button>
+                                        <a href="{{route('mygroups')}}" style="text-decoration: none">
+                                            <button class="btn btn-outline-secondary">Zpět na skupiny</button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="card-body row">
@@ -49,6 +53,11 @@
                                         <img src="{{asset($group->photo)}}" class="rounded-circle"
                                              style="width: 60px; height: 60px;" alt="Fotka skupiny"/>
                                     </div>
+                                    <form method="POST" action="{{route('mygroups.clickShow')}}">
+                                        @csrf
+                                        <input id="group_id" name="group_id" value="{{$group->id}}" hidden />
+                                        <input type="submit" class="btn btn-outline-primary" value="Zobrazit skupinu" />
+                                    </form>
                                 </div>
                             </div>
                         </div>
