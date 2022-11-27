@@ -189,6 +189,12 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            callback: function(value) {if (value % 1 === 0) {return value;}}
+                        },
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Počet pokusů'
                         }
                     }]
                 }
