@@ -295,6 +295,8 @@
         </div>
     </div>
 
+    <!-- Scripts for displaying groups in share exercise modal window -->
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script>
@@ -394,6 +396,8 @@
         }
     </script>
 
+    <!-- Scripts for displaying groups in assign exercise modal window -->
+
     <!-- https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -466,6 +470,10 @@
             );
         }
     </script>
+
+
+
+    <!-- Scripts for displaying groups in show statistics modal window -->
 
     <script>
         $('#statSearch').on('keyup', function () {

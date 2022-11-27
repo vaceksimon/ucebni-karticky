@@ -23,6 +23,11 @@ class GroupStatisticsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Returns group statistics view with data regarding exercise, group, fastest and best attempt and chart data.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index(Request $request)
     {
 
@@ -75,6 +80,11 @@ class GroupStatisticsController extends Controller
     }
 
 
+    /**
+     * Returns all students which are members of a group with $group_id.
+     * @param $group_id
+     * @return mixed
+     */
     private function getMembers($group_id)
     {
         return User::whereIn('users.id', function ($query) use ($group_id) {
@@ -83,6 +93,12 @@ class GroupStatisticsController extends Controller
             ->get();
     }
 
+    /**
+     * Retrieves and transforms data of all exercise attempts which are relevant to a chart.
+     * @param $group_id
+     * @param $exercise_id
+     * @return array
+     */
     public function chartData($group_id, $exercise_id)
     {
         $array_size = 11;
@@ -97,16 +113,6 @@ class GroupStatisticsController extends Controller
             ->groupBy('success_rate')
             ->orderBy('success_rate')
             ->get();
-
-//        $chart_data = DB::table('attempts')
-//            ->select(DB::raw('COUNT(*) as count'),
-//                DB::raw('truncate(correct_answers_number / (correct_answers_number + wrong_answers_number), 1) * 100  as success_rate'))
-//            ->where('user_id', '=', $user_id)
-//            ->where('exercise_id', '=', $exercise_id)
-//            ->groupBy('success_rate')
-//            ->orderBy('success_rate')
-//            ->get();
-
 
         foreach ($chart_data as $data) {
             /*

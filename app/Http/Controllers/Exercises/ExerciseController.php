@@ -97,6 +97,13 @@ class ExerciseController extends Controller
             ->get();
     }
 
+    /**
+     * Finds all student groups owned by teacher which name is LIKE %keyword%.
+     *
+     * This function is used to filter groups in the assign exercise modal window.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function search(Request $request)
     {
         if ($request->keyword != '') {
@@ -119,6 +126,11 @@ class ExerciseController extends Controller
         return response()->json(['result' => $result]);
     }
 
+    /**
+     * Saves assignment of an exercise to a student group.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store_assignment(Request $request)
     {
         DB::table('assigned_exercises')->insert(['exercise_id' => $request->exercise_id, 'group_id' => $request->group_id]);
@@ -215,6 +227,13 @@ class ExerciseController extends Controller
         return redirect('user-statistics');
     }
 
+    /**
+     * Finds all student groups owned by teacher, which have an exercise assigned and their name is LIKE %keyword%.
+     *
+     * This function is used to filter groups in the show statistics modal window.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function searchGroupsForStat(Request $request) {
         if ($request->keyword != '') {
             $result = Group::whereIn('groups.id', function ($query) use ($request) {

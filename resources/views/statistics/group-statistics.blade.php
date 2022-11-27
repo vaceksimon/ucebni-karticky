@@ -107,7 +107,7 @@
                                 <b>Souhrnný graf</b>
                             </div>
                             <div class="card chart-container">
-                                <canvas id="chart"></canvas>
+                                <canvas id="chart"><!-- Chart data --></canvas>
                             </div>
                         </div>
 
@@ -125,6 +125,8 @@
                                         <th>Akce</th>
                                     </tr>
                                     </thead>
+
+                                    <!-- Table of all students in the group -->
                                     <tbody id="users_table">
                                     @foreach($members as $member)
                                         <form method="POST" action="{{route('myexercises.user-statistics')}}">
