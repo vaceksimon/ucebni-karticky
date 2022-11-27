@@ -71,15 +71,6 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
 <h2>Instalace</h2>
 
-Stručně popište:
-<ul>
-<li>postup instalace na server,</li>
-<li>softwarové požadavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
-</ul>
-
-<p style="color: red">TODO instalace</p>
-
 Celý projekt si lze stáhnout z následujícího odkazu:
 <p style="color: red">TODO odkaz</p>
 
@@ -88,40 +79,41 @@ Celý projekt si lze stáhnout z následujícího odkazu:
 Pro spuštění projektu je zapotřebí splnit následující požadavky:
 <ul>
     <li>
-        PHP: >= 7.3
+        PHP: ^7.3
     </li>
     <li>
-        Laravel: >= 8.75
+        Laravel: ^8.75 (pozn.: bude nainstalováno automaticky při následující instalaci projektu, viz dále)
     </li>
     <li>
-        Composer: otestováno na 2.4.2
+        Composer: otestováno na 2.4.2 - 2.4.4
     </li>
     <li>
-        Databáze: MySql (InnoDB)
+        Databáze: MySQL (InnoDB)
     </li>
     <li>
         Požadavky na verze knihoven (viz soubor <i>composer.json</i>):
+        <p>- pozn.: bude nainstalováno automaticky při následující instalaci projektu, viz dále</p>
         <ul>
             <li>
                 Požadovány:
                 <ul>
                     <li>
-                        fruitcake/laravel-cors: >= 2.0
+                        fruitcake/laravel-cors: ^2.0
                     </li>
                     <li>
-                        guzzlehttp/guzzle: >= 7.0.1
+                        guzzlehttp/guzzle: ^7.0.1
                     </li>
                     <li>
-                        laravel/framework: >= 8.75
+                        laravel/framework: ^8.75
                     </li>
                     <li>
-                        laravel/sanctum: >= 2.11
+                        laravel/sanctum: ^2.11
                     </li>
                     <li>
-                        laravel/tinker: >= 2.5
+                        laravel/tinker: ^2.5
                     </li>
                     <li>
-                        laravel/ui: >= 3.4
+                        laravel/ui: ^3.4
                     </li>
                     <li>
                         ext-json: *
@@ -133,22 +125,22 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
 
                 <ul>
                     <li>
-                        facade/ignition: >= 2.5
+                        facade/ignition: ^2.5
                     </li>
                     <li>
-                        fakerphp/faker: >= 1.9.1
+                        fakerphp/faker: ^1.9.1
                     </li>
                     <li>
-                        laravel/sail: >= 1.0.1
+                        laravel/sail: ^1.0.1
                     </li>
                     <li>
-                        mockery/mockery: >= 1.4.4
+                        mockery/mockery: ^1.4.4
                     </li>
                     <li>
-                        nunomaduro/collision: >= 5.10
+                        nunomaduro/collision: ^5.10
                     </li>
                     <li>
-                        phpunit/phpunit: >= 9.5.10
+                        phpunit/phpunit: ^9.5.10
                     </li>
                 </ul>
             </li>
@@ -156,15 +148,95 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
     </li>
 </ul>
 
-<h4>Postup spuštění</h4>
-<p style="color: red">TODO postup spusteni</p>
+<p>Pro instalaci <i>PHP</i> například verze 7.4 na Ubuntu 20.04 lze doporučit postup dle následujícího odkazu:</p>
+<a href="https://www.digitalocean.com/community/tutorials/how-to-install-php-7-4-and-set-up-a-local-development-environment-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-install-php-7-4-and-set-up-a-local-development-environment-on-ubuntu-20-04</a>
+
+<p>Pro instalaci <i>Composer</i> na Ubuntu 20.04 lze doporučit postup dle následujícího odkazu:</p>
+<a href="https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart">https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart</a>
+
+<h4>Postup instalace a spuštění</h4>
+<p><u>Po nainstalování všech požadovaných utilit (<i>PHP</i> a <i>Composer</i>) postupujte dle následujících instrukcí:</u></p>
+
+<ol>
+    <li>
+        <p>Nejprve je nutné si stáhnou celý projekt z výše uvedeného odkazu (<i>github</i>). Po stažení a případném rozbalení archivu se přesuňte do kořenové složky projektu příkazem:
+
+        <p><i>cd ucebni-karticky/</i></p>
+
+        <p>Všechny další úkony provádějte výhradně ve zmíněné umístnění. Poté pro instalaci zadejte následující 2 příkazy:</p>
+
+        <p><i>composer update</i></p>
+        <p><i>composer install</i></p>
+    </li>
+    <li>
+        <p> Dále je nutné vytvořit soubor <i>.env</i> a jeho obsah vyplnit obsahem souboru <i>.env.example</i>. Zmíněný postup lze provést následujícím příkazem:</p>
+
+        <p><i>cp .env.example .env</i></p>
+    </li>
+    <li>
+        <p>Poté je třeba vytvořit vlastní MySQL databázi. Po jejím vytvoření je nutné její název, uživatele a jeho heslo zadat do souboru <i>.env</i> za následující parametry ve stejném pořadí:</p>
+        <ul>
+            <li>
+                DB_DATABASE=<i>jméno databáze</i>
+            </li>
+            <li>
+                DB_USERNAME=<i>jméno uživatele</i>
+            </li>
+            <li>
+                DB_PASSWORD=<i>heslo uživatele</i>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>Jako další krok zadejte uvedený příkaz pro vygenerování klíče:</p>
+
+        <p><i>php artisan key:generate</i></p>
+    </li>
+    <li>
+        <p>Jako předposlední krok bude vytvořena struktura databáze a naplněna testovacími daty.
+        Pro vygenerování uvedených uživatelů systému společně s náhodně vygenerovanými
+        uživateli zadejte následují příkaz:</p>
+
+        <p><i>php artisan migrate:fresh --seed</i></p>
+
+        <p><i>Pozn.: pro vytvoření databáze bez naplnění testovacími daty zadejte příkaz:</i></p>
+
+        <p><i> php artisan migrate:fresh.</i></p>
+
+        <p>Poté je možná naplnit vytvořenou strukturu tabulek pomocí přiloženého SQL skriptu <i>input.sql</i>. Případně je možné totožný skript najít ve složce <i>/docs</i> ve staženém projektu.</p>
+    </li>
+    <li>
+        <p>Po splnění všech požadavků je pak možné projekt spustit následujícím příkazem při umístění v kořenové složce projektu:</p>
+
+        <p><i>php artisan serve</i></p>
+
+        Po zadání uvedeného příkazu pak lze na webovou stránku přistoupit na adrese uvedené ve výstupu terminálu:
+        </p>
+
+        <p>například: <i>127.0.0.1:8000</i></p>
+
+        Pro testování aplikace je opět možné využít výše zmíněné uživatele systému pro testování tak, jako je tomu v případě veřejné verze na <a href="https://ucebnikarticky.jednoduse.cz/">https://ucebnikarticky.jednoduse.cz/</a>.
+    </li>
+
+    <hr />
+
+    Pozn.: pro spuštění poskutnutých testů zadejte následující příkaz:
+
+    <p><i>php artisan test</i></p>
+</ol>
+
 
 <h2>Známé problémy</h2>
-<p>Zde popište, které body zadání nejsou implementovány a z jakého
-důvodu. Např. &#8222;Z časových důvodů nebyla implementována správa
-uživatelů.&#8221; Pomůžete tím zrychlit hodnocení, když neimplementované
-funkce nebudeme muset dlouze hledat.</p>
-
-<p style="color: red">TODO problemy</p>
+<p>Z důvodu velkého nadsazení navržených částí projektu v původním vlastním zadání
+    a s ohledem na časové možnosti nebyly v systému implementovány následující 2 části:</p>
+<ul>
+    <li>
+        Každé cvičení se kategorizuje do témat dle štítků
+        podle obzažené látky (Anglický jazyk, Přirodopis, ...).
+    </li>
+    <li>
+        Systém rozlišuje mezi splněnými a nedokončenými cvičeními.
+    </li>
+</ul>
 
 </body></html>
