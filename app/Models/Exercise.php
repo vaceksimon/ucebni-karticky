@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Model representing the exercise.
+ */
 class Exercise extends Model
 {
     use HasFactory;
@@ -25,6 +28,8 @@ class Exercise extends Model
     ];
 
     /**
+     * The author of the exercise.
+     *
      * @return BelongsTo
      */
     public function creator(): BelongsTo
@@ -33,6 +38,8 @@ class Exercise extends Model
     }
 
     /**
+     * The flashcards in the exercise.
+     *
      * @return HasMany
      */
     public function flashcards(): HasMany
@@ -41,6 +48,8 @@ class Exercise extends Model
     }
 
     /**
+     * The attempts of the exercise.
+     *
      * @return HasMany
      */
     public function attempts(): HasMany
@@ -49,6 +58,8 @@ class Exercise extends Model
     }
 
     /**
+     * The sharings of the exercise.
+     *
      * @return BelongsToMany
      */
     public function groupsSharing() : BelongsToMany

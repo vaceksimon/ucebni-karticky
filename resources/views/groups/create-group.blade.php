@@ -119,11 +119,6 @@
                                 </div>
                             </div>
                             <div class="mb-3 mt-5 d-flex">
-                                <!--
-                                 TODO
-                                  - zrušit will navigate to home-page or previous page
-                                  - vytvořit skupinu will navigate to moje skupiny page
-                                 -->
                                 <a href="{{ route('home') }}">
                                     <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 </a>
@@ -187,10 +182,12 @@
         </div>
     </div>
 
-    <!-- https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c -->
+    <!--
+    The following part of code is inspired of the source:
+    - Source: https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c
+    - Author: Cahyo Fajar
+    -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
 <script>$('#search').on('keyup', function(){
     search();

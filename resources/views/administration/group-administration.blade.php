@@ -138,7 +138,6 @@
         });
     </script>
     <script>
-        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-group-dialog", function () {
             var group = $(this).data('id');
             $(".modal-footer #group_id").val( group );

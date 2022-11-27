@@ -1,3 +1,7 @@
+/*
+ * Styles for the texts.
+ */
+
 .text-shortening {
     text-overflow: ellipsis;
     overflow: hidden;

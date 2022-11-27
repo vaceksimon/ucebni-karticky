@@ -51,7 +51,11 @@
                                                     <a href="{{route('myexercises.edit', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit</button>
                                                     </a>
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
+                                                            data-bs-toggle="modal" data-bs-target="#statModal"
+                                                            onclick="exerciseId = {{$record->id}}; searchForStat();">
+                                                        Zobrazit statistiky
+                                                    </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
                                                     </a>
@@ -143,8 +147,13 @@
                                             <div> {{ $record->description }} </div>
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
+                                                    <form method="POST" action="{{ route('myexercises.user-statistics') }}">
+                                                        @csrf
 
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                        <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
+                                                        <input type="hidden" name="exercise_id_stat" id="exercise_id_stat" value="{{ $record->id }}">
+                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                    </form>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
                                                     </a>
@@ -226,6 +235,45 @@
                                                 </div>
                                             </form>
                                             <div class="container" id="searchedGroupsBody" name="searchedGroupsBody">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXERCISE STATISTICS MODAL -->
+            <div class="modal fade" id="statModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true" style="--bs-modal-width: 75vw;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Zobrazit statistiky skupiny</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mt-5">
+
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Vyhledat skupiny" id="statSearch">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="container" id="statisticsBody" name="statisticsBody">
                                             </div>
                                         </div>
                                     </div>
@@ -401,6 +449,71 @@
                 console.log(htmlView);
             }
             $('#searchedGroupsBody').html(htmlView);
+        }
+
+        function assignExercise(groupId) {
+            $.post('{{ route("myexercises.store-assignment") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    exercise_id: exerciseId,
+                    group_id: groupId
+                }
+            );
+        }
+    </script>
+
+    <script>
+        $('#statSearch').on('keyup', function () {
+            searchForStat();
+        });
+
+        function searchForStat() {
+            var keyword = $('#statSearch').val();
+            $.post('{{ route("myexercises.search-stat") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    keyword: keyword,
+                    owner_id: {{Auth::id()}},
+                    exercise_id: exerciseId
+                },
+                function (data) {
+                    postGroupsStat(data);
+                });
+        }
+
+        // table row with ajax
+        function postGroupsStat(res) {
+            htmlView = '';
+            for (let i = 0; i < res.result.length; i++) {
+                if (i % 3 === 0) {
+                    htmlView += `
+                        <div class="row mb-3">`
+                }
+
+                htmlView += `
+                    <div class="col">
+                        <div class="card" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                            <div class="card-body">
+                                <h5 class="card-title">` + res.result[i].name + `</h5>
+                                <p class="card-text">` + res.result[i].description + `</p>
+                                <form method="GET" action="`
+                htmlView += `{{route('group-statistics')}}`;
+                htmlView += `">
+                                    <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
+                                    <input type="hidden" id="exercise_id" name="exercise_id" value="` + exerciseId + `" />
+                                    <input type="submit" class="btn btn-primary" value="Zobrazit" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
+                    htmlView += `</div>`
+                console.log(htmlView);
+            }
+            $('#statisticsBody').html(htmlView);
         }
 
         function assignExercise(groupId) {

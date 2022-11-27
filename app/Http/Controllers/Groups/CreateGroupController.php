@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Controller for the create-group view.
+ */
 class CreateGroupController extends Controller
 {
     /**
@@ -19,27 +22,22 @@ class CreateGroupController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * The index of the create-group view.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return view('groups.create-group');
     }
-/*
-    public function search(Request $request)
-    {
-        if ($request->keyword != '')
-        {
-            $result = User::where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
-                ->where( 'account_type', '<>', 'admin')
-                ->get();
-        }
-        else
-        {
-            $result = User::where('account_type', '<>', 'admin')->get();
-        }
 
-        return response()->json(['result' => $result]);
-    }
-*/
+    /**
+     * Function for storing the new group in the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Request $request)
     {
         $user = auth()->user();
