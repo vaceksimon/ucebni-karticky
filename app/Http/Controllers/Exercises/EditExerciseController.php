@@ -128,4 +128,28 @@ class EditExerciseController extends Controller
 
         return view('administration.exercise-administration');
     }
+
+    /**
+     * Function for editing the content of the flashcard.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function editFlashcard(Request $request)
+    {
+        $validated = $request->validate([
+            'flashcard_question_edit' => 'required|max:255',
+            'flashcard_answer_edit' => 'required|max:255',
+        ]);
+
+        // First store the other data.
+        Exercise::where('id', '=', $request->exercise_id_edit)->update(['name' => $request->exercise_name_edit, 'description' => $request->exercise_description_edit]);
+
+        // Then update the flashcard question and answer.
+        DB::table('flashcards')
+            ->where('id', '=', $request->flashcard_id_edit)
+            ->update(['question' => $validated['flashcard_question_edit'], 'answer' => $validated['flashcard_answer_edit']]);
+
+        return redirect('edit-exercise');
+    }
 }
