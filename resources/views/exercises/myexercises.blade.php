@@ -88,8 +88,12 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="d-flex justify-content-end gap-3">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                onclick="exerciseId = {{$record->id}}; search();">Zadat</button>
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
+                                                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                                onclick="exerciseId = {{$record->id}}; search();">
+                                                            Zadat
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
