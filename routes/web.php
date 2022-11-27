@@ -81,6 +81,7 @@ Route::post('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseContro
 Route::post('/edit-exercise/remove-flashcard', [App\Http\Controllers\Exercises\EditExerciseController::class, 'removeFlashcard'])->name('edit-exercise.remove-flashcard');
 Route::post('/edit-exercise/add-flashcard', [App\Http\Controllers\Exercises\EditExerciseController::class, 'addFlashcard'])->name('edit-exercise.add-flashcard');
 Route::post('/edit-exercise/delete-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'deleteExercise'])->name('edit-exercise.delete-exercise');
+Route::post('/edit-exercise/edit-flashcard', [App\Http\Controllers\Exercises\EditExerciseController::class, 'editFlashcard'])->name('edit-exercise.edit-flashcard');
 
 Route::get('/show-group', [App\Http\Controllers\Groups\ShowGroupController::class, 'index'])->name('show-group');
 
