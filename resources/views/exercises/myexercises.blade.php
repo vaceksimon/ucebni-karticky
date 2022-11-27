@@ -102,6 +102,11 @@
                                             <div>{{ $record->description }}</div>
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
+                                                            data-bs-toggle="modal" data-bs-target="#statModal"
+                                                            onclick="exerciseId = {{$record->id}}; searchForStat();">
+                                                        Zobrazit statistiky
+                                                    </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
                                                         <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
                                                     </a>

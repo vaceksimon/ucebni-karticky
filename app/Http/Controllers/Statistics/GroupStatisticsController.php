@@ -36,12 +36,15 @@ class GroupStatisticsController extends Controller
             ->get()
             ->first();
 
-        if($exercise == null || $group == null) {
-            return redirect(route('myexercises'));
-        }
+        $isAssigned = DB::table('assigned_exercises')
+            ->where('group_id', $request->group_id)
+            ->where('exercise_id', $request->exercise_id)
+            ->get()
+            ->first();
 
-        if(Auth::id() != $group->owner || Auth::id() != $exercise->author) {
-            return redirect(route('myexercises'));
+
+        if($exercise == null || $group == null || Auth::id() != $group->owner || $isAssigned == null) {
+            return view('errors.403');
         }
 
         $fastestAttempt = Attempt::whereIn('attempts.user_id', function ($query) use ($request) {
