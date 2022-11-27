@@ -50,7 +50,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // TODO add type of the account and ignore filed fields for student type
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'degree_front' => ['string', 'nullable', 'max:255'],

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Model representing the group.
+ */
 class Group extends Model
 {
     use HasFactory;
@@ -35,6 +38,8 @@ class Group extends Model
     ];
 
     /**
+     * The owner of the group.
+     *
      * @return BelongsTo
      */
     public function owner(): BelongsTo
@@ -43,6 +48,8 @@ class Group extends Model
     }
 
     /**
+     * The members of the group.
+     *
      * @return BelongsToMany
      */
     public function members(): BelongsToMany
@@ -55,8 +62,9 @@ class Group extends Model
         );
     }
 
-
     /**
+     * The assigned exercises.
+     *
      * @return BelongsToMany
      */
     public function assigned(): BelongsToMany
@@ -70,6 +78,8 @@ class Group extends Model
     }
 
     /**
+     * The shared exercises in the group.
+     *
      * @return BelongsToMany
      */
     public function groupsSharing() : BelongsToMany

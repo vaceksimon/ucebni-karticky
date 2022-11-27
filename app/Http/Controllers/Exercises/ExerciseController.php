@@ -168,4 +168,33 @@ class ExerciseController extends Controller
             return '0';
         }
     }
+
+    public function showUserStatistics(Request $request)
+    {
+        session(['user_id' => $request->user_id]);
+        session(['exercise_id' => $request->exercise_id_stat]);
+
+        return redirect('user-statistics');
+    }
+
+    public function searchGroupsForStat(Request $request) {
+        if ($request->keyword != '') {
+            $result = Group::whereIn('groups.id', function ($query) use ($request) {
+                $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
+            })
+                ->where('groups.owner', $request->owner_id)
+                ->where('groups.type', 'students')
+                ->where('groups.name', 'LIKE', "%" . $request->keyword . "%")
+                ->get();
+        } else {
+            $result = Group::whereIn('groups.id', function ($query) use ($request) {
+                $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
+            })
+                ->where('groups.owner', $request->owner_id)
+                ->where('groups.type', 'students')
+                ->get();
+        }
+
+        return response()->json(['result' => $result]);
+    }
 }

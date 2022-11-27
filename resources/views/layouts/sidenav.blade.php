@@ -22,10 +22,6 @@
                                    class="nav-link px-0 @if(request()->routeIs('mygroups')) active @endif"> <span
                                         class="d-none d-sm-inline">Moje skupiny</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link px-0 @if(request()->routeIs('')) active @endif"> <span
-                                        class="d-none d-sm-inline">Veřejné skupiny</span></a>
-                            </li>
                         </ul>
                     @endif
                 </li>
@@ -33,15 +29,15 @@
                     <a href="{{route('myexercises')}}" class="nav-link align-middle px-0">
                         <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Cvičení</span>
                     </a>
-                    @if(request()->routeIs('myexercises'))
+                    @if(request()->routeIs('myexercises') || request()->routeIs('public-exercises'))
                         <ul class="collapse show nav flex-column ms-1 fs-5" data-bs-parent="#menu"
                             style="--bs-nav-link-color: none">
                             <li class="w-100 nav-item">
-                                <a href="#" class="nav-link px-0 @if(request()->routeIs('myexercises')) active @endif">
+                                <a href="{{ route('myexercises') }}" class="nav-link px-0 @if(request()->routeIs('myexercises')) active @endif">
                                     <span class="d-none d-sm-inline">Moje cvičení</span></a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link px-0 @if(request()->routeIs('')) active @endif"> <span
+                                <a href="{{ route('public-exercises') }}" class="nav-link px-0 @if(request()->routeIs('public-exercises')) active @endif"> <span
                                         class="d-none d-sm-inline">Veřejné cvičení</span></a>
                             </li>
                         </ul>

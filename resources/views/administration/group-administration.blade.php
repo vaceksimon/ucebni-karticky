@@ -26,7 +26,7 @@
                                         </form>
                                         <div style="height: 500px;overflow-y: scroll;">
                                             <table class="table table-striped d-table">
-                                                <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
+                                                <thead class="table-head-sticky">
                                                 <tr>
                                                     <th>Pořadí</th>
                                                     <th>Foto</th>
@@ -138,7 +138,6 @@
         });
     </script>
     <script>
-        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-group-dialog", function () {
             var group = $(this).data('id');
             $(".modal-footer #group_id").val( group );

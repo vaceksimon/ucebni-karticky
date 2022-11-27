@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts/app', ['activePage' => 'public-flashcardPractise', 'title' => 'Učební Kartičky'])
 
 @section('content')
     <div class="container my-5">
@@ -34,9 +34,7 @@
                                 <p class="fs-4 text-success">Správných odpovědí: <span id="resultCorrect"></span></p>
                                 <p class="fs-4 text-danger" >Špatných odpovědí:  <span id="resultWrong"  ></span></p>
                                 <p class="fs-4 text-warning">Uběhnutý čas: <span id="resultTimer"  ></span></p>
-                                @if($role === 'teacher')
-                                    <p class="fs-4">Tyto výsledky nebudou započítány do systému</p>
-                                @endif
+                                <p class="fs-4">Tyto výsledky nebudou započítány do systému</p>
                             </div>
                         </div>
                     </div>
@@ -44,7 +42,7 @@
                         <div class="text-center fs-5">
                             <div id="timer"><label id="hours"></label>:<label id="minutes"></label>:<label id="seconds"></label></div>
                             <div class="text-center">
-                                <a href="{{ route('myexercises') }}">
+                                <a href="{{ route('public-exercises') }}">
                                     <button id="btnBack" type="button" class="btn btn-info btn-lg m-auto" style="display: none">Zpět na seznam cvičení</button>
                                 </a>
                             </div>
@@ -75,7 +73,7 @@
 
             $.ajax({
                 data: {"id": cid},
-                url: "{{ route('flashcard.get-cards') }}",
+                url: "{{ route('public-flashcard.get-cards') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
@@ -148,40 +146,7 @@
             document.getElementById('resultCorrect').innerHTML = (correctCounter - 1).toString();
             document.getElementById('resultWrong').innerText   = (wrongCounter - 1).toString();
             document.getElementById('resultTimer').innerText   = getTimer();
-
-            @if($role == 'student')
-                sendResult();
-            @endif
-
             clearInterval(interval);
-        }
-
-        function sendResult() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                data: {"correctCount" : correctCounter - 1,
-                       "wrongCount"   : wrongCounter   - 1,
-                       "timer"        : getTimer(),
-                       "exercise_id"  : document.getElementById('cards').getAttribute('data-id')
-                },
-                url: "{{ route('attempt.save-attempt') }}",
-                type: "POST",
-                dataType: 'text',
-                success: function (data) {
-                    if (data !== "1")
-                    {
-                        alert("Výsledky se neporařilo uložit.");
-                    }
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-            });
         }
 
         correct.innerText = correctCounter++;

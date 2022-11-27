@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Groups;
 
+/**
+ * Controller for the exercise-administration view.
+ */
 class ExerciseAdministrationController extends Controller
 {
     /**
@@ -22,11 +25,23 @@ class ExerciseAdministrationController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * The index of the exercise-administration view.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index(Request $request)
     {
         return view('administration.exercise-administration');
     }
 
+    /**
+     * Function for dynamic searching of the exercises in the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function search(Request $request)
     {
         if ($request->keyword != '')
@@ -42,6 +57,12 @@ class ExerciseAdministrationController extends Controller
         return response()->json(['result' => $result]);
     }
 
+    /**
+     * Function for removing the exercises from the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function removeExercise(Request $request)
     {
         DB::table('exercises')
@@ -51,6 +72,13 @@ class ExerciseAdministrationController extends Controller
         return view('administration.exercise-administration');
     }
 
+    /**
+     * Function for redirecting from the exercise administration page
+     * to the specific exercise.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function redirectToExercise(Request $request)
     {
         session(['exercise_id' => $request->exercise_id]);

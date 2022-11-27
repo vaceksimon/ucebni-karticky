@@ -26,7 +26,7 @@
                                         </form>
                                         <div style="height: 500px;overflow-y: scroll;">
                                             <table class="table table-striped d-table">
-                                                <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
+                                                <thead class="table-head-sticky">
                                                 <tr>
                                                     <th>Pořadí</th>
                                                     <th>Foto</th>
@@ -118,7 +118,7 @@
                 user = user.replace(':id', res.result[i].id);
 
                 htmlView += `
-            <tr>
+            <tr style="cursor:pointer;">
                 <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
                 <td class="clickable-row" data-href="` + url + `">
                     <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
@@ -129,7 +129,7 @@
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
                 <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
-                <td class="clickable-row" data-href="` + url + `">
+                <td>
                     <button type="button"
                         class="btn btn-outline-danger open-remove-member-dialog"
                         data-id="` + user + `"
@@ -148,7 +148,6 @@
         });
     </script>
     <script>
-        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-member-dialog", function () {
             var user = $(this).data('id');
             $(".modal-footer #user_id").val( user );

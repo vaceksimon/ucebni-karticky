@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Model representing the exercise attempt.
+ */
 class Attempt extends Model
 {
     use HasFactory;
@@ -25,6 +28,8 @@ class Attempt extends Model
 
 
     /**
+     * User who created the attempt.
+     *
      * @return BelongsTo
      */
     public function user(): BelongsTo
@@ -33,6 +38,8 @@ class Attempt extends Model
     }
 
     /**
+     * The exercise to which the attempt belongs.
+     *
      * @return BelongsTo
      */
     public function exercise(): BelongsTo

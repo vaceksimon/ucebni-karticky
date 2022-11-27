@@ -14,9 +14,9 @@
 
                             <input type="hidden" name="group_id" value="<?php echo $group[0]->id; ?>">
 
-                            <div class="row row-center">
+                            <div class="row">
                                 <div class="col-7">
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Typ skupiny') }} :
                                         </label>
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="name" class="col-form-label text-start">
                                             {{ __('Název *') }} :
                                         </label>
@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="description" class="col-form-label text-start">
                                             {{ __('Popis') }} :
                                         </label>
@@ -62,14 +62,14 @@
 
                                 <div class="col-5">
                                     <!-- Second column -->
-                                    <div class="row row-center row-cols-2">
-                                        <div class="row row-center" style="width: 40%">
+                                    <div class="row row-cols-2">
+                                        <div class="row" style="width: 40%">
                                             <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="width: 160px; height: 160px;"
                                                  alt="Avatar"/>
                                         </div>
-                                        <div class="row row-center" style="width: 60%">
+                                        <div class="row" style="width: 60%">
                                             <div class="container my-auto">
-                                                <label class="input-group-text my-auto" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
+                                                <label class="input-group-text my-auto change-image" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
                                                 <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image" hidden>
                                             </div>
                                         </div>
@@ -80,11 +80,11 @@
                             <div class="col-md-12 my-5">
                                 <div class="card">
                                     <div class="card-header">
-                                        <div class="row row-center row-cols-2">
+                                        <div class="row row-cols-2">
                                             <div>
                                                 {{ __('Členové') }}
                                             </div>
-                                            <div class="row row-center">
+                                            <div class="row">
                                                 <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                                                 <div class="text-center">
                                                                     Vaše skupina zatím neobsahuje žádné členy.
                                                                 </div>
-                                                                <div class="row row-center mx-auto my-3" style="width: 120px">
+                                                                <div class="row mx-auto my-3" style="width: 120px">
                                                                     <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
                                                                 </div>
                                                             </div>
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="delete-group" class="col-form-label text-start" style="color: red">
                                     <b>{{ __('Nebezpečná zóna') }}</b> :
                                 </label>
@@ -206,7 +206,7 @@
                                             </form>
                                                 <div style="height: 300px;overflow-y: scroll;">
                                                     <table class="table table-striped d-table">
-                                                        <thead style="position: sticky; top: 0; z-index: 1; background-color: lightgrey;">
+                                                        <thead class="table-head-sticky">
                                                         <tr>
                                                             <th>Pořadí</th>
                                                             <th>Foto</th>
@@ -285,23 +285,16 @@
         </div>
     </div>
 
-    <!-- https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c -->
+    <!--
+    The following part of code is inspired of the source:
+    - Source: https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c
+    - Author: Cahyo Fajar
+    -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
     <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
-    </script>
-    <script>
-        $('#search').ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
+        $(document).on("click", ".clickable-row", function() {
+            window.location = $(this).data("href");
         });
     </script>
     <script>$('#search').on('keyup', function(){

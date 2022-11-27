@@ -15,9 +15,9 @@
                                 <form>
                                     <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('register') }}">Registrovat</button>
                                 </form>
-                                <form>
+                                <a href="{{route('public-exercises')}}">
                                     <button class="btn btn-outline-secondary btn-lg px-4">Procvičovat</button>
-                                </form>
+                                </a>
                             </div>
                             @endguest
                             @auth

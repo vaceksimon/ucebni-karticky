@@ -12,10 +12,10 @@
                         <form method="POST" action="{{ route('create-group.store') }}">
                             @csrf
 
-                            <!--<div class="row row-center row-cols-2">-->
-                                <div class="row row-center">
+                            <!--<div class="row row-cols-2">-->
+                                <div class="row">
                                 <div>
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Typ skupiny') }} :
                                         </label>
@@ -45,7 +45,7 @@
                                     </div>
 
                                     <!--
-                                    <div class="mb-3 row row-center">
+                                    <div class="mb-3 row">
                                         <label for="" class="col-form-label text-start">
                                             {{ __('Viditelnost') }} :
                                         </label>
@@ -79,12 +79,12 @@
                                 <div>
                                     <!-- Second column -->
                                     <!--
-                                    <div class="row row-center row-cols-2">
-                                        <div class="row row-center" style="width: 40%">
+                                    <div class="row row-cols-2">
+                                        <div class="row" style="width: 40%">
                                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle d-flex px-0"
                                                  alt="Avatar"/>
                                         </div>
-                                        <div class="row row-center" style="width: 60%">
+                                        <div class="row" style="width: 60%">
                                             <div class="container my-auto">
                                                 <label class="input-group-text my-auto" style="width: 75px" for="inputGroupFile">Upravit</label>
                                                 <input type="file" class="form-control" id="inputGroupFile" hidden>
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="name" class="col-form-label text-start">
                                     {{ __('Název *') }} :
                                 </label>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 row row-center">
+                            <div class="mb-3 row">
                                 <label for="description" class="col-form-label text-start">
                                     {{ __('Popis') }} :
                                 </label>
@@ -119,11 +119,6 @@
                                 </div>
                             </div>
                             <div class="mb-3 mt-5 d-flex">
-                                <!--
-                                 TODO
-                                  - zrušit will navigate to home-page or previous page
-                                  - vytvořit skupinu will navigate to moje skupiny page
-                                 -->
                                 <a href="{{ route('home') }}">
                                     <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 </a>
@@ -187,10 +182,12 @@
         </div>
     </div>
 
-    <!-- https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c -->
+    <!--
+    The following part of code is inspired of the source:
+    - Source: https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c
+    - Author: Cahyo Fajar
+    -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 
 <script>$('#search').on('keyup', function(){
     search();
