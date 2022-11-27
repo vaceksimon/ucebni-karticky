@@ -168,4 +168,12 @@ class ExerciseController extends Controller
             return '0';
         }
     }
+
+    public function showUserStatistics(Request $request)
+    {
+        session(['user_id' => $request->user_id]);
+        session(['exercise_id' => $request->exercise_id_stat]);
+
+        return redirect('user-statistics');
+    }
 }
