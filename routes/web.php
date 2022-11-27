@@ -59,7 +59,8 @@ Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::c
 
 Route::post('/myexercises/search', [App\Http\Controllers\Exercises\ExerciseController::class, 'search'])->name('myexercises.search');
 Route::post('/myexercises/store-assignment', [App\Http\Controllers\Exercises\ExerciseController::class, 'store_assignment'])->name('myexercises.store-assignment');
-
+Route::post('/myexercises/search-stat', [App\Http\Controllers\Exercises\ExerciseController::class, 'searchGroupsForStat'])->name('myexercises.search-stat');
+Route::get('/myexercises/show-stat', [App\Http\Controllers\Exercises\ExerciseController::class, 'searchGroupsForStat'])->name('myexercises.show-stat');
 Route::get('myexercises/edit', [\App\Http\Controllers\Exercises\ExerciseController::class, 'edit'])->name('myexercises.edit');
 Route::post('/myexercises/share', [App\Http\Controllers\Exercises\ExerciseController::class, 'share'])->name('myexercises.share');
 Route::post('/myexercises/store-share', [App\Http\Controllers\Exercises\ExerciseController::class, 'storeShare'])->name('myexercises.store-share');
@@ -100,6 +101,7 @@ Route::post('/exercise-administration/remove-exercise', [App\Http\Controllers\Ad
 Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controllers\Administration\ExerciseAdministrationController::class, 'redirectToExercise'])->name('exercise-administration.redirect-to-exercise');
 
 Route::get('/user-statistics', [App\Http\Controllers\Statistics\UserStatisticsController::class, 'index'])->name('user-statistics');
+Route::get('/group-statistics', [App\Http\Controllers\Statistics\GroupStatisticsController::class, 'index'])->name('group-statistics');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
