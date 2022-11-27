@@ -206,6 +206,7 @@
                         </div>
                         @if($user['account_type'] != 'admin')
                             <div class="mt-5">
+                                <p class="text-danger fw-bold mb-1">Nebezpečná zóna:</p>
                                 <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#removeUserPrompt">Smazat profil</button>
                             </div>
                         @endif
