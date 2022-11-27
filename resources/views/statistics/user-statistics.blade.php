@@ -18,9 +18,8 @@
                                     <li>
                                         <b>Cvičení</b>: <?php echo $exercise_name ?>
                                     </li>
-                                    <!-- TODO user -->
                                     @if($user_id != Auth::user()->id)
-                                        <b>Uživatel:</b>
+                                        <b>Uživatel:</b> {{ $first_name }} {{ $last_name }}
                                     @endif
                                 </ul>
                             </div>
