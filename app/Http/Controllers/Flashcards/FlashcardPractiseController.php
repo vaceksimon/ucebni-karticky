@@ -19,6 +19,12 @@ class FlashcardPractiseController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Function which return view of flashcards practise if user has access to it else return error page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show(Request $request)
     {
         if (FlashcardController::hasAccess($request->id))

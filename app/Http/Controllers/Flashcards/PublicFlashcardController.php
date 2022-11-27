@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class PublicFlashcardController extends Controller
 {
+    /**
+     * Function which return view of public flashcards if user has access to it else return error page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show(Request $request)
     {
         if (self::hasAccess($request->id))
@@ -16,6 +22,12 @@ class PublicFlashcardController extends Controller
             return view('flashcards.public-flashcard-invalid');
     }
 
+    /**
+     * Function which return all flashcards in exercises
+     *
+     * @param Request $request
+     * @return \Illuminate\Support\Collection
+     */
     public function getCards(Request $request)
     {
         $cards = DB::table('flashcards')
@@ -25,6 +37,12 @@ class PublicFlashcardController extends Controller
         return $cards;
     }
 
+    /**
+     * Function to check if user has access to flashcards set
+     *
+     * @param $exercise_id
+     * @return bool True if user has access else return false
+     */
     public static function hasAccess($exercise_id)
     {
         if (self::getAccess($exercise_id) === 0)
@@ -33,6 +51,10 @@ class PublicFlashcardController extends Controller
             return true;
     }
 
+    /**
+     * @param $exercise_id
+     * @return int How many flashcards exercises has user access
+     */
     private static function getAccess($exercise_id)
     {
         return DB::table('exercises')

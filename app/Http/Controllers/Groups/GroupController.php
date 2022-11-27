@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+
+    /**
+     * Function to return view with necessary data to display
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show()
     {
         return view('groups.mygroups')
@@ -19,6 +25,11 @@ class GroupController extends Controller
             ->with('s_studentGroups', $this->s_getStudents());
     }
 
+    /**
+     * Function which return teacher's groups owned by authorized teacher
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function t_getTeachers()
     {
         return DB::table('groups as gr')
@@ -32,6 +43,11 @@ class GroupController extends Controller
             ->get();
     }
 
+    /**
+     * Function which return student's groups for teacher
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function t_getStudents()
     {
         return DB::table('groups as gr')
@@ -45,6 +61,11 @@ class GroupController extends Controller
             ->get();
     }
 
+    /**
+     * Function which return teacher's groups where are authorized teacher a member
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function t_getTeachersGroup()
     {
         return DB::table('groups as gr')
@@ -59,6 +80,11 @@ class GroupController extends Controller
             ->get();
     }
 
+    /**
+     * Function which return all student's groups where are authorized student a member
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function s_getStudents()
     {
         return DB::table('groups as gr')

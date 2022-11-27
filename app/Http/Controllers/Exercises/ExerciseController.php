@@ -22,6 +22,11 @@ class ExerciseController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Function to return view with necessary data to display
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show()
     {
         return view('exercises.myexercises')
@@ -31,6 +36,11 @@ class ExerciseController extends Controller
             ->with('t_sharedExercises', $this->t_getSharedExercises());
     }
 
+    /**
+     * Function which return teacher's exercises
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function t_getExercises()
     {
         return DB::table('exercises AS ex')
@@ -42,6 +52,11 @@ class ExerciseController extends Controller
             ->get();
     }
 
+    /**
+     * Function which return teacher's shared exercises
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function t_getSharedExercises()
     {
         return DB::table('exercises AS ex')
@@ -59,6 +74,11 @@ class ExerciseController extends Controller
             ->get();
     }
 
+    /**
+     * Function which return student's exercises
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function s_getStudents()
     {
         return DB::table('users AS us')
@@ -112,6 +132,12 @@ class ExerciseController extends Controller
         return redirect('edit-exercise');
     }
 
+    /**
+     * Function which return JSON of shared exercises
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function share(Request $request)
     {
         if ($request->keyword != '') {
@@ -145,6 +171,12 @@ class ExerciseController extends Controller
         return response()->json(['result' => $tmp, 'isShared' => json_encode($isShared)]);
     }
 
+    /**
+     * Function in which are shared status are stored
+     *
+     * @param Request $request
+     * @return string '1' if everything is OK else '0'
+     */
     public function storeShare(Request $request)
     {
         try {
@@ -156,6 +188,12 @@ class ExerciseController extends Controller
         }
     }
 
+    /**
+     * Function where is shared status deleted
+     *
+     * @param Request $request
+     * @return string
+     */
     public function deleteShare(Request $request)
     {
         try {

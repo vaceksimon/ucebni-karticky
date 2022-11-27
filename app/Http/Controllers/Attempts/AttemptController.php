@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AttemptController extends Controller
 {
+    /**
+     * Function to save attempt to database.
+     *
+     * @param Request $request
+     * @return string '1' if everything is OK else return error message
+     */
     public function saveAttempt(Request $request)
     {
         try
