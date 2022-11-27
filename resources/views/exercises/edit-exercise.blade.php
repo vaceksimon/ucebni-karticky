@@ -315,7 +315,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Opravdu si přejete odebrat uživatele ze skupiny?</p>
+                            <p>Opravdu si přejete odebrat kartičku ze cvičení?</p>
                         </div>
                         <div class="modal-footer">
                             <form method="post" action="{{ route('edit-exercise.remove-flashcard') }}">
