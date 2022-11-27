@@ -7,12 +7,22 @@ use Illuminate\Support\Facades\DB;
 
 class PublicExerciseController extends Controller
 {
+    /**
+     * Return view of public exercises
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return view('exercises.public-exercises')
             ->with('exercises', $this->publicExercises());
     }
 
+    /**
+     * Function which return all public exercises
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function publicExercises()
     {
         return DB::table('exercises AS ex')
