@@ -32,31 +32,36 @@ class ShowGroupController extends Controller
      */
     public function index()
     {
-        $group_id = Session::get('group_id');
-        $group = Group::where('id', '=', $group_id)->get();
+        if (Session::has('group_id'))
+        {
+            $group_id = Session::get('group_id');
+            $group = Group::where('id', '=', $group_id)->get();
 
-        $members = User::leftJoin('users_memberships', function($join) {
-            $join->on('users.id', '=', 'users_memberships.user_id');
-        })->whereNotIn('user_id', function ($query) use ($group_id) {
-            $query->select('owner')->from('groups')->where('groups.id', '=', $group_id);
-        })->where('users_memberships.group_id', '=', $group_id)->get();
+            $members = User::leftJoin('users_memberships', function($join) {
+                $join->on('users.id', '=', 'users_memberships.user_id');
+            })->whereNotIn('user_id', function ($query) use ($group_id) {
+                $query->select('owner')->from('groups')->where('groups.id', '=', $group_id);
+            })->where('users_memberships.group_id', '=', $group_id)->get();
 
-        if($group->first()->type == 'students') {
-            $assigned_exc = DB::table('exercises AS ex')
-                ->join('assigned_exercises AS aex', 'ex.id', 'aex.exercise_id')
-                ->where('aex.group_id', $group_id)
-                ->Select(DB::raw('ex.*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS pocet'))
-                ->get();
+            if($group->first()->type == 'students') {
+                $assigned_exc = DB::table('exercises AS ex')
+                    ->join('assigned_exercises AS aex', 'ex.id', 'aex.exercise_id')
+                    ->where('aex.group_id', $group_id)
+                    ->Select(DB::raw('ex.*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS pocet'))
+                    ->get();
+                return view('groups.show-group')
+                    ->with('group', $group)
+                    ->with('members', $members)
+                    ->with('exercises', $assigned_exc);
+            }
+
+
             return view('groups.show-group')
                 ->with('group', $group)
-                ->with('members', $members)
-                ->with('exercises', $assigned_exc);
+                ->with('members', $members);
         }
 
-
-        return view('groups.show-group')
-            ->with('group', $group)
-            ->with('members', $members);
+        return view('home');
     }
 
     /**
