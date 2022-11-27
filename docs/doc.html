@@ -60,11 +60,8 @@ spustit z odkazu.</p>
 <p style="color: red">TODO video</p>
 
 <h2>Implementace</h2>
-<p>Stručná dokumentace k implementaci, která popisuje, které části
-projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
-
 <p>
-    Routy dostupné uživatelům jsou nadefinované v souboru <i>routes/web.php</i>. Téměř každá route je obsluhovaná některým controllerem
+    Routes dostupné uživatelům jsou nadefinované v souboru <i>routes/web.php</i>. Téměř každá route je obsluhovaná některým controllerem
     z adresáře <i>app/Htpp/Controllers/</i>
 </p>
 
@@ -88,6 +85,7 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     </li>
     <li> Auth - <i>vygenerován laravelem</i>
         <ul>
+            <li>RegisterController.php - modifikovaný pro registrační formulář</li>
             <li>…</li>
         </ul>
     </li>
@@ -101,7 +99,7 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     </li>
     <li> Flashcards
         <ul>
-            <li>FlashcardController.php - získání kartiček v cvičení, autorizace</li>
+            <li>FlashcardController.php - získání kartiček ve cvičení, autorizace</li>
             <li>FlashcardPracticeController.php - zobrazení kartiček po jedné</li>
             <li>PublicFlashcardController.php - získání kartiček ve veřejném cvičení</li>
             <li>PublicFlashcardPracticeExerciseController.php - zobrazení kartiček po jedné</li>
@@ -164,7 +162,7 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     </li>
     <li>flashcards
         <ul>
-            <li>flashcard.blade.php</li>
+            <li>flashcard.blade.php - </li>
             <li>flashcard-invalid.blade.php</li>
             <li>flashcardPractice.blade.php</li>
             <li>public-flashcard.blade.php</li>
@@ -191,7 +189,7 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     </li>
     <li>profile
         <ul>
-            <li>edit.blade.php - stánka s úpravou uživatelského profilu</li>
+            <li>edit.blade.php - stránka s úpravou uživatelského profilu</li>
             <li>show.blade.php - stránka s detailem uživatelského profilu</li>
         </ul>
     </li>
@@ -223,15 +221,8 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     Přihlášení a registrace je obstarána vestavěnými metodami a controllery z adresáře <i>app/Http/Controllers/Auth</i>.
 </p>
 <p>
-    Ty se zároveň starají a autentizaci uživatele na jednotlivých stránkách pomocí konstruktoru jednotlivých controllerů,
+    Ty se zároveň starají o autentizaci uživatele na jednotlivých stránkách pomocí konstruktoru jednotlivých controllerů,
     který obsahuje výraz <i>$this->middleware('auth');</i>
-</p>
-
-<h3>Správa skupin</h3>
-
-<p>
-    Práva na vytvoření a úpravu skupin má pouze učitel. Vytváření obsluhuje <i>CreateGroupController.php</i> <i>EditGroupController.php</i>
-    s views <i>create-group.blade.php</i> a <i>edit-group.blade.php</i>.
 </p>
 
 <h2>Instalace</h2>
