@@ -97,6 +97,12 @@ class EditExerciseController extends Controller
         return view('administration.exercise-administration');
     }
 
+    /**
+     * Function for editing the content of the flashcard.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function editFlashcard(Request $request)
     {
         $validated = $request->validate([
