@@ -46,7 +46,8 @@
                                         Popis: {{$group->description}}
                                     </div>
                                     <div class="col-3">
-                                        <img src="{{asset($group->photo)}}" class="rounded-circle" style="width: 60px; height: 60px;" alt="Fotka skupiny" />
+                                        <img src="{{asset($group->photo)}}" class="rounded-circle"
+                                             style="width: 60px; height: 60px;" alt="Fotka skupiny"/>
                                     </div>
                                 </div>
                             </div>
@@ -64,8 +65,10 @@
                                             <div class="card-body p-1">
                                                 <p>Čas: {{$attempt->spend_time}}</p>
                                                 <p>Úspěšnost: {{money_format('%.0i', $attempt->percentage)}}%</p>
-                                                <p class="text-success">Počet správných odpovědí: {{$attempt->correct_answers_number}}</p>
-                                                <p class="text-danger m-0">Počet špatných odpovědí: {{$attempt->wrong_answers_number}}</p>
+                                                <p class="text-success">Počet správných
+                                                    odpovědí: {{$attempt->correct_answers_number}}</p>
+                                                <p class="text-danger m-0">Počet špatných
+                                                    odpovědí: {{$attempt->wrong_answers_number}}</p>
                                             </div>
                                         </div>
                                     @endforeach
@@ -79,18 +82,67 @@
                                             <div class="card-body p-1">
                                                 <p>Čas: {{$attempt->spend_time}}</p>
                                                 <p>Úspěšnost: {{money_format('%.0i', $attempt->percentage)}}%</p>
-                                                <p class="text-success">Počet správných odpovědí: {{$attempt->correct_answers_number}}</p>
-                                                <p class="text-danger m-0">Počet špatných odpovědí: {{$attempt->wrong_answers_number}}</p>
+                                                <p class="text-success">Počet správných
+                                                    odpovědí: {{$attempt->correct_answers_number}}</p>
+                                                <p class="text-danger m-0">Počet špatných
+                                                    odpovědí: {{$attempt->wrong_answers_number}}</p>
                                             </div>
                                         </div>
                                     @endforeach
                                 </div>
+                            </div>
                         </div>
+
+                        <div class="my-5">
+                            <div class="mb-3 text-center">
+                                <b>Souhrnný graf</b>
+                            </div>
+                            <div class="card chart-container">
+                                <canvas id="chart"></canvas>
+                            </div>
                         </div>
-                    </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+    <!--
+        The following part of code is inspired from the source on 2022-11-25:
+        - Source: https://www.devwares.com/blog/create-bootstrap-charts-using-bootstrap5/
+        - Author: By Chimdia Anyiam
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9d1d9a82d2.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById("chart").getContext('2d');
+        var chartData = {{ json_encode($chart_data) }};
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["0%", "10%", "20%", "30%", "40%",
+                    "50%", "60%", "70%", "80%", "90%", "100%"],
+                datasets: [{
+                    label: 'Úspěšnost',
+                    backgroundColor: 'rgba(161, 198, 247, 1)',
+                    borderColor: 'rgb(47, 128, 237)',
+                    data: chartData,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            },
+        });
+    </script>
 @endsection
