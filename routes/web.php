@@ -24,16 +24,11 @@ Route::post('/profile/store', [App\Http\Controllers\ProfileController::class, 's
 Route::post('/profile/delete', [App\Http\Controllers\ProfileController::class, 'delete'])->name('profile.delete');
 Route::get('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
-Route::get('/test', function () {
-    return view('test');
-})->name('test');
-
 Route::get('mygroups', [\App\Http\Controllers\Groups\GroupController::class, 'show' ])->name('mygroups');
 Route::post('mygroups/clickEdit', [\App\Http\Controllers\Groups\GroupController::class, 'clickEdit' ])->name('mygroups.clickEdit');
 Route::post('mygroups/clickShow', [\App\Http\Controllers\Groups\GroupController::class, 'clickShow' ])->name('mygroups.clickShow');
 Route::post('mygroups/get-assignments', [\App\Http\Controllers\Groups\ShowGroupController::class, 'getAssignments' ])->name('mygroups.get-assignments');
 Route::post('mygroups/unassign-exercise', [\App\Http\Controllers\Groups\ShowGroupController::class, 'unassign' ])->name('mygroups.unassign-exercise');
-
 
 Route::get('create-group', function () {
     return view('create-group');
@@ -110,7 +105,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/dbconn', function () {
-    return view('dbconn');
-});
