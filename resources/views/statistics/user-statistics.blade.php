@@ -35,7 +35,7 @@
                         @else
                         <div class="my-5">
                             <div class="mb-1">
-                                <b>Nejrúspěšnější pokus</b>
+                                <b>Nejúspěšnější pokus</b>
                             </div>
                             <div>
                                 <ul>
@@ -99,7 +99,7 @@
 
                         <div class="my-5">
                             <div class="mb-3 text-center">
-                                <b>Souhrný graf</b>
+                                <b>Souhrnný graf</b>
                             </div>
                             <div class="card chart-container">
                                 <canvas id="chart"></canvas>
