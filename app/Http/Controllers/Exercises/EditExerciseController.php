@@ -34,14 +34,19 @@ class EditExerciseController extends Controller
      */
     public function index()
     {
-        $exercise_id = Session::get('exercise_id');
-        $exercise = Exercise::where('id', '=', $exercise_id)->get();
+        if (Session::has('exercise_id'))
+        {
+            $exercise_id = Session::get('exercise_id');
+            $exercise = Exercise::where('id', '=', $exercise_id)->get();
 
-        $flashcards = Flashcard::where('exercise_id', '=', $exercise_id)->get();
+            $flashcards = Flashcard::where('exercise_id', '=', $exercise_id)->get();
 
-        return view('exercises.edit-exercise')
-            ->with('exercise', $exercise)
-            ->with('flashcards', $flashcards);
+            return view('exercises.edit-exercise')
+                ->with('exercise', $exercise)
+                ->with('flashcards', $flashcards);
+        }
+
+        return view('home');
     }
 
     /**
