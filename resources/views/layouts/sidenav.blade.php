@@ -86,18 +86,20 @@
                         <i class="fs-5 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Správa cvičení</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('create-group')}}"
-                       class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
-                        <i class="fs-5 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit skupinu</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('create-exercise')}}"
-                       class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
-                        <i class="fs-5 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit cvičení</span>
-                    </a>
-                </li>
+                @if(Auth::user()['account_type'] == 'teacher')
+                    <li class="nav-item">
+                        <a href="{{route('create-group')}}"
+                           class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
+                            <i class="fs-5 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit skupinu</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('create-exercise')}}"
+                           class="nav-link px-0 align-middle @if(request()->routeIs('')) active @endif">
+                            <i class="fs-5 bi-plus"></i> <span class="ms-1 d-none d-sm-inline fs-5">Vytvořit cvičení</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         @endif
     </div>
