@@ -45,7 +45,7 @@ class GroupStatisticsController extends Controller
                 'group' => $group,
                 'fastest_attempt' => $fastestAttempt,
                 'best_attempt' => $bestAttempt,
-                'chart_data' => $this->chartData(null, $request->group_id, $request->exercise_id)]);
+                'chart_data' => $this->chartData($request->group_id, $request->exercise_id)]);
     }
 
     public function chartData($group_id, $exercise_id)
