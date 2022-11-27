@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Učební Kartičky') }}</title>
+    <title>{{__('Učební Kartičky')}}</title>
+    <link rel="icon" type="image/x-icon" href="{{asset('favicon.svg')}}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

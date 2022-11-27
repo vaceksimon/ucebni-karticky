@@ -20,6 +20,12 @@ class FlashcardController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Function which return view of flashcards if user has access to it else return error page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show(Request $request)
     {
         if ($this->hasAccess($request->id))
@@ -28,6 +34,12 @@ class FlashcardController extends Controller
             return view('flashcards.flashcard-invalid');
     }
 
+    /**
+     * Return all flashcards in exercises
+     *
+     * @param Request $request
+     * @return \Illuminate\Support\Collection
+     */
     public function getCards(Request $request)
     {
         $cards = DB::table('flashcards')
@@ -37,6 +49,12 @@ class FlashcardController extends Controller
         return $cards;
     }
 
+    /**
+     * Function to check if user has access to flashcards set
+     *
+     * @param $exercise_id
+     * @return bool True if user has access else return false
+     */
     public static function hasAccess($exercise_id) {
         if (Auth::user()->account_type === User::ROLE_STUDENT)
             return !(self::studentAccess($exercise_id) === 0);
@@ -46,6 +64,10 @@ class FlashcardController extends Controller
             return false;
     }
 
+    /**
+     * @param $exercise_id
+     * @return int How many exercises has teacher access
+     */
     private static function teacherAccess($exercise_id)
     {
         return DB::table('exercises')
@@ -55,6 +77,10 @@ class FlashcardController extends Controller
             ->get()->count();
     }
 
+    /**
+     * @param $exercise_id
+     * @return int How many shared exercises has teacher access
+     */
     private static function teacherAccessByShare($exercise_id)
     {
        return DB::table('exercises AS ex')
@@ -73,6 +99,10 @@ class FlashcardController extends Controller
             ->count();
     }
 
+    /**
+     * @param $exercise_id
+     * @return int How many exercises has student access
+     */
     private static function studentAccess($exercise_id)
     {
         return DB::table('users AS us')

@@ -25,7 +25,7 @@ class ProfileController extends Controller
         if (!isset($request['id']))
             $id = Auth::id();
         elseif (User::where('id', $request['id'])->doesntExist())
-            return redirect(route('profile'));
+            return view('errors.404');
         else
             $id = $request['id'];
 
