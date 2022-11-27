@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<h1>Výukové kartičky - vlastní zadání</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>David Chocholatý <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xchoch09@stud.fit.vutbr.cz">xchoch09@stud.fit.vutbr.cz</a> -
+		vedoucí týmu, Use Case Diagram, vytvoření databáze, vytvoření migrací, úvodní stránka, přihlášení, registrace,
+        automatické odhlášení po určité době nečinnosti, vytvoření skupiny,
+        vytvoření cvičení, editace skupiny, editace cvičení, zobrazení skupiny, správa uživatelů, správa skupin,
+        správa cvičení, statistiky uživatele, ukládání obrázků
+	</dd>
+	<dd>Tomáš Bártů <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xbartu11@stud.fit.vutbr.cz">xbartu11@stud.fit.vutbr.cz</a> -
+		webhosting, vytvoření databáze, naplnění databáze ukázkovými a testovacími daty, testy,
+        vlastní chybové stránky, hlavní stránka uživatele, sdílení cvičení, moje cvičení (pro učitele i žáka),
+        moje skupiny (pro učitele i žáka), veřejné cvičení, zobrazení cvičení, spuštění cvičení,
+        ukládání pokusů cvičení
+	</dd>
+  <dd>Šimon Vacek <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xvacek10@stud.fit.vutbr.cz">xvacek10@stud.fit.vutbr.cz</a> -
+		ER diagram, vytvoření databáze, hlavička stránky, menu stránky, zadávání cvičení, zrušení zadání cvičení, zobrazení uživatelského účtu,
+        správa uživatelského účtu, statistiky skupiny, ukládání obrázků
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="https://ucebnikarticky.jednoduse.cz/">https://ucebnikarticky.jednoduse.cz/</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin@example.com</td><td>admin</td><td>Administrátor</td></tr>
+<tr><td>BBELM@example.com</td><td>Osciloskop123</td><td>Učitel</td></tr>
+<tr><td>speedy@example.com</td><td>BigShock</td><td>Student</td></tr>
+<tr><td><i>bez loginu</i></td><td><i>bez hesla</i></td><td>Nepřihlášený uživatel</td></tr>
+</tbody></table>
+
+<h4>Diagram případů užití</h4>
+<p style="color: red">TODO use case diagram</p>
+
+<h3>Video</h3>
+
+<p>Přiložte odkaz na komentované video demostrující použití informačního
+ systému. Zaměřte se na případy užití definované zadáním (např.
+registrace uživatele, správa uživatelů a činnosti jednotlivých rolí).
+Video nahrajte například na VUT Google Drive, kde ho bude možné přímo
+spustit z odkazu.</p>
+<p style="color: red">TODO video</p>
+
+<h2>Implementace</h2>
+<p>Stručná dokumentace k implementaci, která popisuje, které části
+projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+
+<p style="color: red">TODO implementace</p>
+
+<h3>Databáze</h3>
+
+<embed src="ErDiagram.pdf" width="75%" height="700px" type="application/pdf"/>
+
+<h2>Instalace</h2>
+
+Stručně popište:
+<ul>
+<li>postup instalace na server,</li>
+<li>softwarové požadavky (verze PHP apod.),</li>
+<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+</ul>
+
+<p style="color: red">TODO instalace</p>
+
+Celý projekt si lze stáhnout z následujícího odkazu:
+<p style="color: red">TODO odkaz</p>
+
+<h4>Požadavky</h4>
+
+Pro spuštění projektu je zapotřebí splnit následující požadavky:
+<ul>
+    <li>
+        PHP: >= 7.3
+    </li>
+    <li>
+        Laravel: >= 8.75
+    </li>
+    <li>
+        Composer: otestováno na 2.4.2
+    </li>
+    <li>
+        Databáze: MySql (InnoDB)
+    </li>
+    <li>
+        Požadavky na verze knihoven (viz soubor <i>composer.json</i>):
+        <ul>
+            <li>
+                Požadovány:
+                <ul>
+                    <li>
+                        fruitcake/laravel-cors: >= 2.0
+                    </li>
+                    <li>
+                        guzzlehttp/guzzle: >= 7.0.1
+                    </li>
+                    <li>
+                        laravel/framework: >= 8.75
+                    </li>
+                    <li>
+                        laravel/sanctum: >= 2.11
+                    </li>
+                    <li>
+                        laravel/tinker: >= 2.5
+                    </li>
+                    <li>
+                        laravel/ui: >= 3.4
+                    </li>
+                    <li>
+                        ext-json: *
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Požadovány pro vývoj:
+
+                <ul>
+                    <li>
+                        facade/ignition: >= 2.5
+                    </li>
+                    <li>
+                        fakerphp/faker: >= 1.9.1
+                    </li>
+                    <li>
+                        laravel/sail: >= 1.0.1
+                    </li>
+                    <li>
+                        mockery/mockery: >= 1.4.4
+                    </li>
+                    <li>
+                        nunomaduro/collision: >= 5.10
+                    </li>
+                    <li>
+                        phpunit/phpunit: >= 9.5.10
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<h4>Postup spuštění</h4>
+<p style="color: red">TODO postup spusteni</p>
+
+<h2>Známé problémy</h2>
+<p>Zde popište, které body zadání nejsou implementovány a z jakého
+důvodu. Např. &#8222;Z časových důvodů nebyla implementována správa
+uživatelů.&#8221; Pomůžete tím zrychlit hodnocení, když neimplementované
+funkce nebudeme muset dlouze hledat.</p>
+
+<p style="color: red">TODO problemy</p>
+
+</body></html>
