@@ -7,6 +7,9 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Controller for the create-exercise view.
+ */
 class CreateExerciseController extends Controller
 {
     /**
@@ -19,11 +22,22 @@ class CreateExerciseController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * The index of the create-exercise view.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return view('exercises.create-exercise');
     }
 
+    /**
+     * Function for storing the new exercise in the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Request $request)
     {
         $user = auth()->user();

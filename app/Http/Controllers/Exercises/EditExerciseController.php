@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\ImageUploadController;
 
+/**
+ * Controller for the edit-exercise view.
+ */
 class EditExerciseController extends Controller
 {
     /**
@@ -24,6 +27,11 @@ class EditExerciseController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * The index of the edit-exercise view.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $exercise_id = Session::get('exercise_id');
@@ -36,6 +44,12 @@ class EditExerciseController extends Controller
             ->with('flashcards', $flashcards);
     }
 
+    /**
+     * Function for storing the exercise changes in the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function store(Request $request)
     {
         Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'description' => $request->description]);
@@ -43,6 +57,12 @@ class EditExerciseController extends Controller
         return $this->index();
     }
 
+    /**
+     * Function for removing flashcard from the exercise.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function removeFlashcard(Request $request)
     {
         $flashcard_id = $request->flashcard_id;
@@ -59,6 +79,12 @@ class EditExerciseController extends Controller
         return redirect('edit-exercise');
     }
 
+    /**
+     * Function for adding flashcard to the exercise.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function addFlashcard(Request $request)
     {
         $validated = $request->validate([
@@ -82,6 +108,12 @@ class EditExerciseController extends Controller
         return redirect('edit-exercise');
     }
 
+    /**
+     * Function for deleting the whole exercise from the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function deleteExercise(Request $request)
     {
         DB::table('exercises')

@@ -1,3 +1,7 @@
+/**
+ * Script for automatic logout after the inactivity timeout expiration.
+ */
+
 /*
  * The following document is taken from the following source on 2022-11-20.
  * Source: https://laracasts.com/discuss/channels/laravel/auto-logout-if-no-activity-in-given-time?page=1&replyId=484851
