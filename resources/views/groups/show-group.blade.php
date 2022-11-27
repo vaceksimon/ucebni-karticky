@@ -132,9 +132,11 @@
                                                     <div>
                                                         {{$exercise->name}}
                                                     </div>
-                                                    <div class="ms-auto">
-                                                        <button type="submit" class="btn btn-outline-danger" onclick="unassignExercise({{$exercise->id}}, {{$group[0]->id}})">Zrušit zadání</button>
-                                                    </div>
+                                                    @if(Auth::id() == $group[0]->owner)
+                                                        <div class="ms-auto">
+                                                            <button type="submit" class="btn btn-outline-danger" onclick="unassignExercise({{$exercise->id}}, {{$group[0]->id}})">Zrušit zadání</button>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="card-body">
                                                     <p class="mb-0">Počet kartiček: {{$exercise->pocet}}</p>

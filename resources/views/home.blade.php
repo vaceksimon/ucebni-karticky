@@ -14,14 +14,14 @@
                             Hledáte univerzální způsob, který Vám pomůže naučit se téměř cokoliv? Myslíte si, že se neumíte učit a máte pocit, že Vám nic neleze do hlavy? Metody učení, které momentálně používáte, nefungují? Tak právě pro Vás jsou tu Učební Kartičky. Stačí jen začít. Tak s chutí do toho!
                         </p>
                         <div class="d-flex justify-content-evenly flex-wrap gap-3">
-                            @if(Auth::user()->account_type != 'student')
+                            @if(Auth::user()->account_type == 'teacher')
                                 <form>
                                     <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('create-exercise') }}">Vytvořit sadu kartiček</button>
                                 </form>
                                 <form>
                                     <button class="btn btn-outline-secondary btn-lg px-4" formaction="{{ route('create-group') }}">Vytvořit skupinu</button>
                                 </form>
-                            @else
+                            @elseif(Auth::user()->account_type == 'student')
                                 <form>
                                     <button class="btn btn-primary btn-lg px-4 gap-3" formaction="{{ route('myexercises') }}">Moje cvičení</button>
                                 </form>
