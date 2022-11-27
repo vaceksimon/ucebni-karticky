@@ -8,9 +8,12 @@
                     <div class="card-header">{{ __('Moje skupiny') }}</div>
                     <div class="card-body">
                         <div class="col-md-12">
+                            @if($role != 'student')
                             <div class="pb-3">
                                 <h4>Spravované skupiny</h4>
                             </div>
+                            @endif
+
                             @if($role === 'teacher')
                             <div>
                                 <ul>
