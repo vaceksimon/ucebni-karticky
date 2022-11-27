@@ -64,61 +64,61 @@ spustit z odkazu.</p>
 projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
 <p>
-    Routy dostupné uživatelům jsou nadefinované v souboru <i>routes/web.php</i>. Téměř každá route je obsluhovaná některým Controllerem
+    Routy dostupné uživatelům jsou nadefinované v souboru <i>routes/web.php</i>. Téměř každá route je obsluhovaná některým controllerem
     z adresáře <i>app/Htpp/Controllers/</i>
 </p>
 
 <h3>app/Htpp/Controllers/</h3>
 <ul>
-    <li>Controller.php</li>
-    <li>HomeController.php</li>
-    <li>ImageUploadController.php</li>
-    <li>ProfileController.php</li>
+    <li>Controller.php - vygenerovaná rodičovská třída, ze které dědí ostatní controllery</li>
+    <li>HomeController.php - domovská stránka (důležitý jenom pro autorizaci uživatele)</li>
+    <li>ImageUploadController.php - zajišťuje uložení nahraného obrázku na server</li>
+    <li>ProfileController.php - zobrazení, úprava (uživatelem i administrátorem) a smazání uživatelského profilu</li>
     <li> Administration
         <ul>
-            <li>ExerciseAdministrationController.php</li>
-            <li>GroupAdministrationController.php</li>
-            <li>UserAdministrationController.php</li>
+            <li>ExerciseAdministrationController.php - získání, vyhledání všech cvičení a smazání</li>
+            <li>GroupAdministrationController.php - získání, vyhledání všech skupin a smazání</li>
+            <li>UserAdministrationController.php - získání, vyhledání všech uživatelů a smazání</li>
         </ul>
     </li>
     <li> Attempts
         <ul>
-            <li>Attempts.php</li>
+            <li>Attempts.php - uložení pokusu po absolvování cvičení</li>
         </ul>
     </li>
-    <li> Auth - <i>vygenerovan laravelem</i>
+    <li> Auth - <i>vygenerován laravelem</i>
         <ul>
-            <li>Attempts.php</li>
+            <li>…</li>
         </ul>
     </li>
     <li> Exercise
         <ul>
-            <li>CreateExerciseController.php</li>
-            <li>EditExerciseController.php</li>
-            <li>ExerciseController.php</li>
-            <li>PublicExerciseController.php</li>
+            <li>CreateExerciseController.php - vytvoření cvičení</li>
+            <li>EditExerciseController.php - úprava cvičení</li>
+            <li>ExerciseController.php - získání cvičení, členů skupiny, zadání skupině žáků a sdílení skupině učitelů</li>
+            <li>PublicExerciseController.php - získání veřejných cvičení</li>
         </ul>
     </li>
     <li> Flashcards
         <ul>
-            <li>FlashcardController.php</li>
-            <li>FlashcardPracticeController.php</li>
-            <li>PublicFlashcardController.php</li>
-            <li>PublicFlashcardPracticeExerciseController.php</li>
+            <li>FlashcardController.php - získání kartiček v cvičení, autorizace</li>
+            <li>FlashcardPracticeController.php - zobrazení kartiček po jedné</li>
+            <li>PublicFlashcardController.php - získání kartiček ve veřejném cvičení</li>
+            <li>PublicFlashcardPracticeExerciseController.php - zobrazení kartiček po jedné</li>
         </ul>
     </li>
     <li> Groups
         <ul>
-            <li>CreateGroupController.php</li>
-            <li>FlashcardPracticeController.php</li>
-            <li>PublicFlashcardController.php</li>
-            <li>PublicFlashcardPracticeExerciseController.php</li>
+            <li>CreateGroupController.php - vytvoření a uložení skupiny</li>
+            <li>EditGroupController.php - úprava skupiny, přidání a odebrání uživatele</li>
+            <li>GroupController.php - získání dat pro výpis všech skupin</li>
+            <li>ShowGroupController.php - získání dat pro detail skupiny</li>
         </ul>
     </li>
     <li> Statistics
         <ul>
-            <li>GroupStatisticsController.php</li>
-            <li>UserStatisticsController.php</li>
+            <li>GroupStatisticsController.php - získání dat pro zobrazení statistik skupiny</li>
+            <li>UserStatisticsController.php - získání dat pro zobrazení statistik žáka</li>
         </ul>
     </li>
 </ul>
@@ -130,45 +130,36 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
 <h3>resources/views/</h3>
 <ul>
-    <li>home.blade.php</li>
-    <li>welcome.blade.php</li>
+    <li>home.blade.php - domovská stránka přihlášeného uživatele</li>
+    <li>welcome.blade.php - obal pro výchozí stránku aplikace</li>
     <li>administration
         <ul>
-            <li>exercise-administration.php</li>
-            <li>group-administration.php</li>
-            <li>user-administration.php</li>
+            <li>exercise-administration.php - správa cvičení</li>
+            <li>group-administration.php - správa skupin</li>
+            <li>user-administration.php - správa uživatelů</li>
         </ul>
     </li>
-    <li>auth
+    <li>auth - <i>vygenerován laravelem</i>
         <ul>
-            <li>passwords
-                <ul>
-                    <li>confirm.blade.php</li>
-                    <li>email.blade.php</li>
-                    <li>reset.blade.php</li>
-                </ul>
-            </li>
-            <li>login.blade.php</li>
-            <li>register.blade.php</li>
-            <li>verify.blade.php</li>
+            <li>…</li>
         </ul>
     </li>
     <li>errors
         <ul>
-            <li>400.blade.php</li>
-            <li>401.blade.php</li>
-            <li>402.blade.php</li>
-            <li>403.blade.php</li>
-            <li>404.blade.php</li>
-            <li>500.blade.php</li>
+            <li>400.blade.php - stránka pro HTTP status kód 400</li>
+            <li>401.blade.php - stránka pro HTTP status kód 401</li>
+            <li>402.blade.php - stránka pro HTTP status kód 402</li>
+            <li>403.blade.php - stránka pro HTTP status kód 403</li>
+            <li>404.blade.php - stránka pro HTTP status kód 404</li>
+            <li>500.blade.php - stránka pro HTTP status kód 500</li>
         </ul>
     </li>
     <li>exercises
         <ul>
-            <li>create-exercise.blade.php</li>
-            <li>edit-exercise.blade.php</li>
-            <li>myexercises.blade.php</li>
-            <li>public-exercise.blade.php</li>
+            <li>create-exercise.blade.php - vytvoření cvičení</li>
+            <li>edit-exercise.blade.php - úprava cvičení</li>
+            <li>myexercises.blade.php - přehled uživatelem dostupných cvičení</li>
+            <li>public-exercise.blade.php - přehled veřejně dostupných cvičení</li>
         </ul>
     </li>
     <li>flashcards
@@ -183,31 +174,31 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     </li>
     <li>groups
         <ul>
-            <li>create-group.blade.php</li>
-            <li>edit-group.blade.php</li>
-            <li>mygroups.blade.php</li>
-            <li>show-group.blade.php</li>
+            <li>create-group.blade.php - vytvoření skupiny</li>
+            <li>edit-group.blade.php - úprava skupiny</li>
+            <li>mygroups.blade.php - přehled skupin, kterých je uživatel členem</li>
+            <li>show-group.blade.php - přehled veřejých skupin</li>
         </ul>
     </li>
     <li>layout
         <ul>
-            <li>app.blade.php</li>
-            <li>errorMain.blade.php</li>
-            <li>header.blade.php</li>
-            <li>main.blade.php</li>
-            <li>sidenav.blade.php</li>
+            <li>app.blade.php - vnitřek výchozí stránky aplikace (vkládá se do <i>welcome.blade.php</i>)</li>
+            <li>errorMain.blade.php - obal pro jednotlivé chybové stránky</li>
+            <li>header.blade.php - vrchní pás každé stránky</li>
+            <li>main.blade.php - obal pro obsah stránek</li>
+            <li>sidenav.blade.php - levé menu každé stránky</li>
         </ul>
     </li>
     <li>profile
         <ul>
-            <li>edit.blade.php</li>
-            <li>show.blade.php</li>
+            <li>edit.blade.php - stánka s úpravou uživatelského profilu</li>
+            <li>show.blade.php - stránka s detailem uživatelského profilu</li>
         </ul>
     </li>
     <li>statistics
         <ul>
-            <li>group-statistics.blade.php</li>
-            <li>user-statistics.blade.php</li>
+            <li>group-statistics.blade.php - statistiky skupiny na daném cvičení</li>
+            <li>user-statistics.blade.php - statistiky uživatele na daném cvičení</li>
         </ul>
     </li>
 </ul>
@@ -236,9 +227,12 @@ projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
     který obsahuje výraz <i>$this->middleware('auth');</i>
 </p>
 
-<h3>Prohlížení a procvičování veřejných cvičení</h3>
+<h3>Správa skupin</h3>
 
-<p></p>
+<p>
+    Práva na vytvoření a úpravu skupin má pouze učitel. Vytváření obsluhuje <i>CreateGroupController.php</i> <i>EditGroupController.php</i>
+    s views <i>create-group.blade.php</i> a <i>edit-group.blade.php</i>.
+</p>
 
 <h2>Instalace</h2>
 
