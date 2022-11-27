@@ -63,11 +63,182 @@ spustit z odkazu.</p>
 <p>Stručná dokumentace k implementaci, která popisuje, které části
 projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
-<p style="color: red">TODO implementace</p>
+<p>
+    Routy dostupné uživatelům jsou nadefinované v souboru <i>routes/web.php</i>. Téměř každá route je obsluhovaná některým Controllerem
+    z adresáře <i>app/Htpp/Controllers/</i>
+</p>
+
+<h3>app/Htpp/Controllers/</h3>
+<ul>
+    <li>Controller.php</li>
+    <li>HomeController.php</li>
+    <li>ImageUploadController.php</li>
+    <li>ProfileController.php</li>
+    <li> Administration
+        <ul>
+            <li>ExerciseAdministrationController.php</li>
+            <li>GroupAdministrationController.php</li>
+            <li>UserAdministrationController.php</li>
+        </ul>
+    </li>
+    <li> Attempts
+        <ul>
+            <li>Attempts.php</li>
+        </ul>
+    </li>
+    <li> Auth - <i>vygenerovan laravelem</i>
+        <ul>
+            <li>Attempts.php</li>
+        </ul>
+    </li>
+    <li> Exercise
+        <ul>
+            <li>CreateExerciseController.php</li>
+            <li>EditExerciseController.php</li>
+            <li>ExerciseController.php</li>
+            <li>PublicExerciseController.php</li>
+        </ul>
+    </li>
+    <li> Flashcards
+        <ul>
+            <li>FlashcardController.php</li>
+            <li>FlashcardPracticeController.php</li>
+            <li>PublicFlashcardController.php</li>
+            <li>PublicFlashcardPracticeExerciseController.php</li>
+        </ul>
+    </li>
+    <li> Groups
+        <ul>
+            <li>CreateGroupController.php</li>
+            <li>FlashcardPracticeController.php</li>
+            <li>PublicFlashcardController.php</li>
+            <li>PublicFlashcardPracticeExerciseController.php</li>
+        </ul>
+    </li>
+    <li> Statistics
+        <ul>
+            <li>GroupStatisticsController.php</li>
+            <li>UserStatisticsController.php</li>
+        </ul>
+    </li>
+</ul>
+
+<p>
+    Tyto controllery provádí autorizaci a operace s daty, které posílají view, který se zobrazí uživateli.
+    Views jsou uložené v <i>resources/views/</i>
+</p>
+
+<h3>resources/views/</h3>
+<ul>
+    <li>home.blade.php</li>
+    <li>welcome.blade.php</li>
+    <li>administration
+        <ul>
+            <li>exercise-administration.php</li>
+            <li>group-administration.php</li>
+            <li>user-administration.php</li>
+        </ul>
+    </li>
+    <li>auth
+        <ul>
+            <li>passwords
+                <ul>
+                    <li>confirm.blade.php</li>
+                    <li>email.blade.php</li>
+                    <li>reset.blade.php</li>
+                </ul>
+            </li>
+            <li>login.blade.php</li>
+            <li>register.blade.php</li>
+            <li>verify.blade.php</li>
+        </ul>
+    </li>
+    <li>errors
+        <ul>
+            <li>400.blade.php</li>
+            <li>401.blade.php</li>
+            <li>402.blade.php</li>
+            <li>403.blade.php</li>
+            <li>404.blade.php</li>
+            <li>500.blade.php</li>
+        </ul>
+    </li>
+    <li>exercises
+        <ul>
+            <li>create-exercise.blade.php</li>
+            <li>edit-exercise.blade.php</li>
+            <li>myexercises.blade.php</li>
+            <li>public-exercise.blade.php</li>
+        </ul>
+    </li>
+    <li>flashcards
+        <ul>
+            <li>flashcard.blade.php</li>
+            <li>flashcard-invalid.blade.php</li>
+            <li>flashcardPractice.blade.php</li>
+            <li>public-flashcard.blade.php</li>
+            <li>public-flashcard-invalid.blade.php</li>
+            <li>public-flashcardPractice.blade.php</li>
+        </ul>
+    </li>
+    <li>groups
+        <ul>
+            <li>create-group.blade.php</li>
+            <li>edit-group.blade.php</li>
+            <li>mygroups.blade.php</li>
+            <li>show-group.blade.php</li>
+        </ul>
+    </li>
+    <li>layout
+        <ul>
+            <li>app.blade.php</li>
+            <li>errorMain.blade.php</li>
+            <li>header.blade.php</li>
+            <li>main.blade.php</li>
+            <li>sidenav.blade.php</li>
+        </ul>
+    </li>
+    <li>profile
+        <ul>
+            <li>edit.blade.php</li>
+            <li>show.blade.php</li>
+        </ul>
+    </li>
+    <li>statistics
+        <ul>
+            <li>group-statistics.blade.php</li>
+            <li>user-statistics.blade.php</li>
+        </ul>
+    </li>
+</ul>
+
+
+<p>Modely představující jednotlivé entitní množiny, které jsou zachycené v E-R diagramu jsou k nalezení v adresáři <i>app/Models/</i></p>
+<ul>
+    <li>Attempt</li>
+    <li>Exercise</li>
+    <li>Flashcard</li>
+    <li>Group</li>
+    <li>User</li>
+</ul>
 
 <h3>Databáze</h3>
 
 <embed src="ErDiagram.pdf" width="75%" height="700px" type="application/pdf"/>
+
+<h3>Přihlášení a registrace</h3>
+
+<p>
+    Přihlášení a registrace je obstarána vestavěnými metodami a controllery z adresáře <i>app/Http/Controllers/Auth</i>.
+</p>
+<p>
+    Ty se zároveň starají a autentizaci uživatele na jednotlivých stránkách pomocí konstruktoru jednotlivých controllerů,
+    který obsahuje výraz <i>$this->middleware('auth');</i>
+</p>
+
+<h3>Prohlížení a procvičování veřejných cvičení</h3>
+
+<p></p>
 
 <h2>Instalace</h2>
 
