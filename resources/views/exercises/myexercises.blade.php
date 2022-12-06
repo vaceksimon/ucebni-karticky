@@ -193,10 +193,18 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="" method="POST">
-                                                <div class="row">
+                                                <div class="row align-items-center">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
                                                             <input type="text" class="form-control" placeholder="Vyhledat skupinu" id="share">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-check fs-5">
+                                                            <label class="form-check-label">
+                                                                Sdílená cvičení
+                                                                <input class="form-check-input" type="checkbox" value="value" id="shared">
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -300,9 +308,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script>
+
         $('#share').on('keyup', function () {
             share();
         });
+
+        $('#shared').change(function () {
+            share()
+        });
+
         function share() {
             let keyword = $('#share').val();
             $.post('{{ route("myexercises.share") }}',
@@ -320,31 +334,59 @@
         function postGroupsShare(res) {
             isShared = JSON.parse(res.isShared);
             htmlView = '';
+            let j = 0;
             for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
+                if (!(document.getElementById("shared").checked)) {
+                    if (i % 3 === 0) {
+                        htmlView += `
                         <div class="row mb-3 gap-3">`
+                    }
                 }
-                htmlView += `
+                else
+                {
+                    if (j % 3 === 0) {
+                        htmlView += `
+                        <div class="row mb-3 gap-3">`
+                    }
+                }
+
+                console.log(j);
+
+                if (!(document.getElementById("shared").checked && isShared[i].shared === "0")) {
+                    htmlView += `
                     <div class="col">
                         <div class="card m-auto" style="width: 18rem;">
                             <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
                                 <p class="card-text">` + res.result[i].description + `</p>`
-                if (isShared[i].shared === "1") {
-                    htmlView += `<button class="btn btn-danger"
+                    if (isShared[i].shared === "1") {
+                        htmlView += `<button class="btn btn-danger"
                                 onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`
-                } else {
-                    htmlView += `<button class="btn btn-primary"
+                    } else {
+                        htmlView += `<button class="btn btn-primary"
                                 onclick="shareExercise(` + res.result[i].id + `);">Sdílet</button>`
-                }
-                htmlView += `</div>
+                    }
+                    htmlView += `</div>
                         </div>
                     </div>
                 `
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
+                }
+
+                if (!(document.getElementById("shared").checked)) {
+                    if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
+                        htmlView += `</div>`
+                }
+                else
+                {
+                    if ((j + 1) % 3 === 0 || i === (res.result.length + 1)) {
+                        htmlView += `</div>`
+                    }
+                }
+
+                if (isShared[i].shared === "1")
+                    j++;
+
             }
             $('#shareGroupsBody').html(htmlView);
         }
