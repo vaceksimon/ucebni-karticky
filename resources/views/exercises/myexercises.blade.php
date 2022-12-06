@@ -323,12 +323,12 @@
             for (let i = 0; i < res.result.length; i++) {
                 if (i % 3 === 0) {
                     htmlView += `
-                        <div class="row mb-3">`
+                        <div class="row mb-3 gap-3">`
                 }
                 htmlView += `
                     <div class="col">
                         <div class="card m-auto" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
                                 <p class="card-text">` + res.result[i].description + `</p>`
