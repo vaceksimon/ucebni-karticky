@@ -1,0 +1,48 @@
+# TODO 2
+
+- [ ] Admin -> odebrat [uživatele, skupinu, cvičení] - NO REFRESH
+- [ ] Změna obrázku (uživatele, skupiny) -> změnit bez odeslání form a bez refresh
+- [ ] Sidenav - změnit práh
+- [ ] Navbar - hamburger menu
+- [ ] Obrázek - fixnout proporce (kulatý)
+- [ ] Vytvořit skupinu - jako editace skupiny (přidat uživatele, editace obrázku)
+- [ ] Vytvořit skupinu - jako editace cvičení (přidat kartičky)
+- [ ] Moje skupiny - vyhledávání skupin
+- [ ] Moje cvičení a veřejné cvičení - vyhledávání cvičení
+
+- [ ] Náhodné řazení kartiček ve cvičení?
+- [ ] Editovat skupinu - odebrat uživatele - NO REFRESH
+- [ ] Editovat cvičení - odebrat kartičku - NO REFRESH
+- [ ] Vyhledání členů skupiny (v editovat skupinu)
+- [ ] Editovat skupinu, cvičení - tlačítko zrušit - redirect zpět o 1 stránku
+- [ ] Editovat skupinu - přidat člena - NO REFRESH
+- [ ] Editovat skupinu - tlačítko upravit skupinu - vymyslet přesměrování
+- [ ] Proklik na náhled uživatele (admin - skupiny, cvičení) - on hover - změna barvy řádku, ikony myši
+- [ ] Detail skupiny - tlačítko zpět - pořešit redirect
+- [ ] Náhled uživatele - přidat tlačítko zpět
+- [ ] Náhled uživatele - zvětšit font
+- [ ] Náhled uživatele - zobrazení společných skupin (pro vztah žák-žák a učitel-učitel) či zobrazení skupin, pokud je žák členem spravované skupiny žáků (učitel - žák)
+- [ ] Náhled uživatele - pokud nemá hodnotu, tak nezobrazovat tituly a školu
+
+- [ ] Detail skupiny - vyhledávání členů
+- [ ] Moje skupiny - pokud není členem skupin - NEZOBRAZOVAT TEXT
+- [ ] Editace cvičení - upravit a odebrat - NO REFRESH
+- [ ] Přidat kartičky - NO REFRESH
+- [ ] Editace cvičení - zrušit, uptravit tlačítka přesměrování
+- [ ] Sdílet a zadat cvičení checkbox zadané
+- [ ] Sdílet a zadat cvičení obrázek card ve fixní velikosti
+- [ ] Sdílet a zadat cvičení popisek zobrazit n písmen a zalomit "..." 
+- [ ] Téma cvičení?
+- [ ] Spustit cvičení - ikony správně, špatně
+- [ ] Zobrazit cvičení - ikony předchozí, další
+- [ ] Zadat cvičení má velkou mezeru od search boxu
+- [ ] Zadat cvičení - vypsat text, pokud nejsou skupiny, kterým cvičení zadat
+- [ ] Statistiky cvičení - improve design
+- [ ] Statistiky cvičení skupiny - vyhledání žáka ve cvičení
+- [ ] Statistiky cvičení skupiny - místo tlačítka zobrazit highlight a ikonka
+- [ ] Statistiky cvičení skupiny - zobrazit žáky nejrychlejších a nejúspěšnějších pousů ?
+- [ ] V zobrazení skupiny přidat proklik na úpravu cvičení
+- [ ] Editace skupiny - zvětšit odpověď a otázka text fields
+- [ ] Upravit můj profil - text fields design
+- [ ] Statistiky uživatele ve cvičení - formát datumu
+- [ ] Patička ?
