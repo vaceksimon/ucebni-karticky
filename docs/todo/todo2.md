@@ -7,6 +7,7 @@
 - [ ] Editovat skupinu - přidat člena - NO REFRESH
 - [ ] Editace cvičení - upravit a odebrat - NO REFRESH
 - [ ] Přidat kartičky - NO REFRESH
+- [ ] Nevymazání progresu po obnovení při procvičování - NO REFRESH
 
 ## Responzivita a design
 - [ ] Sidenav - změnit práh
