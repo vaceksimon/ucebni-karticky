@@ -62,14 +62,11 @@ class UserAdministrationController extends Controller
      * Function for removing the user from the database.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function removeUser(Request $request)
     {
         DB::table('users')
             ->where('id', $request->user_id)
             ->delete();
-
-        return view('administration.user-administration');
     }
 }
