@@ -168,10 +168,18 @@
                                                     <tr>
                                                         <th>Pořadí</th>
                                                         <th>Foto</th>
+
+                                                        @if($group[0]->type == 'teachers')
                                                         <th>Tituly před</th>
+                                                        @endif
+
                                                         <th>Jméno</th>
                                                         <th>Příjmení</th>
+
+                                                        @if($group[0]->type == 'teachers')
                                                         <th>Tituly za</th>
+                                                        @endif
+
                                                         <th>Typ uživatele</th>
                                                         <th>Akce</th>
                                                     </tr>
@@ -276,11 +284,16 @@
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
-                // TODO tituly pred a tituly za jenom pro ucitele, colspan right values
                 htmlView += `
-            <tr>
-                <td colspan="8">Nebyli nalezeni žádní uživatelé.</td>
-            </tr>`;
+                    <tr>`
+                            @if($group[0]->type == 'teachers')
+                                htmlView += `<td colspan="8">`;
+                            @else
+                                htmlView += `<td colspan="6">`;
+                            @endif
+
+                            htmlView += `Nebyli nalezeni žádní uživatelé.</td>
+                    </tr>`;
             }
 
             for(let i = 0; i < res.result.length; i++){
@@ -295,22 +308,32 @@
                 url = url.replace(':id', res.result[i].id);
 
                 htmlView += `
-            <tr>
-                <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
-                <td class="clickable-row" data-href="` + url + `">
-                    <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
-                        alt="Avatar"/>
-                </td>
-                <td class="clickable-row" data-href="` + url + `">`+res.result[i].degree_front+`</td>
-                <td class="clickable-row" data-href="` + url + `">`+res.result[i].first_name+`</td>
-                <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
-                <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
-                <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
-                <td>
-                    <input type="hidden" id="new_user_group_id" name="new_user_group_id" value="{{ session('group_id') }}">
-                    <button type="button" class="btn btn-outline-primary" id="add-member-btn"  data-id="` + res.result[i].id + `">Přidat</button>
-                </td>
-            </tr>`;
+                    <tr>
+                        <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
+                        <td class="clickable-row" data-href="` + url + `">
+                            <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
+                                alt="Avatar"/>
+                        </td>`;
+
+                @if($group[0]->type == 'teachers')
+                    htmlView += `<td class="clickable-row" data-href="` + url + `">`+res.result[i].degree_front+`</td>`;
+                @endif
+
+                htmlView += `
+                    <td class="clickable-row" data-href="` + url + `">`+res.result[i].first_name+`</td>
+                    <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>`;
+
+                @if($group[0]->type == 'teachers')
+                    htmlView += `<td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>`;
+                @endif
+
+                htmlView += `
+                    <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
+                    <td>
+                        <input type="hidden" id="new_user_group_id" name="new_user_group_id" value="{{ session('group_id') }}">
+                        <button type="button" class="btn btn-outline-primary" id="add-member-btn"  data-id="` + res.result[i].id + `">Přidat</button>
+                    </td>
+                </tr>`;
             }
 
             $('#users_table').html(htmlView);
@@ -433,10 +456,15 @@
                             <tbody>`;
 
                 if (res.result.length <= 0) {
-                    // TODO set colspan right value (teachers / students members print - degrees)
                     htmlView += `
-                        <tr>
-                            <td colspan="8">Nebyli nalezeni žádní členové.</td>
+                        <tr>`
+                                @if($group[0]->type == 'teachers')
+                                    htmlView += `<td colspan="8">`;
+                                @else
+                                    htmlView += `<td colspan="6">`;
+                                @endif
+
+                                    htmlView += `Nebyli nalezeni žádní členové.</td>
                         </tr>`;
                 }
 
