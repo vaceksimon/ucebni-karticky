@@ -85,7 +85,7 @@
                                                 {{ __('Členové') }}
                                             </div>
                                             <div class="row">
-                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
+                                                <button type="button" id="add-member-open-model-btn" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
                                             </div>
                                         </div>
                                     </div>
@@ -222,37 +222,33 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form action="" method="POST">
-                                                @csrf
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="input-group mb-3">
-                                                            <input type="hidden" id="group_id" value="{{ $group[0]->id }}">
-                                                            <input type="hidden" id="group_type" name="group_type" value="{{ $group[0]->type }}">
-                                                            <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search">
-                                                        </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="hidden" id="group_id" value="{{ $group[0]->id }}">
+                                                        <input type="hidden" id="group_type" name="group_type" value="{{ $group[0]->type }}">
+                                                        <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search">
                                                     </div>
                                                 </div>
-                                            </form>
-                                                <div style="height: 300px;overflow-y: scroll;">
-                                                    <table class="table table-striped d-table">
-                                                        <thead class="table-head-sticky">
-                                                        <tr>
-                                                            <th>Pořadí</th>
-                                                            <th>Foto</th>
-                                                            <th>Tituly před</th>
-                                                            <th>Jméno</th>
-                                                            <th>Příjmení</th>
-                                                            <th>Tituly za</th>
-                                                            <th>Typ uživatele</th>
-                                                            <th>Akce</th>
-                                                        </tr>
-                                                        </thead>
-                                                            <tbody id="users_table">
-                                                            </tbody>
-                                                    </table>
-                                                </div>
+                                            </div>
+                                            <div style="height: 300px;overflow-y: scroll;">
+                                                <table class="table table-striped d-table">
+                                                    <thead class="table-head-sticky">
+                                                    <tr>
+                                                        <th>Pořadí</th>
+                                                        <th>Foto</th>
+                                                        <th>Tituly před</th>
+                                                        <th>Jméno</th>
+                                                        <th>Příjmení</th>
+                                                        <th>Tituly za</th>
+                                                        <th>Typ uživatele</th>
+                                                        <th>Akce</th>
+                                                    </tr>
+                                                    </thead>
+                                                        <tbody id="users_table">
+                                                        </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -278,8 +274,6 @@
                         <div class="modal-footer">
                             <input type="hidden" id="member_id" name="member_id" value="">
                             <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
-                            <!--<input type="hidden" id="group_name" name="group_name" value="">-->
-                            <!--<input type="hidden" id="group_description" name="group_description" value="">-->
                             <button type="button" class="btn btn-primary" id="remove-member-btn" data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
@@ -324,7 +318,6 @@
             window.location = $(this).data("href");
         });
     </script>
-<!--
     <script>
         $('#search').on('keyup', function(){
             search();
@@ -346,18 +339,19 @@
                 },
                 function(data){
                     table_post_row(data);
-                    console.log(data);
                 });
         }
         // table row
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
+                // TODO tituly pred a tituly za jenom pro ucitele
                 htmlView += `
             <tr>
                 <td colspan="8">Nebyli nalezeni žádní uživatelé.</td>
             </tr>`;
             }
+
             for(let i = 0; i < res.result.length; i++){
                 if (res.result[i].degree_front === null) {
                     res.result[i].degree_front = '';
@@ -382,31 +376,46 @@
                 <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
                 <td>
-                    <form method="post" action="{{ route('edit-group.add-member') }}">
-                        @csrf
-
-                        <input type="hidden" name="new_user_id" value="`+ res.result[i].id +`">
-                        <input type="hidden" id="new_user_group_id" name="new_user_group_id" value="{{ session('group_id') }}">
-                        <button type="submit" class="btn btn-outline-primary">Přidat</button>
-                    </form>
+                    <input type="hidden" id="new_user_group_id" name="new_user_group_id" value="{{ session('group_id') }}">
+                    <button type="button" class="btn btn-outline-primary" id="add-member-btn"  data-id="` + res.result[i].id + `">Přidat</button>
                 </td>
             </tr>`;
-
             }
 
             $('#users_table').html(htmlView);
         }
     </script>
-    -->
+    <script>
+        $(document).on("click", "#add-member-btn", function () {
+            addMember($(this).data("id"),
+                document.getElementById("new_user_group_id").value);
+        });
+
+        function addMember(new_user_id, new_user_group_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"new_user_id": new_user_id, "new_user_group_id": new_user_group_id},
+                url: "{{ route('edit-group.add-member') }}",
+                type: "POST",
+                dataType: 'text',
+            });
+
+            // Clear the searching text field.
+            document.getElementById('search').value = '';
+            // Search to remove the deleted row.
+            search();
+            searchMember();
+        }
+    </script>
     <script>
         $(document).on("click", ".open-remove-member-dialog", function () {
             var member = $(this).data('id');
-            //var groupName = document.getElementById("name").value;
-            //var groupDescription = document.getElementById("description").value;
 
             $(".modal-footer #member_id").val( member );
-            //$(".modal-footer #group_name").val( groupName );
-            //$(".modal-footer #group_description").val( groupDescription );
         });
     </script>
     <script>
@@ -421,8 +430,6 @@
             var group_id = $('#group_id').val();
             var group_type = $('#group_type').val();
 
-            console.log("keyword: " + keyword + ", group_id: " + group_id + ", group_type: " + group_type);
-
             $.post('{{ route("edit-group.search-member") }}',
                 {
                     _token: $('meta[name="csrf-token"]').attr('content'),
@@ -432,7 +439,6 @@
                 },
                 function(data){
                     table_post_row_member(data);
-                    console.log(data);
                 });
         }
 
@@ -446,8 +452,6 @@
                 <td colspan="8">Nebyli nalezeni žádní členové.</td>
             </tr>`;
             }
-
-            console.log("result length: " + res.result.length);
 
             for(let i = 0; i < res.result.length; i++){
                 var account_type = res.result[i].account_type;
@@ -505,8 +509,6 @@
         });
 
         function removeMember(member_id, group_id) {
-            console.log("removing member, member id: " + member_id + ", group_id: " + group_id);
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -519,7 +521,6 @@
                 dataType: 'text',
             });
 
-            // TODO
             // Clear the searching text field.
             document.getElementById('search-member').value = '';
             // Search to remove the deleted row.
@@ -528,6 +529,12 @@
     </script>
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });
+    </script>
+    <script>
+        $(document).on("click", "#add-member-open-model-btn", function () {
+            document.getElementById('search').value = '';
+            search();
+        });
     </script>
 
 @endsection
