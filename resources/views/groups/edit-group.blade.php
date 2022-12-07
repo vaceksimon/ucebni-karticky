@@ -90,89 +90,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-body">
-                                        <form action="" method="POST">
-                                            @csrf
-
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search-member">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div style="height: 300px;overflow-y: scroll;">
-                                            <table class="table table-striped d-table">
-                                                <thead class="table-head-sticky">
-                                                <tr>
-                                                    <th>Pořadí</th>
-                                                    <th>Foto</th>
-
-                                                    @if($group[0]->type == 'teachers')
-                                                    <th>Tituly před</th>
-                                                    @endif
-
-                                                    <th>Jméno</th>
-                                                    <th>Příjmení</th>
-
-                                                    @if($group[0]->type == 'teachers')
-                                                    <th>Tituly za</th>
-                                                    @endif
-
-                                                    <th>Typ uživatele</th>
-                                                    <th>Akce</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="members_table">
-                                                <!--
-                                                @empty($members[0])
-
-                                                        <tr>
-                                                            <div class="my-5">
-                                                                <div class="text-center">
-                                                                    Vaše skupina zatím neobsahuje žádné členy.
-                                                                </div>
-                                                                <div class="row mx-auto my-3" style="width: 120px">
-                                                                    <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
-                                                                </div>
-                                                            </div>
-                                                        </tr>
-                                                @else
-
-                                                    @foreach($members as $member)
-                                                        <tr>
-                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
-                                                                <img src="{{ $member->photo }}" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
-                                                                     alt="Avatar"/>
-                                                            </td>
-                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
-                                                                {{ $member->degree_front }}
-                                                            </td>
-                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
-                                                                {{ $member->first_name }}
-                                                            </td>
-                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
-                                                                {{ $member->last_name }}
-                                                            </td>
-                                                            <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
-                                                                {{ $member->degree_after }}
-                                                            </td>
-                                                            <td>
-                                                                <button type="button"
-                                                                        class="btn btn-outline-danger open-remove-member-dialog"
-                                                                        data-id="{{ $member->user_id }}"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#removingQuestion">Odebrat</button>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-
-                                                @endempty
-                                                -->
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div class="card-body" id="members_table">
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +263,7 @@
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
-                // TODO tituly pred a tituly za jenom pro ucitele
+                // TODO tituly pred a tituly za jenom pro ucitele, colspan right values
                 htmlView += `
             <tr>
                 <td colspan="8">Nebyli nalezeni žádní uživatelé.</td>
@@ -438,37 +356,98 @@
                     group_type:group_type
                 },
                 function(data){
-                    table_post_row_member(data);
+                    table_post_row_member(data, keyword);
                 });
         }
 
         // table row
-        function table_post_row_member(res){
+        function table_post_row_member(res, keyword){
             let htmlView = '';
-            if(res.result.length <= 0){
-                // TODO set colspan right value (teachers / students members print - degrees)
+
+            if(res.result.length <= 0 && keyword == null) {
                 htmlView += `
-            <tr>
-                <td colspan="8">Nebyli nalezeni žádní členové.</td>
-            </tr>`;
-            }
+                    <div style="height: 300px;overflow-y: scroll;">
+                        <table class="table table-striped d-table">
+                            <thead class="table-head-sticky">
+                                <tr>
+                                    <div class="my-5">
+                                        <div class="text-center">
+                                            Vaše skupina zatím neobsahuje žádné členy.
+                                        </div>
+                                        <div class="row mx-auto my-3" style="width: 120px">
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addMemberModal">Přidat člena</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>`;
+            } else {
+                htmlView += `
+                    <form action="" method="POST">
+                        @csrf
 
-            for(let i = 0; i < res.result.length; i++){
-                var account_type = res.result[i].account_type;
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search-member">
+                                </div>
+                            </div>
+                        </div>
+                    </form>`;
 
-                if (account_type === "teacher") {
-                    if (res.result[i].degree_front === null) {
-                        res.result[i].degree_front = '';
-                    }
-                    if (res.result[i].degree_after === null) {
-                        res.result[i].degree_after = '';
-                    }
+                htmlView += `
+                    <div style="height: 300px;overflow-y: scroll;">
+                        <table class="table table-striped d-table">
+                            <thead class="table-head-sticky">
+                            <tr>
+                                @if(!$members->isEmpty())
+                                <th>Pořadí</th>
+                                <th>Foto</th>
+
+                                @if($group[0]->type == 'teachers')
+                                <th>Tituly před</th>
+                                @endif
+
+                                <th>Jméno</th>
+                                <th>Příjmení</th>
+
+                                @if($group[0]->type == 'teachers')
+                                <th>Tituly za</th>
+                                @endif
+
+                                <th>Typ uživatele</th>
+                                <th>Akce</th>
+                                @endif
+                            </tr>
+                            </thead>
+                            <tbody>`;
+
+                if (res.result.length <= 0) {
+                    // TODO set colspan right value (teachers / students members print - degrees)
+                    htmlView += `
+                        <tr>
+                            <td colspan="8">Nebyli nalezeni žádní členové.</td>
+                        </tr>`;
                 }
 
-                var url = '{{ route("profile", ":id") }}';
-                url = url.replace(':id', res.result[i].id);
+                for(let i = 0; i < res.result.length; i++){
+                    var account_type = res.result[i].account_type;
 
-                htmlView += `
+                    if (account_type === "teacher") {
+                        if (res.result[i].degree_front === null) {
+                            res.result[i].degree_front = '';
+                        }
+                        if (res.result[i].degree_after === null) {
+                            res.result[i].degree_after = '';
+                        }
+                    }
+
+                    var url = '{{ route("profile", ":id") }}';
+                    url = url.replace(':id', res.result[i].id);
+
+                    htmlView += `
                     <tr>
                         <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
                         <td class="clickable-row" data-href="` + url + `">
@@ -476,27 +455,30 @@
                                 alt="Avatar"/>
                         </td>`;
 
-                if (account_type === 'teacher') {
-                    htmlView += `
+                    if (account_type === 'teacher') {
+                        htmlView += `
                         <td class="clickable-row" data-href="` + url + `">`+res.result[i].degree_front+`</td>
                     `;
-                }
+                    }
 
-                htmlView += `
+                    htmlView += `
                     <td class="clickable-row" data-href="` + url + `">`+res.result[i].first_name+`</td>
                     <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>`;
 
-                if (account_type === 'teacher') {
-                    htmlView += `
+                    if (account_type === 'teacher') {
+                        htmlView += `
                         <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>`;
-                }
+                    }
 
-                htmlView += `
+                    htmlView += `
                     <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
                     <td>
                         <button type="button" class="btn btn-outline-danger open-remove-member-dialog"
                             data-id="` + res.result[i].id + `" data-bs-toggle="modal" data-bs-target="#removingQuestion">Odebrat</button>
                     </td></tr>`;
+                }
+
+                htmlView += `</tbody></table></div>`;
             }
 
             $('#members_table').html(htmlView);
