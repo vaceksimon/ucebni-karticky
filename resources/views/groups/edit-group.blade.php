@@ -90,7 +90,20 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-body" id="members_table">
+                                    <div class="card-body">
+                                        <form action="" method="POST">
+                                            @csrf
+
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="members_table">
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -345,10 +358,6 @@
         });
     </script>
     <script>
-        $('#search-member').on('keyup', function(){
-            searchMember();
-        });
-
         searchMember();
 
         function searchMember(){
@@ -372,7 +381,9 @@
         function table_post_row_member(res, keyword){
             let htmlView = '';
 
-            if(res.result.length <= 0 && keyword == null) {
+            if(res.result.length <= 0 && keyword === '') {
+                document.getElementById("search-member").style.display = "none";
+
                 htmlView += `
                     <div style="height: 300px;overflow-y: scroll;">
                         <table class="table table-striped d-table">
@@ -392,18 +403,7 @@
                         </table>
                     </div>`;
             } else {
-                htmlView += `
-                    <form action="" method="POST">
-                        @csrf
-
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search-member">
-                                </div>
-                            </div>
-                        </div>
-                    </form>`;
+                document.getElementById("search-member").style.display = "flex";
 
                 htmlView += `
                     <div style="height: 300px;overflow-y: scroll;">
@@ -491,6 +491,10 @@
 
             $('#members_table').html(htmlView);
         }
+
+        $('#search-member').on('keyup', function(){
+            searchMember();
+        });
     </script>
     <script>
         $(document).on("click", "#remove-member-btn", function () {
