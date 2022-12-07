@@ -70,7 +70,7 @@
                                         <div class="row" style="width: 60%">
                                             <div class="container my-auto">
                                                 <label class="input-group-text my-auto change-image" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
-                                                <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image" hidden>
+                                                <input type="file" class="form-control" id="image" name="image" hidden>
                                             </div>
                                         </div>
                                     </div>
@@ -376,9 +376,6 @@
             $(".modal-footer #group_name").val( groupName );
             $(".modal-footer #group_description").val( groupDescription );
         });
-    </script>
-    <script>
-        $("input[name='image']").change(function() { this.form.submit(); });
     </script>
 
 @endsection

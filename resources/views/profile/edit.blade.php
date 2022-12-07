@@ -147,7 +147,7 @@
                                                     <label class="input-group-text my-auto change-image"
                                                            style="width: 75px; cursor: pointer"
                                                            for="image">Nahrát</label>
-                                                    <input type="file" onchange="this.form.submit()"
+                                                    <input type="file"
                                                            class="form-control" id="image" name="image"
                                                            style="cursor: pointer" hidden>
                                                 </div>
