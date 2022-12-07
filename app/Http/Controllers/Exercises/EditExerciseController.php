@@ -94,29 +94,33 @@ class EditExerciseController extends Controller
      * Function for adding flashcard to the exercise.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function addFlashcard(Request $request)
     {
-        $validated = $request->validate([
-            'flashcard_question' => 'required|max:255',
-            'flashcard_answer' => 'required|max:255',
-        ]);
+        try {
+            $validated = $request->validate([
+                'flashcard_question' => 'required|max:255',
+                'flashcard_answer' => 'required|max:255',
+            ]);
 
-        $question = $validated['flashcard_question'];
-        $answer = $validated['flashcard_answer'];
-        $exercise_id = $request->add_flashcard_exercise_id;
+            $question = $validated['flashcard_question'];
+            $answer = $validated['flashcard_answer'];
+            $exercise_id = $request->add_flashcard_exercise_id;
 
-        $exercise = Exercise::find($exercise_id);
+            $exercise = Exercise::find($exercise_id);
 
-        $exercise->flashcards()->create([
-            'question' => $question,
-            'answer' => $answer,
-        ]);
+            $exercise->flashcards()->create([
+                'question' => $question,
+                'answer' => $answer,
+            ]);
 
-        $exercise->save();
+            $exercise->save();
+        } catch (Exception $e) {
+            return '1';
+        }
 
-        return redirect('edit-exercise');
+        return '0';
     }
 
     /**
