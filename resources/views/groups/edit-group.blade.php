@@ -178,7 +178,7 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="delete-group" class="col-form-label text-start" style="color: red">
+                                <label class="col-form-label text-start" style="color: red">
                                     <b>{{ __('Nebezpečná zóna') }}</b> :
                                 </label>
 
