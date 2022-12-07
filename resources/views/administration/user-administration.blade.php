@@ -167,6 +167,14 @@
                 url: "{{ route('user-administration.remove-user') }}",
                 type: "POST",
                 dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat uživatele.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
             });
 
             // Clear the searching text field.

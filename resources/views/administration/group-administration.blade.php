@@ -155,6 +155,14 @@
                 url: "{{ route('group-administration.remove-group') }}",
                 type: "POST",
                 dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat skupinu.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
             });
             // Clear the searching text field.
             document.getElementById('search').value = '';

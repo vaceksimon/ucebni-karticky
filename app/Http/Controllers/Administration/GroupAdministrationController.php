@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Groups;
@@ -61,12 +62,19 @@ class GroupAdministrationController extends Controller
      * Function for removing the group from the database.
      *
      * @param Request $request
+     * @return string
      */
     public function removeGroup(Request $request)
     {
-        DB::table('groups')
-            ->where('id', $request->group_id)
-            ->delete();
+        try {
+            DB::table('groups')
+                ->where('id', $request->group_id)
+                ->delete();
+        } catch (Exception $e) {
+            return '1';
+        }
+
+        return '0';
     }
 
     /**

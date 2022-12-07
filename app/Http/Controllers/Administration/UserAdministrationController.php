@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -62,11 +63,18 @@ class UserAdministrationController extends Controller
      * Function for removing the user from the database.
      *
      * @param Request $request
+     * @return string
      */
     public function removeUser(Request $request)
     {
-        DB::table('users')
-            ->where('id', $request->user_id)
-            ->delete();
+        try {
+            DB::table('users')
+                ->where('id', $request->user_id)
+                ->delete();
+        } catch (Exception $e) {
+            return '1';
+        }
+
+        return '0';
     }
 }

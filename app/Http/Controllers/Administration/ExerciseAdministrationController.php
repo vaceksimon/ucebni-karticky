@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Groups;
@@ -61,12 +62,19 @@ class ExerciseAdministrationController extends Controller
      * Function for removing the exercises from the database.
      *
      * @param Request $request
+     * @return string
      */
     public function removeExercise(Request $request)
     {
-        DB::table('exercises')
-            ->where('id', $request->exercise_id)
-            ->delete();
+        try {
+            DB::table('exercises')
+                ->where('id', $request->exercise_id)
+                ->delete();
+        } catch (Exception $e) {
+            return '1';
+        }
+
+        return '0';
     }
 
     /**

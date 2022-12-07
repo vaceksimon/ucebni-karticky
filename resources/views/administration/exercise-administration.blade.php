@@ -152,6 +152,14 @@
                 url: "{{ route('exercise-administration.remove-exercise') }}",
                 type: "POST",
                 dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat cvičení.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
             });
 
             // Clear the searching text field.
