@@ -61,15 +61,12 @@ class GroupAdministrationController extends Controller
      * Function for removing the group from the database.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function removeGroup(Request $request)
     {
         DB::table('groups')
             ->where('id', $request->group_id)
             ->delete();
-
-        return view('administration.group-administration');
     }
 
     /**

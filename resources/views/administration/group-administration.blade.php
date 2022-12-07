@@ -58,12 +58,7 @@
                             <p>Opravdu si přejete smazat skupinu?</p>
                         </div>
                         <div class="modal-footer">
-                            <form method="post" action="{{ route('group-administration.remove-group') }}">
-                                @csrf
-
-                                <input type="hidden" id="group_id" name="group_id" value="">
-                                <button type="submit" class="btn btn-primary">Ano</button>
-                            </form>
+                            <button type="button" class="btn btn-primary" id="remove-group-btn" data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
@@ -140,7 +135,31 @@
     <script>
         $(document).on("click", ".open-remove-group-dialog", function () {
             var group = $(this).data('id');
-            $(".modal-footer #group_id").val( group );
+            //$(".modal-footer #group_id").val( group );
+
+            $(".modal-footer #remove-group-btn").val(group);
         });
+
+        $(document).on("click", "#remove-group-btn", function () {
+            removeGroup($(this).attr("value"));
+        })
+
+        function removeGroup(group_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"group_id" : group_id},
+                url: "{{ route('group-administration.remove-group') }}",
+                type: "POST",
+                dataType: 'text',
+            });
+            // Clear the searching text field.
+            document.getElementById('search').value = '';
+            // Search to remove the deleted row.
+            search();
+        }
     </script>
 @endsection

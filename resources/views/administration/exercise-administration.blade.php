@@ -142,8 +142,6 @@
         });
 
         function removeExercise(exercise_id) {
-            console.log("remove exercise, exercise id: " + exercise_id);
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
