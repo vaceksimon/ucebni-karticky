@@ -32,13 +32,13 @@
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#shareModal"
                                                                 onclick="exercise_id = {{$record->id}}; share();">
-                                                            Sdílet
+                                                            Sdílet <i class="bi bi-share-fill"></i>
                                                         </button>
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                                 onclick="exerciseId = {{$record->id}}; search();">
-                                                            Zadat
+                                                            Zadat <i class="bi bi-collection"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -49,20 +49,20 @@
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
                                                     <a href="{{route('myexercises.edit', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit <i class="bi bi-pencil-fill"></i></button>
                                                     </a>
                                                     <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                             data-bs-toggle="modal" data-bs-target="#statModal"
                                                             onclick="exerciseId = {{$record->id}}; searchForStat();">
-                                                        Zobrazit statistiky
+                                                        Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i>
                                                     </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                                 onclick="exerciseId = {{$record->id}}; search();">
-                                                            Zadat
+                                                            Zadat <i class="bi bi-collection"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -105,15 +105,15 @@
                                                     <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                             data-bs-toggle="modal" data-bs-target="#statModal"
                                                             onclick="exerciseId = {{$record->id}}; searchForStat();">
-                                                        Zobrazit statistiky
+                                                        Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i>
                                                     </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -157,15 +157,15 @@
 
                                                         <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
                                                         <input type="hidden" name="exercise_id_stat" id="exercise_id_stat" value="{{ $record->id }}">
-                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i></button>
                                                     </form>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -335,6 +335,17 @@
             isShared = JSON.parse(res.isShared);
             htmlView = '';
             let j = 0;
+
+            if (res.result.length === 0)
+            {
+                htmlView += `
+                <div class="text-center fs-3">Bohužel nemáte cvičení komu nasdílet.
+                    <i class="bi bi-emoji-frown"></i>
+                </div>`
+                $('#shareGroupsBody').html(htmlView);
+                return;
+            }
+
             for (let i = 0; i < res.result.length; i++) {
                 if (!(document.getElementById("shared").checked)) {
                     if (i % 3 === 0) {
