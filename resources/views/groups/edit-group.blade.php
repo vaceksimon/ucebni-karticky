@@ -385,7 +385,7 @@
                 document.getElementById("search-member").style.display = "none";
 
                 htmlView += `
-                    <div style="height: 300px;overflow-y: scroll;">
+                    <div style="height: 336px;overflow-y: scroll;">
                         <table class="table table-striped d-table">
                             <thead class="table-head-sticky">
                                 <tr>
