@@ -73,62 +73,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-body">
-                                        <div style="height: 300px;overflow-y: scroll;">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                </thead>
-                                                @empty($flashcards[0])
-                                                    <tbody>
-                                                        <tr>
-                                                            <div class="my-5">
-                                                                <div class="text-center">
-                                                                    Cvičení zatím neobsahuje žádné kartičky.
-                                                                    <i class="bi bi-emoji-frown"></i>
-                                                                </div>
-                                                                <div class="row mx-auto my-3" style="width: 120px">
-                                                                    <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
-                                                                </div>
-                                                            </div>
-                                                        </tr>
-                                                    </tbody>
-                                                @else
-                                                    <tbody>
-                                                        @foreach($flashcards as $flashcard)
-                                                            <tr>
-                                                                <td>
-                                                                    {{ $loop->index + 1 }}
-                                                                </td>
-                                                                <td>
-                                                                    <div id="flashcard_question_{{ $flashcard->id }}" class="text-shortening" data-value="{{ $flashcard->question }}">
-                                                                        {{ $flashcard->question }}
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div id="flashcard_answer_{{ $flashcard->id }}" class="text-shortening" data-value="{{ $flashcard->answer }}">
-                                                                        {{ $flashcard->answer }}
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                            class="btn btn-outline-primary open-edit-flashcard"
-                                                                            data-id="{{ $flashcard->id }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#editFlashcard">Upravit</button>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                            class="btn btn-outline-danger open-remove-flashcard-dialog"
-                                                                            data-id="{{ $flashcard->id }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#removingQuestion">Odebrat</button>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                @endempty
-                                            </table>
-                                        </div>
+                                    <div class="card-body" id="flashcards-table">
                                     </div>
                                 </div>
                             </div>
@@ -387,14 +332,101 @@
         });
     </script>
     <script>
+        showFlashcards();
+
+        function showFlashcards() {
+            $.post('{{ route("edit-exercise.search-flashcards") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                },
+                function(data){
+                    table_post_row_flashcards(data);
+                });
+        }
+
+        function table_post_row_flashcards(res) {
+            let htmlView = '';
+            if(res.result.length <= 0) {
+                htmlView += `
+                    <div style="height: 300px;overflow-y: scroll;">
+                        <table class="table table-striped d-table">
+                            <thead class="table-head-sticky">
+                                <tr>
+                                    <div class="my-5">
+                                        <div class="text-center">
+                                            Cvičení zatím neobsahuje žádné kartičky.
+                                            <i class="bi bi-emoji-frown"></i>
+                                        </div>
+                                        <div class="row mx-auto my-3" style="width: 120px">
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>`;
+            } else {
+                htmlView += `
+                    <div style="height: 300px;overflow-y: scroll;">
+                            <table class="table table-striped d-table">
+                                <thead class="table-head-sticky">
+                                    <tr>
+                                        <th>Pořadí</th>
+                                        <th>Otázka</th>
+                                        <th>Odpověď</th>
+                                        <th>Upravit</th>
+                                        <th>Odebrat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+
+                for (let i = 0; i < res.result.length; i++) {
+                    htmlView += `
+                        <tr>
+                            <td>` + (i+1) + `</td>
+                            <td>
+                                <div id="flashcard_question_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].question + `">` +
+                                    res.result[i].question + `
+                                </div>
+                            </td>
+                            <td>
+                                <div id="flashcard_answer_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].answer + `">` +
+                                    res.result[i].answer + `
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-outline-primary open-edit-flashcard"
+                                        data-id="` + res.result[i].id + `"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editFlashcard">Upravit</button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                    class="btn btn-outline-danger open-remove-flashcard-dialog"
+                                    data-id="` + res.result[i].id + `"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#removingQuestion">Odebrat</button>
+                            </td>
+                        </tr>
+                    `;
+                }
+
+                htmlView += `</tbody></table></div>`;
+            }
+
+            $('#flashcards-table').html(htmlView);
+        }
+    </script>
+    <script>
         $(document).on("click", "#remove-flashcard-btn", function () {
             removeFlashcard(document.getElementById("flashcard_id").value,
                 document.getElementById("exercise_id").value);
         });
 
         function removeFlashcard(flashcard_id) {
-            console.log("removing flashcard, flashcard id: " + flashcard_id);
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -415,6 +447,8 @@
                     console.log('Error: ', data);
                 },
             });
+
+            showFlashcards();
         }
     </script>
 @endsection

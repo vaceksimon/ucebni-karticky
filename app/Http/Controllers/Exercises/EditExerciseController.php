@@ -40,14 +40,19 @@ class EditExerciseController extends Controller
             $exercise_id = Session::get('exercise_id');
             $exercise = Exercise::where('id', '=', $exercise_id)->get();
 
-            $flashcards = Flashcard::where('exercise_id', '=', $exercise_id)->get();
-
             return view('exercises.edit-exercise')
-                ->with('exercise', $exercise)
-                ->with('flashcards', $flashcards);
+                ->with('exercise', $exercise);
         }
 
         return view('home');
+    }
+
+    public function searchFlashcards(Request $request)
+    {
+        $exercise_id = Session::get('exercise_id');
+        $result = Flashcard::where('exercise_id', '=', $exercise_id)->get();
+
+        return response()->json(['result' => $result]);
     }
 
     /**
