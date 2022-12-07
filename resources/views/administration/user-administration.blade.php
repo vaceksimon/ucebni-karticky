@@ -169,12 +169,11 @@
                 dataType: 'text',
             });
 
+            // Clear the searching text field.
+            document.getElementById('search').value = '';
+
+            // Search to remove the deleted row.
             search();
         }
-    </script>
-    <script>/*
-        $(document).on("click", ".remove-user", function () {
-           var user = $()
-        });*/
     </script>
 @endsection

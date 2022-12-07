@@ -57,12 +57,7 @@
                             <p>Opravdu si přejete smazat cvičení?</p>
                         </div>
                         <div class="modal-footer">
-                            <form method="post" action="{{ route('exercise-administration.remove-exercise') }}">
-                                @csrf
-
-                                <input type="hidden" id="exercise_id" name="exercise_id" value="">
-                                <button type="submit" class="btn btn-primary">Ano</button>
-                            </form>
+                            <button type="button" class="btn btn-primary" id="remove-exercise-btn" data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
@@ -73,10 +68,13 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-    <script>$('#search').on('keyup', function(){
+    <script>
+        $('#search').on('keyup', function(){
             search();
         });
+
         search();
+
         function search(){
             var keyword = $('#search').val();
             $.post('{{ route("exercise-administration.search") }}',
@@ -133,10 +131,36 @@
         });
     </script>
     <script>
-        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-exercise-dialog", function () {
             var exercise = $(this).data('id');
-            $(".modal-footer #exercise_id").val( exercise );
+
+            $(".modal-footer #remove-exercise-btn").val(exercise);
         });
+
+        $(document).on("click", "#remove-exercise-btn", function () {
+            removeExercise($(this).attr("value"));
+        });
+
+        function removeExercise(exercise_id) {
+            console.log("remove exercise, exercise id: " + exercise_id);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"exercise_id" : exercise_id},
+                url: "{{ route('exercise-administration.remove-exercise') }}",
+                type: "POST",
+                dataType: 'text',
+            });
+
+            // Clear the searching text field.
+            document.getElementById('search').value = '';
+
+            // Search to remove the deleted row.
+            search();
+        }
     </script>
 @endsection
