@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ImageUploadController;
 use App\Models\Group;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -130,33 +131,44 @@ class EditGroupController extends Controller
      * Function for removing the member from the group.
      *
      * @param Request $request
+     * @return string
      */
     public function removeMember(Request $request)
     {
-        $member_id = $request->member_id;
-        $group_id = $request->group_id;
+        try {
+            $member_id = $request->member_id;
+            $group_id = $request->group_id;
 
-        // Then remove user from the group.
-        DB::table('users_memberships')
-            ->where('user_id', $member_id)
-            ->where('group_id', $group_id)
-            ->delete();
+            // Then remove user from the group.
+            DB::table('users_memberships')
+                ->where('user_id', $member_id)
+                ->where('group_id', $group_id)
+                ->delete();
+        } catch (Exception $e) {
+            return '1';
+        }
+
+        return '0';
     }
 
     /**
      * Function for adding member to the group.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function addMember(Request $request)
     {
-        $user_id = $request->new_user_id;
-        $group_id = $request->new_user_group_id;
+        try {
+            $user_id = $request->new_user_id;
+            $group_id = $request->new_user_group_id;
 
-        DB::insert('insert into users_memberships (user_id, group_id) values (?, ?)', [$user_id, $group_id]);
+            DB::insert('insert into users_memberships (user_id, group_id) values (?, ?)', [$user_id, $group_id]);
+        } catch (Exception $e) {
+            return '1';
+        }
 
-        return redirect('edit-group');
+        return '0';
     }
 
     /**

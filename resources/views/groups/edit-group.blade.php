@@ -320,6 +320,14 @@
                 url: "{{ route('edit-group.add-member') }}",
                 type: "POST",
                 dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se přidat člena.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
             });
 
             // Clear the searching text field.
@@ -501,6 +509,14 @@
                 url: "{{ route('edit-group.remove-member') }}",
                 type: "POST",
                 dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat člena.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
             });
 
             // Clear the searching text field.
