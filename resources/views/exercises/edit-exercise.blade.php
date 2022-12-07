@@ -318,15 +318,8 @@
                             <p>Opravdu si přejete odebrat kartičku ze cvičení?</p>
                         </div>
                         <div class="modal-footer">
-                            <form method="post" action="{{ route('edit-exercise.remove-flashcard') }}">
-                                @csrf
-
-                                <input type="hidden" id="flashcard_id" name="flashcard_id" value="">
-                                <input type="hidden" id="exercise_id" name="exercise_id" value="{{ session('exercise_id') }}">
-                                <input type="hidden" id="exercise_name" name="exercise_name" value="">
-                                <input type="hidden" id="exercise_description" name="exercise_description" value="">
-                                <button type="submit" class="btn btn-primary">Ano</button>
-                            </form>
+                            <input type="hidden" id="flashcard_id" name="flashcard_id" value="">
+                            <button type="button" class="btn btn-primary" id="remove-flashcard-btn" data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
@@ -392,5 +385,36 @@
             $(".modal-footer #exercise_name_edit").val( exerciseName );
             $(".modal-footer #exercise_description_edit").val( exerciseDescription );
         });
+    </script>
+    <script>
+        $(document).on("click", "#remove-flashcard-btn", function () {
+            removeFlashcard(document.getElementById("flashcard_id").value,
+                document.getElementById("exercise_id").value);
+        });
+
+        function removeFlashcard(flashcard_id) {
+            console.log("removing flashcard, flashcard id: " + flashcard_id);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {"flashcard_id": flashcard_id},
+                url: "{{ route('edit-exercise.remove-flashcard') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat kartičku.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
+            });
+        }
     </script>
 @endsection

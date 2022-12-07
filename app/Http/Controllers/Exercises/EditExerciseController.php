@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
 use App\Models\Flashcard;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -66,22 +67,22 @@ class EditExerciseController extends Controller
      * Function for removing flashcard from the exercise.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function removeFlashcard(Request $request)
     {
-        $flashcard_id = $request->flashcard_id;
-        $exercise_id = $request->exercise_id;
+        try {
+            $flashcard_id = $request->flashcard_id;
 
-        // First store the other data.
-        Exercise::where('id', '=', $exercise_id)->update(['name' => $request->exercise_name, 'description' => $request->exercise_description]);
+            // Then remove the flashcard from the exercise.
+            DB::table('flashcards')
+                ->where('id', $flashcard_id)
+                ->delete();
+        } catch (Exception $e) {
+            return '1';
+        }
 
-        // Then remove the flashcard from the exercise.
-        DB::table('flashcards')
-            ->where('id', $flashcard_id)
-            ->delete();
-
-        return redirect('edit-exercise');
+        return '0';
     }
 
     /**
