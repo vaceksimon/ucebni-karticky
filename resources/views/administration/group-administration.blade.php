@@ -142,7 +142,7 @@
 
         $(document).on("click", "#remove-group-btn", function () {
             removeGroup($(this).attr("value"));
-        })
+        });
 
         function removeGroup(group_id) {
             $.ajaxSetup({
