@@ -68,6 +68,7 @@ Route::post('create-group', [\App\Http\Controllers\Groups\CreateGroupController:
 
 Route::get('/edit-group', [App\Http\Controllers\Groups\EditGroupController::class, 'index'])->name('edit-group');
 Route::post('/edit-group/search', [App\Http\Controllers\Groups\EditGroupController::class, 'search'])->name('edit-group.search');
+Route::post('/edit-group/search-member', [App\Http\Controllers\Groups\EditGroupController::class, 'searchMember'])->name('edit-group.search-member');
 Route::post('/edit-group/remove-member', [App\Http\Controllers\Groups\EditGroupController::class, 'removeMember'])->name('edit-group.remove-member');
 Route::post('/edit-group/add-member', [App\Http\Controllers\Groups\EditGroupController::class, 'addMember'])->name('edit-group.add-member');
 Route::post('/edit-group/delete-group', [\App\Http\Controllers\Groups\EditGroupController::class, 'deleteGroup'])->name('edit-group.delete-group');

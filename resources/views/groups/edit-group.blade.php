@@ -91,13 +91,43 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <div style="height: 300px;overflow-y: scroll;">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                </thead>
+                                        <form action="" method="POST">
+                                            @csrf
 
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" placeholder="Vyhledat uživatele" id="search-member">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div style="height: 300px;overflow-y: scroll;">
+                                            <table class="table table-striped d-table">
+                                                <thead class="table-head-sticky">
+                                                <tr>
+                                                    <th>Pořadí</th>
+                                                    <th>Foto</th>
+
+                                                    @if($group[0]->type == 'teachers')
+                                                    <th>Tituly před</th>
+                                                    @endif
+
+                                                    <th>Jméno</th>
+                                                    <th>Příjmení</th>
+
+                                                    @if($group[0]->type == 'teachers')
+                                                    <th>Tituly za</th>
+                                                    @endif
+
+                                                    <th>Typ uživatele</th>
+                                                    <th>Akce</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="members_table">
+                                                <!--
                                                 @empty($members[0])
-                                                    <tbody>
+
                                                         <tr>
                                                             <div class="my-5">
                                                                 <div class="text-center">
@@ -108,9 +138,8 @@
                                                                 </div>
                                                             </div>
                                                         </tr>
-                                                    </tbody>
                                                 @else
-                                                    <tbody>
+
                                                     @foreach($members as $member)
                                                         <tr>
                                                             <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
@@ -138,8 +167,10 @@
                                                             </td>
                                                         </tr>
                                                     @endforeach
-                                                    </tbody>
+
                                                 @endempty
+                                                -->
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -245,15 +276,11 @@
                             <p>Opravdu si přejete odebrat uživatele ze skupiny?</p>
                         </div>
                         <div class="modal-footer">
-                            <form method="post" action="{{ route('edit-group.remove-member') }}">
-                                @csrf
-
-                                <input type="hidden" id="member_id" name="member_id" value="">
-                                <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
-                                <input type="hidden" id="group_name" name="group_name" value="">
-                                <input type="hidden" id="group_description" name="group_description" value="">
-                                <button type="submit" class="btn btn-primary">Ano</button>
-                            </form>
+                            <input type="hidden" id="member_id" name="member_id" value="">
+                            <input type="hidden" id="group_id" name="group_id" value="{{ session('group_id') }}">
+                            <!--<input type="hidden" id="group_name" name="group_name" value="">-->
+                            <!--<input type="hidden" id="group_description" name="group_description" value="">-->
+                            <button type="button" class="btn btn-primary" id="remove-member-btn" data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
@@ -297,10 +324,14 @@
             window.location = $(this).data("href");
         });
     </script>
-    <script>$('#search').on('keyup', function(){
+<!--
+    <script>
+        $('#search').on('keyup', function(){
             search();
         });
+
         search();
+
         function search(){
             var keyword = $('#search').val();
             var group_id = $('#group_id').val();
@@ -318,7 +349,7 @@
                     console.log(data);
                 });
         }
-        // table row with ajax
+        // table row
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
@@ -362,20 +393,138 @@
             </tr>`;
 
             }
+
             $('#users_table').html(htmlView);
         }
     </script>
+    -->
     <script>
-        // https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
         $(document).on("click", ".open-remove-member-dialog", function () {
             var member = $(this).data('id');
-            var groupName = document.getElementById("name").value;
-            var groupDescription = document.getElementById("description").value;
+            //var groupName = document.getElementById("name").value;
+            //var groupDescription = document.getElementById("description").value;
 
             $(".modal-footer #member_id").val( member );
-            $(".modal-footer #group_name").val( groupName );
-            $(".modal-footer #group_description").val( groupDescription );
+            //$(".modal-footer #group_name").val( groupName );
+            //$(".modal-footer #group_description").val( groupDescription );
         });
+    </script>
+    <script>
+        $('#search-member').on('keyup', function(){
+            searchMember();
+        });
+
+        searchMember();
+
+        function searchMember(){
+            var keyword = $('#search-member').val();
+            var group_id = $('#group_id').val();
+            var group_type = $('#group_type').val();
+
+            console.log("keyword: " + keyword + ", group_id: " + group_id + ", group_type: " + group_type);
+
+            $.post('{{ route("edit-group.search-member") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    keyword:keyword,
+                    group_id:group_id,
+                    group_type:group_type
+                },
+                function(data){
+                    table_post_row_member(data);
+                    console.log(data);
+                });
+        }
+
+        // table row
+        function table_post_row_member(res){
+            let htmlView = '';
+            if(res.result.length <= 0){
+                // TODO set colspan right value (teachers / students members print - degrees)
+                htmlView += `
+            <tr>
+                <td colspan="8">Nebyli nalezeni žádní členové.</td>
+            </tr>`;
+            }
+
+            console.log("result length: " + res.result.length);
+
+            for(let i = 0; i < res.result.length; i++){
+                var account_type = res.result[i].account_type;
+
+                if (account_type === "teacher") {
+                    if (res.result[i].degree_front === null) {
+                        res.result[i].degree_front = '';
+                    }
+                    if (res.result[i].degree_after === null) {
+                        res.result[i].degree_after = '';
+                    }
+                }
+
+                var url = '{{ route("profile", ":id") }}';
+                url = url.replace(':id', res.result[i].id);
+
+                htmlView += `
+                    <tr>
+                        <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
+                        <td class="clickable-row" data-href="` + url + `">
+                            <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
+                                alt="Avatar"/>
+                        </td>`;
+
+                if (account_type === 'teacher') {
+                    htmlView += `
+                        <td class="clickable-row" data-href="` + url + `">`+res.result[i].degree_front+`</td>
+                    `;
+                }
+
+                htmlView += `
+                    <td class="clickable-row" data-href="` + url + `">`+res.result[i].first_name+`</td>
+                    <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>`;
+
+                if (account_type === 'teacher') {
+                    htmlView += `
+                        <td class="clickable-row" data-href="` + url + `">`+ res.result[i].degree_after  +`</td>`;
+                }
+
+                htmlView += `
+                    <td class="clickable-row" data-href="` + url + `">`+res.result[i].account_type+`</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger open-remove-member-dialog"
+                            data-id="` + res.result[i].id + `" data-bs-toggle="modal" data-bs-target="#removingQuestion">Odebrat</button>
+                    </td></tr>`;
+            }
+
+            $('#members_table').html(htmlView);
+        }
+    </script>
+    <script>
+        $(document).on("click", "#remove-member-btn", function () {
+            removeMember(document.getElementById("member_id").value,
+                document.getElementById("group_id").value);
+        });
+
+        function removeMember(member_id, group_id) {
+            console.log("removing member, member id: " + member_id + ", group_id: " + group_id);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"member_id": member_id, "group_id": group_id},
+                url: "{{ route('edit-group.remove-member') }}",
+                type: "POST",
+                dataType: 'text',
+            });
+
+            // TODO
+            // Clear the searching text field.
+            document.getElementById('search-member').value = '';
+            // Search to remove the deleted row.
+            searchMember();
+        }
     </script>
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });

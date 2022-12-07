@@ -80,6 +80,28 @@ class EditGroupController extends Controller
         return response()->json(['result' => $result]);
     }
 
+    public function searchMember(Request $request)
+    {
+        $account_type = rtrim($request->group_type, "s");
+
+        if ($request->keyword != '')
+        {
+            $result = User::whereIn('users.id', function ($query) use ($request) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+            })->where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
+                ->where( 'account_type', '=', $account_type)
+                ->get();
+        }
+        else
+        {
+            $result = User::whereIn('users.id', function ($query) use ($request) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+            })->where( 'account_type', '=', $account_type)->get();
+        }
+
+        return response()->json(['result' => $result]);
+    }
+
     /**
      * Function for storing the new group in the database.
      *
@@ -108,23 +130,23 @@ class EditGroupController extends Controller
      * Function for removing the member from the group.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function removeMember(Request $request)
     {
+        dump($request);
         $member_id = $request->member_id;
         $group_id = $request->group_id;
 
         // First store the other data.
-        Group::where('id', '=', $group_id)->update(['name' => $request->group_name, 'description' => $request->group_description]);
+        // TODO if it is really needed now
+
+        //Group::where('id', '=', $group_id)->update(['name' => $request->group_name, 'description' => $request->group_description]);
 
         // Then remove user from the group.
         DB::table('users_memberships')
             ->where('user_id', $member_id)
             ->where('group_id', $group_id)
             ->delete();
-
-        return redirect('edit-group');
     }
 
     /**
