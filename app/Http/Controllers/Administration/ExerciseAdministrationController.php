@@ -61,15 +61,12 @@ class ExerciseAdministrationController extends Controller
      * Function for removing the exercises from the database.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function removeExercise(Request $request)
     {
         DB::table('exercises')
             ->where('id', $request->exercise_id)
             ->delete();
-
-        return view('administration.exercise-administration');
     }
 
     /**
