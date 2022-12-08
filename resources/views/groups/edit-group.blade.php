@@ -560,7 +560,7 @@
     </script>
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });
-        
+
         function photoSelected(profilePhoto) {
             let url = profilePhoto.value;
             let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
