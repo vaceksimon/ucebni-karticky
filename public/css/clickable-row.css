@@ -1,0 +1,4 @@
+.clickable-row-hover:hover {
+    --bs-table-striped-bg: rgba(173, 216, 230, .25);
+    --bs-table-bg: rgba(173, 216, 230, .25);
+}
