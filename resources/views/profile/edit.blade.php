@@ -138,15 +138,16 @@
                                     <div class="col-5">
                                         <div class="row">
                                             <div class="row col-lg-5">
-                                                <img src="{{asset($user->photo)}}" class="rounded-circle d-flex my-lg-auto mx-lg-0 my-3 mx-auto px-0" style="aspect-ratio : 1 / 1; width: 100%; object-fit: cover;" alt="Avatar"/>
+                                                <img id="img_profile" name="img_profile" src="{{asset($user->photo)}}" class="rounded-circle d-flex my-lg-auto mx-lg-0 my-3 mx-auto px-0" style="aspect-ratio : 1 / 1; width: 100%; object-fit: cover;" alt="Avatar"/>
                                             </div>
                                             <div class="row col-lg-7">
                                                 <div class="container my-auto">
                                                     <label class="input-group-text my-lg-auto mx-lg-0 my-3 mx-auto change-image"
                                                            style="width: 75px; cursor: pointer"
                                                            for="image">Nahrát</label>
-                                                    <input type="file" onchange="this.form.submit()"
+                                                    <input type="file"
                                                            class="form-control" id="image" name="image"
+                                                           onchange="photoSelected(this)"
                                                            style="cursor: pointer" hidden>
                                                 </div>
                                             </div>
@@ -205,14 +206,17 @@
                         @if($user['account_type'] != 'admin')
                             <div class="mt-5">
                                 <p class="text-danger fw-bold mb-1">Nebezpečná zóna:</p>
-                                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#removeUserPrompt">Smazat profil</button>
+                                <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                        data-bs-target="#removeUserPrompt">Smazat profil
+                                </button>
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
 
-            <div id="removeUserPrompt" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" role="dialog">
+            <div id="removeUserPrompt" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel"
+                 aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -249,4 +253,20 @@
 
         </div>
     </div>
+
+    <script>
+        function photoSelected(profilePhoto) {
+            let url = profilePhoto.value;
+            let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (profilePhoto.files && profilePhoto.files[0] && (ext === "gif" || ext === "png" || ext === "jpeg" || ext === "jpg")) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img_profile').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(profilePhoto.files[0]);
+            }
+        }
+    </script>
+
 @endsection
