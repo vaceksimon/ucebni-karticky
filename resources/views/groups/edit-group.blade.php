@@ -65,12 +65,12 @@
                                     <div class="row row-cols-2">
                                         <div class="row" style="width: 40%">
                                             <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="width: 160px; height: 160px;"
-                                                 alt="Avatar"/>
+                                                 id="img_group" alt="Avatar"/>
                                         </div>
                                         <div class="row" style="width: 60%">
                                             <div class="container my-auto">
                                                 <label class="input-group-text my-auto change-image" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
-                                                <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image" hidden>
+                                                <input type="file" class="form-control" onchange="photoSelected(this)" id="image" name="image" hidden>
                                             </div>
                                         </div>
                                     </div>
@@ -377,8 +377,20 @@
             $(".modal-footer #group_description").val( groupDescription );
         });
     </script>
+
     <script>
-        $("input[name='image']").change(function() { this.form.submit(); });
+        function photoSelected(profilePhoto) {
+            let url = profilePhoto.value;
+            let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (profilePhoto.files && profilePhoto.files[0] && (ext === "gif" || ext === "png" || ext === "jpeg" || ext === "jpg")) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img_group').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(profilePhoto.files[0]);
+            }
+        }
     </script>
 
 @endsection
