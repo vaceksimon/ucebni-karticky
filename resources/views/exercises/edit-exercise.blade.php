@@ -73,62 +73,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-body">
-                                        <div style="height: 300px;overflow-y: scroll;">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                </thead>
-                                                @empty($flashcards[0])
-                                                    <tbody>
-                                                        <tr>
-                                                            <div class="my-5">
-                                                                <div class="text-center">
-                                                                    Cvičení zatím neobsahuje žádné kartičky.
-                                                                    <i class="bi bi-emoji-frown"></i>
-                                                                </div>
-                                                                <div class="row mx-auto my-3" style="width: 120px">
-                                                                    <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
-                                                                </div>
-                                                            </div>
-                                                        </tr>
-                                                    </tbody>
-                                                @else
-                                                    <tbody>
-                                                        @foreach($flashcards as $flashcard)
-                                                            <tr>
-                                                                <td>
-                                                                    {{ $loop->index + 1 }}
-                                                                </td>
-                                                                <td>
-                                                                    <div id="flashcard_question_{{ $flashcard->id }}" class="text-shortening" data-value="{{ $flashcard->question }}">
-                                                                        {{ $flashcard->question }}
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div id="flashcard_answer_{{ $flashcard->id }}" class="text-shortening" data-value="{{ $flashcard->answer }}">
-                                                                        {{ $flashcard->answer }}
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                            class="btn btn-outline-primary open-edit-flashcard"
-                                                                            data-id="{{ $flashcard->id }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#editFlashcard">Upravit</button>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                            class="btn btn-outline-danger open-remove-flashcard-dialog"
-                                                                            data-id="{{ $flashcard->id }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#removingQuestion">Odebrat</button>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                @endempty
-                                            </table>
-                                        </div>
+                                    <div class="card-body" id="flashcards-table">
                                     </div>
                                 </div>
                             </div>
@@ -173,64 +118,60 @@
                             <h5 class="modal-title" id="addFlashcardModalLabel">Přidání kartičky</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" action="{{ route('edit-exercise.add-flashcard') }}">
-                            @csrf
+                        <div class="modal-body">
+                            <div class="row mt-5">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-3 row offset-lg-4">
+                                                <label for="flashcard_question" class="col-form-label text-start">
+                                                    {{ __('Otázka *') }} :
+                                                </label>
 
-                            <div class="modal-body">
-                                <div class="row mt-5">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="mb-3 row offset-lg-4">
-                                                    <label for="flashcard_question" class="col-form-label text-start">
-                                                        {{ __('Otázka *') }} :
-                                                    </label>
+                                                <div class="col-lg-6">
+                                                    <input id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
+                                                           maxlength="255"
+                                                           value="{{ old('question') }}" required autocomplete="question" autofocus
+                                                           oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
+                                                           oninput="setCustomValidity('')">
 
-                                                    <div class="col-lg-6">
-                                                        <input id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
-                                                               maxlength="255"
-                                                               value="{{ old('question') }}" required autocomplete="question" autofocus
-                                                               oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
-                                                               oninput="setCustomValidity('')">
-
-                                                        @error('flashcard_question')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>Otázka musí být vyplněna.</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3 row offset-lg-4">
-                                                    <label for="flashcard_answer" class="col-form-label text-start">
-                                                        {{ __('Odpověď *') }} :
-                                                    </label>
-
-                                                    <div class="col-lg-6">
-                                                        <input id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
-                                                               maxlength="255"
-                                                               value="{{ old('answer') }}" required autocomplete="question" autofocus
-                                                               oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
-                                                               oninput="setCustomValidity('')">
-
-                                                        @error('flashcard_answer')
+                                                    @error('flashcard_question')
                                                         <span class="invalid-feedback" role="alert">
-                                                                <strong>Odpověď musí být vyplněna.</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
+                                                            <strong>Otázka musí být vyplněna.</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 row offset-lg-4">
+                                                <label for="flashcard_answer" class="col-form-label text-start">
+                                                    {{ __('Odpověď *') }} :
+                                                </label>
+
+                                                <div class="col-lg-6">
+                                                    <input id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
+                                                           maxlength="255"
+                                                           value="{{ old('answer') }}" required autocomplete="question" autofocus
+                                                           oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
+                                                           oninput="setCustomValidity('')">
+
+                                                    @error('flashcard_answer')
+                                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>Odpověď musí být vyplněna.</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer" style="justify-content: flex-start;">
-                                <input type="hidden" id="add_flashcard_exercise_id" name="add_flashcard_exercise_id" value="<?php echo $exercise[0]->id;?>">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                                <button type="submit" class="btn btn-primary ms-auto me-0 add-flashcard">Přidat</button>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="modal-footer" style="justify-content: flex-start;">
+                            <input type="hidden" id="add_flashcard_exercise_id" name="add_flashcard_exercise_id" value="<?php echo $exercise[0]->id;?>">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
+                            <button type="button" id="add-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Přidat</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -242,67 +183,60 @@
                             <h5 class="modal-title" id="editFlashcardModalLabel">Úprava kartičky</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" action="{{ route('edit-exercise.edit-flashcard') }}">
-                            @csrf
+                        <div class="modal-body">
+                            <div class="row mt-5">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-3 row offset-lg-4">
+                                                <label for="flashcard_question_edit" class="col-form-label text-start">
+                                                    {{ __('Otázka *') }} :
+                                                </label>
 
-                            <div class="modal-body">
-                                <div class="row mt-5">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="mb-3 row offset-lg-4">
-                                                    <label for="flashcard_question_edit" class="col-form-label text-start">
-                                                        {{ __('Otázka *') }} :
-                                                    </label>
+                                                <div class="col-lg-6">
+                                                    <input id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
+                                                           maxlength="255"
+                                                           value="" required autocomplete="question" autofocus
+                                                           oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
+                                                           oninput="setCustomValidity('')">
 
-                                                    <div class="col-lg-6">
-                                                        <input id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
-                                                               maxlength="255"
-                                                               value="" required autocomplete="question" autofocus
-                                                               oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
-                                                               oninput="setCustomValidity('')">
-
-                                                        @error('flashcard_question_edit')
-                                                        <span class="invalid-feedback" role="alert">
-                                                                <strong>Otázka musí být vyplněna.</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
+                                                    @error('flashcard_question_edit')
+                                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>Otázka musí být vyplněna.</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
+                                            </div>
 
-                                                <div class="mb-3 row offset-lg-4">
-                                                    <label for="flashcard_answer_edit" class="col-form-label text-start">
-                                                        {{ __('Odpověď *') }} :
-                                                    </label>
+                                            <div class="mb-3 row offset-lg-4">
+                                                <label for="flashcard_answer_edit" class="col-form-label text-start">
+                                                    {{ __('Odpověď *') }} :
+                                                </label>
 
-                                                    <div class="col-lg-6">
-                                                        <input id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
-                                                               maxlength="255"
-                                                               value="" required autocomplete="question" autofocus
-                                                               oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
-                                                               oninput="setCustomValidity('')">
+                                                <div class="col-lg-6">
+                                                    <input id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
+                                                           maxlength="255"
+                                                           value="" required autocomplete="question" autofocus
+                                                           oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
+                                                           oninput="setCustomValidity('')">
 
-                                                        @error('flashcard_answer_edit')
-                                                        <span class="invalid-feedback" role="alert">
-                                                                <strong>Odpověď musí být vyplněna.</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
+                                                    @error('flashcard_answer_edit')
+                                                    <span class="invalid-feedback" role="alert">
+                                                            <strong>Odpověď musí být vyplněna.</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer" style="justify-content: flex-start;">
-                                <input type="hidden" id="flashcard_id_edit" name="flashcard_id_edit" value="">
-                                <input type="hidden" id="exercise_id_edit" name="exercise_id_edit" value="{{ session('exercise_id') }}">
-                                <input type="hidden" id="exercise_name_edit" name="exercise_name_edit" value="">
-                                <input type="hidden" id="exercise_description_edit" name="exercise_description_edit" value="">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                                <button type="submit" class="btn btn-primary ms-auto me-0 add-flashcard">Upravit</button>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="modal-footer" style="justify-content: flex-start;">
+                            <input type="hidden" id="flashcard_id_edit" name="flashcard_id_edit" value="">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
+                            <button type="button" id="edit-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Upravit</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -318,15 +252,8 @@
                             <p>Opravdu si přejete odebrat kartičku ze cvičení?</p>
                         </div>
                         <div class="modal-footer">
-                            <form method="post" action="{{ route('edit-exercise.remove-flashcard') }}">
-                                @csrf
-
-                                <input type="hidden" id="flashcard_id" name="flashcard_id" value="">
-                                <input type="hidden" id="exercise_id" name="exercise_id" value="{{ session('exercise_id') }}">
-                                <input type="hidden" id="exercise_name" name="exercise_name" value="">
-                                <input type="hidden" id="exercise_description" name="exercise_description" value="">
-                                <button type="submit" class="btn btn-primary">Ano</button>
-                            </form>
+                            <input type="hidden" id="flashcard_id" name="flashcard_id" value="">
+                            <button type="button" class="btn btn-primary" id="remove-flashcard-btn" data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
@@ -392,5 +319,191 @@
             $(".modal-footer #exercise_name_edit").val( exerciseName );
             $(".modal-footer #exercise_description_edit").val( exerciseDescription );
         });
+    </script>
+    <script>
+        showFlashcards();
+
+        function showFlashcards() {
+            $.post('{{ route("edit-exercise.search-flashcards") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                },
+                function(data){
+                    table_post_row_flashcards(data);
+                });
+        }
+
+        function table_post_row_flashcards(res) {
+            let htmlView = '';
+            if(res.result.length <= 0) {
+                htmlView += `
+                    <div style="height: 300px;overflow-y: scroll;">
+                        <table class="table table-striped d-table">
+                            <thead class="table-head-sticky">
+                                <tr>
+                                    <div class="my-5">
+                                        <div class="text-center">
+                                            Cvičení zatím neobsahuje žádné kartičky.
+                                            <i class="bi bi-emoji-frown"></i>
+                                        </div>
+                                        <div class="row mx-auto my-3" style="width: 120px">
+                                            <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>`;
+            } else {
+                htmlView += `
+                    <div style="height: 300px;overflow-y: scroll;">
+                            <table class="table table-striped d-table">
+                                <thead class="table-head-sticky">
+                                    <tr>
+                                        <th>Pořadí</th>
+                                        <th>Otázka</th>
+                                        <th>Odpověď</th>
+                                        <th>Upravit</th>
+                                        <th>Odebrat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+
+                for (let i = 0; i < res.result.length; i++) {
+                    htmlView += `
+                        <tr>
+                            <td>` + (i+1) + `</td>
+                            <td>
+                                <div id="flashcard_question_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].question + `">` +
+                                    res.result[i].question + `
+                                </div>
+                            </td>
+                            <td>
+                                <div id="flashcard_answer_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].answer + `">` +
+                                    res.result[i].answer + `
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-outline-primary open-edit-flashcard"
+                                        data-id="` + res.result[i].id + `"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editFlashcard">Upravit</button>
+                            </td>
+                            <td>
+                                <button type="button"
+                                    class="btn btn-outline-danger open-remove-flashcard-dialog"
+                                    data-id="` + res.result[i].id + `"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#removingQuestion">Odebrat</button>
+                            </td>
+                        </tr>
+                    `;
+                }
+
+                htmlView += `</tbody></table></div>`;
+            }
+
+            $('#flashcards-table').html(htmlView);
+        }
+    </script>
+    <script>
+        $(document).on("click", "#remove-flashcard-btn", function () {
+            removeFlashcard(document.getElementById("flashcard_id").value,
+                document.getElementById("exercise_id").value);
+        });
+
+        function removeFlashcard(flashcard_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {"flashcard_id": flashcard_id},
+                url: "{{ route('edit-exercise.remove-flashcard') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat kartičku.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
+            });
+
+            showFlashcards();
+        }
+    </script>
+    <script>
+        $(document).on("click", "#add-flashcard-btn", function () {
+           addFlashcard(document.getElementById("flashcard_question").value ,
+               document.getElementById("flashcard_answer").value,
+               document.getElementById("add_flashcard_exercise_id").value);
+        });
+
+        function addFlashcard(question, answer, exercise_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"flashcard_question": question,
+                    "flashcard_answer": answer,
+                    "add_flashcard_exercise_id": exercise_id},
+                url: "{{ route('edit-exercise.add-flashcard') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se přidat kartičku.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
+            });
+
+            showFlashcards();
+        }
+    </script>
+    <script>
+        $(document).on("click", "#edit-flashcard-btn", function () {
+            editFlashcard(document.getElementById("flashcard_id_edit").value,
+                document.getElementById("flashcard_question_edit").value,
+                document.getElementById("flashcard_answer_edit").value);
+        });
+
+        function editFlashcard(flashcard_id, question, answer) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"flashcard_question_edit": question,
+                    "flashcard_answer_edit": answer,
+                    "flashcard_id_edit": flashcard_id},
+                url: "{{ route('edit-exercise.edit-flashcard') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se upravit kartičku.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
+            });
+
+            showFlashcards();
+        }
     </script>
 @endsection
