@@ -25,6 +25,7 @@
     <link href="{{ asset('css/button-image-hover.css') }}" rel="stylesheet">
     <link href="{{ asset('css/table-head-sticky.css') }}" rel="stylesheet">
     <link href="{{ asset('css/text-shortening.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/clickable-row.css') }}" rel="stylesheet">
 
 </head>
 

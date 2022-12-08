@@ -95,7 +95,7 @@
                                                 @else
                                                     <tbody>
                                                     @foreach($members as $member)
-                                                        <tr>
+                                                        <tr class="clickable-row-hover" style="cursor:pointer;">
                                                             <td class="clickable-row" data-href="{{ route('profile', [$member->user_id]) }}">
                                                                 <img src="{{ $member->photo }}" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
                                                                      alt="Avatar"/>

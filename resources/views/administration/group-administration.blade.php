@@ -107,7 +107,7 @@
                 group = group.replace(':id', res.result[i].id);
 
                 htmlView += `
-            <tr>
+            <tr class="clickable-row-hover" style="cursor:pointer;">
                 <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
                 <td class="clickable-row" data-href="` + url + `">
                     <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
