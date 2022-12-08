@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
 use App\Models\Flashcard;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,14 +40,19 @@ class EditExerciseController extends Controller
             $exercise_id = Session::get('exercise_id');
             $exercise = Exercise::where('id', '=', $exercise_id)->get();
 
-            $flashcards = Flashcard::where('exercise_id', '=', $exercise_id)->get();
-
             return view('exercises.edit-exercise')
-                ->with('exercise', $exercise)
-                ->with('flashcards', $flashcards);
+                ->with('exercise', $exercise);
         }
 
         return view('home');
+    }
+
+    public function searchFlashcards(Request $request)
+    {
+        $exercise_id = Session::get('exercise_id');
+        $result = Flashcard::where('exercise_id', '=', $exercise_id)->get();
+
+        return response()->json(['result' => $result]);
     }
 
     /**
@@ -66,51 +72,55 @@ class EditExerciseController extends Controller
      * Function for removing flashcard from the exercise.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function removeFlashcard(Request $request)
     {
-        $flashcard_id = $request->flashcard_id;
-        $exercise_id = $request->exercise_id;
+        try {
+            $flashcard_id = $request->flashcard_id;
 
-        // First store the other data.
-        Exercise::where('id', '=', $exercise_id)->update(['name' => $request->exercise_name, 'description' => $request->exercise_description]);
+            // Then remove the flashcard from the exercise.
+            DB::table('flashcards')
+                ->where('id', $flashcard_id)
+                ->delete();
+        } catch (Exception $e) {
+            return '1';
+        }
 
-        // Then remove the flashcard from the exercise.
-        DB::table('flashcards')
-            ->where('id', $flashcard_id)
-            ->delete();
-
-        return redirect('edit-exercise');
+        return '0';
     }
 
     /**
      * Function for adding flashcard to the exercise.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function addFlashcard(Request $request)
     {
-        $validated = $request->validate([
-            'flashcard_question' => 'required|max:255',
-            'flashcard_answer' => 'required|max:255',
-        ]);
+        try {
+            $validated = $request->validate([
+                'flashcard_question' => 'required|max:255',
+                'flashcard_answer' => 'required|max:255',
+            ]);
 
-        $question = $validated['flashcard_question'];
-        $answer = $validated['flashcard_answer'];
-        $exercise_id = $request->add_flashcard_exercise_id;
+            $question = $validated['flashcard_question'];
+            $answer = $validated['flashcard_answer'];
+            $exercise_id = $request->add_flashcard_exercise_id;
 
-        $exercise = Exercise::find($exercise_id);
+            $exercise = Exercise::find($exercise_id);
 
-        $exercise->flashcards()->create([
-            'question' => $question,
-            'answer' => $answer,
-        ]);
+            $exercise->flashcards()->create([
+                'question' => $question,
+                'answer' => $answer,
+            ]);
 
-        $exercise->save();
+            $exercise->save();
+        } catch (Exception $e) {
+            return '1';
+        }
 
-        return redirect('edit-exercise');
+        return '0';
     }
 
     /**
@@ -138,23 +148,23 @@ class EditExerciseController extends Controller
      * Function for editing the content of the flashcard.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function editFlashcard(Request $request)
     {
-        $validated = $request->validate([
-            'flashcard_question_edit' => 'required|max:255',
-            'flashcard_answer_edit' => 'required|max:255',
-        ]);
+        try {
+            $validated = $request->validate([
+                'flashcard_question_edit' => 'required|max:255',
+                'flashcard_answer_edit' => 'required|max:255',
+            ]);
 
-        // First store the other data.
-        Exercise::where('id', '=', $request->exercise_id_edit)->update(['name' => $request->exercise_name_edit, 'description' => $request->exercise_description_edit]);
+            // Then update the flashcard question and answer.
+            DB::table('flashcards')
+                ->where('id', '=', $request->flashcard_id_edit)
+                ->update(['question' => $validated['flashcard_question_edit'], 'answer' => $validated['flashcard_answer_edit']]);
+        } catch (Exception $e) {
+            return '1';
+        }
 
-        // Then update the flashcard question and answer.
-        DB::table('flashcards')
-            ->where('id', '=', $request->flashcard_id_edit)
-            ->update(['question' => $validated['flashcard_question_edit'], 'answer' => $validated['flashcard_answer_edit']]);
-
-        return redirect('edit-exercise');
+        return '0';
     }
 }

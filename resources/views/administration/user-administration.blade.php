@@ -61,12 +61,7 @@
                             <p>Opravdu si přejete smazat uživatele?</p>
                         </div>
                         <div class="modal-footer">
-                            <form method="post" action="{{ route('user-administration.remove-user') }}">
-                                @csrf
-
-                                <input type="hidden" id="user_id" name="user_id" value="">
-                                <button type="submit" class="btn btn-primary">Ano</button>
-                            </form>
+                            <button type="button" class="btn btn-primary" id="remove-user-btn"  data-bs-dismiss="modal" value="">Ano</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
                         </div>
                     </div>
@@ -77,10 +72,13 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-    <script>$('#search').on('keyup', function(){
+    <script>
+        $('#search').on('keyup', function(){
             search();
         });
+
         search();
+
         function search(){
             var keyword = $('#search').val();
 
@@ -150,7 +148,40 @@
     <script>
         $(document).on("click", ".open-remove-member-dialog", function () {
             var user = $(this).data('id');
-            $(".modal-footer #user_id").val( user );
+
+            $(".modal-footer #remove-user-btn").val( user );
         });
+
+        $(document).on("click", "#remove-user-btn", function () {
+            removeUser($(this).attr("value"));
+        });
+
+        function removeUser(user_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"user_id" : user_id},
+                url: "{{ route('user-administration.remove-user') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '1') {
+                        alert("Nepodařilo se odebrat uživatele.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error: ', data);
+                },
+            });
+
+            // Clear the searching text field.
+            document.getElementById('search').value = '';
+
+            // Search to remove the deleted row.
+            search();
+        }
     </script>
 @endsection
