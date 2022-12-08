@@ -216,7 +216,7 @@
                         <div class="modal-footer" style="justify-content: flex-start;">
                             <input type="hidden" id="flashcard_id_edit" name="flashcard_id_edit" value="">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                            <button type="button" id="edit-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Upravit</button>
+                            <button type="button" id="edit-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard">Upravit</button>
                         </div>
                     </div>
                 </div>
@@ -440,8 +440,6 @@
             var flashcardQuestion =  flashcardQuestionInput.value;
             var flashcardAnswer = flashcardAnswerInput.value;
 
-            console.log("flashcard question: '" + flashcardQuestion + "', flashcard answer: '" + flashcardAnswer + "'");
-
             if (flashcardQuestion === '' || flashcardAnswer === '') {
                 if (flashcardQuestion === '') {
                     flashcardQuestionInput.style.boxShadow = '0 0 2px red';
@@ -489,10 +487,38 @@
         }
     </script>
     <script>
+        $('#flashcard_question_edit').on('keyup', function () {
+            var flashcardQuestionInput = document.getElementById("flashcard_question_edit");
+            flashcardQuestionInput.style.boxShadow = 'none';
+        });
+        $('#flashcard_answer_edit').on('keyup', function () {
+            var flashcardAnswerInput = document.getElementById("flashcard_answer_edit");
+            flashcardAnswerInput.style.boxShadow = 'none';
+        });
+    </script>
+    <script>
         $(document).on("click", "#edit-flashcard-btn", function () {
+            var flashcardQuestionInput = document.getElementById("flashcard_question_edit");
+            var flashcardAnswerInput = document.getElementById("flashcard_answer_edit");
+            var flashcardQuestion =  flashcardQuestionInput.value;
+            var flashcardAnswer = flashcardAnswerInput.value;
+
+            if (flashcardQuestion === '' || flashcardAnswer === '') {
+                if (flashcardQuestion === '') {
+                    flashcardQuestionInput.style.boxShadow = '0 0 2px red';
+                }
+                if (flashcardAnswer === '') {
+                    flashcardAnswerInput.style.boxShadow = '0 0 2px red';
+                }
+
+                alert("Prosím vyplňte všechna požadovaná pole.");
+
+                return;
+            }
+
             editFlashcard(document.getElementById("flashcard_id_edit").value,
-                document.getElementById("flashcard_question_edit").value,
-                document.getElementById("flashcard_answer_edit").value);
+                flashcardQuestion,
+                flashcardAnswer);
         });
 
         function editFlashcard(flashcard_id, question, answer) {
@@ -519,6 +545,8 @@
             });
 
             showFlashcards();
+
+            $("#editFlashcard").modal('hide');
         }
     </script>
     <script>
