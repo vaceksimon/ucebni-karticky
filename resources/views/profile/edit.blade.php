@@ -36,12 +36,12 @@
                                 <div class="row col-12 d-flex">
                                     <div class="col-6">
                                         <div class="mb-3 row">
-                                            <div>
+                                            <div class="pe-5">
                                                 <div>
                                                     <label for="first_name">Jméno * :</label>
                                                 </div>
                                                 <div>
-                                                    <input id="first_name" name="first_name" type="text"
+                                                    <input class="form-control" id="first_name" name="first_name" type="text"
                                                            value="{{$user['first_name']}}" placeholder="Jméno">
                                                 </div>
                                                 <div>
@@ -50,89 +50,95 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <div>
-                                                <label for="last_name">Příjmení * :</label>
-                                            </div>
-                                            <div>
-                                                <input id="last_name" name="last_name" type="text"
-                                                       value="{{$user['last_name']}}" placeholder="Příjmení">
-                                            </div>
-                                            <div>
-                                                <span id="errorLastName" name="error" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <div>
-                                                <label for="last_name">Email * :</label>
-                                            </div>
-                                            <div>
-                                                <input id="email" name="email" type="text"
-                                                       value="{{$user['email']}}" placeholder="email">
-                                            </div>
-                                            <div>
-                                                <span id="errorEmail" name="error" class="text-danger"></span>
+                                            <div class="pe-5">
+                                                <div>
+                                                    <label for="last_name">Příjmení * :</label>
+                                                </div>
+                                                <div>
+                                                    <input class="form-control" id="last_name" name="last_name" type="text"
+                                                           value="{{$user['last_name']}}" placeholder="Příjmení">
+                                                </div>
+                                                <div>
+                                                    <span id="errorLastName" name="error" class="text-danger"></span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <div>
-                                                <label for="password">Heslo * :</label>
+                                            <div class="pe-5">
+                                                <div>
+                                                    <label for="last_name">Email * :</label>
+                                                </div>
+                                                <div>
+                                                    <input class="form-control" id="email" name="email" type="text"
+                                                           value="{{$user['email']}}" placeholder="email">
+                                                </div>
+                                                <div>
+                                                    <span id="errorEmail" name="error" class="text-danger"></span>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <input id="password" name="password" type="password">
-                                            </div>
-                                            <div>
-                                                <span id="errorPassword" name="error" class="text-danger"></span>
-                                            </div>
-                                            <script type="text/javascript">
-                                                document.getElementById('password').addEventListener('keyup', checkValue('password', 'errorPassword', 8, 'Heslo'));
-                                                document.getElementById('password').addEventListener('mouseup', checkValue('password', 'errorPassword', 8, 'Heslo'));
-                                                document.getElementById('first_name').addEventListener('keyup', checkValue('first_name', 'errorFirstName', 1, 'Jméno'));
-                                                document.getElementById('last_name').addEventListener('keyup', checkValue('last_name', 'errorLastName', 1, 'Příjmení'));
-                                                document.getElementById('email').addEventListener('keyup', checkValue('email', 'errorEmail', 1, 'Email'));
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="pe-5">
+                                                <div>
+                                                    <label for="password">Heslo * :</label>
+                                                </div>
+                                                <div>
+                                                    <input class="form-control" id="password" name="password" type="password">
+                                                </div>
+                                                <div>
+                                                    <span id="errorPassword" name="error" class="text-danger"></span>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    document.getElementById('password').addEventListener('keyup', checkValue('password', 'errorPassword', 8, 'Heslo'));
+                                                    document.getElementById('password').addEventListener('mouseup', checkValue('password', 'errorPassword', 8, 'Heslo'));
+                                                    document.getElementById('first_name').addEventListener('keyup', checkValue('first_name', 'errorFirstName', 1, 'Jméno'));
+                                                    document.getElementById('last_name').addEventListener('keyup', checkValue('last_name', 'errorLastName', 1, 'Příjmení'));
+                                                    document.getElementById('email').addEventListener('keyup', checkValue('email', 'errorEmail', 1, 'Email'));
 
-                                                function checkValue(idInput, idSpan, length, prompt) {
-                                                    return function () {
-                                                        if (!checkLength(idInput, length)) {
-                                                            document.getElementById(idSpan).textContent = prompt + " musí mít alespoň " + length + " znaků.";
-                                                            document.getElementById(idInput).classList.add('bg-danger');
-                                                        } else {
-                                                            if (idInput === 'email' && !checkEmail(idInput)) {
-                                                                document.getElementById(idSpan).textContent = "Emailová adresa je ve špatném tvaru";
+                                                    function checkValue(idInput, idSpan, length, prompt) {
+                                                        return function () {
+                                                            if (!checkLength(idInput, length)) {
+                                                                document.getElementById(idSpan).textContent = prompt + " musí mít alespoň " + length + " znaků.";
                                                                 document.getElementById(idInput).classList.add('bg-danger');
                                                             } else {
-                                                                document.getElementById(idSpan).textContent = "";
-                                                                document.getElementById(idInput).classList.remove('bg-danger');
+                                                                if (idInput === 'email' && !checkEmail(idInput)) {
+                                                                    document.getElementById(idSpan).textContent = "Emailová adresa je ve špatném tvaru";
+                                                                    document.getElementById(idInput).classList.add('bg-danger');
+                                                                } else {
+                                                                    document.getElementById(idSpan).textContent = "";
+                                                                    document.getElementById(idInput).classList.remove('bg-danger');
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
 
-                                                function checkLength(id, length) {
-                                                    var value = document.getElementById(id).value;
-                                                    return (value.length >= length);
-                                                }
-
-                                                function checkEmail(id) {
-                                                    let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                                                    return res.test(document.getElementById(id).value);
-                                                }
-
-
-                                                function validateFormAndSubmit() {
-                                                    var errorElements = document.getElementsByName('error');
-                                                    var isOk = true;
-                                                    for (const element of errorElements) {
-                                                        if (element.textContent !== "") {
-                                                            isOk = false
-                                                            break;
-                                                        }
+                                                    function checkLength(id, length) {
+                                                        var value = document.getElementById(id).value;
+                                                        return (value.length >= length);
                                                     }
-                                                    if (isOk)
-                                                        document.getElementById('edit-form').submit();
-                                                    else
-                                                        alert('Vyplňte prosím povinné údaje.');
-                                                }
-                                            </script>
+
+                                                    function checkEmail(id) {
+                                                        let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                                                        return res.test(document.getElementById(id).value);
+                                                    }
+
+
+                                                    function validateFormAndSubmit() {
+                                                        var errorElements = document.getElementsByName('error');
+                                                        var isOk = true;
+                                                        for (const element of errorElements) {
+                                                            if (element.textContent !== "") {
+                                                                isOk = false
+                                                                break;
+                                                            }
+                                                        }
+                                                        if (isOk)
+                                                            document.getElementById('edit-form').submit();
+                                                        else
+                                                            alert('Vyplňte prosím povinné údaje.');
+                                                    }
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -162,8 +168,8 @@
                                             <div>
                                                 <label for="degree_front">Titul před jménem:</label>
                                             </div>
-                                            <div>
-                                                <input id="degree_front" name="degree_front" type="text"
+                                            <div class="col-md-4">
+                                                <input class="form-control" id="degree_front" name="degree_front" type="text"
                                                        value="{{$user['degree_front']}}"
                                                        placeholder="Titul před jménem">
                                             </div>
@@ -172,8 +178,8 @@
                                             <div>
                                                 <label for="degree_front">Titul za jménem:</label>
                                             </div>
-                                            <div>
-                                                <input id="degree_after" name="degree_after" type="text"
+                                            <div class="col-md-4">
+                                                <input class="form-control" id="degree_after" name="degree_after" type="text"
                                                        value="{{$user['degree_after']}}" placeholder="Titul za jménem">
                                             </div>
                                         </div>
@@ -181,8 +187,8 @@
                                             <div>
                                                 <label for="degree_front">Škola:</label>
                                             </div>
-                                            <div>
-                                                <input id="school" name="school" type="text"
+                                            <div class="col-md-6">
+                                                <input class="form-control" id="school" name="school" type="text"
                                                        value="{{$user['school']}}" placeholder="Škola">
                                             </div>
                                         </div>
@@ -193,7 +199,7 @@
 
                             </div>
                         </form>
-                        <div>
+                        <div class="mt-5">
                             <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
                                     onclick="validateFormAndSubmit()">Uložit
                             </button>
