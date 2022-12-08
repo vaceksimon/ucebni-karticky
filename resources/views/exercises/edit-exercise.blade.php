@@ -94,13 +94,7 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a
-                                    @if((Auth::user()->account_type != "admin"))
-                                        href="{{ route('myexercises') }}"
-                                    @else
-                                        href="{{ route('exercise-administration') }}"
-                                    @endif
-                                >
+                                <a href="{{ url()->previous() }}">
                                     <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit cvičení</button>
