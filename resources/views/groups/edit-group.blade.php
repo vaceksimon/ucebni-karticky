@@ -62,14 +62,13 @@
 
                                 <div class="col-5">
                                     <!-- Second column -->
-                                    <div class="row row-cols-2">
-                                        <div class="row" style="width: 40%">
-                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="width: 160px; height: 160px;"
-                                                 alt="Avatar"/>
+                                    <div class="row">
+                                        <div class="row col-lg-5">
+                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" alt="Avatar"/>
                                         </div>
-                                        <div class="row" style="width: 60%">
+                                        <div class="row col-lg-7">
                                             <div class="container my-auto">
-                                                <label class="input-group-text my-auto change-image" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
+                                                <label class="input-group-text my-lg-auto change-image mx-lg-0 my-3 mx-auto" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
                                                 <input onchange="this.form.submit();" type="file" class="form-control" id="image" name="image" hidden>
                                             </div>
                                         </div>
