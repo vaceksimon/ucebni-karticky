@@ -124,13 +124,7 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a
-                                @if((Auth::user()->account_type != "admin"))
-                                    href="{{ route('mygroups') }}"
-                                @else
-                                    href="{{ route('group-administration') }}"
-                                @endif
-                                >
+                                <a href="{{ url()->previous() }}">
                                     <input type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" value="Zrušit">
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>
@@ -560,7 +554,7 @@
     </script>
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });
-        
+
         function photoSelected(profilePhoto) {
             let url = profilePhoto.value;
             let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
