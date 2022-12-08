@@ -91,19 +91,15 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <form action="" method="POST">
-                                            @csrf
-
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
                                                 </div>
                                             </div>
-                                            <div id="members_table">
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <div id="members_table">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
