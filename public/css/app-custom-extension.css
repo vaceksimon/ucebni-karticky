@@ -1,6 +1,10 @@
 /*
  * Custom rules which extends the rules in the app.css file.
  */
+.card {
+    font-size: 1.005rem;
+}
+
 .row-center {
     justify-content: center;
 }
