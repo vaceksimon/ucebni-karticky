@@ -153,7 +153,7 @@
                             </div>
 
                             <div class="my-3 row d-flex">
-                                <a href="{{ route('mygroups') }}">
+                                <a href="{{ url()->previous() }}">
                                     <input type="button" class="btn btn-outline-secondary btn-lg px-4" value="Zpět">
                                 </a>
                             </div>
