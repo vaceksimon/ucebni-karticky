@@ -108,16 +108,16 @@
             for (let i = 0; i < data.result.length; i++) {
                 if (i % 3 === 0) {
                     htmlView += `
-                        <div class="row mb-3">`
+                        <div class="row mb-3 gap-3">`
                 }
 
                 htmlView += `
                     <div class="col">
                         <div class="card" style="width: 18rem;">
-                            <img src="` + data.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                            <img src="` + data.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + data.result[i].name + `</h5>
-                                <p class="card-text">` + data.result[i].description + `</p>
+                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + data.result[i].name + `">` + data.result[i].name + `</h5>
+                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + data.result[i].description + `">` + data.result[i].description + `</p>
                                 <form method="POST" action="`
                 htmlView += `{{route('mygroups.clickShow')}}`;
                 htmlView += `">`;
