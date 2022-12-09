@@ -69,9 +69,38 @@
                         @endif
                     </div>
                 </div>
+                @if($user['id'] != Auth::id())
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            Společné skupiny
+                        </div>
+                        <div class="card-body">
+                            @empty($groups)
+                                Nemáte žádné společné skupiny.
+                            @endempty
+                            @foreach($groups as $group)
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="{{asset($group->photo)}}" class="card-img-top" alt="Foto skupiny">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{$group->name}}</h5>
+                                                <p class="card-text">{{$group->description}}</p>
+                                                <form method="POST" action="{{route('mygroups.clickShow')}}">
+                                                    @csrf
+                                                    <input type="hidden" id="group_id" name="group_id" value="{{$group->id}}" />
+                                                    <button type="submit" class="btn btn-primary">Zobrazit skupinu</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
             </div>
-
-
         </div>
     </div>
 @endsection

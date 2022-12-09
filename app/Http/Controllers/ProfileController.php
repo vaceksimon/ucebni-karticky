@@ -61,6 +61,7 @@ class ProfileController extends Controller
                 ->join('users_memberships AS um', 'g.id', 'um.group_id')
                 ->where( 'g.owner', Auth::id())
                 ->where( 'um.user_id', $user_id)
+                ->orderBy('g.name')
                 ->get();
         }
         else if(Auth::user()->account_type == 'teacher') {
@@ -70,6 +71,7 @@ class ProfileController extends Controller
                 ->where( 'um1.user_id', Auth::id())
                 ->join('users_memberships AS um2', 'g.id', 'um2.group_id')
                 ->where( 'um2.user_id', $user_id)
+                ->orderBy('g.name')
                 ->get();
         }
         else if (Auth::user()->account_type == 'student' && $account_type == 'teacher') {
@@ -78,6 +80,7 @@ class ProfileController extends Controller
                 ->join('users_memberships AS um', 'g.id', 'um.group_id')
                 ->where( 'g.owner', $user_id)
                 ->where( 'um.user_id', Auth::id())
+                ->orderBy('g.name')
                 ->get();
         }
         else {
@@ -87,6 +90,7 @@ class ProfileController extends Controller
                 ->where('um1.user_id', Auth::id())
                 ->join('users_memberships AS um2', 'g.id', 'um2.group_id')
                 ->where('um2.user_id', $user_id)
+                ->orderBy('g.name')
                 ->get();
         }
 
