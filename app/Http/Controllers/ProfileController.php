@@ -40,27 +40,24 @@ class ProfileController extends Controller
         if (Auth::user()->account_type == 'admin') // account_type admin can only edit profiles, not display them
             return view('profile.edit', ['user' => $user->first()]);
 
-        if(!isset($request['id']) || Auth::id() == $request['id'])
-            return view('profile.show', ['user' => $user->first()]);
-        else
-            return view('profile.show', ['user' => $user->first(), 'groups' => $this->getCommonGroups($request['id'])]);
+        return view('profile.show', ['user' => $user->first()]);
     }
 
     /**
      * Retrieves all groups this user and the authenticated user have in common (are both somehow related to).
      *
      * @param String $user_id Giver user's id
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Http\JsonResponse
      */
-    private function getCommonGroups(String $user_id): \Illuminate\Support\Collection
+    public function getCommonGroups(Request $request): \Illuminate\Http\JsonResponse
     {
-        $account_type = User::where('id', $user_id)->get()->first()['account_type'];
+        $account_type = User::where('id', $request->user_id)->get()->first()['account_type'];
         if(Auth::user()->account_type == 'teacher' && $account_type == 'student') {
             $groups = DB::table('groups AS g')
                 ->select('g.*')
                 ->join('users_memberships AS um', 'g.id', 'um.group_id')
                 ->where( 'g.owner', Auth::id())
-                ->where( 'um.user_id', $user_id)
+                ->where( 'um.user_id', $request->user_id)
                 ->orderBy('g.name')
                 ->get();
         }
@@ -70,7 +67,7 @@ class ProfileController extends Controller
                 ->join('users_memberships AS um1', 'g.id', 'um1.group_id')
                 ->where( 'um1.user_id', Auth::id())
                 ->join('users_memberships AS um2', 'g.id', 'um2.group_id')
-                ->where( 'um2.user_id', $user_id)
+                ->where( 'um2.user_id', $request->user_id)
                 ->orderBy('g.name')
                 ->get();
         }
@@ -78,7 +75,7 @@ class ProfileController extends Controller
             $groups = DB::table('groups AS g')
                 ->select('g.*')
                 ->join('users_memberships AS um', 'g.id', 'um.group_id')
-                ->where( 'g.owner', $user_id)
+                ->where( 'g.owner', $request->user_id)
                 ->where( 'um.user_id', Auth::id())
                 ->orderBy('g.name')
                 ->get();
@@ -89,12 +86,11 @@ class ProfileController extends Controller
                 ->join('users_memberships AS um1', 'g.id', 'um1.group_id')
                 ->where('um1.user_id', Auth::id())
                 ->join('users_memberships AS um2', 'g.id', 'um2.group_id')
-                ->where('um2.user_id', $user_id)
+                ->where('um2.user_id', $request->user_id)
                 ->orderBy('g.name')
                 ->get();
         }
-
-        return $groups;
+        return response()->json(['result' => $groups]);
     }
 
     /**

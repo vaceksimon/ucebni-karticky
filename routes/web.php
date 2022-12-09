@@ -23,6 +23,7 @@ Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edi
 Route::post('/profile/store', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
 Route::post('/profile/delete', [App\Http\Controllers\ProfileController::class, 'delete'])->name('profile.delete');
 Route::get('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/commonGroups', [\App\Http\Controllers\ProfileController::class, 'getCommonGroups'])->name('profile.commonGroups');
 
 Route::get('mygroups', [\App\Http\Controllers\Groups\GroupController::class, 'show' ])->name('mygroups');
 Route::post('mygroups/clickEdit', [\App\Http\Controllers\Groups\GroupController::class, 'clickEdit' ])->name('mygroups.clickEdit');

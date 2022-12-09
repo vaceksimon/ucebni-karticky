@@ -74,33 +74,68 @@
                         <div class="card-header">
                             Společné skupiny
                         </div>
-                        <div class="card-body">
-                            @empty($groups)
-                                Nemáte žádné společné skupiny.
-                            @endempty
-                            @foreach($groups as $group)
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="{{asset($group->photo)}}" class="card-img-top" alt="Foto skupiny">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{$group->name}}</h5>
-                                                <p class="card-text">{{$group->description}}</p>
-                                                <form method="POST" action="{{route('mygroups.clickShow')}}">
-                                                    @csrf
-                                                    <input type="hidden" id="group_id" name="group_id" value="{{$group->id}}" />
-                                                    <button type="submit" class="btn btn-primary">Zobrazit skupinu</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div id="groups_body" name="groups_body" class="card-body">
 
-                            @endforeach
                         </div>
                     </div>
                 @endif
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script>
+        @if(isset($user['id']) && Auth::id() != $user['id'])
+        getCommonGroups();
+        @endif
+
+        function getCommonGroups() {
+            $.post('{{ route("profile.commonGroups") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    user_id: {{$user['id']}}
+                },
+                function (data) {
+                    console.log(data);
+                    postCommonGroups(data);
+                });
+        }
+
+        function postCommonGroups(data) {
+            htmlView = '';
+            for (let i = 0; i < data.result.length; i++) {
+                if (i % 3 === 0) {
+                    htmlView += `
+                        <div class="row mb-3">`
+                }
+
+                htmlView += `
+                    <div class="col">
+                        <div class="card" style="width: 18rem;">
+                            <img src="` + data.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                            <div class="card-body">
+                                <h5 class="card-title">` + data.result[i].name + `</h5>
+                                <p class="card-text">` + data.result[i].description + `</p>
+                                <form method="POST" action="`
+                htmlView += `{{route('mygroups.clickShow')}}`;
+                htmlView += `">`;
+                htmlView += `@csrf`;
+                htmlView += `
+                                    <input type="hidden" id="group_id" name="group_id" value="` + data.result[i].id + `" />
+                                    <button type="submit" class="btn btn-primary">Zobrazit skupinu</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if ((i + 1) % 3 === 0 || i === (data.result.length + 1))
+                    htmlView += `</div>`
+            }
+            $('#groups_body').html(htmlView);
+        }
+
+    </script>
 @endsection
