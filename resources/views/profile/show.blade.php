@@ -9,9 +9,7 @@
                 </a>
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <div>
-                            {{ __('Zobrazení profilu') }}
-                        </div>
+                        <div>{{ __('Zobrazení profilu') }}</div>
                         @if($user['id'] == Auth::id())
                             <div class="ms-auto">
                                 <a href="{{route('profile.edit')}}">
@@ -104,17 +102,11 @@
         }
 
         function postCommonGroups(data) {
-            htmlView = '';
+            htmlView = '<div class="row gap-3 m-2 d-flex flex justify-content-evenly align-items-start">';
             for (let i = 0; i < data.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3 gap-3">`
-                }
-
                 htmlView += `
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="` + data.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
+                        <div class="card p-0 me-auto" style="width: 18rem;">
+                            <img src="` + data.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
                                 <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + data.result[i].name + `">` + data.result[i].name + `</h5>
                                 <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + data.result[i].description + `">` + data.result[i].description + `</p>
@@ -128,12 +120,9 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
                 `;
-
-                if ((i + 1) % 3 === 0 || i === (data.result.length + 1))
-                    htmlView += `</div>`
             }
+            htmlView += `</div>`;
             $('#groups_body').html(htmlView);
         }
 
