@@ -4,9 +4,11 @@
     <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <a href="{{url()->previous()}}">
-                    <button class="btn btn-outline-secondary mb-2">Zpět</button>
-                </a>
+                @if($user['id'] != Auth::id())
+                    <a href="{{url()->previous()}}">
+                        <button class="btn btn-outline-secondary mb-2">Zpět</button>
+                    </a>
+                @endif
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <div>{{ __('Zobrazení profilu') }}</div>
