@@ -90,19 +90,15 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <form action="" method="POST">
-                                            @csrf
-
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
                                                 </div>
                                             </div>
-                                            <div id="members_table">
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <div id="members_table">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -123,13 +119,7 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a
-                                @if((Auth::user()->account_type != "admin"))
-                                    href="{{ route('mygroups') }}"
-                                @else
-                                    href="{{ route('group-administration') }}"
-                                @endif
-                                >
+                                <a href="{{ url()->previous() }}">
                                     <input type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" value="Zrušit">
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>
@@ -559,7 +549,7 @@
     </script>
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });
-        
+
         function photoSelected(profilePhoto) {
             let url = profilePhoto.value;
             let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
