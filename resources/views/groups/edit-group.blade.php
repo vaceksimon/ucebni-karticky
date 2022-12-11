@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="col-5">
-                                    <!-- Second column -->sssssssssssssssssssssssssss
+                                    <!-- Second column -->
                                     <div class="row">
                                         <div class="row col-lg-5">
                                             <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex my-lg-auto mx-lg-0 my-3 mx-auto px-0" style="aspect-ratio : 1 / 1; width: 100%; object-fit: cover;" id="img_group" alt="Avatar"/>
