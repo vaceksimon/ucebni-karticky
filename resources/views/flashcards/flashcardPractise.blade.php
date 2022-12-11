@@ -13,13 +13,13 @@
                     <div class="card-header px-0">
                         <div class="d-flex justify-content-center align-content-center">
                             <div class="text-center col-4">
-                                <button id="btnCorrect" type="button" class="btn btn-success btn-lg" onclick={getCorrect()}>Správně</button>
+                                <button id="btnCorrect" type="button" class="btn btn-success btn-lg fs-4" onclick={getCorrect()}>Správně <i class="bi bi-check-lg"></i></button>
                             </div>
                             <div class="text-center col-4">
-                                <button type="button" id="btnFlip" class="btn btn-primary btn-lg" onclick={flipCard()} style="width: 200px">Zobraz odpověď</button>
+                                <button type="button" class="btn btn-primary btn-lg fs-4" onclick={flipCard()} style="width: 200px"><span id="btnFlip"></span> <i class="bi bi-arrow-repeat"></i></button>
                             </div>
                             <div class="text-center col-4">
-                                <button id="btnWrong" type="button" class="btn btn-danger btn-lg" onclick={getWrong()}>Špatně</button>
+                                <button id="btnWrong" type="button" class="btn btn-danger btn-lg fs-4" onclick={getWrong()}>Špatně <i class="bi bi-x-lg"></i></button>
                             </div>
                         </div>
                     </div>
@@ -90,11 +90,11 @@
 
         function changeQA() {
             if (showFront) {
-                document.getElementById('btnFlip').innerText = "Zobraz odpověď";
-                document.getElementById('QA').innerText      = "Otázka";
+                document.getElementById('btnFlip').innerText = " Odpověď";
+                document.getElementById('QA').innerText      = "Otázka:";
             } else {
-                document.getElementById('btnFlip').innerText = "Zobraz otázku";
-                document.getElementById('QA').innerText = "Odpověď";
+                document.getElementById('btnFlip').innerText = " Otázka";
+                document.getElementById('QA').innerText = "Odpověď:";
             }
         }
 
