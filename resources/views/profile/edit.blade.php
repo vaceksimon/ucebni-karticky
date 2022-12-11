@@ -33,8 +33,8 @@
                             <input id="user_id" name="user_id" value="{{$user['id']}}" hidden/>
                             @csrf
                             <div class="d-flex flex-nowrap flex-column">
-                                <div class="row col-12 d-flex">
-                                    <div class="col-6">
+                                <div class="row">
+                                    <div class="col-7">
                                         <div class="mb-3 row">
                                             <div class="pe-5">
                                                 <div>
@@ -141,17 +141,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <div>
-                                                <img id="img_profile" name="img_profile" src="{{asset($user->photo)}}"
-                                                     class="rounded-circle d-flex px-0"
-                                                     style="width:150px; height: 150px"
-                                                     alt="Avatar"/>
+                                    <div class="col-5">
+                                        <div class="row">
+                                            <div class="row col-lg-5">
+                                                <img id="img_profile" name="img_profile" src="{{asset($user->photo)}}" class="rounded-circle d-flex my-lg-auto mx-lg-0 my-3 mx-auto px-0" style="aspect-ratio : 1 / 1; width: 100%; object-fit: cover;" alt="Avatar"/>
                                             </div>
-                                            <div style="width: 60%">
+                                            <div class="row col-lg-7">
                                                 <div class="container my-auto">
-                                                    <label class="input-group-text my-auto change-image"
+                                                    <label class="input-group-text my-lg-auto mx-lg-0 my-3 mx-auto change-image"
                                                            style="width: 75px; cursor: pointer"
                                                            for="image">Nahrát</label>
                                                     <input type="file"

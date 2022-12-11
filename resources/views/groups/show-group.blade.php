@@ -57,10 +57,9 @@
 
                                 <div class="col-5">
                                     <!-- Second column -->
-                                    <div class="row row-cols-2">
-                                        <div class="row" style="width: 40%">
-                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="width: 160px; height: 160px;"
-                                                 alt="Avatar"/>
+                                    <div class="row">
+                                        <div class="row col-lg-5">
+                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="aspect-ratio : 1 / 1; width: 100%; object-fit: cover;" alt="Avatar"/>
                                         </div>
                                     </div>
                                 </div>
