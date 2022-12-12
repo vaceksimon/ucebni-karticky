@@ -84,6 +84,7 @@ Route::post('/edit-exercise/edit-flashcard', [App\Http\Controllers\Exercises\Edi
 Route::post('/edit-exercise/searchFlashcards', [App\Http\Controllers\Exercises\EditExerciseController::class, 'searchFlashcards'])->name('edit-exercise.search-flashcards');
 
 Route::get('/show-group', [App\Http\Controllers\Groups\ShowGroupController::class, 'index'])->name('show-group');
+Route::post('/show-group/search-member', [App\Http\Controllers\Groups\ShowGroupController::class, 'searchMember'])->name('show-group.search-member');
 
 Route::get('/group-administration', [App\Http\Controllers\Administration\GroupAdministrationController::class, 'index'])->name('group-administration');
 Route::post('/group-administration/search', [App\Http\Controllers\Administration\GroupAdministrationController::class, 'search'])->name('group-administration.search');
