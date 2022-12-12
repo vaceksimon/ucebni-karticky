@@ -53,6 +53,22 @@
                                         </label>
                                     </div>
                                 </div>
+
+                                <div class="mb-3 row">
+                                    <label for="owner" class="col-form-label text-start">
+                                        {{ __('Správce skupiny') }} :
+                                    </label>
+
+                                    <div class="col-md-11">
+                                        <label class="form-check-label text-black-50">
+                                            <?php echo $group_owner[0]->degree_front ?>
+                                            <?php echo $group_owner[0]->first_name ?>
+                                            <?php echo $group_owner[0]->last_name ?>
+                                            <?php echo $group_owner[0]->degree_after ?>
+
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
 
                                 <div class="col-5">
