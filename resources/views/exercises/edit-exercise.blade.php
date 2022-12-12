@@ -51,12 +51,13 @@
 
                             <div class="mb-3 row">
                                 <label for="topic" class="col-form-label text-start">
-                                    {{ __('Téma *') }} :
+                                    {{ __('Téma') }} :
                                 </label>
 
                                 <div class="col-md-6">
                                     <input id="topic" type="text" class="form-control"
-                                           name="topic" value="<?php echo $exercise[0]->topic ?>">
+                                           name="topic" autocomplete="name" autofocus
+                                           value="<?php echo $exercise[0]->topic ?>">
                                 </div>
                             </div>
 
@@ -67,7 +68,7 @@
 
                                 <div class="col-md-6">
                                     <textarea rows="5" cols="60" id="description" name="description" class="form-control" style="height:20vh;"
-                                              required autocomplete="description" autofocus><?php echo $exercise[0]->description ?></textarea>
+                                              autocomplete="description" autofocus><?php echo $exercise[0]->description ?></textarea>
                                 </div>
                             </div>
 

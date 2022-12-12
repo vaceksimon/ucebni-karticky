@@ -44,6 +44,7 @@ class CreateExerciseController extends Controller
 
         $exercise = $user->createdExercises()->create([
         'name' => $request->name,
+        'topic' => $request->topic,
         'description' => $request->description,
         'visibility' => $request->visibility,
         ]);

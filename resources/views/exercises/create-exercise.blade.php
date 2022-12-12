@@ -59,13 +59,24 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <label for="topic" class="col-form-label text-start">
+                                    {{ __('Téma') }} :
+                                </label>
+
+                                <div class="col-md-12">
+                                    <input id="topic" type="text" class="form-control"
+                                           name="topic" value="{{ old('topic') }}" autocomplete="topic" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label for="description" class="col-form-label text-start">
                                     {{ __('Popis') }} :
                                 </label>
 
                                 <div class="col-md-12">
                                     <textarea rows="5" cols="60" id="description" name="description" class="form-control" style="height:20vh;"
-                                              required autocomplete="description" autofocus></textarea>
+                                              autocomplete="description" autofocus></textarea>
                                 </div>
                             </div>
 
