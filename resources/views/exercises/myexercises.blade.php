@@ -493,8 +493,8 @@
                         <div class="card" style="width: 18rem;">
                             <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>
+                                <h5 class="card-title" title="`+ res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
+                                <p class="card-text" title="`+ res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>
                                 <form method="POST" id="formAssign` + i +`" action="`
                 htmlView += `{{route('myexercises.store-assignment')}}`;
                 htmlView += `">`;
