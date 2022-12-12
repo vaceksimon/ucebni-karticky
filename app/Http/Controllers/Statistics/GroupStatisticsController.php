@@ -93,6 +93,31 @@ class GroupStatisticsController extends Controller
             ->get();
     }
 
+    public function searchStudent(Request $request)
+    {
+        $account_type = $request->user_type;
+
+        $owner_id = DB::table('groups')->where('id', '=', $request->group_id)->value('owner');
+
+        if ($request->keyword != '')
+        {
+            $result = User::whereIn('users.id', function ($query) use ($request, $owner_id) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id)->where('user_id', '<>', $owner_id);
+            })->where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
+                ->where( 'account_type', '=', $account_type)
+                ->get();
+        }
+        else
+        {
+            $result = User::whereIn('users.id', function ($query) use ($request, $owner_id) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id)->where('user_id', '<>', $owner_id);
+            })->where( 'account_type', '=', $account_type)
+                ->get();
+        }
+
+        return response()->json(['result' => $result]);
+    }
+
     /**
      * Retrieves and transforms data of all exercise attempts which are relevant to a chart.
      * @param $group_id

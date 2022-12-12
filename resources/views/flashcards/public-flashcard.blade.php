@@ -9,13 +9,13 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-evenly">
                             <div>
-                                <button type="button" class="btn btn-secondary" onclick={getPrevCard()}>Předchozí kartička</button>
+                                <button type="button" class="btn btn-secondary fs-4" onclick={getPrevCard()}><i class="bi bi-arrow-left"></i> Předchozí kartička</button>
                             </div>
                             <div>
-                                <button type="button" id="btnFlip" class="btn btn-primary" onclick={flipCard()} style="width: 160px">Zobraz odpověď</button>
+                                <button type="button" class="btn btn-primary fs-4" onclick={flipCard()} style="width: 160px"><span id="btnFlip"></span> <i class="bi bi-arrow-repeat"></i></button>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-secondary" onclick={getNextCard()}>Následující kartička</button>
+                                <button type="button" class="btn btn-secondary fs-4" onclick={getNextCard()}>Následující kartička <i class="bi bi-arrow-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -65,11 +65,11 @@
 
         function changeQA() {
             if (showFront) {
-                document.getElementById('btnFlip').innerText = "Zobraz odpověď";
-                document.getElementById('QA').innerText      = "Otázka";
+                document.getElementById('btnFlip').innerText = "Odpověď";
+                document.getElementById('QA').innerText      = "Otázka:";
             } else {
-                document.getElementById('btnFlip').innerText = "Zobraz otázku";
-                document.getElementById('QA').innerText = "Odpověď";
+                document.getElementById('btnFlip').innerText = "Otázka";
+                document.getElementById('QA').innerText = "Odpověď:";
             }
         }
 

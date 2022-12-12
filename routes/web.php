@@ -23,6 +23,7 @@ Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edi
 Route::post('/profile/store', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
 Route::post('/profile/delete', [App\Http\Controllers\ProfileController::class, 'delete'])->name('profile.delete');
 Route::get('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/commonGroups', [\App\Http\Controllers\ProfileController::class, 'getCommonGroups'])->name('profile.commonGroups');
 
 Route::get('mygroups', [\App\Http\Controllers\Groups\GroupController::class, 'show' ])->name('mygroups');
 Route::post('mygroups/clickEdit', [\App\Http\Controllers\Groups\GroupController::class, 'clickEdit' ])->name('mygroups.clickEdit');
@@ -72,7 +73,7 @@ Route::post('/edit-group/search-member', [App\Http\Controllers\Groups\EditGroupC
 Route::post('/edit-group/remove-member', [App\Http\Controllers\Groups\EditGroupController::class, 'removeMember'])->name('edit-group.remove-member');
 Route::post('/edit-group/add-member', [App\Http\Controllers\Groups\EditGroupController::class, 'addMember'])->name('edit-group.add-member');
 Route::post('/edit-group/delete-group', [\App\Http\Controllers\Groups\EditGroupController::class, 'deleteGroup'])->name('edit-group.delete-group');
-Route::post('edit-group', [App\Http\Controllers\Groups\EditGroupController::class, 'store'])->name('edit-group.store');
+Route::post('/edit-group/store', [App\Http\Controllers\Groups\EditGroupController::class, 'store'])->name('edit-group.store');
 
 Route::get('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'index'])->name('edit-exercise');
 Route::post('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'store'])->name('edit-exercise.store');
@@ -83,6 +84,7 @@ Route::post('/edit-exercise/edit-flashcard', [App\Http\Controllers\Exercises\Edi
 Route::post('/edit-exercise/searchFlashcards', [App\Http\Controllers\Exercises\EditExerciseController::class, 'searchFlashcards'])->name('edit-exercise.search-flashcards');
 
 Route::get('/show-group', [App\Http\Controllers\Groups\ShowGroupController::class, 'index'])->name('show-group');
+Route::post('/show-group/search-member', [App\Http\Controllers\Groups\ShowGroupController::class, 'searchMember'])->name('show-group.search-member');
 
 Route::get('/group-administration', [App\Http\Controllers\Administration\GroupAdministrationController::class, 'index'])->name('group-administration');
 Route::post('/group-administration/search', [App\Http\Controllers\Administration\GroupAdministrationController::class, 'search'])->name('group-administration.search');
@@ -100,6 +102,7 @@ Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controller
 
 Route::get('/user-statistics', [App\Http\Controllers\Statistics\UserStatisticsController::class, 'index'])->name('user-statistics');
 Route::get('/group-statistics', [App\Http\Controllers\Statistics\GroupStatisticsController::class, 'index'])->name('group-statistics');
+Route::post('/group-statistics/search-student', [App\Http\Controllers\Statistics\GroupStatisticsController::class, 'searchStudent'])->name('group-statistics.search-student');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');

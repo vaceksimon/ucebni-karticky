@@ -32,13 +32,13 @@
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#shareModal"
                                                                 onclick="exercise_id = {{$record->id}}; share();">
-                                                            Sdílet
+                                                            Sdílet <i class="bi bi-share-fill"></i>
                                                         </button>
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                                 onclick="exerciseId = {{$record->id}}; search();">
-                                                            Zadat
+                                                            Zadat <i class="bi bi-collection"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -49,20 +49,20 @@
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
                                                     <a href="{{route('myexercises.edit', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit <i class="bi bi-pencil-fill"></i></button>
                                                     </a>
                                                     <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                             data-bs-toggle="modal" data-bs-target="#statModal"
                                                             onclick="exerciseId = {{$record->id}}; searchForStat();">
-                                                        Zobrazit statistiky
+                                                        Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i>
                                                     </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                                 onclick="exerciseId = {{$record->id}}; search();">
-                                                            Zadat
+                                                            Zadat <i class="bi bi-collection"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -105,15 +105,15 @@
                                                     <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                             data-bs-toggle="modal" data-bs-target="#statModal"
                                                             onclick="exerciseId = {{$record->id}}; searchForStat();">
-                                                        Zobrazit statistiky
+                                                        Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i>
                                                     </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -157,15 +157,15 @@
 
                                                         <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
                                                         <input type="hidden" name="exercise_id_stat" id="exercise_id_stat" value="{{ $record->id }}">
-                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky</button>
+                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i></button>
                                                     </form>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit</button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -193,10 +193,18 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="" method="POST">
-                                                <div class="row">
+                                                <div class="row align-items-center">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
                                                             <input type="text" class="form-control" placeholder="Vyhledat skupinu" id="share">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-check fs-5">
+                                                            <label class="form-check-label">
+                                                                Sdílená cvičení
+                                                                <input class="form-check-input" type="checkbox" value="value" id="shared">
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +232,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="row mt-5">
+                            <div class="row">
 
                                 <div class="col-md-12">
                                     <div class="card">
@@ -300,9 +308,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script>
+
         $('#share').on('keyup', function () {
             share();
         });
+
+        $('#shared').change(function () {
+            share()
+        });
+
         function share() {
             let keyword = $('#share').val();
             $.post('{{ route("myexercises.share") }}',
@@ -320,31 +334,73 @@
         function postGroupsShare(res) {
             isShared = JSON.parse(res.isShared);
             htmlView = '';
-            for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3">`
-                }
+            let j = 0;
+
+            if (res.result.length === 0)
+            {
                 htmlView += `
-                    <div class="col">
-                        <div class="card m-auto" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
-                            <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>`
-                if (isShared[i].shared === "1") {
-                    htmlView += `<button class="btn btn-danger"
-                                onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`
-                } else {
-                    htmlView += `<button class="btn btn-primary"
-                                onclick="shareExercise(` + res.result[i].id + `);">Sdílet</button>`
+                <div class="text-center fs-3">Bohužel nemáte cvičení komu nasdílet.
+                    <i class="bi bi-emoji-frown"></i>
+                </div>`
+                $('#shareGroupsBody').html(htmlView);
+                return;
+            }
+
+            for (let i = 0; i < res.result.length; i++) {
+                console.log(j);
+
+                if (!(document.getElementById("shared").checked)) {
+                    if (i % 3 === 0) {
+                        htmlView += `
+                        <div class="row mb-3 gap-3">`
+                    }
                 }
-                htmlView += `</div>
+                else
+                {
+                    if (isShared[i].shared === "0")
+                        continue;
+
+                    if (j % 3 === 0) {
+                        htmlView += `
+                        <div class="row mb-3 gap-3">`
+                    }
+                }
+
+                if (!(document.getElementById("shared").checked && isShared[i].shared === "0")) {
+                    htmlView += `
+                    <div class="col">
+                        <div class="card m-0" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
+                            <div class="card-body">
+                                <h5 class="card-title" title="`+ res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
+                                <p class="card-text" title="`+ res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>`
+                    if (isShared[i].shared === "1") {
+                        htmlView += `<button class="btn btn-danger"
+                                onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`
+                    } else {
+                        htmlView += `<button class="btn btn-primary"
+                                onclick="shareExercise(` + res.result[i].id + `);">Sdílet</button>`
+                    }
+                    htmlView += `</div>
                         </div>
                     </div>
                 `
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
+                }
+
+                if (!(document.getElementById("shared").checked)) {
+                    if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
+                        htmlView += `</div>`
+                }
+                else
+                {
+                    if ((j + 1) % 3 === 0 || i === (res.result.length + 1)) {
+                        htmlView += `</div>`
+                    }
+                }
+
+                if (isShared[i].shared === "1")
+                    j++;
+
             }
             $('#shareGroupsBody').html(htmlView);
         }
@@ -426,6 +482,17 @@
         // table row with ajax
         function postGroupsAssign(res) {
             htmlView = '';
+
+            if (res.result.length === 0)
+            {
+                htmlView += `
+                <div class="text-center fs-3">Bohužel nemáte cvičení komu zadat.
+                    <i class="bi bi-emoji-frown"></i>
+                </div>`
+                $('#searchedGroupsBody').html(htmlView);
+                return;
+            }
+
             for (let i = 0; i < res.result.length; i++) {
                 if (i % 3 === 0) {
                     htmlView += `
@@ -437,8 +504,8 @@
                         <div class="card" style="width: 18rem;">
                             <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>
+                                <h5 class="card-title" title="`+ res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
+                                <p class="card-text" title="`+ res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>
                                 <form method="POST" id="formAssign` + i +`" action="`
                 htmlView += `{{route('myexercises.store-assignment')}}`;
                 htmlView += `">`;

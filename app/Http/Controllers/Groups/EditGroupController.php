@@ -85,19 +85,22 @@ class EditGroupController extends Controller
     {
         $account_type = rtrim($request->group_type, "s");
 
+        $owner_id = DB::table('groups')->where('id', '=', $request->group_id)->value('owner');
+
         if ($request->keyword != '')
         {
-            $result = User::whereIn('users.id', function ($query) use ($request) {
-                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+            $result = User::whereIn('users.id', function ($query) use ($request, $owner_id) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id)->where('user_id', '<>', $owner_id);
             })->where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
                 ->where( 'account_type', '=', $account_type)
                 ->get();
         }
         else
         {
-            $result = User::whereIn('users.id', function ($query) use ($request) {
-                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
-            })->where( 'account_type', '=', $account_type)->get();
+            $result = User::whereIn('users.id', function ($query) use ($request, $owner_id) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id)->where('user_id', '<>', $owner_id);
+            })->where( 'account_type', '=', $account_type)
+                ->get();
         }
 
         return response()->json(['result' => $result]);
@@ -124,7 +127,12 @@ class EditGroupController extends Controller
             Group::where('id', '=', $request->group_id)->update(['name' => $request->name, 'description' => $request->description]);
         }
 
-        return $this->index();
+        if (Auth::user()->account_type == "admin")
+        {
+            return redirect('group-administration');
+        }
+
+        return redirect('mygroups');
     }
 
     /**

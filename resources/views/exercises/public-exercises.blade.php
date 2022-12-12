@@ -33,7 +33,7 @@
                                                 <a href="{{route('public-flashcard.show', ['id' => $record->id])}}">
                                                     <button type="button"
                                                             class="btn btn-outline-secondary btn-sm px-3 text-nowrap">
-                                                        Zobrazit
+                                                        Zobrazit <i class="bi bi-eye-fill"></i>
                                                     </button>
                                                 </a>
                                             </div>
@@ -41,6 +41,7 @@
                                                 <a href="{{route('public-flashcardPractise.show', ['id' => $record->id])}}">
                                                     <button type="button"
                                                             class="btn btn-primary btn-sm px-3 me-3 text-nowrap">Spustit
+                                                        <i class="bi bi-arrow-return-right"></i>
                                                     </button>
                                                 </a>
                                             </div>

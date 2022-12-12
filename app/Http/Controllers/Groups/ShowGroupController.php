@@ -64,6 +64,28 @@ class ShowGroupController extends Controller
         return view('home');
     }
 
+    public function searchMember(Request $request)
+    {
+        $account_type = rtrim($request->group_type, "s");
+
+        if ($request->keyword != '')
+        {
+            $result = User::whereIn('users.id', function ($query) use ($request) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+            })->where(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%".$request->keyword."%")
+                ->where( 'account_type', '=', $account_type)
+                ->get();
+        }
+        else
+        {
+            $result = User::whereIn('users.id', function ($query) use ($request) {
+                $query->select('user_id')->from('users_memberships')->where('group_id', '=', $request->group_id);
+            })->where( 'account_type', '=', $account_type)->get();
+        }
+
+        return response()->json(['result' => $result]);
+    }
+
     /**
      * Function for getting the assignments.
      *

@@ -62,14 +62,13 @@
 
                                 <div class="col-5">
                                     <!-- Second column -->
-                                    <div class="row row-cols-2">
-                                        <div class="row" style="width: 40%">
-                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex px-0" style="width: 160px; height: 160px;"
-                                                 id="img_group" alt="Avatar"/>
+                                    <div class="row">
+                                        <div class="row col-lg-5">
+                                            <img src="{{ $group[0]->photo }}" class="rounded-circle d-flex my-lg-auto mx-lg-0 my-3 mx-auto px-0" style="aspect-ratio : 1 / 1; width: 100%; object-fit: cover;" id="img_group" alt="Avatar"/>
                                         </div>
-                                        <div class="row" style="width: 60%">
+                                        <div class="row col-lg-7">
                                             <div class="container my-auto">
-                                                <label class="input-group-text my-auto change-image" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
+                                                <label class="input-group-text my-lg-auto change-image mx-lg-0 my-3 mx-auto" style="width: 75px; cursor:pointer;" for="image">Upravit</label>
                                                 <input type="file" class="form-control" onchange="photoSelected(this)" id="image" name="image" hidden>
                                             </div>
                                         </div>
@@ -91,19 +90,15 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <form action="" method="POST">
-                                            @csrf
-
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Vyhledat člena" id="search-member">
                                                 </div>
                                             </div>
-                                            <div id="members_table">
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <div id="members_table">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -124,13 +119,7 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a
-                                @if((Auth::user()->account_type != "admin"))
-                                    href="{{ route('mygroups') }}"
-                                @else
-                                    href="{{ route('group-administration') }}"
-                                @endif
-                                >
+                                <a href="{{ url()->previous() }}">
                                     <input type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" value="Zrušit">
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>

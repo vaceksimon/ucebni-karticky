@@ -65,7 +65,12 @@ class EditExerciseController extends Controller
     {
         Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'description' => $request->description]);
 
-        return $this->index();
+        if (Auth::user()->account_type == "admin")
+        {
+            return redirect('exercise-administration');
+        }
+
+        return redirect('myexercises');
     }
 
     /**
