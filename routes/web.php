@@ -102,6 +102,7 @@ Route::get('/exercise-administration/redirect-to-exercise', [App\Http\Controller
 
 Route::get('/user-statistics', [App\Http\Controllers\Statistics\UserStatisticsController::class, 'index'])->name('user-statistics');
 Route::get('/group-statistics', [App\Http\Controllers\Statistics\GroupStatisticsController::class, 'index'])->name('group-statistics');
+Route::post('/group-statistics/search-student', [App\Http\Controllers\Statistics\GroupStatisticsController::class, 'searchStudent'])->name('group-statistics.search-student');
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
