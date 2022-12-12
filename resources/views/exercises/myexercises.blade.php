@@ -347,6 +347,8 @@
             }
 
             for (let i = 0; i < res.result.length; i++) {
+                console.log(j);
+
                 if (!(document.getElementById("shared").checked)) {
                     if (i % 3 === 0) {
                         htmlView += `
@@ -355,13 +357,14 @@
                 }
                 else
                 {
+                    if (isShared[i].shared === "0")
+                        continue;
+
                     if (j % 3 === 0) {
                         htmlView += `
                         <div class="row mb-3 gap-3">`
                     }
                 }
-
-                console.log(j);
 
                 if (!(document.getElementById("shared").checked && isShared[i].shared === "0")) {
                     htmlView += `
