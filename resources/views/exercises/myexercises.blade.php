@@ -369,11 +369,11 @@
                 if (!(document.getElementById("shared").checked && isShared[i].shared === "0")) {
                     htmlView += `
                     <div class="col">
-                        <div class="card m-auto" style="width: 18rem;">
+                        <div class="card m-0" style="width: 18rem;">
                             <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>`
+                                <h5 class="card-title" title="`+ res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
+                                <p class="card-text" title="`+ res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>`
                     if (isShared[i].shared === "1") {
                         htmlView += `<button class="btn btn-danger"
                                 onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`
