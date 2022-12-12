@@ -37,7 +37,7 @@
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                onclick="exerciseId = {{$record->id}}; search();">
+                                                                onclick="exerciseId = {{$record->id}}; assign();">
                                                             Zadat
                                                         </button>
                                                     </div>
@@ -91,7 +91,7 @@
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                onclick="exerciseId = {{$record->id}}; search();">
+                                                                onclick="exerciseId = {{$record->id}}; assign();">
                                                             Zadat
                                                         </button>
                                                     </div>
@@ -406,10 +406,10 @@
 
     <script>
         $('#search').on('keyup', function () {
-            search();
+            assign();
         });
 
-        function search() {
+        function assign() {
             var keyword = $('#search').val();
             $.post('{{ route("myexercises.search") }}',
                 {
@@ -422,6 +422,31 @@
                     postGroupsAssign(data);
                 });
         }
+
+        function assignExercise(exercise_id, group_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"exercise_id": exercise_id, "group_id": group_id },
+                url: "{{ route('myexercises.store-assignment') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '0')
+                    {
+                        alert("Neporařilo se nasdílet skupinu.");
+                    }
+                    assign();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+
 
         // table row with ajax
         function postGroupsAssign(res) {
@@ -439,15 +464,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
                                 <p class="card-text">` + res.result[i].description + `</p>
-                                <form method="POST" id="formAssign` + i +`" action="`
-                htmlView += `{{route('myexercises.store-assignment')}}`;
-                htmlView += `">`;
-                htmlView += `@csrf`;
-                htmlView += `
-                                    <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
-                                    <input type="hidden" id="exercise_id" name="exercise_id" value="` + exerciseId + `" />
-                                    <button type="submit" class="btn btn-primary" onclick="document.getElementById('formAssign` + i + `').submit()">Zadat</button>
-                                </form>
+                                <button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>
                             </div>
                         </div>
                     </div>
@@ -458,16 +475,6 @@
                 console.log(htmlView);
             }
             $('#searchedGroupsBody').html(htmlView);
-        }
-
-        function assignExercise(groupId) {
-            $.post('{{ route("myexercises.store-assignment") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    exercise_id: exerciseId,
-                    group_id: groupId
-                }
-            );
         }
     </script>
 
@@ -527,16 +534,6 @@
                 console.log(htmlView);
             }
             $('#statisticsBody').html(htmlView);
-        }
-
-        function assignExercise(groupId) {
-            $.post('{{ route("myexercises.store-assignment") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    exercise_id: exerciseId,
-                    group_id: groupId
-                }
-            );
         }
     </script>
 @endsection

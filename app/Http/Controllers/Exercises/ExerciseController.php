@@ -120,6 +120,7 @@ class ExerciseController extends Controller
             })
                 ->where('groups.owner', $request->owner_id)
                 ->where('groups.type', 'students')
+
                 ->get();
         }
 
@@ -129,12 +130,12 @@ class ExerciseController extends Controller
     /**
      * Saves assignment of an exercise to a student group.
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function store_assignment(Request $request)
     {
         DB::table('assigned_exercises')->insert(['exercise_id' => $request->exercise_id, 'group_id' => $request->group_id]);
-        return redirect(route('myexercises'));
+        return '1';
     }
 
     public function edit(Request $request)
