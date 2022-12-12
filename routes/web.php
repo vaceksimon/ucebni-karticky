@@ -23,6 +23,7 @@ Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edi
 Route::post('/profile/store', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
 Route::post('/profile/delete', [App\Http\Controllers\ProfileController::class, 'delete'])->name('profile.delete');
 Route::get('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/commonGroups', [\App\Http\Controllers\ProfileController::class, 'getCommonGroups'])->name('profile.commonGroups');
 
 Route::get('mygroups', [\App\Http\Controllers\Groups\GroupController::class, 'show' ])->name('mygroups');
 Route::post('mygroups/clickEdit', [\App\Http\Controllers\Groups\GroupController::class, 'clickEdit' ])->name('mygroups.clickEdit');
@@ -72,7 +73,7 @@ Route::post('/edit-group/search-member', [App\Http\Controllers\Groups\EditGroupC
 Route::post('/edit-group/remove-member', [App\Http\Controllers\Groups\EditGroupController::class, 'removeMember'])->name('edit-group.remove-member');
 Route::post('/edit-group/add-member', [App\Http\Controllers\Groups\EditGroupController::class, 'addMember'])->name('edit-group.add-member');
 Route::post('/edit-group/delete-group', [\App\Http\Controllers\Groups\EditGroupController::class, 'deleteGroup'])->name('edit-group.delete-group');
-Route::post('edit-group', [App\Http\Controllers\Groups\EditGroupController::class, 'store'])->name('edit-group.store');
+Route::post('/edit-group/store', [App\Http\Controllers\Groups\EditGroupController::class, 'store'])->name('edit-group.store');
 
 Route::get('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'index'])->name('edit-exercise');
 Route::post('/edit-exercise', [App\Http\Controllers\Exercises\EditExerciseController::class, 'store'])->name('edit-exercise.store');

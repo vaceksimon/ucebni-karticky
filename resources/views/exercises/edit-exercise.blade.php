@@ -68,7 +68,7 @@
                                                 {{ __('Kartičky') }}
                                             </div>
                                             <div class="row">
-                                                <button type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
+                                                <button id="add-flashcards-btn-1" type="button" class="btn btn-outline-primary btn-sm px-3 ms-auto me-0" style="width: 120px" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
                                             </div>
                                         </div>
                                     </div>
@@ -94,13 +94,7 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a
-                                    @if((Auth::user()->account_type != "admin"))
-                                        href="{{ route('myexercises') }}"
-                                    @else
-                                        href="{{ route('exercise-administration') }}"
-                                    @endif
-                                >
+                                <a href="{{ url()->previous() }}">
                                     <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3">Zrušit</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit cvičení</button>
@@ -170,7 +164,8 @@
                         <div class="modal-footer" style="justify-content: flex-start;">
                             <input type="hidden" id="add_flashcard_exercise_id" name="add_flashcard_exercise_id" value="<?php echo $exercise[0]->id;?>">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                            <button type="button" id="add-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Přidat</button>
+                            <!-- <button type="button" id="add-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Přidat</button>-->
+                            <button type="button" id="add-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard">Přidat</button>
                         </div>
                     </div>
                 </div>
@@ -197,14 +192,7 @@
                                                     <input id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="" required autocomplete="question" autofocus
-                                                           oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
                                                            oninput="setCustomValidity('')">
-
-                                                    @error('flashcard_question_edit')
-                                                    <span class="invalid-feedback" role="alert">
-                                                            <strong>Otázka musí být vyplněna.</strong>
-                                                        </span>
-                                                    @enderror
                                                 </div>
                                             </div>
 
@@ -217,14 +205,7 @@
                                                     <input id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="" required autocomplete="question" autofocus
-                                                           oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
                                                            oninput="setCustomValidity('')">
-
-                                                    @error('flashcard_answer_edit')
-                                                    <span class="invalid-feedback" role="alert">
-                                                            <strong>Odpověď musí být vyplněna.</strong>
-                                                        </span>
-                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -235,7 +216,7 @@
                         <div class="modal-footer" style="justify-content: flex-start;">
                             <input type="hidden" id="flashcard_id_edit" name="flashcard_id_edit" value="">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                            <button type="button" id="edit-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Upravit</button>
+                            <button type="button" id="edit-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard">Upravit</button>
                         </div>
                     </div>
                 </div>
@@ -347,7 +328,7 @@
                                             <i class="bi bi-emoji-frown"></i>
                                         </div>
                                         <div class="row mx-auto my-3" style="width: 120px">
-                                            <button type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
+                                            <button id="add-flashcards-btn-2" type="button" class="btn btn-outline-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#addFlashcardModal">Přidat kartičky</button>
                                         </div>
                                     </div>
                                 </tr>
@@ -441,10 +422,40 @@
         }
     </script>
     <script>
+        $('#flashcard_question').on('keyup', function(){
+            var flashcardQuestionInput = document.getElementById("flashcard_question");
+            flashcardQuestionInput.style.boxShadow = 'none';
+        });
+    </script>
+    <script>
+        $('#flashcard_answer').on('keyup', function(){
+            var flashcardAnswerInput = document.getElementById("flashcard_answer");
+            flashcardAnswerInput.style.boxShadow = 'none';
+        });
+    </script>
+    <script>
         $(document).on("click", "#add-flashcard-btn", function () {
-           addFlashcard(document.getElementById("flashcard_question").value ,
-               document.getElementById("flashcard_answer").value,
-               document.getElementById("add_flashcard_exercise_id").value);
+            var flashcardQuestionInput = document.getElementById("flashcard_question");
+            var flashcardAnswerInput = document.getElementById("flashcard_answer");
+            var flashcardQuestion =  flashcardQuestionInput.value;
+            var flashcardAnswer = flashcardAnswerInput.value;
+
+            if (flashcardQuestion === '' || flashcardAnswer === '') {
+                if (flashcardQuestion === '') {
+                    flashcardQuestionInput.style.boxShadow = '0 0 2px red';
+                }
+
+                if (flashcardAnswer === '') {
+                    flashcardAnswerInput.style.boxShadow = '0 0 2px red';
+                }
+
+                alert("Prosím vyplňte všechna požadovaná pole.");
+
+                return;
+            }
+
+            addFlashcard(flashcardQuestion, flashcardAnswer,
+                document.getElementById("add_flashcard_exercise_id").value);
         });
 
         function addFlashcard(question, answer, exercise_id) {
@@ -471,13 +482,43 @@
             });
 
             showFlashcards();
+
+            $("#addFlashcardModal").modal('hide');
         }
     </script>
     <script>
+        $('#flashcard_question_edit').on('keyup', function () {
+            var flashcardQuestionInput = document.getElementById("flashcard_question_edit");
+            flashcardQuestionInput.style.boxShadow = 'none';
+        });
+        $('#flashcard_answer_edit').on('keyup', function () {
+            var flashcardAnswerInput = document.getElementById("flashcard_answer_edit");
+            flashcardAnswerInput.style.boxShadow = 'none';
+        });
+    </script>
+    <script>
         $(document).on("click", "#edit-flashcard-btn", function () {
+            var flashcardQuestionInput = document.getElementById("flashcard_question_edit");
+            var flashcardAnswerInput = document.getElementById("flashcard_answer_edit");
+            var flashcardQuestion =  flashcardQuestionInput.value;
+            var flashcardAnswer = flashcardAnswerInput.value;
+
+            if (flashcardQuestion === '' || flashcardAnswer === '') {
+                if (flashcardQuestion === '') {
+                    flashcardQuestionInput.style.boxShadow = '0 0 2px red';
+                }
+                if (flashcardAnswer === '') {
+                    flashcardAnswerInput.style.boxShadow = '0 0 2px red';
+                }
+
+                alert("Prosím vyplňte všechna požadovaná pole.");
+
+                return;
+            }
+
             editFlashcard(document.getElementById("flashcard_id_edit").value,
-                document.getElementById("flashcard_question_edit").value,
-                document.getElementById("flashcard_answer_edit").value);
+                flashcardQuestion,
+                flashcardAnswer);
         });
 
         function editFlashcard(flashcard_id, question, answer) {
@@ -504,6 +545,19 @@
             });
 
             showFlashcards();
+
+            $("#editFlashcard").modal('hide');
         }
+    </script>
+    <script>
+        $(document).on("click", "#add-flashcards-btn-1", function () {
+           document.getElementById("flashcard_question").value = '';
+            document.getElementById("flashcard_answer").value = '';
+        });
+
+        $(document).on("click", "#add-flashcards-btn-2", function () {
+            document.getElementById("flashcard_question").value = '';
+            document.getElementById("flashcard_answer").value = '';
+        });
     </script>
 @endsection

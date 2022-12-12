@@ -127,7 +127,12 @@ class EditGroupController extends Controller
             Group::where('id', '=', $request->group_id)->update(['name' => $request->name, 'description' => $request->description]);
         }
 
-        return $this->index();
+        if (Auth::user()->account_type == "admin")
+        {
+            return redirect('group-administration');
+        }
+
+        return redirect('mygroups');
     }
 
     /**
