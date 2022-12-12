@@ -50,6 +50,17 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <label for="topic" class="col-form-label text-start">
+                                    {{ __('Téma *') }} :
+                                </label>
+
+                                <div class="col-md-6">
+                                    <input id="topic" type="text" class="form-control"
+                                           name="topic" value="<?php echo $exercise[0]->topic ?>">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label for="description" class="col-form-label text-start">
                                     {{ __('Popis') }} :
                                 </label>
