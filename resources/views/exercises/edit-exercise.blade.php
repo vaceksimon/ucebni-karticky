@@ -357,12 +357,12 @@
                         <tr>
                             <td>` + (i+1) + `</td>
                             <td>
-                                <div id="flashcard_question_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].question + `">` +
+                                <div id="flashcard_question_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].question + `" title="` + res.result[i].question + `">` +
                                     res.result[i].question + `
                                 </div>
                             </td>
                             <td>
-                                <div id="flashcard_answer_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].answer + `">` +
+                                <div id="flashcard_answer_` + res.result[i].id + `" class="text-shortening" data-value="` + res.result[i].answer + `" title="` + res.result[i].answer + `">` +
                                     res.result[i].answer + `
                                 </div>
                             </td>
