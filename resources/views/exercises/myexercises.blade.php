@@ -482,6 +482,17 @@
         // table row with ajax
         function postGroupsAssign(res) {
             htmlView = '';
+
+            if (res.result.length === 0)
+            {
+                htmlView += `
+                <div class="text-center fs-3">Bohužel nemáte cvičení komu zadat.
+                    <i class="bi bi-emoji-frown"></i>
+                </div>`
+                $('#searchedGroupsBody').html(htmlView);
+                return;
+            }
+
             for (let i = 0; i < res.result.length; i++) {
                 if (i % 3 === 0) {
                     htmlView += `
