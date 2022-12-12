@@ -123,11 +123,11 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
+                                                    <textarea id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="{{ old('question') }}" required autocomplete="question" autofocus
                                                            oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
 
                                                     @error('flashcard_question')
                                                         <span class="invalid-feedback" role="alert">
@@ -143,11 +143,11 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
+                                                    <textarea id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="{{ old('answer') }}" required autocomplete="question" autofocus
                                                            oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
 
                                                     @error('flashcard_answer')
                                                     <span class="invalid-feedback" role="alert">
@@ -195,10 +195,10 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
+                                                    <textarea id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="" required autocomplete="question" autofocus
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
                                                 </div>
                                             </div>
 
@@ -208,10 +208,10 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
+                                                    <textarea id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="" required autocomplete="question" autofocus
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
                                                 </div>
                                             </div>
                                         </div>
