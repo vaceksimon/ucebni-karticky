@@ -31,7 +31,7 @@
 
 <body class="h-100">
 <div class="d-flex h-100" style="flex-flow: column; overflow: auto">
-    <div class="d-flex flex-grow-0 flex-shrink-1">
+    <div class="d-flex flex-grow-0 flex-shrink-1 sticky-top">
         <div class="flex-grow-1 flex-shrink-1" style="flex-basis: auto">
             @include('layouts.header')
         </div>
