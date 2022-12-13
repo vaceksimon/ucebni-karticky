@@ -107,20 +107,43 @@ class ExerciseController extends Controller
     public function search(Request $request)
     {
         if ($request->keyword != '') {
-            $result = Group::whereNotIn('groups.id', function ($query) use ($request) {
-                $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
-            })
-                ->where('groups.owner', $request->owner_id)
-                ->where('groups.type', 'students')
-                ->where('groups.name', 'LIKE', "%" . $request->keyword . "%")
-                ->get();
+            if($request->assigned == 'false') {
+                $result = Group::whereNotIn('groups.id', function ($query) use ($request) {
+                    $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
+                })
+                    ->where('groups.owner', $request->owner_id)
+                    ->where('groups.type', 'students')
+                    ->where('groups.name', 'LIKE', "%" . $request->keyword . "%")
+                    ->get();
+            }
+            else {
+                $result = Group::whereIn('groups.id', function ($query) use ($request) {
+                    $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
+                })
+                    ->where('groups.owner', $request->owner_id)
+                    ->where('groups.type', 'students')
+                    ->where('groups.name', 'LIKE', "%" . $request->keyword . "%")
+                    ->get();
+            }
         } else {
-            $result = Group::whereNotIn('groups.id', function ($query) use ($request) {
-                $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
-            })
-                ->where('groups.owner', $request->owner_id)
-                ->where('groups.type', 'students')
-                ->get();
+            if($request->assigned == 'true') {
+                $result = Group::whereIn('groups.id', function ($query) use ($request) {
+                    $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
+                })
+                    ->where('groups.owner', $request->owner_id)
+                    ->where('groups.type', 'students')
+
+                    ->get();
+            }
+            else {
+                $result = Group::whereNotIn('groups.id', function ($query) use ($request) {
+                    $query->select('group_id')->from('assigned_exercises AS ae')->where('exercise_id', '=', $request->exercise_id);
+                })
+                    ->where('groups.owner', $request->owner_id)
+                    ->where('groups.type', 'students')
+
+                    ->get();
+            }
         }
 
         return response()->json(['result' => $result]);
@@ -129,12 +152,20 @@ class ExerciseController extends Controller
     /**
      * Saves assignment of an exercise to a student group.
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return string
      */
     public function store_assignment(Request $request)
     {
         DB::table('assigned_exercises')->insert(['exercise_id' => $request->exercise_id, 'group_id' => $request->group_id]);
-        return redirect(route('myexercises'));
+        return '1';
+    }
+
+    public function unassign(Request $request) {
+        DB::table('assigned_exercises')
+            ->select('*')
+            ->where('group_id', $request->group_id)
+            ->where('exercise_id', $request->exercise_id)
+            ->delete();
     }
 
     public function edit(Request $request)

@@ -37,7 +37,7 @@
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                onclick="exerciseId = {{$record->id}}; search();">
+                                                                onclick="exerciseId = {{$record->id}}; assign();">
                                                             Zadat <i class="bi bi-collection"></i>
                                                         </button>
                                                     </div>
@@ -91,7 +91,7 @@
                                                         <button type="button"
                                                                 class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                onclick="exerciseId = {{$record->id}}; search();">
+                                                                onclick="exerciseId = {{$record->id}}; assign();">
                                                             Zadat <i class="bi bi-collection"></i>
                                                         </button>
                                                     </div>
@@ -226,7 +226,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content m-auto w-75">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Zadat skupině</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -238,11 +238,19 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="" method="POST">
-                                                <div class="row">
+                                                <div class="row align-items-center">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
                                                             <input type="text" class="form-control"
                                                                    placeholder="Vyhledat skupiny" id="search">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-check fs-5">
+                                                            <label class="form-check-label">
+                                                                Zadaná cvičení
+                                                                <input class="form-check-input" type="checkbox" value="value" id="assigned">
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -265,7 +273,7 @@
             <div class="modal fade" id="statModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content m-auto w-75">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Zobrazit statistiky skupiny</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -462,30 +470,83 @@
 
     <script>
         $('#search').on('keyup', function () {
-            search();
+            assign();
         });
 
-        function search() {
+        function assign() {
             var keyword = $('#search').val();
             $.post('{{ route("myexercises.search") }}',
                 {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     keyword: keyword,
                     owner_id: {{Auth::id()}},
-                    exercise_id: exerciseId
+                    exercise_id: exerciseId,
+                    assigned: $('#assigned').prop('checked').toString()
                 },
                 function (data) {
                     postGroupsAssign(data);
                 });
         }
 
+        $('#assigned').change(function () {
+            assign();
+        });
+
+        function assignExercise(exercise_id, group_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"exercise_id": exercise_id, "group_id": group_id },
+                url: "{{ route('myexercises.store-assignment') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '0')
+                    {
+                        alert("Neporařilo se zadat cvičení skupině.");
+                    }
+                    assign();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+
+        function unassignExercise(exercise_id, group_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"exercise_id": exercise_id, "group_id": group_id },
+                url: "{{ route('myexercises.unassign-exercise') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '0')
+                    {
+                        alert("Neporařilo se odstranit zadání skupině.");
+                    }
+                    assign();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+            assign();
+        }
+
+
         // table row with ajax
         function postGroupsAssign(res) {
-            htmlView = '';
-
             if (res.result.length === 0)
             {
-                htmlView += `
+                htmlView = `
                 <div class="text-center fs-3">Bohužel nemáte cvičení komu zadat.
                     <i class="bi bi-emoji-frown"></i>
                 </div>`
@@ -493,48 +554,26 @@
                 return;
             }
 
+            htmlView = '<div class="row gap-3 m-2 d-flex flex justify-content-evenly align-items-start">';
             for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3">`
-                }
-
                 htmlView += `
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                        <div class="card p-0 me-auto" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title" title="`+ res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
-                                <p class="card-text" title="`+ res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>
-                                <form method="POST" id="formAssign` + i +`" action="`
-                htmlView += `{{route('myexercises.store-assignment')}}`;
-                htmlView += `">`;
-                htmlView += `@csrf`;
+                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
+                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].description + `">` + res.result[i].description + `</p>`
+                    if($('#assigned').prop('checked')) {
+                        htmlView += `<button class="btn btn-danger" onclick="unassignExercise(` + exerciseId + `,` + res.result[i].id + `)">Odstranit zadání</button>`
+                    }
+                    else {
+                        htmlView += `<button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>`
+                    }
                 htmlView += `
-                                    <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
-                                    <input type="hidden" id="exercise_id" name="exercise_id" value="` + exerciseId + `" />
-                                    <button type="submit" class="btn btn-primary" onclick="document.getElementById('formAssign` + i + `').submit()">Zadat</button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 `;
-
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
-                console.log(htmlView);
             }
             $('#searchedGroupsBody').html(htmlView);
-        }
-
-        function assignExercise(groupId) {
-            $.post('{{ route("myexercises.store-assignment") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    exercise_id: exerciseId,
-                    group_id: groupId
-                }
-            );
         }
     </script>
 
@@ -563,20 +602,24 @@
 
         // table row with ajax
         function postGroupsStat(res) {
-            htmlView = '';
-            for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3">`
-                }
+            if (res.result.length === 0)
+            {
+                htmlView = `
+                <div class="text-center fs-3">Bohužel nemáte skupinu, které statistiky zobrazit.
+                    <i class="bi bi-emoji-frown"></i>
+                </div>`
+                $('#statisticsBody').html(htmlView);
+                return;
+            }
 
+            htmlView = '<div class="row gap-3 m-2 d-flex flex justify-content-evenly align-items-start">';
+            for (let i = 0; i < res.result.length; i++) {
                 htmlView += `
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                        <div class="card p-0 me-auto" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>
+                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
+                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].description + `">` + res.result[i].description + `</p>
                                 <form method="GET" action="`
                 htmlView += `{{route('group-statistics')}}`;
                 htmlView += `">
@@ -586,24 +629,11 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
                 `;
 
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
                 console.log(htmlView);
             }
             $('#statisticsBody').html(htmlView);
-        }
-
-        function assignExercise(groupId) {
-            $.post('{{ route("myexercises.store-assignment") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    exercise_id: exerciseId,
-                    group_id: groupId
-                }
-            );
         }
     </script>
 @endsection
