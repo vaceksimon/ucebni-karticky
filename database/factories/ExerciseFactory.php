@@ -1,5 +1,8 @@
 <?php
-
+/***********************
+ * Author: Tomas Bartu *
+ * Login: xbartu11     *
+ ***********************/
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,7 +23,8 @@ class ExerciseFactory extends Factory
             'name'        => $this->faker->words(2, true),
             'description' => $this->faker->sentence(4),
             'topic'       => $this->faker->word(),
-            'visibility'  => $this->faker->randomElement(['public', 'private'])
+            'visibility'  => $this->faker->randomElement(['public', 'private']),
+            'show_timer'  => $this->faker->randomElement([true, false])
         ];
     }
 }

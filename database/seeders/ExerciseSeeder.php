@@ -1,5 +1,8 @@
 <?php
-
+/***********************
+ * Author: Tomas Bartu *
+ * Login: xbartu11     *
+ ***********************/
 namespace Database\Seeders;
 
 use App\Models\Exercise;
@@ -19,7 +22,8 @@ class ExerciseSeeder extends Seeder
             'name'        => 'Elektrotechnické měření',
             'description' => 'Kartičky pro procvičení základních pojmů z předmětu ELM',
             'topic'       => 'Elektrotechnika',
-            'visibility'  => 'private'
+            'visibility'  => 'private',
+            'show_timer'  => true
         ]);
         Exercise::factory()->times(19)->create();
     }
