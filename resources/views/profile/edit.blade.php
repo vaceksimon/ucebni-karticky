@@ -1,3 +1,8 @@
+<!-- ************************************* -->
+<!-- * Author: Simon Vacek               * -->
+<!-- * Login: xvacek10                   * -->
+<!-- ************************************* -->
+
 @extends('layouts.main')
 
 @section('content')
@@ -88,56 +93,6 @@
                                                 <div>
                                                     <span id="errorPassword" name="error" class="text-danger"></span>
                                                 </div>
-                                                <script type="text/javascript">
-                                                    document.getElementById('password').addEventListener('keyup', checkValue('password', 'errorPassword', 8, 'Heslo'));
-                                                    document.getElementById('password').addEventListener('mouseup', checkValue('password', 'errorPassword', 8, 'Heslo'));
-                                                    document.getElementById('first_name').addEventListener('keyup', checkValue('first_name', 'errorFirstName', 1, 'Jméno'));
-                                                    document.getElementById('last_name').addEventListener('keyup', checkValue('last_name', 'errorLastName', 1, 'Příjmení'));
-                                                    document.getElementById('email').addEventListener('keyup', checkValue('email', 'errorEmail', 1, 'Email'));
-
-                                                    function checkValue(idInput, idSpan, length, prompt) {
-                                                        return function () {
-                                                            if (!checkLength(idInput, length)) {
-                                                                document.getElementById(idSpan).textContent = prompt + " musí mít alespoň " + length + " znaků.";
-                                                                document.getElementById(idInput).classList.add('bg-danger');
-                                                            } else {
-                                                                if (idInput === 'email' && !checkEmail(idInput)) {
-                                                                    document.getElementById(idSpan).textContent = "Emailová adresa je ve špatném tvaru";
-                                                                    document.getElementById(idInput).classList.add('bg-danger');
-                                                                } else {
-                                                                    document.getElementById(idSpan).textContent = "";
-                                                                    document.getElementById(idInput).classList.remove('bg-danger');
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-
-                                                    function checkLength(id, length) {
-                                                        var value = document.getElementById(id).value;
-                                                        return (value.length >= length);
-                                                    }
-
-                                                    function checkEmail(id) {
-                                                        let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                                                        return res.test(document.getElementById(id).value);
-                                                    }
-
-
-                                                    function validateFormAndSubmit() {
-                                                        var errorElements = document.getElementsByName('error');
-                                                        var isOk = true;
-                                                        for (const element of errorElements) {
-                                                            if (element.textContent !== "") {
-                                                                isOk = false
-                                                                break;
-                                                            }
-                                                        }
-                                                        if (isOk)
-                                                            document.getElementById('edit-form').submit();
-                                                        else
-                                                            alert('Vyplňte prosím povinné údaje.');
-                                                    }
-                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +155,8 @@
                         </form>
                         <div class="mt-5">
                             <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
-                                    onclick="validateFormAndSubmit()">Uložit
+                                    onclick="validateFormAndSubmit()">
+                                Uložit
                             </button>
                             <a href="javascript:window.history.back()"
                                style="text-decoration: none">
@@ -218,9 +174,11 @@
                             </div>
                         @endif
                     </div>
+                    <button id="btn_invalid" data-bs-toggle="modal" data-bs-target="#invalidPrompt"  style="display: none">Invalid</button>
                 </div>
             </div>
 
+            <!-- remove user modal -->
             <div id="removeUserPrompt" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel"
                  aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -256,11 +214,102 @@
                 </div>
             </div>
 
-
+            <!-- invalid information modal -->
+            <div id="invalidPrompt" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel"
+                 aria-hidden="true" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upozornění</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Vyplňte prosím správně všechny povinné údaje.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rozumím</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <script type="text/javascript">
+        // add event listeners to validate user input
+        document.getElementById('password').addEventListener('keyup', checkValue('password', 'errorPassword', 8, 'Heslo'));
+        document.getElementById('password').addEventListener('mouseup', checkValue('password', 'errorPassword', 8, 'Heslo'));
+        document.getElementById('first_name').addEventListener('keyup', checkValue('first_name', 'errorFirstName', 1, 'Jméno'));
+        document.getElementById('first_name').addEventListener('mouseup', checkValue('first_name', 'errorFirstName', 1, 'Jméno'));
+        document.getElementById('last_name').addEventListener('keyup', checkValue('last_name', 'errorLastName', 1, 'Příjmení'));
+        document.getElementById('last_name').addEventListener('mouseup', checkValue('last_name', 'errorLastName', 1, 'Příjmení'));
+        document.getElementById('email').addEventListener('keyup', checkValue('email', 'errorEmail', 1, 'Email'));
+        document.getElementById('email').addEventListener('mouseup', checkValue('email', 'errorEmail', 1, 'Email'));
+
+        /*
+         * Checks an input value and prints an error message if the value is invalid.
+         * Author: Simon Vacek
+         */
+        function checkValue(idInput, idSpan, length, prompt) {
+            return function () {
+                if (!checkLength(idInput, length)) {
+                    document.getElementById(idSpan).textContent = prompt + " musí mít alespoň " + length + " znaků.";
+                    document.getElementById(idInput).classList.add('bg-danger');
+                } else {
+                    if (idInput === 'email' && !checkEmail(idInput)) {
+                        document.getElementById(idSpan).textContent = "Emailová adresa je ve špatném tvaru";
+                        document.getElementById(idInput).classList.add('bg-danger');
+                    } else {
+                        document.getElementById(idSpan).textContent = "";
+                        document.getElementById(idInput).classList.remove('bg-danger');
+                    }
+                }
+            }
+        }
+
+        /*
+         * Function checks if an input has length number of characters.
+         * Author: Simon Vacek
+         */
+        function checkLength(id, length) {
+            var value = document.getElementById(id).value;
+            return (value.length >= length);
+        }
+
+        /*
+         * Function checks if an input has valid email address.
+         * Author: Simon Vacek
+         */
+        function checkEmail(id) {
+            let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            return res.test(document.getElementById(id).value);
+        }
+
+        /**
+         * If all inputs have valid values, submits the form. Otherwise display an error modal window.
+         */
+        function validateFormAndSubmit() {
+            var errorElements = document.getElementsByName('error');
+            var isOk = true;
+            for (const element of errorElements) {
+                if (element.textContent !== "") {
+                    isOk = false
+                    break;
+                }
+            }
+            if (isOk)
+                document.getElementById('edit-form').submit();
+            else {
+                document.getElementById('btn_invalid').click();
+            }
+        }
+    </script>
+
     <script>
+        /*
+         * Loads and displays a photo once user uploads/submits it.
+         * Author: Simon Vacek
+         */
         function photoSelected(profilePhoto) {
             let url = profilePhoto.value;
             let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
