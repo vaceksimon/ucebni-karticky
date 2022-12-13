@@ -1,4 +1,13 @@
-@extends('layouts/app', ['activePage' => 'public-flashcard-invalid', 'title' => 'Učební Kartičky'])
+<!-- *********************** -->
+<!-- * Author: Tomas Bartu * -->
+<!-- * Login: xbartu11     * -->
+<!-- *********************** -->
+@guest()
+    @extends('layouts/app', ['activePage' => 'public-flashcard-invalid', 'title' => 'Učební Kartičky'])
+@endguest
+@auth()
+    @extends('layouts.main')
+@endauth
 
 @section('content')
     <div class="container my-5">

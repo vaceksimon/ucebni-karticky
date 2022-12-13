@@ -1,5 +1,8 @@
 @extends('layouts.main')
-
+<!-- *********************** -->
+<!-- * Author: Tomas Bartu * -->
+<!-- * Login: xbartu11     * -->
+<!-- *********************** -->
 @section('content')
     <div class="container my-5">
         <div class="row justify-content-center">
