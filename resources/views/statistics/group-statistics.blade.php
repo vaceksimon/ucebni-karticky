@@ -62,71 +62,79 @@
                             </div>
                         </div>
 
+                        @empty($best_attempt[0])
+                            <div class="text-center my-5">
+                                <h4>
+                                    Toto cvičení zatím nebylo dokončeno.
+                                    <i class="bi bi-emoji-frown"></i>
+                                </h4>
+                            </div>
+                        @else
+                            <hr class="my-2">
 
-                        <hr class="my-2">
-
-                        <div class="card-group mt-3">
-                            <div class="col-5 card">
-                                <div class="card-header">Nejrychlejší pokusy</div>
-                                <div class="card-body">
-                                    @foreach($fastest_attempt as $attempt)
-                                        <div class="card mb-2">
-                                            <div class="card-body p-1">
-                                                <p>Čas: {{$attempt->spend_time}}</p>
-                                                <p>Úspěšnost: {{money_format('%.0i', $attempt->percentage)}}%</p>
-                                                <p class="text-success">Počet správných
-                                                    odpovědí: {{$attempt->correct_answers_number}}</p>
-                                                <p class="text-danger m-0">Počet špatných
-                                                    odpovědí: {{$attempt->wrong_answers_number}}</p>
+                            <div class="card-group mt-3">
+                                <div class="col-5 card">
+                                    <div class="card-header">Nejúspěšnější pokusy</div>
+                                    <div class="card-body">
+                                        @foreach($best_attempt as $attempt)
+                                            <div class="card mb-2">
+                                                <div class="card-body p-1">
+                                                    <p>Čas: {{$attempt->spend_time}}</p>
+                                                    <p>Úspěšnost: {{money_format('%.0i', $attempt->percentage)}}%</p>
+                                                    <p class="text-success">Počet správných
+                                                        odpovědí: {{$attempt->correct_answers_number}}</p>
+                                                    <p class="text-danger m-0">Počet špatných
+                                                        odpovědí: {{$attempt->wrong_answers_number}}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="col-5 card">
-                                <div class="card-header">Nejúspěšnější pokusy</div>
-                                <div class="card-body">
-                                    @foreach($best_attempt as $attempt)
-                                        <div class="card mb-2">
-                                            <div class="card-body p-1">
-                                                <p>Čas: {{$attempt->spend_time}}</p>
-                                                <p>Úspěšnost: {{money_format('%.0i', $attempt->percentage)}}%</p>
-                                                <p class="text-success">Počet správných
-                                                    odpovědí: {{$attempt->correct_answers_number}}</p>
-                                                <p class="text-danger m-0">Počet špatných
-                                                    odpovědí: {{$attempt->wrong_answers_number}}</p>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="my-5">
-                            <div class="mb-3 text-center">
-                                <b>Souhrnný graf</b>
-                            </div>
-                            <div class="card chart-container">
-                                <canvas id="chart"><!-- Chart data --></canvas>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                Zobrazit statistiku žáka
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="Vyhledat žáka" id="search-student">
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                <div id="students_table">
+                                <div class="col-5 card">
+                                    <div class="card-header">Nejrychlejší pokusy</div>
+                                    <div class="card-body">
+                                        @foreach($fastest_attempt as $attempt)
+                                            <div class="card mb-2">
+                                                <div class="card-body p-1">
+                                                    <p>Čas: {{$attempt->spend_time}}</p>
+                                                    <p>Úspěšnost: {{money_format('%.0i', $attempt->percentage)}}%</p>
+                                                    <p class="text-success">Počet správných
+                                                        odpovědí: {{$attempt->correct_answers_number}}</p>
+                                                    <p class="text-danger m-0">Počet špatných
+                                                        odpovědí: {{$attempt->wrong_answers_number}}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="my-5">
+                                <div class="mb-3 text-center">
+                                    <b>Souhrnný graf</b>
+                                </div>
+                                <div class="card chart-container">
+                                    <canvas id="chart"><!-- Chart data --></canvas>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    Zobrazit statistiku žáka
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="Vyhledat žáka" id="search-student">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="students_table">
+                                    </div>
+                                </div>
+                            </div>
+                        @endempty
                     </div>
                 </div>
             </div>
