@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 @if($user['id'] != Auth::id())
-                    <a href="{{url()->previous()}}">
+                    <a href="javascript:window.history.back()">
                         <button class="btn btn-outline-secondary mb-2">Zpět</button>
                     </a>
                 @endif

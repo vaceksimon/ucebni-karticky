@@ -119,7 +119,7 @@
                             </div>
 
                             <div class="my-3 d-flex">
-                                <a href="{{ url()->previous() }}">
+                                <a href="javascript:window.history.back()">
                                     <input type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" value="Zrušit">
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg px-3 ms-auto me-0">Upravit skupinu</button>
