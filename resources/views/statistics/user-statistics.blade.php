@@ -109,7 +109,7 @@
                         @endempty
 
                         <div class="my-3 row d-flex">
-                            <a href="{{ url()->previous() }}">
+                            <a href="javascript:window.history.back()">
                                 <input type="button" class="btn btn-outline-secondary btn-lg px-4" value="Zpět">
                             </a>
                         </div>

@@ -10,7 +10,7 @@
                             {{ __('Úprava profilu') }}
                         </div>
                         <div class="ms-auto">
-                            <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif"
+                            <a href="javascript:window.history.back()"
                                style="text-decoration: none">
                                 <button class="btn btn-outline-secondary me-2">
                                     Zrušit
@@ -202,7 +202,7 @@
                             <button id="submitBtn" name="submitBtn" class="btn btn-outline-success"
                                     onclick="validateFormAndSubmit()">Uložit
                             </button>
-                            <a href="@if(Auth::user()->account_type == 'admin'){{route('user-administration')}}@else{{route('profile')}}@endif"
+                            <a href="javascript:window.history.back()"
                                style="text-decoration: none">
                                 <button class="btn btn-outline-secondary ms-2">
                                     Zrušit
