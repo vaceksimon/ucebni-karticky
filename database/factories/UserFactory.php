@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: UserFactory.php                                   */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Factory for User model                     */
+/*                                                         */
+/***********************************************************/
 namespace Database\Factories;
 
 use App\Models\User;

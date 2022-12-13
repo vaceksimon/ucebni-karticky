@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: PublicFlashcardController.php                     */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Controller for Flashcard public views      */
+/*                                                         */
+/***********************************************************/
 namespace App\Http\Controllers\Flashcards;
 
 use App\Http\Controllers\Controller;
