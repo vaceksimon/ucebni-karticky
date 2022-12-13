@@ -37,6 +37,8 @@ class ShowGroupController extends Controller
             $group_id = Session::get('group_id');
             $group = Group::where('id', '=', $group_id)->get();
 
+            $group_owner = User::where('id', '=', $group[0]->owner)->get(['degree_front', 'first_name', 'last_name', 'degree_after']);
+
             $members = User::leftJoin('users_memberships', function($join) {
                 $join->on('users.id', '=', 'users_memberships.user_id');
             })->whereNotIn('user_id', function ($query) use ($group_id) {
@@ -52,12 +54,13 @@ class ShowGroupController extends Controller
                 return view('groups.show-group')
                     ->with('group', $group)
                     ->with('members', $members)
+                    ->with('group_owner', $group_owner)
                     ->with('exercises', $assigned_exc);
             }
 
-
             return view('groups.show-group')
                 ->with('group', $group)
+                ->with('group_owner', $group_owner)
                 ->with('members', $members);
         }
 
