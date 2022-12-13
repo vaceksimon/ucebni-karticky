@@ -25,6 +25,7 @@ class Exercise extends Model
         'description',
         'topic',
         'visibility',
+        'show_timer'
     ];
 
     /**
