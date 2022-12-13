@@ -137,7 +137,10 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- **************************** -->
+            <!-- * Modal window for adding  * -->
+            <!-- * the flashcard.           * -->
+            <!-- **************************** -->
             <div class="modal fade" id="addFlashcardModal" name="addFlashcardModal" tabindex="-1" aria-labelledby="addFlashcardModalLabel" aria-hidden="true" style="--bs-modal-width: 55vw;">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -210,6 +213,10 @@
                 </div>
             </div>
 
+            <!-- ***************************** -->
+            <!-- * Modal window for editing  * -->
+            <!-- * the flashcard.            * -->
+            <!-- ***************************** -->
             <div class="modal fade" id="editFlashcard" name="editFlashcard" tabindex="-1" aria-labelledby="editFlashcardModalLabel" aria-hidden="true" style="--bs-modal-width: 55vw;">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -261,6 +268,10 @@
                 </div>
             </div>
 
+            <!-- ****************************** -->
+            <!-- * Modal window for removing  * -->
+            <!-- * the flashcard.             * -->
+            <!-- ****************************** -->
             <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addFlashcardModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -280,6 +291,10 @@
                 </div>
             </div>
 
+            <!-- ****************************** -->
+            <!-- * Modal window for removing  * -->
+            <!-- * the exercise.             * -->
+            <!-- ****************************** -->
             <div id="deletingQuestion" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -306,8 +321,10 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script>
+        /*
+         * Event handler for removing the flashcard (modal window).
+         */
         $(document).on("click", ".open-remove-flashcard-dialog", function () {
             var flashcard = $(this).data('id');
             var exerciseName = document.getElementById("name").value;
@@ -318,6 +335,9 @@
             $(".modal-footer #exercise_description").val( exerciseDescription );
         });
 
+        /*
+         * Event handler for editing the flashcard.
+         */
         $(document).on("click", ".open-edit-flashcard", function () {
             var flashcard = $(this).data('id');
 
@@ -343,6 +363,9 @@
     <script>
         showFlashcards();
 
+        /*
+         * Function for showing the exercise flashcards.
+         */
         function showFlashcards() {
             $.post('{{ route("edit-exercise.search-flashcards") }}',
                 {
@@ -353,6 +376,9 @@
                 });
         }
 
+        /*
+         * Function for showing the table row.
+         */
         function table_post_row_flashcards(res) {
             let htmlView = '';
             if(res.result.length <= 0) {
@@ -430,11 +456,17 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for removing the flashcard.
+         */
         $(document).on("click", "#remove-flashcard-btn", function () {
             removeFlashcard(document.getElementById("flashcard_id").value,
                 document.getElementById("exercise_id").value);
         });
 
+        /*
+         * Function for removing the flashcard from the exercise.
+         */
         function removeFlashcard(flashcard_id) {
             $.ajaxSetup({
                 headers: {
@@ -461,12 +493,18 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for filling the question.
+         */
         $('#flashcard_question').on('keyup', function(){
             var flashcardQuestionInput = document.getElementById("flashcard_question");
             flashcardQuestionInput.style.boxShadow = 'none';
         });
     </script>
     <script>
+        /*
+         * Event handler for filling the answer.
+         */
         $('#flashcard_answer').on('keyup', function(){
             var flashcardAnswerInput = document.getElementById("flashcard_answer");
             flashcardAnswerInput.style.boxShadow = 'none';
@@ -477,11 +515,17 @@
 
         document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
 
+        /*
+         * Event handler for closing the modal window for adding the flashcards.
+         */
         $(document).on("click", "#add-flashcard-close-btn", function () {
            addedCards = 0;
            document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
         });
 
+        /*
+         * Event handler for adding the flashcard.
+         */
         $(document).on("click", "#add-flashcard-btn", function () {
             var flashcardQuestionInput = document.getElementById("flashcard_question");
             var flashcardAnswerInput = document.getElementById("flashcard_answer");
@@ -514,6 +558,9 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
+        /*
+         * Function for adding the flashcard.
+         */
         function addFlashcard(question, answer, exercise_id) {
             $.ajaxSetup({
                 headers: {
@@ -551,16 +598,25 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for filling the question (edit flashcard).
+         */
         $('#flashcard_question_edit').on('keyup', function () {
             var flashcardQuestionInput = document.getElementById("flashcard_question_edit");
             flashcardQuestionInput.style.boxShadow = 'none';
         });
+        /*
+         * Event handler for filling the answer (edit flashcard).
+         */
         $('#flashcard_answer_edit').on('keyup', function () {
             var flashcardAnswerInput = document.getElementById("flashcard_answer_edit");
             flashcardAnswerInput.style.boxShadow = 'none';
         });
     </script>
     <script>
+        /*
+         * Event handler for editing the flashcard.
+         */
         $(document).on("click", "#edit-flashcard-btn", function () {
             var flashcardQuestionInput = document.getElementById("flashcard_question_edit");
             var flashcardAnswerInput = document.getElementById("flashcard_answer_edit");
@@ -585,6 +641,9 @@
                 flashcardAnswer);
         });
 
+        /*
+         * Function for editing the flashcard.
+         */
         function editFlashcard(flashcard_id, question, answer) {
             $.ajaxSetup({
                 headers: {
@@ -614,11 +673,17 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for adding the flashcard using the first button.
+         */
         $(document).on("click", "#add-flashcards-btn-1", function () {
             document.getElementById("flashcard_question").value = '';
             document.getElementById("flashcard_answer").value = '';
         });
 
+        /*
+         * Event handler for adding the flashcard using the second button.
+         */
         $(document).on("click", "#add-flashcards-btn-2", function () {
             document.getElementById("flashcard_question").value = '';
             document.getElementById("flashcard_answer").value = '';

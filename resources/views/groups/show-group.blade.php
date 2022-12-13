@@ -1,9 +1,10 @@
 @extends('layouts.main')
 
-<!-- **************************** -->
-<!-- * Author: David Chocholaty * -->
-<!-- * Login: xchoch09          * -->
-<!-- **************************** -->
+<!-- ***************************** -->
+<!-- * Authors: David Chocholaty * -->
+<!-- *          Simon Vacek      * -->
+<!-- * Login: xchoch09           * -->
+<!-- ***************************** -->
 
 @section('content')
     <div class="container my-4">
@@ -153,19 +154,30 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script>
+        /*
+         * Event handler for setting the window location for the clickable row.
+         * Author: David Chocholaty
+         */
         $(document).on("click", ".clickable-row", function() {
             window.location = $(this).data("href");
         });
     </script>
     <script>
+        /*
+         * Event handler for searching the group member.
+         * Author: David Chocholaty
+         */
         $('#search-member').on('keyup', function(){
             searchMember();
         });
 
         searchMember();
 
+        /*
+         * Function for searching the group member.
+         * Author: David Chocholaty
+         */
         function searchMember() {
             let keyword = $('#search-member').val();
             let group_id = $('#group_id').val();
@@ -183,6 +195,10 @@
                 });
         }
 
+        /*
+         * Function for showing the table row.
+         * Author: David Chocholaty
+         */
         function table_post_row_member(res, keyword) {
             let htmlView = '';
 
@@ -294,12 +310,20 @@
         }
     </script>
     <script>
+        /*
+         * Setting window location for the clickable row.
+         * Author: Simon Vacek
+         */
         jQuery(document).ready(function($) {
             $(".clickable-row").click(function() {
                 window.location = $(this).data("href");
             });
         });
 
+        /*
+         * Function for unassigning the exercise.
+         * Author: Simon Vacek
+         */
         function unassignExercise(exerciseID, groupId) {
             $.post('{{route('mygroups.unassign-exercise')}}', {
                 _token: $('meta[name="csrf-token"]').attr('content'),
@@ -309,6 +333,10 @@
             loadAssignedExercises(groupId);
         }
 
+        /*
+         * Function for loading the assigned exercises.
+         * Author: Simon Vacek
+         */
         function loadAssignedExercises(groupId) {
             if('{{$group[0]->type}}' === 'students') {
                 $.post('{{route('mygroups.get-assignments')}}', {
@@ -320,6 +348,10 @@
             }
         }
 
+        /*
+         * Function for post assignments.
+         * Author: Simon Vacek
+         */
         function postAssignments(data) {
             let htmlView = ``;
             for(let i = 0; i < data.length; i++) {
