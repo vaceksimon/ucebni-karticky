@@ -30,17 +30,21 @@ class UserStatisticsController extends Controller
             $user_id = Session::get('user_id');
             $exercise_id = Session::get('exercise_id');
 
-            $user = User::where('id', '=', $user_id)->get(['first_name', 'last_name']);
-            $exercise_name = Exercise::find($exercise_id, ['name']);
+            $user = User::where('id', '=', $user_id)
+                ->get()
+                ->first();
+
+            $exercise = DB::table('exercises AS ex')
+                ->where('ex.id', $exercise_id)
+                ->Select(DB::raw('*, (SELECT COUNT(*) FROM flashcards AS fc WHERE ex.id = fc.exercise_id) AS count'))
+                ->get()
+                ->first();
 
             return view('statistics.user-statistics')
-                ->with('user_id', $user_id)
-                ->with('first_name', $user[0]->first_name)
-                ->with('last_name', $user[0]->last_name)
-                ->with('exercise_id', $exercise_id)
-                ->with('exercise_name', $exercise_name->name)
+                ->with('user', $user)
+                ->with('exercise', $exercise)
                 ->with('fastest_attempt', $this->fastestAttempt($user_id, $exercise_id))
-                ->with('most_successful_attempt', $this->mostSuccessfulAttempt($user_id, $exercise_id))
+                ->with('best_attempt', $this->mostSuccessfulAttempt($user_id, $exercise_id))
                 ->with('chart_data', $this->chartData($user_id, $exercise_id));
         }
 
@@ -57,7 +61,8 @@ class UserStatisticsController extends Controller
             ->where('exercise_id', '=', $exercise_id)
             ->orderBy('spend_time')
             ->limit(1)
-            ->get();
+            ->get()
+            ->first();
 
         return $fastest_attempt;
     }
@@ -72,7 +77,8 @@ class UserStatisticsController extends Controller
             ->where('exercise_id', '=', $exercise_id)
             ->orderBy('success_rate', 'DESC')
             ->limit(1)
-            ->get();
+            ->get()
+            ->first();
 
         return $most_successful_attempt;
     }
