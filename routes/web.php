@@ -49,6 +49,7 @@ Route::post('flashcard', [\App\Http\Controllers\Flashcards\FlashcardController::
 Route::post('flashcard/getSession', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'getSession'])->name('flashcard.get-session');
 Route::post('flashcard/storeSession', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'storeSession'])->name('flashcard.store-session');
 
+Route::post('flashcard/isTimerVisible', [\App\Http\Controllers\Flashcards\FlashcardPractiseController::class, 'isTimerVisible'])->name('flashcard.is-timer-visible');
 Route::get('flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\FlashcardPractiseController::class, 'show'])->name('flashcardPractise.show');
 
 Route::post('attempt', [\App\Http\Controllers\Attempts\AttemptController::class, 'saveAttempt'])->name('attempt.save-attempt');
