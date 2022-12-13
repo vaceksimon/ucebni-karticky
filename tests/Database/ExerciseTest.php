@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: ExerciseTest.php                                  */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Database unit tests for Exercise model     */
+/*                                                         */
+/***********************************************************/
 namespace Tests\Database;
 
 use App\Models\Exercise;

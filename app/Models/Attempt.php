@@ -1,5 +1,4 @@
 <?php
-
 /**********************************************************/
 /*                                                        */
 /* File: Attempt.php                                      */
@@ -8,7 +7,6 @@
 /* Description: ORM for the attempt.                      */
 /*                                                        */
 /**********************************************************/
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

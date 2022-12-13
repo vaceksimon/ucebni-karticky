@@ -1,8 +1,12 @@
 <?php
-/***********************
- * Author: Tomas Bartu *
- * Login: xbartu11     *
- ***********************/
+/***********************************************************/
+/*                                                         */
+/* File: AttemptController.php                             */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Controller for Attempt views               */
+/*                                                         */
+/***********************************************************/
 namespace App\Http\Controllers\Attempts;
 
 use App\Http\Controllers\Controller;
