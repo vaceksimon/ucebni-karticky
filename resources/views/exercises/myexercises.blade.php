@@ -218,7 +218,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content m-auto w-75">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Zadat skupině</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -265,7 +265,7 @@
             <div class="modal fade" id="statModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content m-auto w-75">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Zobrazit statistiky skupiny</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -488,34 +488,24 @@
 
         // table row with ajax
         function postGroupsAssign(res) {
-            htmlView = '';
+            htmlView = '<div class="row gap-3 m-2 d-flex flex justify-content-evenly align-items-start">';
             for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3">`
-                }
-
                 htmlView += `
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                        <div class="card p-0 me-auto" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>`
+                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
+                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].description + `">` + res.result[i].description + `</p>`
                     if($('#assigned').prop('checked')) {
                         htmlView += `<button class="btn btn-danger" onclick="unassignExercise(` + exerciseId + `,` + res.result[i].id + `)">Odstranit zadání</button>`
                     }
                     else {
                         htmlView += `<button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>`
                     }
-                htmlView += `</div>
+                htmlView += `
                         </div>
                     </div>
                 `;
-
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
-                console.log(htmlView);
             }
             $('#searchedGroupsBody').html(htmlView);
         }
@@ -546,20 +536,24 @@
 
         // table row with ajax
         function postGroupsStat(res) {
-            htmlView = '';
-            for (let i = 0; i < res.result.length; i++) {
-                if (i % 3 === 0) {
-                    htmlView += `
-                        <div class="row mb-3">`
-                }
+            if (res.result.length === 0)
+            {
+                htmlView = `
+                <div class="text-center fs-3">Bohužel nemáte skupinu, které statistiky zobrazit.
+                    <i class="bi bi-emoji-frown"></i>
+                </div>`
+                $('#statisticsBody').html(htmlView);
+                return;
+            }
 
+            htmlView = '<div class="row gap-3 m-2 d-flex flex justify-content-evenly align-items-start">';
+            for (let i = 0; i < res.result.length; i++) {
                 htmlView += `
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
+                        <div class="card p-0 me-auto" style="width: 18rem;">
+                            <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>
+                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
+                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].description + `">` + res.result[i].description + `</p>
                                 <form method="GET" action="`
                 htmlView += `{{route('group-statistics')}}`;
                 htmlView += `">
@@ -569,11 +563,8 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
                 `;
 
-                if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
-                    htmlView += `</div>`
                 console.log(htmlView);
             }
             $('#statisticsBody').html(htmlView);
