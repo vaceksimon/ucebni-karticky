@@ -1,6 +1,11 @@
-/*
- * Styles for the images.
- */
+/**********************************************************/
+/*                                                        */
+/* File: button-image-hover.css                           */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Styles for the images.                    */
+/*                                                        */
+/**********************************************************/
 
 .change-image:hover {
     background-color: lightblue;

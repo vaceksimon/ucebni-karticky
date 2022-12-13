@@ -1,8 +1,16 @@
 <?php
 
+/***********************************************************/
+/*                                                         */
+/* File: UserAdministrationController.php                  */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>   */
+/* Project: Project for the course ITU                     */
+/* Description: Controller for the user-administration     */
+/*              view.                                      */
+/*                                                         */
+/***********************************************************/
+
 namespace App\Http\Controllers\Administration;
-
-
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
