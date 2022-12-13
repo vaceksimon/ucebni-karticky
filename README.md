@@ -1,6 +1,5 @@
 # Učební Kartičky
 Webová aplikace Učební Kartičky, která vznikla v rámci projektu na VUT FIT v roce 2022.
-
 <dl>
 	<dt>Autoři</dt>
 	<dd>David Chocholatý
@@ -116,20 +115,14 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
 <ol>
     <li>
         <p>Nejprve je nutné si stáhnou celý projekt z výše uvedeného odkazu (<i>github</i>). Po stažení a případném rozbalení archivu se přesuňte do kořenové složky projektu příkazem:</p>
-        &nbsp;
-        <p><i>cd ucebni-karticky/</i></p>
-        &nbsp;
+        <pre><i>$ cd ucebni-karticky/</i></pre>
         <p>Všechny další úkony provádějte výhradně ve zmíněné umístnění. Poté pro instalaci zadejte následující 2 příkazy:</p>
-        &nbsp;
-        <p><i>composer update</i></p>
-        <p><i>composer install</i></p>
-        &nbsp;
+        <pre><i>$ composer update</i>&nbsp;
+<i>$ composer install</i></pre>
     </li>
     <li>
         <p> Dále je nutné vytvořit soubor <i>.env</i> a jeho obsah vyplnit obsahem souboru <i>.env.example</i>. Zmíněný postup lze provést následujícím příkazem:</p>
-        &nbsp;
-        <p><i>cp .env.example .env</i></p>
-        &nbsp;
+        <pre><i>$ cp .env.example .env</i></pre>
     </li>
     <li>
         <p>Poté je třeba vytvořit vlastní MySQL databázi. Po jejím vytvoření je nutné její název, uživatele a jeho heslo zadat do souboru <i>.env</i> za následující parametry ve stejném pořadí:</p>
@@ -149,28 +142,20 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
     </li>
     <li>
         <p>Jako další krok zadejte uvedený příkaz pro vygenerování klíče:</p>
-        &nbsp;
-        <p><i>php artisan key:generate</i></p>
-        &nbsp;
+        <pre><i>$ php artisan key:generate</i></pre>
     </li>
     <li>
         <p>Jako předposlední krok bude vytvořena struktura databáze a naplněna testovacími daty.
         Pro vygenerování uvedených uživatelů systému společně s náhodně vygenerovanými
         uživateli zadejte následují příkaz:</p>
-        &nbsp;
-        <p><i>php artisan migrate:fresh --seed</i></p>
-        &nbsp;
+        <pre><i>$ php artisan migrate:fresh --seed</i></pre>
         <p><i>Pozn.: pro vytvoření databáze bez naplnění testovacími daty zadejte příkaz:</i></p>
-        &nbsp;
-        <p><i> php artisan migrate:fresh.</i></p>
-        &nbsp;
+        <pre><i>$ php artisan migrate:fresh.</i></pre>
         <p>Poté je možná naplnit vytvořenou strukturu tabulek pomocí přiloženého SQL skriptu <i>input.sql</i>. Případně je možné totožný skript najít ve složce <i>/docs</i> ve staženém projektu.</p>
     </li>
     <li>
         <p>Po splnění všech požadavků je pak možné projekt spustit následujícím příkazem při umístění v kořenové složce projektu:</p>
-        &nbsp;
-        <p><i>php artisan serve</i></p>
-        &nbsp;
+        <pre><i>php artisan serve</i></pre>
         <p>Po zadání uvedeného příkazu pak lze na webovou stránku přistoupit na adrese uvedené ve výstupu terminálu:</p>
         &nbsp;
         <p>například: <i>127.0.0.1:8000</i></p>
@@ -179,6 +164,21 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
     </li>
     <hr />
     Pozn.: pro spuštění poskutnutých testů zadejte následující příkaz:
-    &nbsp;
-    <p><i>php artisan test</i></p>
+    <pre><i>php artisan test</i></pre>
 </ol>
+
+<style>
+pre {
+    background: #383838;
+    color: #d3d3d3;
+    page-break-inside: avoid;
+    font-family: monospace;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+</style>
