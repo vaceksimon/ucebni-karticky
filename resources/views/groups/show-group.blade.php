@@ -4,6 +4,12 @@
     <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-10">
+                <div class="my-3 row d-flex">
+                    <a href="javascript:window.history.back()">
+                        <input type="button" class="btn btn-outline-secondary btn-md px-3" value="Zpět">
+                    </a>
+                </div>
+
                 <div class="card">
                     <div class="card-header">{{ __('Zobrazení skupiny') }}
                     </div>
@@ -118,12 +124,6 @@
                                     </div>
                                 </div>
                             @endif
-                        </div>
-
-                        <div class="my-3 row d-flex">
-                            <a href="javascript:window.history.back()">
-                                <input type="button" class="btn btn-outline-secondary btn-lg px-4" value="Zpět">
-                            </a>
                         </div>
                     </div>
                 </div>

@@ -4,11 +4,11 @@
     <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                @if($user['id'] != Auth::id())
+                <div class="my-3 row d-flex">
                     <a href="javascript:window.history.back()">
-                        <button class="btn btn-outline-secondary mb-2">Zpět</button>
+                        <input type="button" class="btn btn-outline-secondary btn-md px-3" value="Zpět">
                     </a>
-                @endif
+                </div>
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <div>{{ __('Zobrazení profilu') }}</div>
