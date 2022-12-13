@@ -46,10 +46,13 @@ Route::get('public-flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\Pu
 
 Route::get('flashcard/{id}', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'show'])->name('flashcard.show');
 Route::post('flashcard', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'getCards'])->name('flashcard.get-cards');
+Route::post('flashcard/getSession', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'getSession'])->name('flashcard.get-session');
+Route::post('flashcard/storeSession', [\App\Http\Controllers\Flashcards\FlashcardController::class, 'storeSession'])->name('flashcard.store-session');
 
 Route::get('flashcardPractise/{id}', [\App\Http\Controllers\Flashcards\FlashcardPractiseController::class, 'show'])->name('flashcardPractise.show');
 
 Route::post('attempt', [\App\Http\Controllers\Attempts\AttemptController::class, 'saveAttempt'])->name('attempt.save-attempt');
+Route::post('attempt/clear', [\App\Http\Controllers\Attempts\AttemptController::class, 'clearAttempt'])->name('attempt.clear-attempt');
 
 Route::get('myexercises', [\App\Http\Controllers\Exercises\ExerciseController::class, 'show'])->name('myexercises');
 
