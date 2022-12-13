@@ -115,50 +115,22 @@
                             <div class="card-header">
                                 Zobrazit statistiku žáka
                             </div>
-                            <div class="card-body p-0" style="max-height: 350px; overflow-y: scroll;">
-                                <table class="table table-striped d-table">
-                                    <thead class="table-head-sticky">
-                                    <tr style="text-align: center;">
-                                        <th>Foto</th>
-                                        <th>Jméno</th>
-                                        <th>Příjmení</th>
-                                        <th>Akce</th>
-                                    </tr>
-                                    </thead>
-
-                                    <!-- Table of all students in the group -->
-                                    <tbody id="users_table">
-                                    @foreach($members as $member)
-                                        <form method="POST" action="{{route('myexercises.user-statistics')}}">
-                                            @csrf
-                                            <input id="user_id" name="user_id" value="{{$member->id}}" hidden>
-                                            <input id="exercise_id_stat" name="exercise_id_stat" value="{{$exercise->id}}" hidden>
-                                            <tr style="text-align: center;">
-                                                <td>
-                                                    <img src="{{asset($member->photo)}}"
-                                                         class="rounded-circle px-0"
-                                                         style="width: 40px; height: 40px;"
-                                                         alt="Avatar"/>
-                                                </td>
-                                                <td>{{$member->first_name}}</td>
-                                                <td>{{$member->last_name}}</td>
-                                                <td>
-                                                    <input type="submit" class="btn btn-outline-primary" value="Zobrazit">
-                                                </td>
-                                            </tr>
-                                        </form>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Vyhledat žáka" id="search-student">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="students_table">
+                                </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!--
@@ -202,5 +174,112 @@
                 }
             },
         });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).on("click", ".clickable-row", function() {
+            window.location = $(this).data("href");
+        });
+    </script>
+
+    <script>
+        $('#search-student').on('keyup', function(){
+            searchStudent();
+        });
+
+        searchStudent();
+
+        function searchStudent(){
+            let keyword = $('#search-student').val();
+            let group_id = $('#group_id').val();
+            let user_type = "student";
+
+            $.post('{{ route("group-statistics.search-student") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    keyword:keyword,
+                    group_id:group_id,
+                    user_type:user_type
+                },
+                function(data){
+                    table_post_row_student(data, keyword);
+                });
+        }
+
+        // table row
+        function table_post_row_student(res, keyword){
+            let htmlView = '';
+
+            if(res.result.length <= 0 && keyword === '') {
+                document.getElementById("search-student").style.display = "none";
+
+                htmlView += `
+                    <div style="height: 336px;overflow-y: scroll;">
+                        <table class="table table-striped d-table">
+                            <thead class="table-head-sticky">
+                                <tr>
+                                    <div class="my-5">
+                                        <div class="text-center">
+                                            Skupina zatím neobsahuje žádné členy.
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>`;
+            } else {
+                document.getElementById("search-student").style.display = "flex";
+
+                htmlView += `
+                    <div style="height: 300px;overflow-y: scroll;">
+                        <table class="table table-striped d-table">
+                            <thead class="table-head-sticky">
+                            <tr>
+                                @if(!$members->isEmpty())
+                                <th>Pořadí</th>
+                                <th>Foto</th>
+                                <th>Jméno</th>
+                                <th>Příjmení</th>
+                                <th>Zobrazit statistiku</th>
+                                @endif
+                            </tr>
+                            </thead>
+                            <tbody>`;
+
+                if (res.result.length <= 0) {
+                    htmlView += `<tr><td colspan="6">Nebyli nalezeni žádní žáci.</td></tr>`;
+                }
+
+                for(let i = 0; i < res.result.length; i++){
+                    var url = '{{ route("profile", ":id") }}';
+                    url = url.replace(':id', res.result[i].id);
+
+                    htmlView += `
+                    <tr>
+                        <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
+                        <td class="clickable-row" data-href="` + url + `">
+                            <img src="` + res.result[i].photo + `" class="rounded-circle d-flex px-0" style="width: 40px; height: 40px;"
+                                alt="Avatar"/>
+                        </td>
+                        <td class="clickable-row" data-href="` + url + `">`+res.result[i].first_name+`</td>
+                        <td class="clickable-row" data-href="` + url + `">`+res.result[i].last_name+`</td>
+                        <td>
+                            <form method="POST" action="{{route('myexercises.user-statistics')}}">
+                                @csrf
+                                <input id="user_id" name="user_id" value="` + res.result[i].id + `" hidden>
+                                <input id="exercise_id_stat" name="exercise_id_stat" value="{{$exercise->id}}" hidden>
+                                <input type="submit" class="btn btn-outline-primary" value="Zobrazit">
+                            </form>
+                        </td></tr>`;
+                }
+
+                htmlView += `</tbody></table></div>`;
+            }
+
+            $('#students_table').html(htmlView);
+        }
     </script>
 @endsection
