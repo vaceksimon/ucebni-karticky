@@ -1,5 +1,8 @@
 <?php
-
+/***********************
+ * Author: Tomas Bartu *
+ * Login: xbartu11     *
+ ***********************/
 namespace App\Http\Controllers\Flashcards;
 
 use App\Http\Controllers\Controller;
@@ -32,5 +35,13 @@ class FlashcardPractiseController extends Controller
                 ->with('role', Auth::user()->account_type);
         else
             return view('flashcards.flashcard-invalid');
+    }
+
+    public function isTimerVisible(Request $request)
+    {
+        return DB::table('exercises')
+            ->select('show_timer')
+            ->where('id', '=', $request->id)
+            ->get();
     }
 }

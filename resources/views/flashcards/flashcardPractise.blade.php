@@ -45,7 +45,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-center fs-5">
-                            <div id="timer"><label id="hours"></label>:<label id="minutes"></label>:<label id="seconds"></label></div>
+                            <div id="timer" data-timer="1"><label id="hours"></label>:<label id="minutes"></label>:<label id="seconds"></label></div>
                             <div class="text-center">
                                 <a href="{{ route('myexercises') }}">
                                     <button id="btnBack" type="button" class="btn btn-info btn-lg m-auto" style="display: none">Zpět na seznam cvičení</button>
@@ -144,6 +144,32 @@
                     console.log('Error:', data);
                 }
             });
+        }
+
+        function isTimerVisible()
+        {
+            let r = 0;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {"id": cid},
+                url: "{{ route('flashcard.is-timer-visible') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    let res = JSON.parse(data)
+                    document.getElementById('timer').setAttribute('data-timer', res[0].show_timer);
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+            console.log(r);
+            return r;
         }
 
         function changeQA() {
@@ -269,6 +295,7 @@
 
         correct.innerText = correctCounter++;
         wrong.innerText = wrongCounter++;
+        isTimerVisible();
         getCards();
         getSession();
 
@@ -281,10 +308,15 @@
         }
 
         interval = setInterval( function() {
+            let isVisible = document.getElementById('timer').getAttribute('data-timer');
             storeSession();
-            document.getElementById("seconds").innerHTML = pad(++sec % 60);
-            document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60,10));
-            document.getElementById("hours").innerHTML   = pad(parseInt(sec / 3600, 10));
+            if(isVisible === '1') {
+                document.getElementById("seconds").innerHTML = pad(++sec % 60);
+                document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+                document.getElementById("hours").innerHTML = pad(parseInt(sec / 3600, 10));
+            } else {
+                document.getElementById('timer').innerHTML = '<i>Časovač je skrytý</i>'
+            }
         }, 1000);
 
     </script>
