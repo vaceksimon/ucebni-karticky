@@ -1,6 +1,14 @@
 @extends('layouts.main')
 
+<!-- ************************************* -->
+<!-- * Authors: Tomas Bartu, Simon Vacek * -->
+<!-- * Logins: xbartu11, xvacek10        * -->
+<!-- ************************************* -->
 @section('content')
+    <!-- *********************** -->
+    <!-- * Author: Tomas Bartu * -->
+    <!-- * Section: Blade 1    * -->
+    <!-- *********************** -->
     <script type="text/javascript">var exerciseId = 0;</script>
     <div class="container my-4">
         <div class="row justify-content-center">
@@ -178,7 +186,11 @@
                 </div>
             </div>
 
-            <!-- SHARE EXERCISE MODAL -->
+            <!--   SHARE EXERCISE MODAL  -->
+            <!-- *********************** -->
+            <!-- * Author: Tomas Bartu * -->
+            <!-- * Section: Modal 1    * -->
+            <!-- *********************** -->
             <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
@@ -260,8 +272,14 @@
                     </div>
                 </div>
             </div>
+            <!-- * End of section: Modal 1  * -->
+            <!-- **************************** -->
 
             <!-- EXERCISE STATISTICS MODAL -->
+            <!-- *********************** -->
+            <!-- * Author: Simon Vacek * -->
+            <!-- * Section: Modal 2    * -->
+            <!-- *********************** -->
             <div class="modal fade" id="statModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
@@ -299,16 +317,22 @@
                     </div>
                 </div>
             </div>
-
+            <!-- * End of section: Modal 2  * -->
+            <!-- **************************** -->
         </div>
     </div>
-
-    <!-- Scripts for displaying groups in share exercise modal window -->
+    <!-- * End of section: Blade 1  * -->
+    <!-- **************************** -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script>
 
+    <!-- Scripts for displaying groups in share exercise modal window -->
+    <!-- *********************** -->
+    <!-- * Author: Tomas Bartu * -->
+    <!-- * Section: Script 1   * -->
+    <!-- *********************** -->
+    <script>
         $('#share').on('keyup', function () {
             share();
         });
@@ -319,18 +343,26 @@
 
         function share() {
             let keyword = $('#share').val();
-            $.post('{{ route("myexercises.share") }}',
-                {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    keyword: keyword,
-                    owner_id: {{Auth::id()}},
-                    exercise_id: exercise_id
-                },
-                function (data) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"exercise_id": exercise_id, "keyword": keyword, "owner_id": {{ Auth::id() }} },
+                url: "{{ route('myexercises.share') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
                     postGroupsShare(data);
-                });
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
-        // table row with ajax
+
         function postGroupsShare(res) {
             isShared = JSON.parse(res.isShared);
             htmlView = '';
@@ -404,6 +436,7 @@
             }
             $('#shareGroupsBody').html(htmlView);
         }
+
         function shareExercise(group_id) {
             $.ajaxSetup({
                 headers: {
@@ -427,6 +460,7 @@
                 }
             });
         }
+
         function deleteExercise(group_id) {
             $.ajaxSetup({
                 headers: {
@@ -451,15 +485,14 @@
             });
         }
     </script>
+    <!-- * End of section: Script 1 * -->
+    <!-- **************************** -->
 
     <!-- Scripts for displaying groups in assign exercise modal window -->
-
-    <!-- https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
-
+    <!-- *********************** -->
+    <!-- * Author: Simon Vacek * -->
+    <!-- * Section: Script 2   * -->
+    <!-- *********************** -->
     <script>
         $('#search').on('keyup', function () {
             search();
@@ -606,4 +639,6 @@
             );
         }
     </script>
+    <!-- * End of section: Script 2 * -->
+    <!-- **************************** -->
 @endsection
