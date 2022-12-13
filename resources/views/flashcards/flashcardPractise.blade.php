@@ -307,14 +307,16 @@
             return pad(parseInt(sec / 3600, 10)) + ':' + pad(parseInt(sec / 60, 10)) + ':' + pad( sec % 60 );
         }
 
+        let isVisible = document.getElementById('timer').getAttribute('data-timer');
         interval = setInterval( function() {
-            let isVisible = document.getElementById('timer').getAttribute('data-timer');
             storeSession();
+            isVisible = '0';
             if(isVisible === '1') {
                 document.getElementById("seconds").innerHTML = pad(++sec % 60);
                 document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
                 document.getElementById("hours").innerHTML = pad(parseInt(sec / 3600, 10));
             } else {
+                sec++;
                 document.getElementById('timer').innerHTML = '<i>Časovač je skrytý</i>'
             }
         }, 1000);
