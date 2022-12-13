@@ -63,7 +63,7 @@ class EditExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'description' => $request->description]);
+        Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'topic' => $request->topic, 'description' => $request->description]);
 
         if (Auth::user()->account_type == "admin")
         {
