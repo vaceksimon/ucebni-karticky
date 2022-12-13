@@ -20,6 +20,7 @@ class CreateExercisesTable extends Migration
             $table->string('description')->nullable();
             $table->string('topic')->nullable();
             $table->enum('visibility', ['private', 'public']);
+            $table->boolean('show_timer')->default(true);
             $table->timestamps();
 
             $table->foreign('author')
