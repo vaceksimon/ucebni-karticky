@@ -230,11 +230,19 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="" method="POST">
-                                                <div class="row">
+                                                <div class="row align-items-center">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
                                                             <input type="text" class="form-control"
                                                                    placeholder="Vyhledat skupiny" id="search">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-check fs-5">
+                                                            <label class="form-check-label">
+                                                                Zadaná cvičení
+                                                                <input class="form-check-input" type="checkbox" value="value" id="assigned">
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -416,12 +424,17 @@
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     keyword: keyword,
                     owner_id: {{Auth::id()}},
-                    exercise_id: exerciseId
+                    exercise_id: exerciseId,
+                    assigned: $('#assigned').prop('checked').toString()
                 },
                 function (data) {
                     postGroupsAssign(data);
                 });
         }
+
+        $('#assigned').change(function () {
+            assign();
+        });
 
         function assignExercise(exercise_id, group_id) {
             $.ajaxSetup({
@@ -437,7 +450,7 @@
                 success: function (data) {
                     if (data === '0')
                     {
-                        alert("Neporařilo se nasdílet skupinu.");
+                        alert("Neporařilo se zadat cvičení skupině.");
                     }
                     assign();
                 },
@@ -445,6 +458,31 @@
                     console.log('Error:', data);
                 }
             });
+        }
+
+        function unassignExercise(exercise_id, group_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                data: {"exercise_id": exercise_id, "group_id": group_id },
+                url: "{{ route('myexercises.unassign-exercise') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data === '0')
+                    {
+                        alert("Neporařilo se odstranit zadání skupině.");
+                    }
+                    assign();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+            assign();
         }
 
 
@@ -463,9 +501,14 @@
                             <img src="` + res.result[i].photo + `" class="card-img-top" alt="Foto skupiny">
                             <div class="card-body">
                                 <h5 class="card-title">` + res.result[i].name + `</h5>
-                                <p class="card-text">` + res.result[i].description + `</p>
-                                <button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>
-                            </div>
+                                <p class="card-text">` + res.result[i].description + `</p>`
+                    if($('#assigned').prop('checked')) {
+                        htmlView += `<button class="btn btn-danger" onclick="unassignExercise(` + exerciseId + `,` + res.result[i].id + `)">Odstranit zadání</button>`
+                    }
+                    else {
+                        htmlView += `<button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>`
+                    }
+                htmlView += `</div>
                         </div>
                     </div>
                 `;
