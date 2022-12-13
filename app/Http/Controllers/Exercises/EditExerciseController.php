@@ -63,7 +63,15 @@ class EditExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'topic' => $request->topic, 'description' => $request->description]);
+        $show_timer = true;
+
+        if (strcmp($request->show_timer, "show") !== 0)
+        {
+            $show_timer = false;
+        }
+
+        Exercise::where('id', '=', $request->exercise_id)->update(['name' => $request->name, 'topic' => $request->topic,
+            'description' => $request->description, 'show_timer' => $show_timer]);
 
         if (Auth::user()->account_type == "admin")
         {
