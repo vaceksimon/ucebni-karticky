@@ -102,6 +102,22 @@
 
                             <div class="card-group mt-3">
                                 <div class="col-5 card">
+                                    <div class="card-header">Nejúspěšnější pokus</div>
+                                    <div class="card-body">
+                                        <div class="card mb-2">
+                                            <div class="card-body p-1">
+                                                <p>Datum pokusu: {{date("j. n. Y G:i:s", strtotime($best_attempt->created_at))}}</p>
+                                                <p>Čas: {{$best_attempt->spend_time}}</p>
+                                                <p>Úspěšnost: {{money_format('%.0i', $best_attempt->success_rate)}}%</p>
+                                                <p class="text-success">Počet správných
+                                                    odpovědí: {{$best_attempt->correct_answers_number}}</p>
+                                                <p class="text-danger m-0">Počet špatných
+                                                    odpovědí: {{$best_attempt->wrong_answers_number}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5 card">
                                     <div class="card-header">Nejrychlejší pokus</div>
                                     <div class="card-body">
                                         <div class="card mb-2">
@@ -114,22 +130,6 @@
                                                     odpovědí: {{$fastest_attempt->correct_answers_number}}</p>
                                                 <p class="text-danger m-0">Počet špatných
                                                     odpovědí: {{$fastest_attempt->wrong_answers_number}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-5 card">
-                                    <div class="card-header">Nejúspěšnější pokus</div>
-                                    <div class="card-body">
-                                        <div class="card mb-2">
-                                            <div class="card-body p-1">
-                                                <p>Datum pokusu: {{date("j. n. Y G:i:s", strtotime($best_attempt->created_at))}}</p>
-                                                <p>Čas: {{$best_attempt->spend_time}}</p>
-                                                <p>Úspěšnost: {{money_format('%.0i', $best_attempt->success_rate)}}%</p>
-                                                <p class="text-success">Počet správných
-                                                    odpovědí: {{$best_attempt->correct_answers_number}}</p>
-                                                <p class="text-danger m-0">Počet špatných
-                                                    odpovědí: {{$best_attempt->wrong_answers_number}}</p>
                                             </div>
                                         </div>
                                     </div>
