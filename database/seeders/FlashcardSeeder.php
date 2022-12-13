@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: FlashcardSeeder.php                               */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Seeder for Flashcard model                 */
+/*                                                         */
+/***********************************************************/
 namespace Database\Seeders;
 
 use App\Models\Flashcard;

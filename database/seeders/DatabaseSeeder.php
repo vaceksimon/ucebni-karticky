@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: DatabaseSeeder.php                                 */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Default database seeder file               */
+/*                                                         */
+/***********************************************************/
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;

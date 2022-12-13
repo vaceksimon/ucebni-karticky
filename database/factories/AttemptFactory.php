@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: AttemptFactory.php                                */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Factory for Attempt model                  */
+/*                                                         */
+/***********************************************************/
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
