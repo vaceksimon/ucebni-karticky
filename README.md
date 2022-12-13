@@ -166,9 +166,8 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
     Pozn.: pro spuštění poskutnutých testů zadejte následující příkaz:
     <pre><i>php artisan test</i></pre>
 </ol>
-
-<style>
-pre {
+<!--
+<style> pre {
     background: #383838;
     color: #d3d3d3;
     page-break-inside: avoid;
@@ -179,6 +178,4 @@ pre {
     overflow: auto;
     padding: 1em 1.5em;
     display: block;
-    word-wrap: break-word;
-}
-</style>
+    word-wrap: break-word; } </style> -->
