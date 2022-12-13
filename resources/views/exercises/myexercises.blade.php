@@ -593,14 +593,20 @@
                         <div class="card p-0 me-auto" style="width: 18rem;">
                             <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
-                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].description + `">` + res.result[i].description + `</p>`
-                    if($('#assigned').prop('checked')) {
-                        htmlView += `<button class="btn btn-danger" onclick="unassignExercise(` + exerciseId + `,` + res.result[i].id + `)">Odstranit zadání</button>`
-                    }
-                    else {
-                        htmlView += `<button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>`
-                    }
+                                <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>`
+                htmlView += `<p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="`;
+                if(res.result[i].description != null)
+                    htmlView += res.result[i].description + `">` + res.result[i].description + `</p>`
+                else
+                    htmlView += `"><br /></p>`;
+
+                if($('#assigned').prop('checked')) {
+                    htmlView += `<button class="btn btn-danger" onclick="unassignExercise(` + exerciseId + `,` + res.result[i].id + `)">Odstranit zadání</button>`
+                }
+                else {
+                    htmlView += `<button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>`
+                }
+
                 htmlView += `
                         </div>
                     </div>
@@ -652,8 +658,13 @@
                             <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px; width: calc(inherit - 1);" alt="Foto skupiny">
                             <div class="card-body">
                                 <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
-                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].description + `">` + res.result[i].description + `</p>
-                                <form method="GET" action="`
+                                <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="`
+                if(res.result[i].description != null)
+                    htmlView += res.result[i].description + `">` + res.result[i].description + `</p>`
+                else
+                    htmlView += `"><br /></p>`;
+
+                htmlView += `<form method="GET" action="`
                 htmlView += `{{route('group-statistics')}}`;
                 htmlView += `">
                                     <input type="hidden" id="group_id" name="group_id" value="` + res.result[i].id + `" />
