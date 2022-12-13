@@ -109,7 +109,7 @@
                 exercise = exercise.replace(':id', res.result[i].id);
 
                 htmlView += `
-            <tr>
+            <tr class="clickable-row-hover" style="cursor:pointer;">
                 <td class="clickable-row" data-href="` + url + `">`+ (i+1) +`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].name+`</td>
                 <td class="clickable-row" data-href="` + url + `">`+res.result[i].visibility+`</td>
