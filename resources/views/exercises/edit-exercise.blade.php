@@ -75,14 +75,14 @@
                             <div class="mb-3 row">
                                 <div class="col-md-6">
                                     <label class="col-form-label text-start">
-                                        {{ __('Zobrazení časovače při spuštění cvičení') }} :
+                                        {{ __('Zobrazit žákovi čas při spuštění cvičení') }} :
                                     </label>
 
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="show"
                                                id="show_timer" name="show_timer" @if($exercise[0]->show_timer) checked @endif>
                                         <label for="show_timer" class="form-check-label">
-                                            {{ __('Zobrazit časovač') }}
+                                            {{ __('Zobrazit čas') }}
                                         </label>
                                     </div>
                                 </div>
