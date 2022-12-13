@@ -1,5 +1,8 @@
 @extends(Auth::user() ? 'layouts.main' : 'layouts/app', ['activePage' => 'public-exercises', 'title' => 'Učební Kartičky'])
-
+<!-- *********************** -->
+<!-- * Author: Tomas Bartu * -->
+<!-- * Login: xbartu11     * -->
+<!-- *********************** -->
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">

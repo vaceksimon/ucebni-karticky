@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: GroupController.php                               */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Controller for Group views                 */
+/*                                                         */
+/***********************************************************/
 namespace App\Http\Controllers\Groups;
 
 use App\Http\Controllers\Controller;

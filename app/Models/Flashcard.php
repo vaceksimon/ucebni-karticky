@@ -1,5 +1,4 @@
 <?php
-
 /**********************************************************/
 /*                                                        */
 /* File: Flashcard.php                                    */
@@ -8,7 +7,6 @@
 /* Description: ORM for the flashcard.                    */
 /*                                                        */
 /**********************************************************/
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

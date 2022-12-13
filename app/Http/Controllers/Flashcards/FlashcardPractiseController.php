@@ -1,8 +1,12 @@
 <?php
-/***********************
- * Author: Tomas Bartu *
- * Login: xbartu11     *
- ***********************/
+/***********************************************************/
+/*                                                         */
+/* File: FlashcardPractiseController.php                   */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Controller for Flashcard practise views    */
+/*                                                         */
+/***********************************************************/
 namespace App\Http\Controllers\Flashcards;
 
 use App\Http\Controllers\Controller;
