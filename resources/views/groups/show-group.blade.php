@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-<!-- ***************************** -->
-<!-- * Authors: David Chocholaty * -->
-<!-- *          Simon Vacek      * -->
-<!-- * Login: xchoch09           * -->
-<!-- ***************************** -->
+<!-- ****************************** -->
+<!-- * Authors: David Chocholaty  * -->
+<!-- *          Simon Vacek       * -->
+<!-- * Logins: xchoch09, xvacek10 * -->
+<!-- ****************************** -->
 
 @section('content')
     <div class="container my-4">
