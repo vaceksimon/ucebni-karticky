@@ -1,5 +1,10 @@
 @extends('layouts.main')
 
+<!-- **************************** -->
+<!-- * Author: David Chocholaty * -->
+<!-- * Login: xchoch09          * -->
+<!-- **************************** -->
+
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">
@@ -50,6 +55,10 @@
                 </div>
             </div>
 
+            <!-- ***************************** -->
+            <!-- * Modal window for removing * -->
+            <!-- * the user                  * -->
+            <!-- ***************************** -->
             <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -71,14 +80,19 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script>
+        /*
+         * Searching the users on the keyup event in the search box.
+         */
         $('#search').on('keyup', function(){
             search();
         });
 
         search();
 
+        /*
+         * Function for searching the users.
+         */
         function search(){
             var keyword = $('#search').val();
 
@@ -92,7 +106,10 @@
                     console.log(data);
                 });
         }
-        // table row with ajax
+
+        /*
+         * Function for showing the table row.
+         */
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
@@ -141,21 +158,33 @@
         }
     </script>
     <script>
+        /*
+         * Set the window location for the clickable row.
+         */
         $(document).on("click", ".clickable-row", function() {
             window.location = $(this).data("href");
         });
     </script>
     <script>
+        /*
+         * Set the exercise identifier when opening the remove exercise modal window.
+         */
         $(document).on("click", ".open-remove-member-dialog", function () {
             var user = $(this).data('id');
 
             $(".modal-footer #remove-user-btn").val( user );
         });
 
+        /*
+         * Event handler for the user removing.
+         */
         $(document).on("click", "#remove-user-btn", function () {
             removeUser($(this).attr("value"));
         });
 
+        /*
+         * Function for removing the user.
+         */
         function removeUser(user_id) {
             $.ajaxSetup({
                 headers: {
