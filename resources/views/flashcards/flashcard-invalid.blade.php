@@ -1,3 +1,7 @@
+<!-- *********************** -->
+<!-- * Author: Tomas Bartu * -->
+<!-- * Login: xbartu11     * -->
+<!-- *********************** -->
 @extends('layouts.main')
 
 @section('content')
