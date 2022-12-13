@@ -155,16 +155,14 @@ Pro spuštění projektu je zapotřebí splnit následující požadavky:
     </li>
     <li>
         <p>Po splnění všech požadavků je pak možné projekt spustit následujícím příkazem při umístění v kořenové složce projektu:</p>
-        <pre><i>php artisan serve</i></pre>
+        <pre><i>$ php artisan serve</i></pre>
         <p>Po zadání uvedeného příkazu pak lze na webovou stránku přistoupit na adrese uvedené ve výstupu terminálu:</p>
-        &nbsp;
-        <p>například: <i>127.0.0.1:8000</i></p>
-        &nbsp;
+        <pre>například: <i>127.0.0.1:8000</i></pre>
         <p>Pro testování aplikace je opět možné využít výše zmíněné uživatele systému pro testování tak, jako je tomu v případě veřejné verze na <a href="https://ucebnikarticky.jednoduse.cz/">https://ucebnikarticky.jednoduse.cz/</a>.</p>
     </li>
     <hr />
     Pozn.: pro spuštění poskutnutých testů zadejte následující příkaz:
-    <pre><i>php artisan test</i></pre>
+    <pre><i>$ php artisan test</i></pre>
 </ol>
 <!--
 <style> pre {
