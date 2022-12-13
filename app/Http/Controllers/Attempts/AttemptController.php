@@ -1,5 +1,8 @@
 <?php
-
+/***********************
+ * Author: Tomas Bartu *
+ * Login: xbartu11     *
+ ***********************/
 namespace App\Http\Controllers\Attempts;
 
 use App\Http\Controllers\Controller;
@@ -7,6 +10,7 @@ use App\Models\Attempt;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AttemptController extends Controller
 {
@@ -33,5 +37,18 @@ class AttemptController extends Controller
         {
             return $e->getMessage();
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function clearAttempt(Request $request)
+    {
+        Session::forget('correct');
+        Session::forget('counter');
+        Session::forget('wrong');
+        Session::forget('sec');
+        return "1";
     }
 }

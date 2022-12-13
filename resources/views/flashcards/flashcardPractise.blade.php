@@ -1,5 +1,8 @@
 @extends('layouts.main')
-
+<!-- *********************** -->
+<!-- * Author: Tomas Bartu * -->
+<!-- * Login: xbartu11     * -->
+<!-- *********************** -->
 @section('content')
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -62,11 +65,11 @@
         let currentCard = 0;
         let correctCounter = 0;
         let wrongCounter = 0;
+        let sec = 0;
         let showFront = true;
+        let cid = document.getElementById('cards').getAttribute('data-id');
 
         function getCards() {
-            let cid = document.getElementById('cards').getAttribute('data-id');
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -88,13 +91,68 @@
             });
         }
 
+        function storeSession()
+        {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {"correct": correctCounter - 1,
+                       "counter": currentCard - 1,
+                       "wrong": wrongCounter - 1,
+                       "sec": sec,
+                       "id": cid
+                },
+                url: "{{ route('flashcard.store-session') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {},
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+
+        function getSession()
+        {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {"id": cid},
+                url: "{{ route('flashcard.get-session') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+                    let res = JSON.parse(data.result);
+                    correct.innerText = parseInt(res[0].correct, 10);
+                    correctCounter = parseInt(res[0].correct, 10) + 1;
+                    wrong.innerText = parseInt(res[0].wrong, 10);
+                    wrongCounter = parseInt(res[0].wrong) + 1;
+                    currentCard = parseInt(res[0].counter, 10) + 1;
+                    sec = res[0].sec;
+                    counter.innerText = (currentCard + 1).toString() + "/" + cardSet.length.toString();
+                    showCard();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+
         function changeQA() {
             if (showFront) {
                 document.getElementById('btnFlip').innerText = " Odpověď";
                 document.getElementById('QA').innerText      = "Otázka:";
             } else {
                 document.getElementById('btnFlip').innerText = " Otázka";
-                document.getElementById('QA').innerText = "Odpověď:";
+                document.getElementById('QA').innerText      = "Odpověď:";
             }
         }
 
@@ -153,7 +211,32 @@
                 sendResult();
             @endif
 
+            clearResult();
             clearInterval(interval);
+        }
+
+        function clearResult() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                data: {},
+                url: "{{ route('attempt.clear-attempt') }}",
+                type: "POST",
+                dataType: 'text',
+                success: function (data) {
+                    if (data !== "1")
+                    {
+                        alert("Výsledky se neporařilo uložit.");
+                    }
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
 
         function sendResult() {
@@ -187,8 +270,7 @@
         correct.innerText = correctCounter++;
         wrong.innerText = wrongCounter++;
         getCards();
-
-        let sec = 0;
+        getSession();
 
         function pad ( val ) {
             return val > 9 ? val : "0" + val;
@@ -199,9 +281,10 @@
         }
 
         interval = setInterval( function() {
+            storeSession();
             document.getElementById("seconds").innerHTML = pad(++sec % 60);
             document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60,10));
-            document.getElementById("hours").innerHTML   = pad(parseInt(sec / 3600, 10))
+            document.getElementById("hours").innerHTML   = pad(parseInt(sec / 3600, 10));
         }, 1000);
 
     </script>

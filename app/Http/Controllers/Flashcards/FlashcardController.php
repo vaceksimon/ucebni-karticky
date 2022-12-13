@@ -1,5 +1,8 @@
 <?php
-
+/***********************
+ * Author: Tomas Bartu *
+ * Login: xbartu11     *
+ ***********************/
 namespace App\Http\Controllers\Flashcards;
 
 use App\Http\Controllers\Controller;
@@ -7,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use PHPUnit\Exception;
 
 class FlashcardController extends Controller
 {
@@ -50,16 +55,58 @@ class FlashcardController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return string
+     */
+    public function storeSession(Request $request)
+    {
+        Session::put('correct', $request->correct);
+        Session::put('counter', $request->counter);
+        Session::put('wrong', $request->wrong);
+        Session::put('sec', $request->sec);
+        Session::put('id', $request->id);
+        return "1";
+    }
+
+    public function getSession(Request $request)
+    {
+        $res = array();
+        if ((Session::exists('correct') && Session::exists('counter') && Session::exists('wrong'))) {
+            if (Session::get('id') == $request->id) {
+                $res[0]['correct'] = Session::get('correct');
+                $res[0]['counter'] = Session::get('counter');
+                $res[0]['wrong'] = Session::get('wrong');
+                $res[0]['sec'] = Session::get('sec');
+            } else {
+                Session::put('correct', 0);
+                Session::put('counter', 0);
+                Session::put('wrong', 0);
+                Session::put('sec', 0);
+                Session::put('id', $request->id);
+            }
+        } else {
+            Session::put('correct', 0);
+            Session::put('counter', 0);
+            Session::put('wrong', 0);
+            Session::put('sec', 0);
+            Session::put('sec', $request->id);
+        }
+        return response()->json(['result' => json_encode($res)]);
+    }
+
+    /**
      * Function to check if user has access to flashcards set
      *
      * @param $exercise_id
      * @return bool True if user has access else return false
      */
-    public static function hasAccess($exercise_id) {
+    public
+    static function hasAccess($exercise_id)
+    {
         if (Auth::user()->account_type === User::ROLE_STUDENT)
             return !(self::studentAccess($exercise_id) === 0);
         elseif (Auth::user()->account_type === User::ROLE_TEACHER)
-            return !(self::teacherAccess($exercise_id) === 0 && self::teacherAccessByShare($exercise_id) === 0 );
+            return !(self::teacherAccess($exercise_id) === 0 && self::teacherAccessByShare($exercise_id) === 0);
         else
             return false;
     }
@@ -68,7 +115,8 @@ class FlashcardController extends Controller
      * @param $exercise_id
      * @return int How many exercises has teacher access
      */
-    private static function teacherAccess($exercise_id)
+    private
+    static function teacherAccess($exercise_id)
     {
         return DB::table('exercises')
             ->select('*')
@@ -81,15 +129,16 @@ class FlashcardController extends Controller
      * @param $exercise_id
      * @return int How many shared exercises has teacher access
      */
-    private static function teacherAccessByShare($exercise_id)
+    private
+    static function teacherAccessByShare($exercise_id)
     {
-       return DB::table('exercises AS ex')
+        return DB::table('exercises AS ex')
             ->select(DB::raw('ex.id, ex.name AS e_name, ex.topic, gr.name AS g_name, ex.description'))
             ->addSelect(DB::raw('(SELECT COUNT(*)
                         FROM flashcards fs
                         WHERE fs.exercise_id = ex.id) AS pocet'))
             ->join('shared_exercises AS se', 'se.exercise_id', '=', 'ex.id')
-            ->join('groups AS gr', 'se.group_id', '=','gr.id')
+            ->join('groups AS gr', 'se.group_id', '=', 'gr.id')
             ->join('users_memberships AS um', 'um.group_id', '=', 'gr.id')
             ->join('users AS us', 'um.user_id', '=', 'us.id')
             ->where('us.account_type', '=', User::ROLE_TEACHER)
@@ -103,7 +152,8 @@ class FlashcardController extends Controller
      * @param $exercise_id
      * @return int How many exercises has student access
      */
-    private static function studentAccess($exercise_id)
+    private
+    static function studentAccess($exercise_id)
     {
         return DB::table('users AS us')
             ->select('*')
