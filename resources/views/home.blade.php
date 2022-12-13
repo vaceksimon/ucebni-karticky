@@ -1,5 +1,8 @@
 @extends('layouts.main')
-
+<!-- *********************** -->
+<!-- * Author: Tomas Bartu * -->
+<!-- * Login: xbartu11     * -->
+<!-- *********************** -->
 @section('content')
     <div class="col-6 p-0">
         <img class="flex-shrink-0 h-100 w-100" style="object-fit: cover" src="/img/flashcards.jpg" alt="random image">
