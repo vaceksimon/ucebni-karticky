@@ -135,11 +135,11 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
+                                                    <textarea id="flashcard_question" name="flashcard_question" type="text" class="form-control @error('flashcard_question') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="{{ old('question') }}" required autocomplete="question" autofocus
                                                            oninvalid="this.setCustomValidity('Prosím zadejte otázku')"
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
 
                                                     @error('flashcard_question')
                                                         <span class="invalid-feedback" role="alert">
@@ -155,11 +155,11 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
+                                                    <textarea id="flashcard_answer" name="flashcard_answer" type="text" class="form-control @error('flashcard_answer') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="{{ old('answer') }}" required autocomplete="question" autofocus
                                                            oninvalid="this.setCustomValidity('Prosím zadejte odpověď')"
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
 
                                                     @error('flashcard_answer')
                                                     <span class="invalid-feedback" role="alert">
@@ -168,6 +168,13 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                            <div class="pt-4">
+                                                <hr/>
+                                            </div>
+                                            <div class="row">
+                                                <label for="added_flashcards" id="added-flashcards" name="added-flashcards" class="col-form-label py-0 my-0 text-start text-black-50">
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -175,8 +182,7 @@
                         </div>
                         <div class="modal-footer" style="justify-content: flex-start;">
                             <input type="hidden" id="add_flashcard_exercise_id" name="add_flashcard_exercise_id" value="<?php echo $exercise[0]->id;?>">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                            <!-- <button type="button" id="add-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard" data-bs-dismiss="modal">Přidat</button>-->
+                            <button type="button" id="add-flashcard-close-btn" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
                             <button type="button" id="add-flashcard-btn" class="btn btn-primary ms-auto me-0 add-flashcard">Přidat</button>
                         </div>
                     </div>
@@ -201,10 +207,10 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
+                                                    <textarea id="flashcard_question_edit" name="flashcard_question_edit" type="text" class="form-control @error('flashcard_question_edit') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="" required autocomplete="question" autofocus
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
                                                 </div>
                                             </div>
 
@@ -214,10 +220,10 @@
                                                 </label>
 
                                                 <div class="col-lg-6">
-                                                    <input id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
+                                                    <textarea id="flashcard_answer_edit" name="flashcard_answer_edit" type="text" class="form-control @error('flashcard_answer_edit') is-invalid @enderror"
                                                            maxlength="255"
                                                            value="" required autocomplete="question" autofocus
-                                                           oninput="setCustomValidity('')">
+                                                              oninput="setCustomValidity('')"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -446,6 +452,15 @@
         });
     </script>
     <script>
+        var addedCards = 0;
+
+        document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
+
+        $(document).on("click", "#add-flashcard-close-btn", function () {
+           addedCards = 0;
+           document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
+        });
+
         $(document).on("click", "#add-flashcard-btn", function () {
             var flashcardQuestionInput = document.getElementById("flashcard_question");
             var flashcardAnswerInput = document.getElementById("flashcard_answer");
@@ -468,7 +483,15 @@
 
             addFlashcard(flashcardQuestion, flashcardAnswer,
                 document.getElementById("add_flashcard_exercise_id").value);
+
+            addedCards++;
         });
+
+        // The following function is taken from the following source at 2022-12-05:
+        // Source: https://www.sitepoint.com/delay-sleep-pause-wait/
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
         function addFlashcard(question, answer, exercise_id) {
             $.ajaxSetup({
@@ -496,6 +519,14 @@
             showFlashcards();
 
             $("#addFlashcardModal").modal('hide');
+
+            sleep(500).then(() => {
+                document.getElementById("flashcard_question").value = '';
+                document.getElementById("flashcard_answer").value = '';
+                document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
+
+                $("#addFlashcardModal").modal('show');
+            });
         }
     </script>
     <script>
@@ -563,7 +594,7 @@
     </script>
     <script>
         $(document).on("click", "#add-flashcards-btn-1", function () {
-           document.getElementById("flashcard_question").value = '';
+            document.getElementById("flashcard_question").value = '';
             document.getElementById("flashcard_answer").value = '';
         });
 
