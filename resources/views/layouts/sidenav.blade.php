@@ -1,5 +1,5 @@
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 shadow" style="background: #f8f8f8">
-    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2">
+<div class="col-auto shadow" style="background: #f8f8f8">
+    <div class="d-flex flex-column align-items-center align-items-sm-start px-4 pt-2 sticky-top" id="sidebar">
         @if(Auth::user()['account_type'] != 'admin')
             <!-- user and teacher menu -->
             <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start fs-4" id="menu"
@@ -105,3 +105,7 @@
         @endif
     </div>
 </div>
+<script>
+    let navbarHeight = document.getElementById('navbar').clientHeight;
+    document.getElementById('sidebar').setAttribute('style', `top: ${navbarHeight}px;`);
+</script>
