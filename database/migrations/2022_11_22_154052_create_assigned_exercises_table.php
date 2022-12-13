@@ -1,9 +1,22 @@
 <?php
 
+/***************************************************************/
+/*                                                             */
+/* File: 2022_11_22_154052_create_assigned_exercises_table.php */
+/* Author: David Chocholaty <xbartu11@stud.fit.vutbr.cz>       */
+/* Project: Project for the course ITU                         */
+/* Description: The migration for creating the assigned        */
+/*              exercises table.                               */
+/*                                                             */
+/***************************************************************/
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * The migration for creating the assigned exercises table.
+ */
 class CreateAssignedExercisesTable extends Migration
 {
     /**

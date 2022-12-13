@@ -1,3 +1,13 @@
+/**********************************************************/
+/*                                                        */
+/* File: registration-extensions.js                       */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Script for changing the displayed fields  */
+/*              of the registration form.                 */
+/*                                                        */
+/**********************************************************/
+
 /**
  * Script for changing the displayed fields of the registration form.
  */

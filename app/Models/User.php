@@ -1,5 +1,14 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: User.php                                         */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: ORM for the user.                         */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -93,10 +102,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Exercise::class, 'author', 'id');
     }
-
-    /*
-    public function attempts(): HasMany
-    {
-        return $this->hasMany(Attempt::class);
-    }*/
 }

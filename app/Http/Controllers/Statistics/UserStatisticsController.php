@@ -2,6 +2,15 @@
 
 namespace App\Http\Controllers\Statistics;
 
+/**********************************************************/
+/*                                                        */
+/* File: UserStatisticsController.php                     */
+/* Author: Simon Vacek <xvacek10@stud.fit.vutbr.cz>       */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the user-statistics view.  */
+/*                                                        */
+/**********************************************************/
+
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Exercise;
@@ -11,6 +20,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Controller for the user-statistics view.
+ */
 class UserStatisticsController extends Controller
 {
     /**
@@ -23,6 +35,11 @@ class UserStatisticsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * The index of the user-statistics view.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         if (Session::has('user_id') && Session::has('exercise_id'))
@@ -51,6 +68,13 @@ class UserStatisticsController extends Controller
         return view('home');
     }
 
+    /**
+     * Returns the fastest attempt for the provided user and exercise.
+     *
+     * @param $user_id
+     * @param $exercise_id
+     * @return mixed
+     */
     public function fastestAttempt($user_id, $exercise_id)
     {
         // SELECT * FROM ucebni_karticky.attempts WHERE user_id = '2' AND exercise_id = '14' order by spend_time limit 1;
@@ -67,6 +91,13 @@ class UserStatisticsController extends Controller
         return $fastest_attempt;
     }
 
+    /**
+     * Returns the most successful attempt for the provided user and exercise.
+     *
+     * @param $user_id
+     * @param $exercise_id
+     * @return mixed
+     */
     public function mostSuccessfulAttempt($user_id, $exercise_id)
     {
         // SELECT *,  correct_answers_number / (correct_answers_number + wrong_answers_number) * 100 as success_rate FROM ucebni_karticky.attempts WHERE user_id = '2' AND exercise_id = '14' order by success_rate desc limit 1;
@@ -83,6 +114,13 @@ class UserStatisticsController extends Controller
         return $most_successful_attempt;
     }
 
+    /**
+     * Retrieves and transforms data of all exercise attempts which are relevant to a chart.
+     *
+     * @param $user_id
+     * @param $exercise_id
+     * @return array
+     */
     public function chartData($user_id, $exercise_id)
     {
         $array_size = 11;

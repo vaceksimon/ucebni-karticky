@@ -1,3 +1,12 @@
+/**********************************************************/
+/*                                                        */
+/* File: clickable-row.css                                */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Styles for the clickable row.             */
+/*                                                        */
+/**********************************************************/
+
 .clickable-row-hover:hover {
     --bs-table-striped-bg: rgba(173, 216, 230, .25);
     --bs-table-bg: rgba(173, 216, 230, .25);

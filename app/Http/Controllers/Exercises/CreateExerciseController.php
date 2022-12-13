@@ -1,6 +1,13 @@
 <?php
 
-
+/**********************************************************/
+/*                                                        */
+/* File: CreateExerciseController.php                     */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the create-exercise view.  */
+/*                                                        */
+/**********************************************************/
 
 namespace App\Http\Controllers\Exercises;
 
@@ -53,5 +60,4 @@ class CreateExerciseController extends Controller
 
         return redirect('myexercises')->with('status', 'Post Form Data Has Been inserted');
     }
-
 }

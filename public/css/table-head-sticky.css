@@ -1,6 +1,11 @@
-/*
- * Styles for the tables.
- */
+/**********************************************************/
+/*                                                        */
+/* File: table-head-sticky.css                            */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Styles for the tables.                    */
+/*                                                        */
+/**********************************************************/
 
 .table-head-sticky {
     position: sticky;

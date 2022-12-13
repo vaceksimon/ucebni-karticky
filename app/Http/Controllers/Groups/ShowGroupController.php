@@ -1,5 +1,15 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: ShowGroupController.php                          */
+/* Authors: David Chocholaty <xchoch09@stud.fit.vutbr.cz> */
+/*          Simon Vacek <xvacek10@stud.fit.vutbr.cz>      */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the show-group view.       */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Http\Controllers\Groups;
 
 use App\Http\Controllers\Controller;
@@ -17,6 +27,7 @@ class ShowGroupController extends Controller
 {
     /**
      * Create a new controller instance.
+     * Author: David Chocholaty
      *
      * @return void
      */
@@ -27,6 +38,7 @@ class ShowGroupController extends Controller
 
     /**
      * The index of the show-group view.
+     * Author: David Chocholaty
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -67,6 +79,13 @@ class ShowGroupController extends Controller
         return view('home');
     }
 
+    /**
+     * Function for searching the member of the group.
+     * Author: David Chocholaty
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function searchMember(Request $request)
     {
         $account_type = rtrim($request->group_type, "s");
@@ -91,6 +110,7 @@ class ShowGroupController extends Controller
 
     /**
      * Function for getting the assignments.
+     * Author: Simon Vacek
      *
      * @param Request $request
      * @return \Illuminate\Support\Collection
@@ -105,6 +125,7 @@ class ShowGroupController extends Controller
 
     /**
      * Function for unassigning.
+     * Author: Simon Vacek
      *
      * @param Request $request
      * @return void
@@ -116,5 +137,4 @@ class ShowGroupController extends Controller
             ->where('exercise_id', $request->exercise_id)
             ->delete();
     }
-
 }

@@ -1,5 +1,10 @@
 @extends('layouts.main')
 
+<!-- **************************** -->
+<!-- * Author: David Chocholaty * -->
+<!-- * Login: xchoch09          * -->
+<!-- **************************** -->
+
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">
@@ -46,6 +51,10 @@
                 </div>
             </div>
 
+            <!-- ***************************** -->
+            <!-- * Modal window for removing * -->
+            <!-- * the exercise              * -->
+            <!-- ***************************** -->
             <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -67,14 +76,19 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script>
+        /*
+         * Searching the exercises on the keyup event in the search box.
+         */
         $('#search').on('keyup', function(){
             search();
         });
 
         search();
 
+        /*
+         * Function for searching the exercises.
+         */
         function search(){
             var keyword = $('#search').val();
             $.post('{{ route("exercise-administration.search") }}',
@@ -87,7 +101,10 @@
                     console.log(data);
                 });
         }
-        // table row with ajax
+
+        /*
+         * Function for showing the table row.
+         */
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
@@ -126,21 +143,33 @@
         }
     </script>
     <script>
+        /*
+         * Set the window location for the clickable row.
+         */
         $(document).on("click", ".clickable-row", function() {
             window.location = $(this).data("href");
         });
     </script>
     <script>
+        /*
+         * Set the exercise identifier when opening the remove exercise modal window.
+         */
         $(document).on("click", ".open-remove-exercise-dialog", function () {
             var exercise = $(this).data('id');
 
             $(".modal-footer #remove-exercise-btn").val(exercise);
         });
 
+        /*
+         * Event handler for the exercise removing.
+         */
         $(document).on("click", "#remove-exercise-btn", function () {
             removeExercise($(this).attr("value"));
         });
 
+        /*
+         * Function for removing the exercise.
+         */
         function removeExercise(exercise_id) {
             $.ajaxSetup({
                 headers: {

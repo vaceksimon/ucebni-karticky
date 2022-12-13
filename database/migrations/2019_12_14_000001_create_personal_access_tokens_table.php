@@ -1,9 +1,22 @@
 <?php
 
+/*******************************************************************/
+/*                                                                 */
+/* File: 2019_12_14_000001_create_personal_access_tokens_table.php */
+/* Author: David Chocholaty <xbartu11@stud.fit.vutbr.cz>           */
+/* Project: Project for the course ITU                             */
+/* Description: The migration for creating the personal access     */
+/*              tokens table.                                      */
+/*                                                                 */
+/*******************************************************************/
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * The migration for creating the personal access tokens table.
+ */
 class CreatePersonalAccessTokensTable extends Migration
 {
     /**

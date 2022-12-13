@@ -1,6 +1,12 @@
-/**
- * Script for automatic logout after the inactivity timeout expiration.
- */
+/**********************************************************/
+/*                                                        */
+/* File: autologout.js                                    */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Script for automatic logout after         */
+/*              the inactivity timeout expiration.        */
+/*                                                        */
+/**********************************************************/
 
 /*
  * The following document is taken from the following source on 2022-11-20.

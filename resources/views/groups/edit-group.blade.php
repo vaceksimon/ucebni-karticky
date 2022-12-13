@@ -1,5 +1,11 @@
 @extends('layouts.main')
 
+<!-- ****************************** -->
+<!-- * Authors: David Chocholaty  * -->
+<!-- *          Simon Vacek       * -->
+<!-- * Logins: xchoch09, xvacek10 * -->
+<!-- ****************************** -->
+
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">
@@ -129,7 +135,11 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- **************************** -->
+            <!-- * Modal window for adding  * -->
+            <!-- * the member.              * -->
+            <!-- * Author: David Chocholaty * -->
+            <!-- **************************** -->
             <div class="modal fade" id="addMemberModal" name="addMemberModal" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" style="--bs-modal-width: 75vw;">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -189,6 +199,11 @@
                 </div>
             </div>
 
+            <!-- ****************************** -->
+            <!-- * Modal window for removing  * -->
+            <!-- * the member.                * -->
+            <!-- * Author: David Chocholaty   * -->
+            <!-- ****************************** -->
             <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -209,6 +224,11 @@
                 </div>
             </div>
 
+            <!-- ****************************** -->
+            <!-- * Modal window for removing  * -->
+            <!-- * the group.                 * -->
+            <!-- * Author: David Chocholaty   * -->
+            <!-- ****************************** -->
             <div id="deletingQuestion" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -234,25 +254,31 @@
         </div>
     </div>
 
-    <!--
-    The following part of code is inspired of the source:
-    - Source: https://medium.com/@cahyofajar28/live-search-in-laravel-8-using-ajax-and-mysql-ac4bc9b0a93c
-    - Author: Cahyo Fajar
-    -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script>
+        /*
+         * Event handler for setting the window location for the clickable row.
+         * Author: David Chocholaty
+         */
         $(document).on("click", ".clickable-row", function() {
             window.location = $(this).data("href");
         });
     </script>
     <script>
+        /*
+         * Searching the user on the keyup event in the search box.
+         * Author: David Chocholaty
+         */
         $('#search').on('keyup', function(){
             search();
         });
 
         search();
 
+        /*
+         * Function for searching the user.
+         * Author: David Chocholaty
+         */
         function search(){
             var keyword = $('#search').val();
             var group_id = $('#group_id').val();
@@ -269,7 +295,11 @@
                     table_post_row(data);
                 });
         }
-        // table row
+
+        /*
+         * Function for showing the table row.
+         * Author: David Chocholaty
+         */
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
@@ -329,11 +359,19 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for adding the new member.
+         * Author: David Chocholaty
+         */
         $(document).on("click", "#add-member-btn", function () {
             addMember($(this).data("id"),
                 document.getElementById("new_user_group_id").value);
         });
 
+        /*
+         * Function for adding the new member.
+         * Author: David Chocholaty
+         */
         function addMember(new_user_id, new_user_group_id) {
             $.ajaxSetup({
                 headers: {
@@ -363,6 +401,10 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for removing the member.
+         * Author: David Chocholaty
+         */
         $(document).on("click", ".open-remove-member-dialog", function () {
             var member = $(this).data('id');
 
@@ -373,6 +415,10 @@
     <script>
         searchMember();
 
+        /*
+         * Function for searching the member of the group.
+         * Author: David Chocholaty
+         */
         function searchMember(){
             var keyword = $('#search-member').val();
             var group_id = $('#group_id').val();
@@ -390,7 +436,10 @@
                 });
         }
 
-        // table row
+        /*
+         * Function for showing the table row (group members).
+         * Author: David Chocholaty
+         */
         function table_post_row_member(res, keyword){
             let htmlView = '';
 
@@ -510,16 +559,28 @@
             $('#members_table').html(htmlView);
         }
 
+        /*
+         * Searching the group members on the keyup event in the search box.
+         * Author: David Chocholaty
+         */
         $('#search-member').on('keyup', function(){
             searchMember();
         });
     </script>
     <script>
+        /*
+         * Event handler for removing the member from the group.
+         * Author: David Chocholaty
+         */
         $(document).on("click", "#remove-member-btn", function () {
             removeMember(document.getElementById("member_id").value,
                 document.getElementById("group_id").value);
         });
 
+        /*
+         * Function for removing the member from the group.
+         * Author: David Chocholaty
+         */
         function removeMember(member_id, group_id) {
             $.ajaxSetup({
                 headers: {
@@ -550,6 +611,10 @@
     <script>
         $("input[name='image']").change(function() { this.form.submit(); });
 
+        /*
+         * Function for the selected photo.
+         * Author: Simon Vacek
+         */
         function photoSelected(profilePhoto) {
             let url = profilePhoto.value;
             let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
@@ -564,6 +629,10 @@
         }
     </script>
     <script>
+        /*
+         * Event handler for adding the member (modal window).
+         * Author: David Chocholaty
+         */
         $(document).on("click", "#add-member-open-model-btn", function () {
             document.getElementById('search').value = '';
             search();

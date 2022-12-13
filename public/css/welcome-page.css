@@ -1,6 +1,11 @@
-/*
- * Styles for the welcome page.
- */
+/**********************************************************/
+/*                                                        */
+/* File: welcome-page.css                                 */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Styles for the welcome page.              */
+/*                                                        */
+/**********************************************************/
 
 .mask-custom {
     backdrop-filter: blur(4px);

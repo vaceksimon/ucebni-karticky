@@ -1,9 +1,22 @@
 <?php
 
+/**************************************************************/
+/*                                                            */
+/* File: 2022_11_16_104544_create_users_memberships_table.php */
+/* Author: David Chocholaty <xbartu11@stud.fit.vutbr.cz>      */
+/* Project: Project for the course ITU                        */
+/* Description: The migration for creating the users          */
+/*              memberships table.                            */
+/*                                                            */
+/**************************************************************/
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * The migration for creating the users memberships table.
+ */
 class CreateUsersMembershipsTable extends Migration
 {
     /**

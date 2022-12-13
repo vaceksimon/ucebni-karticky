@@ -1,5 +1,14 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: GroupStatisticsController.php                    */
+/* Author: Simon Vacek <xvacek10@stud.fit.vutbr.cz>       */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the group-statistics view. */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Http\Controllers\Statistics;
 
 use App\Http\Controllers\Controller;
@@ -11,6 +20,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Controller for the group-statistics view.
+ */
 class GroupStatisticsController extends Controller
 {
     /**
@@ -25,6 +37,7 @@ class GroupStatisticsController extends Controller
 
     /**
      * Returns group statistics view with data regarding exercise, group, fastest and best attempt and chart data.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -82,6 +95,7 @@ class GroupStatisticsController extends Controller
 
     /**
      * Returns all students which are members of a group with $group_id.
+     *
      * @param $group_id
      * @return mixed
      */
@@ -93,6 +107,12 @@ class GroupStatisticsController extends Controller
             ->get();
     }
 
+    /**
+     * Function for searching the students which are members of the group for which the statistics are shown.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function searchStudent(Request $request)
     {
         $account_type = $request->user_type;
@@ -120,6 +140,7 @@ class GroupStatisticsController extends Controller
 
     /**
      * Retrieves and transforms data of all exercise attempts which are relevant to a chart.
+     *
      * @param $group_id
      * @param $exercise_id
      * @return array

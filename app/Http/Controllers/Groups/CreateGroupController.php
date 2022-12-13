@@ -1,5 +1,14 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: CreateGroupController.php                        */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the create-group view.     */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Http\Controllers\Groups;
 
 use App\Http\Controllers\Controller;

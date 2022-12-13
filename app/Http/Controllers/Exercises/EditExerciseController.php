@@ -1,5 +1,14 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: EditExerciseController.php                       */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the edit-exercise view.    */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Http\Controllers\Exercises;
 
 use App\Http\Controllers\Controller;
@@ -47,6 +56,12 @@ class EditExerciseController extends Controller
         return view('home');
     }
 
+    /**
+     * Function for searching the exercise flashcards.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function searchFlashcards(Request $request)
     {
         $exercise_id = Session::get('exercise_id');

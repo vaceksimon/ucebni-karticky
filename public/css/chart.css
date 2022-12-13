@@ -1,3 +1,12 @@
+/**********************************************************/
+/*                                                        */
+/* File: chart.css                                        */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Styles for the chart.                     */
+/*                                                        */
+/**********************************************************/
+
 .chart-container {
     width: 75%;
     height: 75%;
