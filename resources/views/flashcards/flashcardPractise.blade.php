@@ -19,7 +19,7 @@
                                 <button id="btnCorrect" type="button" class="btn btn-success btn-lg fs-4" onclick={getCorrect()}>Správně <i class="bi bi-check-lg"></i></button>
                             </div>
                             <div class="text-center col-4">
-                                <button type="button" class="btn btn-primary btn-lg fs-4" onclick={flipCard()} style="width: 200px"><span id="btnFlip"></span> <i class="bi bi-arrow-repeat"></i></button>
+                                <button type="button" id="btnFlip" class="btn btn-primary btn-lg fs-4" onclick={flipCard()} style="width: 200px"><span id="flip"></span> <i class="bi bi-arrow-repeat"></i></button>
                             </div>
                             <div class="text-center col-4">
                                 <button id="btnWrong" type="button" class="btn btn-danger btn-lg fs-4" onclick={getWrong()}>Špatně <i class="bi bi-x-lg"></i></button>
@@ -131,11 +131,18 @@
                 dataType: 'json',
                 success: function (data) {
                     let res = JSON.parse(data.result);
+                    currentCard = parseInt(res[0].counter, 10) + 1;
+
+                    // shuffle
+                    let arr1 = cardSet.splice(0, currentCard);
+                    console.log(cardSet);
+                    let arr2 = shuffle(cardSet);
+                    cardSet = arr1.concat(arr2);
+
                     correct.innerText = parseInt(res[0].correct, 10);
                     correctCounter = parseInt(res[0].correct, 10) + 1;
                     wrong.innerText = parseInt(res[0].wrong, 10);
                     wrongCounter = parseInt(res[0].wrong) + 1;
-                    currentCard = parseInt(res[0].counter, 10) + 1;
                     sec = res[0].sec;
                     counter.innerText = (currentCard + 1).toString() + "/" + cardSet.length.toString();
                     showCard();
@@ -168,16 +175,15 @@
                     console.log('Error:', data);
                 }
             });
-            console.log(r);
             return r;
         }
 
         function changeQA() {
             if (showFront) {
-                document.getElementById('btnFlip').innerText = " Odpověď";
+                document.getElementById('flip').innerText = " Odpověď";
                 document.getElementById('QA').innerText      = "Otázka:";
             } else {
-                document.getElementById('btnFlip').innerText = " Otázka";
+                document.getElementById('flip').innerText = " Otázka";
                 document.getElementById('QA').innerText      = "Odpověď:";
             }
         }
@@ -291,6 +297,18 @@
                     console.log('Error:', data);
                 }
             });
+        }
+
+        // The Fisher-Yates algorithm
+        function shuffle(array) {
+            var j, tmp, i;
+            for (i = array.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                tmp = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
+            }
+            return array;
         }
 
         correct.innerText = correctCounter++;
