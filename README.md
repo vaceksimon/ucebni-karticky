@@ -5,10 +5,10 @@ Webová aplikace Učební Kartičky, která vznikla v rámci projektu na VUT FIT
 	<dd>David Chocholatý
 	    (<a href="mailto:xchoch09@stud.fit.vutbr.cz">xchoch09@stud.fit.vutbr.cz</a>)
 	</dd>
-	<dd>Tomáš Bártů <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	<dd>Tomáš Bártů
 	    (<a href="mailto:xbartu11@stud.fit.vutbr.cz">xbartu11@stud.fit.vutbr.cz</a>)
 	</dd>
-  <dd>Šimon Vacek <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+  <dd>Šimon Vacek
 	    (<a href="mailto:xvacek10@stud.fit.vutbr.cz">xvacek10@stud.fit.vutbr.cz</a>)
 	</dd>
 	<dt>URL aplikace</dt>
