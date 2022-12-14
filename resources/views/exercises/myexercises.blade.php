@@ -19,6 +19,18 @@
                         <div class="card-body">
                             <div class="col-md-12">
                                 <h2>Vámi vytvořená cvičení</h2>
+                                @if($t_exercises->isEmpty())
+                                    <div class="ps-3 pb-3 fs-5">
+                                        Nemáte vytvořené žádné cvičení. <i
+                                            class="bi bi-emoji-frown"></i>
+                                        <form action="{{route('create-exercise')}}">
+                                            <button type="submit"
+                                                    class="mt-2 ms-2 btn btn-primary btn-sm px-3 text-nowrap">
+                                                <span class="ms-1 d-none d-sm-inline">Vytvořit cvičení</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
                                 @foreach($t_exercises as $record)
                                     <div class="card mb-3">
                                         <div class="card-header d-flex align-items-center">
@@ -57,28 +69,49 @@
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
                                                     <a href="{{route('myexercises.edit', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Upravit <i class="bi bi-pencil-fill"></i></button>
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm px-3 text-nowrap">
+                                                            Upravit <i class="bi bi-pencil-fill"></i></button>
                                                     </a>
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
+                                                    <button type="button"
+                                                            class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                             data-bs-toggle="modal" data-bs-target="#statModal"
                                                             onclick="exerciseId = {{$record->id}}; searchForStat();">
                                                         Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i>
                                                     </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm px-3 text-nowrap">
+                                                            Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
-                                                <div class="col-4 d-flex justify-content-end">
-                                                    <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
-                                                    </a>
-                                                </div>
+                                                @if($record->pocet == 0)
+                                                    <div class="col-4 d-flex justify-content-end text-danger">
+                                                        Ve cvičení nejsou zatím žádné kartičky.
+                                                    </div>
+                                                @else
+                                                    <div class="col-4 d-flex justify-content-end">
+                                                        <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
+                                                            <button type="button"
+                                                                    class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
+                                                                Spustit <i class="bi bi-arrow-return-right"></i>
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
                                 <h2>Ostatní dostupná cvičení</h2>
+                                @if($t_sharedExercises->isEmpty())
+                                    <div class="ps-3 pb-3 fs-5">
+                                        Nikdo s Vámi zatím nesdílí cvičení. <i
+                                            class="bi bi-emoji-frown"></i>
+                                    </div>
+                                @endif
                                 @foreach($t_sharedExercises as $record)
+                                    @if($record->pocet != 0)
                                     <div class="card mb-3">
                                         <div class="card-header d-flex align-items-center">
                                             <div class="col-6">
@@ -105,28 +138,34 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr class="my-2" />
+                                            <hr class="my-2"/>
                                             <div class="pb-3">Popis:</div>
                                             <div>{{ $record->description }}</div>
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
+                                                    <button type="button"
+                                                            class="btn btn-outline-secondary btn-sm px-3 text-nowrap"
                                                             data-bs-toggle="modal" data-bs-target="#statModal"
                                                             onclick="exerciseId = {{$record->id}}; searchForStat();">
                                                         Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i>
                                                     </button>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm px-3 text-nowrap">
+                                                            Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4 d-flex justify-content-end">
                                                     <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
+                                                        <button type="button"
+                                                                class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
+                                                            Spustit <i class="bi bi-arrow-return-right"></i></button>
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -155,27 +194,44 @@
                                                     <div>Skupina: {{ $record->g_name }}</div>
                                                 </div>
                                             </div>
-                                            <hr class="my-2" />
+                                            <hr class="my-2"/>
                                             <div class="pb-3">Popis:</div>
                                             <div> {{ $record->description }} </div>
                                             <div class="d-flex pt-3 gap-2">
                                                 <div class="col-8 d-flex gap-3">
-                                                    <form method="POST" action="{{ route('myexercises.user-statistics') }}">
+                                                    <form method="POST"
+                                                          action="{{ route('myexercises.user-statistics') }}">
                                                         @csrf
 
-                                                        <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
-                                                        <input type="hidden" name="exercise_id_stat" id="exercise_id_stat" value="{{ $record->id }}">
-                                                        <button type="submit" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit statistiky <i class="bi bi-bar-chart-line-fill"></i></button>
+                                                        <input type="hidden" name="user_id" id="user_id"
+                                                               value="{{ Auth::user()->id }}"/>
+                                                        <input type="hidden" name="exercise_id_stat"
+                                                               id="exercise_id_stat" value="{{ $record->id }}">
+                                                        <button type="submit"
+                                                                class="btn btn-outline-secondary btn-sm px-3 text-nowrap">
+                                                            Zobrazit statistiky <i
+                                                                class="bi bi-bar-chart-line-fill"></i></button>
                                                     </form>
                                                     <a href="{{route('flashcard.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 text-nowrap" >Zobrazit <i class="bi bi-eye-fill"></i></button>
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm px-3 text-nowrap">
+                                                            Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
-                                                <div class="col-4 d-flex justify-content-end">
-                                                    <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button" class="btn btn-primary btn-sm px-3 me-3 text-nowrap" >Spustit <i class="bi bi-arrow-return-right"></i></button>
-                                                    </a>
-                                                </div>
+                                                @if($record->count == 0)
+                                                    <div class="col-4 d-flex justify-content-end text-danger">
+                                                        Ve cvičení nejsou zatím žádné kartičky.
+                                                    </div>
+                                                @else
+                                                    <div class="col-4 d-flex justify-content-end">
+                                                        <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
+                                                            <button type="button"
+                                                                    class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
+                                                                Spustit <i class="bi bi-arrow-return-right"></i>
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -208,14 +264,16 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-md-6">
                                                         <div class="input-group mb-3">
-                                                            <input type="text" class="form-control" placeholder="Vyhledat skupinu" id="share">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Vyhledat skupinu" id="share">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <div class="form-check fs-5">
                                                             <label class="form-check-label">
                                                                 Sdílená cvičení
-                                                                <input class="form-check-input" type="checkbox" value="value" id="shared">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                       value="value" id="shared">
                                                             </label>
                                                         </div>
                                                     </div>
@@ -261,7 +319,8 @@
                                                         <div class="form-check fs-5">
                                                             <label class="form-check-label">
                                                                 Zadaná cvičení
-                                                                <input class="form-check-input" type="checkbox" value="value" id="assigned">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                       value="value" id="assigned">
                                                             </label>
                                                         </div>
                                                     </div>
@@ -332,7 +391,8 @@
     <!-- * End of section: Blade 1  * -->
     <!-- **************************** -->
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
     <!-- Scripts for displaying groups in share exercise modal window -->
@@ -358,7 +418,7 @@
                 }
             });
             $.ajax({
-                data: {"exercise_id": exercise_id, "keyword": keyword, "owner_id": {{ Auth::id() }} },
+                data: {"exercise_id": exercise_id, "keyword": keyword, "owner_id": {{ Auth::id() }}},
                 url: "{{ route('myexercises.share') }}",
                 type: "POST",
                 dataType: 'json',
@@ -376,8 +436,7 @@
             htmlView = '';
             let j = 0;
 
-            if (res.result.length === 0)
-            {
+            if (res.result.length === 0) {
                 htmlView += `
                 <div class="text-center fs-3">Bohužel nemáte cvičení komu nasdílet.
                     <i class="bi bi-emoji-frown"></i>
@@ -394,9 +453,7 @@
                         htmlView += `
                         <div class="row mb-3 gap-3">`
                     }
-                }
-                else
-                {
+                } else {
                     if (isShared[i].shared === "0")
                         continue;
 
@@ -412,8 +469,8 @@
                         <div class="card m-auto" style="width: 18rem;">
                             <img src="` + res.result[i].photo + `" class="card-img-top" style="height: 215px" alt="Foto skupiny">
                             <div class="card-body">
-                                <h5 class="card-title" title="`+ res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
-                                <p class="card-text" title="`+ res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>`
+                                <h5 class="card-title" title="` + res.result[i].name + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].name + `</h5>
+                                <p class="card-text" title="` + res.result[i].description + `" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">` + res.result[i].description + `</p>`
                     if (isShared[i].shared === "1") {
                         htmlView += `<button class="btn btn-danger"
                                 onclick="deleteExercise(` + res.result[i].id + `);">Odstranit sdílení</button>`
@@ -430,9 +487,7 @@
                 if (!(document.getElementById("shared").checked)) {
                     if ((i + 1) % 3 === 0 || i === (res.result.length + 1))
                         htmlView += `</div>`
-                }
-                else
-                {
+                } else {
                     if ((j + 1) % 3 === 0 || i === (res.result.length + 1)) {
                         htmlView += `</div>`
                     }
@@ -452,13 +507,12 @@
                 }
             });
             $.ajax({
-                data: {"exercise_id": exercise_id, "group_id": group_id },
+                data: {"exercise_id": exercise_id, "group_id": group_id},
                 url: "{{ route('myexercises.store-share') }}",
                 type: "POST",
                 dataType: 'text',
                 success: function (data) {
-                    if (data === '0')
-                    {
+                    if (data === '0') {
                         alert("Neporařilo se nasdílet skupinu.");
                     }
                     share();
@@ -476,13 +530,12 @@
                 }
             });
             $.ajax({
-                data: {"exercise_id": exercise_id, "group_id": group_id },
+                data: {"exercise_id": exercise_id, "group_id": group_id},
                 url: "{{ route('myexercises.delete-share') }}",
                 type: "POST",
                 dataType: 'text',
                 success: function (data) {
-                    if (data === '0')
-                    {
+                    if (data === '0') {
                         alert("Neporařilo se odstranit sdílení skupiny.");
                     }
                     share();
@@ -532,13 +585,12 @@
                 }
             });
             $.ajax({
-                data: {"exercise_id": exercise_id, "group_id": group_id },
+                data: {"exercise_id": exercise_id, "group_id": group_id},
                 url: "{{ route('myexercises.store-assignment') }}",
                 type: "POST",
                 dataType: 'text',
                 success: function (data) {
-                    if (data === '0')
-                    {
+                    if (data === '0') {
                         alert("Neporařilo se zadat cvičení skupině.");
                     }
                     assign();
@@ -556,13 +608,12 @@
                 }
             });
             $.ajax({
-                data: {"exercise_id": exercise_id, "group_id": group_id },
+                data: {"exercise_id": exercise_id, "group_id": group_id},
                 url: "{{ route('myexercises.unassign-exercise') }}",
                 type: "POST",
                 dataType: 'text',
                 success: function (data) {
-                    if (data === '0')
-                    {
+                    if (data === '0') {
                         alert("Neporařilo se odstranit zadání skupině.");
                     }
                     assign();
@@ -577,8 +628,7 @@
 
         // table row with ajax
         function postGroupsAssign(res) {
-            if (res.result.length === 0)
-            {
+            if (res.result.length === 0) {
                 htmlView = `
                 <div class="text-center fs-3">Bohužel nemáte cvičení komu zadat.
                     <i class="bi bi-emoji-frown"></i>
@@ -595,15 +645,14 @@
                             <div class="card-body">
                                 <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>`
                 htmlView += `<p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="`;
-                if(res.result[i].description != null)
+                if (res.result[i].description != null)
                     htmlView += res.result[i].description + `">` + res.result[i].description + `</p>`
                 else
                     htmlView += `"><br /></p>`;
 
-                if($('#assigned').prop('checked')) {
+                if ($('#assigned').prop('checked')) {
                     htmlView += `<button class="btn btn-danger" onclick="unassignExercise(` + exerciseId + `,` + res.result[i].id + `)">Odstranit zadání</button>`
-                }
-                else {
+                } else {
                     htmlView += `<button class="btn btn-primary" onclick="assignExercise(` + exerciseId + `,` + res.result[i].id + `)">Zadat</button>`
                 }
 
@@ -641,8 +690,7 @@
 
         // table row with ajax
         function postGroupsStat(res) {
-            if (res.result.length === 0)
-            {
+            if (res.result.length === 0) {
                 htmlView = `
                 <div class="text-center fs-3">Bohužel nemáte skupinu, které statistiky zobrazit.
                     <i class="bi bi-emoji-frown"></i>
@@ -659,7 +707,7 @@
                             <div class="card-body">
                                 <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="` + res.result[i].name + `">` + res.result[i].name + `</h5>
                                 <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden" title="`
-                if(res.result[i].description != null)
+                if (res.result[i].description != null)
                     htmlView += res.result[i].description + `">` + res.result[i].description + `</p>`
                 else
                     htmlView += `"><br /></p>`;
