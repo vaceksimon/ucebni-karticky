@@ -12,6 +12,7 @@
                     <div class="card-body">
                         <div class="col-md-12">
                             @foreach($exercises as $record)
+                                @if($record->pocet != 0)
                                 <div class="card mb-3">
                                     <div class="card-header d-flex align-items-center">
                                         <div class="col-6">
@@ -57,6 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
