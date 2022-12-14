@@ -25,7 +25,6 @@
                                             <div class="col-6">
                                                 <div>Počet kartiček: {{ $record->pocet }}</div>
                                                 <div>Téma: {{ $record->topic }}</div>
-                                                {{--                                                <div>Skupina: {{ $record->g_name }}</div>--}}
                                             </div>
                                         </div>
                                         <hr class="my-2"/>
