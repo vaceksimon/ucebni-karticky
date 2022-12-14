@@ -609,7 +609,6 @@
         }
     </script>
     <script>
-        $("input[name='image']").change(function() { this.form.submit(); });
 
         /*
          * Function for the selected photo.
