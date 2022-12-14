@@ -85,13 +85,20 @@
                                                             Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
-                                                <div class="col-4 d-flex justify-content-end">
-                                                    <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button"
-                                                                class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
-                                                            Spustit <i class="bi bi-arrow-return-right"></i></button>
-                                                    </a>
-                                                </div>
+                                                @if($record->pocet == 0)
+                                                    <div class="col-4 d-flex justify-content-end text-danger">
+                                                        Ve cvičení nejsou zatím žádné kartičky.
+                                                    </div>
+                                                @else
+                                                    <div class="col-4 d-flex justify-content-end">
+                                                        <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
+                                                            <button type="button"
+                                                                    class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
+                                                                Spustit <i class="bi bi-arrow-return-right"></i>
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -209,13 +216,20 @@
                                                             Zobrazit <i class="bi bi-eye-fill"></i></button>
                                                     </a>
                                                 </div>
-                                                <div class="col-4 d-flex justify-content-end">
-                                                    <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
-                                                        <button type="button"
-                                                                class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
-                                                            Spustit <i class="bi bi-arrow-return-right"></i></button>
-                                                    </a>
-                                                </div>
+                                                @if($record->count == 0)
+                                                    <div class="col-4 d-flex justify-content-end text-danger">
+                                                        Ve cvičení nejsou zatím žádné kartičky.
+                                                    </div>
+                                                @else
+                                                    <div class="col-4 d-flex justify-content-end">
+                                                        <a href="{{route('flashcardPractise.show', ['id' => $record->id])}}">
+                                                            <button type="button"
+                                                                    class="btn btn-primary btn-sm px-3 me-3 text-nowrap">
+                                                                Spustit <i class="bi bi-arrow-return-right"></i>
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
