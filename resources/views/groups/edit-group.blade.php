@@ -386,18 +386,18 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se přidat člena.");
+                    } else {
+                        // Clear the searching text field.
+                        document.getElementById('search').value = '';
+                        // Search to remove the deleted row.
+                        search();
+                        searchMember();
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
             });
-
-            // Clear the searching text field.
-            document.getElementById('search').value = '';
-            // Search to remove the deleted row.
-            search();
-            searchMember();
         }
     </script>
     <script>
@@ -595,17 +595,17 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se odebrat člena.");
+                    } else {
+                        // Clear the searching text field.
+                        document.getElementById('search-member').value = '';
+                        // Search to remove the deleted row.
+                        searchMember();
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
             });
-
-            // Clear the searching text field.
-            document.getElementById('search-member').value = '';
-            // Search to remove the deleted row.
-            searchMember();
         }
     </script>
     <script>

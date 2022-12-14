@@ -190,16 +190,17 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se odebrat skupinu.");
+                    } else {
+                        // Clear the searching text field.
+                        document.getElementById('search').value = '';
+                        // Search to remove the deleted row.
+                        search();
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
             });
-            // Clear the searching text field.
-            document.getElementById('search').value = '';
-            // Search to remove the deleted row.
-            search();
         }
     </script>
 @endsection

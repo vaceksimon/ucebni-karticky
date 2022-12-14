@@ -482,14 +482,14 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se odebrat kartičku.");
+                    } else {
+                        showFlashcards();
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
             });
-
-            showFlashcards();
         }
     </script>
     <script>
@@ -577,23 +577,23 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se přidat kartičku.");
+                    } else {
+                        showFlashcards();
+
+                        $("#addFlashcardModal").modal('hide');
+
+                        sleep(500).then(() => {
+                            document.getElementById("flashcard_question").value = '';
+                            document.getElementById("flashcard_answer").value = '';
+                            document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
+
+                            $("#addFlashcardModal").modal('show');
+                        });
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
-            });
-
-            showFlashcards();
-
-            $("#addFlashcardModal").modal('hide');
-
-            sleep(500).then(() => {
-                document.getElementById("flashcard_question").value = '';
-                document.getElementById("flashcard_answer").value = '';
-                document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
-
-                $("#addFlashcardModal").modal('show');
             });
         }
     </script>
@@ -660,16 +660,16 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se upravit kartičku.");
+                    } else {
+                        showFlashcards();
+
+                        $("#editFlashcard").modal('hide');
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
             });
-
-            showFlashcards();
-
-            $("#editFlashcard").modal('hide');
         }
     </script>
     <script>
