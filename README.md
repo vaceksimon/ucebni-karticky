@@ -29,7 +29,7 @@ Webová aplikace Učební Kartičky, která vznikla v rámci projektu na VUT FIT
 <h2>Instalace</h2>
 
 <p>Celý projekt si lze stáhnout z následujícího odkazu:</p>
-<a href="https://github.com/davidchocholaty/ucebni-karticky/tree/3c901c3e8073f872d464e522a831eb9d8613ba90">https://github.com/davidchocholaty/ucebni-karticky/tree/3c901c3e8073f872d464e522a831eb9d8613ba90</a>
+<a href="https://github.com/davidchocholaty/ucebni-karticky/tree/2ba95bd2c88bbe3be16cdca895692f07416b9086">https://github.com/davidchocholaty/ucebni-karticky/tree/2ba95bd2c88bbe3be16cdca895692f07416b9086</a>
 
 <h4>Požadavky</h4>
 
