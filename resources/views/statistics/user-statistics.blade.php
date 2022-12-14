@@ -1,3 +1,7 @@
+<!-- ************************************* -->
+<!-- * Author: Simon Vacek               * -->
+<!-- * Login: xvacek10                   * -->
+<!-- ************************************* -->
 @extends('layouts.main')
 
 @section('content')
@@ -168,6 +172,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <script>
+        // chart
         const ctx = document.getElementById("chart").getContext('2d');
         var chartData = {{ json_encode($chart_data) }};
         const myChart = new Chart(ctx, {

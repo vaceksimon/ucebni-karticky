@@ -1,3 +1,8 @@
+<!-- ************************************* -->
+<!-- * Author: Simon Vacek               * -->
+<!-- * Login: xvacek10                   * -->
+<!-- ************************************* -->
+
 @extends('layouts.main')
 
 @section('content')
@@ -87,10 +92,14 @@
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script>
-        @if(isset($user['id']) && Auth::id() != $user['id'])
+        @if(isset($user['id']) && Auth::id() != $user['id']) // display common groups only when displaying a stranger's profile
         getCommonGroups();
         @endif
 
+        /*
+         * Function retrieving data with groups that the logged in user and selected user havve in common.
+         * Author: Simon Vacek
+         */
         function getCommonGroups() {
             $.post('{{ route("profile.commonGroups") }}',
                 {
@@ -103,6 +112,10 @@
                 });
         }
 
+        /*
+         * Takes data with common groups and prints them to div with groups_body id.
+         * Author: Simon Vacek
+         */
         function postCommonGroups(data) {
             htmlView = '<div class="row gap-3 m-2 d-flex flex justify-content-evenly align-items-start">';
             for (let i = 0; i < data.result.length; i++) {
