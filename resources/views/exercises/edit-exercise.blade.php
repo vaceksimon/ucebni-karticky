@@ -516,11 +516,19 @@
         document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
 
         /*
-         * Event handler for closing the modal window for adding the flashcards.
+         * Event handler for opening the modal window for adding the flashcards.
          */
-        $(document).on("click", "#add-flashcard-close-btn", function () {
+        $(document).on("click", "#add-flashcards-btn-1", function () {
            addedCards = 0;
            document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
+        });
+
+        /*
+         * Event handler for opening the modal window for adding the flashcards.
+         */
+        $(document).on("click", "#add-flashcards-btn-2", function () {
+            addedCards = 0;
+            document.getElementById("added-flashcards").innerHTML = "{{ __('Přidáno kartiček') }}: " + addedCards;
         });
 
         /*
