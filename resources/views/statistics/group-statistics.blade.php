@@ -1,3 +1,8 @@
+<!-- ************************************* -->
+<!-- * Author: Simon Vacek               * -->
+<!-- * Login: xvacek10                   * -->
+<!-- ************************************* -->
+
 @extends('layouts.main')
 
 @section('content')
@@ -131,6 +136,7 @@
                                         </div>
                                     </div>
                                     <div id="students_table">
+                                        <!-- members of the group -->
                                     </div>
                                 </div>
                             </div>
@@ -152,6 +158,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <script>
+        // chart
         const ctx = document.getElementById("chart").getContext('2d');
         var chartData = {{ json_encode($chart_data) }};
         const myChart = new Chart(ctx, {
@@ -199,6 +206,9 @@
 
         searchStudent();
 
+        /*
+         * Sends post http request and retrieves student based on their name.
+         */
         function searchStudent(){
             let keyword = $('#search-student').val();
             let group_id = $('#group_id').val();
@@ -216,7 +226,9 @@
                 });
         }
 
-        // table row
+        /*
+         * Prints students in a group to div students_table.
+         */
         function table_post_row_student(res, keyword){
             let htmlView = '';
 

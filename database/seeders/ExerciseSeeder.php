@@ -1,8 +1,12 @@
 <?php
-/***********************
- * Author: Tomas Bartu *
- * Login: xbartu11     *
- ***********************/
+/***********************************************************/
+/*                                                         */
+/* File: ExerciseSeeder.php                                */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Seeder for Exercise model                  */
+/*                                                         */
+/***********************************************************/
 namespace Database\Seeders;
 
 use App\Models\Exercise;

@@ -1,5 +1,10 @@
 @extends('layouts.main')
 
+<!-- **************************** -->
+<!-- * Author: David Chocholaty * -->
+<!-- * Login: xchoch09          * -->
+<!-- **************************** -->
+
 @section('content')
     <div class="container my-4">
         <div class="row justify-content-center">
@@ -47,6 +52,10 @@
                 </div>
             </div>
 
+            <!-- ***************************** -->
+            <!-- * Modal window for removing * -->
+            <!-- * the group                 * -->
+            <!-- ***************************** -->
             <div id="removingQuestion" class="modal fade" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -68,11 +77,19 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-    <script>$('#search').on('keyup', function(){
+    <script>
+        /*
+         * Searching the groups on the keyup event in the search box.
+         */
+        $('#search').on('keyup', function(){
             search();
         });
+
         search();
+
+        /*
+         * Function for searching the groups.
+         */
         function search(){
             var keyword = $('#search').val();
             $.post('{{ route("group-administration.search") }}',
@@ -85,7 +102,10 @@
                     console.log(data);
                 });
         }
-        // table row with ajax
+
+        /*
+         * Function for showing the table row.
+         */
         function table_post_row(res){
             let htmlView = '';
             if(res.result.length <= 0){
@@ -128,11 +148,17 @@
         }
     </script>
     <script>
+        /*
+         * Set the window location for the clickable row.
+         */
         $(document).on("click", ".clickable-row", function() {
             window.location = $(this).data("href");
         });
     </script>
     <script>
+        /*
+         * Set the group identifier when opening the remove group modal window.
+         */
         $(document).on("click", ".open-remove-group-dialog", function () {
             var group = $(this).data('id');
             //$(".modal-footer #group_id").val( group );
@@ -140,10 +166,16 @@
             $(".modal-footer #remove-group-btn").val(group);
         });
 
+        /*
+         * Event handler for the group removing.
+         */
         $(document).on("click", "#remove-group-btn", function () {
             removeGroup($(this).attr("value"));
         });
 
+        /*
+         * Function for removing the group.
+         */
         function removeGroup(group_id) {
             $.ajaxSetup({
                 headers: {
@@ -158,16 +190,17 @@
                 success: function (data) {
                     if (data === '1') {
                         alert("Nepodařilo se odebrat skupinu.");
+                    } else {
+                        // Clear the searching text field.
+                        document.getElementById('search').value = '';
+                        // Search to remove the deleted row.
+                        search();
                     }
                 },
                 error: function (data) {
                     console.log('Error: ', data);
                 },
             });
-            // Clear the searching text field.
-            document.getElementById('search').value = '';
-            // Search to remove the deleted row.
-            search();
         }
     </script>
 @endsection

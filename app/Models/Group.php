@@ -1,5 +1,14 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: Group.php                                        */
+/* Author: Simon Vacek <xvacek10@stud.fit.vutbr.cz>       */
+/* Project: Project for the course ITU                    */
+/* Description: ORM for the group.                        */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

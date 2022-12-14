@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: UserTest.php                                      */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Database unit tests for User model         */
+/*                                                         */
+/***********************************************************/
 namespace Tests\Database;
 
 use Tests\TestCase;

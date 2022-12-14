@@ -1,7 +1,12 @@
+<!-- ************************************* -->
+<!-- * Author: Simon Vacek               * -->
+<!-- * Login: xvacek10                   * -->
+<!-- ************************************* -->
+
 <div class="col-auto shadow" style="background: #f8f8f8">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-4 pt-2 sticky-top" id="sidebar">
         @if(Auth::user()['account_type'] != 'admin')
-            <!-- user and teacher menu -->
+            <!-- student and teacher menu -->
             <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start fs-4" id="menu"
                 style="--bs-nav-link-color: none; overflow: hidden">
                 <li class="nav-item">
@@ -46,6 +51,7 @@
                     @endif
                 </li>
                 @if(Auth::user()['account_type'] == 'teacher')
+                    <!-- teacher additional menu -->
                     <li class="nav-item mt-3">
                         <a href="{{route('create-group')}}"
                            class="nav-link px-0 align-middle @if(request()->routeIs('create-group')) active @endif">

@@ -1,3 +1,8 @@
+<!-- ************************************* -->
+<!-- * Author: Simon Vacek               * -->
+<!-- * Login: xvacek10                   * -->
+<!-- ************************************* -->
+
 <nav class="navbar navbar-expand bg-light shadow" id="navbar">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

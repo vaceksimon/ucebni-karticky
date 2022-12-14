@@ -1,6 +1,11 @@
-/*
- * Styles for the texts.
- */
+/**********************************************************/
+/*                                                        */
+/* File: text-shortening.css                              */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Styles for the texts.                     */
+/*                                                        */
+/**********************************************************/
 
 .text-shortening {
     text-overflow: ellipsis;

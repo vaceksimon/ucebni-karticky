@@ -1,5 +1,12 @@
 <?php
-
+/***********************************************************/
+/*                                                         */
+/* File: GroupSeeder.php                                   */
+/* Author: Tomas Bartu <xbartu11@stud.fit.vutbr.cz>        */
+/* Project: Project for the course ITU                     */
+/* Description: Seeder for Group model                     */
+/*                                                         */
+/***********************************************************/
 namespace Database\Seeders;
 
 use App\Models\Exercise;

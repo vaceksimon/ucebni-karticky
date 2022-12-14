@@ -1,5 +1,14 @@
 <?php
 
+/**********************************************************/
+/*                                                        */
+/* File: EditGroupController.php                          */
+/* Author: David Chocholaty <xchoch09@stud.fit.vutbr.cz>  */
+/* Project: Project for the course ITU                    */
+/* Description: Controller for the edit-group view.       */
+/*                                                        */
+/**********************************************************/
+
 namespace App\Http\Controllers\Groups;
 
 use App\Http\Controllers\Controller;
@@ -13,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 /**
- * Function for the edit-group view.
+ * Controller for the edit-group view.
  */
 class EditGroupController extends Controller
 {
