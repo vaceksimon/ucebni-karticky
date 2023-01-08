@@ -168,8 +168,9 @@
                 type: "POST",
                 dataType: 'text',
                 success: function (data) {
-                    let res = JSON.parse(data)
+                    let res = JSON.parse(data);
                     document.getElementById('timer').setAttribute('data-timer', res[0].show_timer);
+                    setTimer();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -325,19 +326,19 @@
             return pad(parseInt(sec / 3600, 10)) + ':' + pad(parseInt(sec / 60, 10)) + ':' + pad( sec % 60 );
         }
 
-        let isVisible = document.getElementById('timer').getAttribute('data-timer');
-        interval = setInterval( function() {
-            storeSession();
-            isVisible = '0';
-            if(isVisible === '1') {
-                document.getElementById("seconds").innerHTML = pad(++sec % 60);
-                document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
-                document.getElementById("hours").innerHTML = pad(parseInt(sec / 3600, 10));
-            } else {
-                sec++;
-                document.getElementById('timer').innerHTML = '<i>Časovač je skrytý</i>'
-            }
-        }, 1000);
-
+        function setTimer() {
+            let isVisible = document.getElementById('timer').getAttribute('data-timer');
+            interval = setInterval(function () {
+                storeSession();
+                if (isVisible === '1') {
+                    document.getElementById("seconds").innerHTML = pad(++sec % 60);
+                    document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+                    document.getElementById("hours").innerHTML = pad(parseInt(sec / 3600, 10));
+                } else {
+                    sec++;
+                    document.getElementById('timer').innerHTML = '<i>Časovač je skrytý</i>'
+                }
+            }, 1000);
+        }
     </script>
 @endsection
